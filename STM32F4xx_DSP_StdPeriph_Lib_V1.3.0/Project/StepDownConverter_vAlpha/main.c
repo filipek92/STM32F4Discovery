@@ -38,7 +38,7 @@
 /* Private variables ---------------------------------------------------------*/
 static __IO uint32_t uwTimingDelay;
 RCC_ClocksTypeDef RCC_Clocks;
-
+GPIO_InitTypeDef  GPIO_InitStructure;
 /* Private function prototypes -----------------------------------------------*/
 static void Delay(__IO uint32_t nTime);
 
@@ -64,12 +64,28 @@ int main(void)
   SysTick_Config(RCC_Clocks.HCLK_Frequency / 100);
 
   /* Add your application code here */
+	
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE);
+	
   /* Insert 50 ms delay */
   Delay(5);
-      
+  
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_8;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_Init(GPIOG, &GPIO_InitStructure);
+	
   /* Infinite loop */
   while (1)
   {
+		/* Set PG6 and PG8 */
+    GPIOG->BSRRL = GPIO_Pin_6 | GPIO_Pin_8;
+		Delay(100);
+    /* Reset PG6 and PG8 */
+    GPIOG->BSRRH = GPIO_Pin_6 | GPIO_Pin_8;
+		Delay(100);
   }
 }
 

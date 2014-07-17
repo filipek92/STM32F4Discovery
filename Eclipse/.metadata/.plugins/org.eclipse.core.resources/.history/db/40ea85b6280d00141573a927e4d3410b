@@ -1,0 +1,1 @@
+ST-Link_Cli -c SWD -p Template.hex -Rst

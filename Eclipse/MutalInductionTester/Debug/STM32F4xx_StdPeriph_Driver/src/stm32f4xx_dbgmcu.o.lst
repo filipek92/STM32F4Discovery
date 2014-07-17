@@ -1,0 +1,392 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"stm32f4xx_dbgmcu.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.align	2
+  19              		.global	DBGMCU_GetREVID
+  20              		.thumb
+  21              		.thumb_func
+  23              	DBGMCU_GetREVID:
+  24              	.LFB110:
+  25              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c"
+   1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
+   2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   ******************************************************************************
+   3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @file    stm32f4xx_dbgmcu.c
+   4:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @author  MCD Application Team
+   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @version V1.0.0
+   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @date    30-September-2011
+   7:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief   This file provides all the DBGMCU firmware functions.
+   8:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   ******************************************************************************
+   9:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @attention
+  10:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *
+  11:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  12:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  13:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  14:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  15:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  16:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  17:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *
+  18:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  19:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   ******************************************************************************
+  20:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
+  21:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  22:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /* Includes ------------------------------------------------------------------*/
+  23:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** #include "stm32f4xx_dbgmcu.h"
+  24:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  25:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /** @addtogroup STM32F4xx_StdPeriph_Driver
+  26:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @{
+  27:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
+  28:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  29:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /** @defgroup DBGMCU 
+  30:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief DBGMCU driver modules
+  31:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @{
+  32:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */ 
+  33:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  34:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /* Private typedef -----------------------------------------------------------*/
+  35:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /* Private define ------------------------------------------------------------*/
+  36:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** #define IDCODE_DEVID_MASK    ((uint32_t)0x00000FFF)
+  37:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  38:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /* Private macro -------------------------------------------------------------*/
+  39:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /* Private variables ---------------------------------------------------------*/
+  40:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /* Private function prototypes -----------------------------------------------*/
+  41:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /* Private functions ---------------------------------------------------------*/
+  42:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  43:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /** @defgroup DBGMCU_Private_Functions
+  44:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @{
+  45:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */ 
+  46:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  47:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
+  48:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief  Returns the device revision identifier.
+  49:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @param  None
+  50:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @retval Device revision identifier
+  51:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
+  52:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** uint32_t DBGMCU_GetREVID(void)
+  53:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
+  26              		.loc 1 53 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  54:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****    return(DBGMCU->IDCODE >> 16);
+  31              		.loc 1 54 0
+  32 0000 014B     		ldr	r3, .L2
+  33 0002 1868     		ldr	r0, [r3]
+  55:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** }
+  34              		.loc 1 55 0
+  35 0004 000C     		lsrs	r0, r0, #16
+  36 0006 7047     		bx	lr
+  37              	.L3:
+  38              		.align	2
+  39              	.L2:
+  40 0008 002004E0 		.word	-536600576
+  41              		.cfi_endproc
+  42              	.LFE110:
+  44              		.align	2
+  45              		.global	DBGMCU_GetDEVID
+  46              		.thumb
+  47              		.thumb_func
+  49              	DBGMCU_GetDEVID:
+  50              	.LFB111:
+  56:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  57:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
+  58:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief  Returns the device identifier.
+  59:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @param  None
+  60:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @retval Device identifier
+  61:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
+  62:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** uint32_t DBGMCU_GetDEVID(void)
+  63:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
+  51              		.loc 1 63 0
+  52              		.cfi_startproc
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55              		@ link register save eliminated.
+  64:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****    return(DBGMCU->IDCODE & IDCODE_DEVID_MASK);
+  56              		.loc 1 64 0
+  57 000c 024B     		ldr	r3, .L5
+  58 000e 1868     		ldr	r0, [r3]
+  65:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** }
+  59              		.loc 1 65 0
+  60 0010 C0F30B00 		ubfx	r0, r0, #0, #12
+  61 0014 7047     		bx	lr
+  62              	.L6:
+  63 0016 00BF     		.align	2
+  64              	.L5:
+  65 0018 002004E0 		.word	-536600576
+  66              		.cfi_endproc
+  67              	.LFE111:
+  69              		.align	2
+  70              		.global	DBGMCU_Config
+  71              		.thumb
+  72              		.thumb_func
+  74              	DBGMCU_Config:
+  75              	.LFB112:
+  66:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  67:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
+  68:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief  Configures low power mode behavior when the MCU is in Debug mode.
+  69:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @param  DBGMCU_Periph: specifies the low power mode.
+  70:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *   This parameter can be any combination of the following values:
+  71:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_SLEEP: Keep debugger connection during SLEEP mode              
+  72:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_STOP: Keep debugger connection during STOP mode               
+  73:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_STANDBY: Keep debugger connection during STANDBY mode        
+  74:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @param  NewState: new state of the specified low power mode in Debug mode.
+  75:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *   This parameter can be: ENABLE or DISABLE.
+  76:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @retval None
+  77:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
+  78:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** void DBGMCU_Config(uint32_t DBGMCU_Periph, FunctionalState NewState)
+  79:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
+  76              		.loc 1 79 0
+  77              		.cfi_startproc
+  78              		@ args = 0, pretend = 0, frame = 0
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80              		@ link register save eliminated.
+  81              	.LVL0:
+  80:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   /* Check the parameters */
+  81:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_DBGMCU_PERIPH(DBGMCU_Periph));
+  82:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+  83:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   if (NewState != DISABLE)
+  82              		.loc 1 83 0
+  83 001c 21B1     		cbz	r1, .L8
+  84:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
+  85:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->CR |= DBGMCU_Periph;
+  84              		.loc 1 85 0
+  85 001e 054B     		ldr	r3, .L10
+  86 0020 5A68     		ldr	r2, [r3, #4]
+  87 0022 1043     		orrs	r0, r0, r2
+  88              	.LVL1:
+  89 0024 5860     		str	r0, [r3, #4]
+  90 0026 7047     		bx	lr
+  91              	.LVL2:
+  92              	.L8:
+  86:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
+  87:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   else
+  88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
+  89:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->CR &= ~DBGMCU_Periph;
+  93              		.loc 1 89 0
+  94 0028 024B     		ldr	r3, .L10
+  95 002a 5A68     		ldr	r2, [r3, #4]
+  96 002c 22EA0000 		bic	r0, r2, r0
+  97              	.LVL3:
+  98 0030 5860     		str	r0, [r3, #4]
+  99 0032 7047     		bx	lr
+ 100              	.L11:
+ 101              		.align	2
+ 102              	.L10:
+ 103 0034 002004E0 		.word	-536600576
+ 104              		.cfi_endproc
+ 105              	.LFE112:
+ 107              		.align	2
+ 108              		.global	DBGMCU_APB1PeriphConfig
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	DBGMCU_APB1PeriphConfig:
+ 113              	.LFB113:
+  90:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
+  91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** }
+  92:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+  93:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
+  94:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief  Configures APB1 peripheral behavior when the MCU is in Debug mode.
+  95:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @param  DBGMCU_Periph: specifies the APB1 peripheral.
+  96:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *   This parameter can be any combination of the following values:        
+  97:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM2_STOP: TIM2 counter stopped when Core is halted          
+  98:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM3_STOP: TIM3 counter stopped when Core is halted          
+  99:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM4_STOP: TIM4 counter stopped when Core is halted
+ 100:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM5_STOP: TIM5 counter stopped when Core is halted          
+ 101:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM6_STOP: TIM6 counter stopped when Core is halted          
+ 102:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM7_STOP: TIM7 counter stopped when Core is halted
+ 103:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM12_STOP: TIM12 counter stopped when Core is halted  
+ 104:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM13_STOP: TIM13 counter stopped when Core is halted  
+ 105:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM14_STOP: TIM14 counter stopped when Core is halted 
+ 106:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_RTC_STOP: RTC Calendar and Wakeup counter stopped when Core is halted.         
+ 107:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_WWDG_STOP: Debug WWDG stopped when Core is halted
+ 108:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_IWDG_STOP: Debug IWDG stopped when Core is halted        
+ 109:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_I2C1_SMBUS_TIMEOUT: I2C1 SMBUS timeout mode stopped when Core is halted
+ 110:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_I2C2_SMBUS_TIMEOUT: I2C2 SMBUS timeout mode stopped when Core is halted
+ 111:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_I2C3_SMBUS_TIMEOUT: I2C3 SMBUS timeout mode stopped when Core is halted
+ 112:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_CAN2_STOP: Debug CAN1 stopped when Core is halted           
+ 113:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_CAN1_STOP: Debug CAN2 stopped when Core is halted        
+ 114:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 115:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @retval None
+ 116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
+ 117:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** void DBGMCU_APB1PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState)
+ 118:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
+ 114              		.loc 1 118 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118              		@ link register save eliminated.
+ 119              	.LVL4:
+ 119:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   /* Check the parameters */
+ 120:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_DBGMCU_APB1PERIPH(DBGMCU_Periph));
+ 121:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 122:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+ 123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   if (NewState != DISABLE)
+ 120              		.loc 1 123 0
+ 121 0038 21B1     		cbz	r1, .L13
+ 124:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
+ 125:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->APB1FZ |= DBGMCU_Periph;
+ 122              		.loc 1 125 0
+ 123 003a 054B     		ldr	r3, .L15
+ 124 003c 9A68     		ldr	r2, [r3, #8]
+ 125 003e 1043     		orrs	r0, r0, r2
+ 126              	.LVL5:
+ 127 0040 9860     		str	r0, [r3, #8]
+ 128 0042 7047     		bx	lr
+ 129              	.LVL6:
+ 130              	.L13:
+ 126:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
+ 127:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   else
+ 128:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
+ 129:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->APB1FZ &= ~DBGMCU_Periph;
+ 131              		.loc 1 129 0
+ 132 0044 024B     		ldr	r3, .L15
+ 133 0046 9A68     		ldr	r2, [r3, #8]
+ 134 0048 22EA0000 		bic	r0, r2, r0
+ 135              	.LVL7:
+ 136 004c 9860     		str	r0, [r3, #8]
+ 137 004e 7047     		bx	lr
+ 138              	.L16:
+ 139              		.align	2
+ 140              	.L15:
+ 141 0050 002004E0 		.word	-536600576
+ 142              		.cfi_endproc
+ 143              	.LFE113:
+ 145              		.align	2
+ 146              		.global	DBGMCU_APB2PeriphConfig
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	DBGMCU_APB2PeriphConfig:
+ 151              	.LFB114:
+ 130:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
+ 131:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** }
+ 132:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+ 133:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** /**
+ 134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @brief  Configures APB2 peripheral behavior when the MCU is in Debug mode.
+ 135:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @param  DBGMCU_Periph: specifies the APB2 peripheral.
+ 136:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *   This parameter can be any combination of the following values:       
+ 137:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM1_STOP: TIM1 counter stopped when Core is halted                
+ 138:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM8_STOP: TIM8 counter stopped when Core is halted
+ 139:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM9_STOP: TIM9 counter stopped when Core is halted   
+ 140:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM10_STOP: TIM10 counter stopped when Core is halted   
+ 141:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *     @arg DBGMCU_TIM11_STOP: TIM11 counter stopped when Core is halted                          
+ 142:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @param  NewState: new state of the specified peripheral in Debug mode.
+ 143:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 144:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   * @retval None
+ 145:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   */
+ 146:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** void DBGMCU_APB2PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState)
+ 147:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** {
+ 152              		.loc 1 147 0
+ 153              		.cfi_startproc
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156              		@ link register save eliminated.
+ 157              	.LVL8:
+ 148:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   /* Check the parameters */
+ 149:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_DBGMCU_APB2PERIPH(DBGMCU_Periph));
+ 150:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 151:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c **** 
+ 152:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   if (NewState != DISABLE)
+ 158              		.loc 1 152 0
+ 159 0054 21B1     		cbz	r1, .L18
+ 153:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
+ 154:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->APB2FZ |= DBGMCU_Periph;
+ 160              		.loc 1 154 0
+ 161 0056 054B     		ldr	r3, .L20
+ 162 0058 DA68     		ldr	r2, [r3, #12]
+ 163 005a 1043     		orrs	r0, r0, r2
+ 164              	.LVL9:
+ 165 005c D860     		str	r0, [r3, #12]
+ 166 005e 7047     		bx	lr
+ 167              	.LVL10:
+ 168              	.L18:
+ 155:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   }
+ 156:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   else
+ 157:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****   {
+ 158:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c ****     DBGMCU->APB2FZ &= ~DBGMCU_Periph;
+ 169              		.loc 1 158 0
+ 170 0060 024B     		ldr	r3, .L20
+ 171 0062 DA68     		ldr	r2, [r3, #12]
+ 172 0064 22EA0000 		bic	r0, r2, r0
+ 173              	.LVL11:
+ 174 0068 D860     		str	r0, [r3, #12]
+ 175 006a 7047     		bx	lr
+ 176              	.L21:
+ 177              		.align	2
+ 178              	.L20:
+ 179 006c 002004E0 		.word	-536600576
+ 180              		.cfi_endproc
+ 181              	.LFE114:
+ 183              	.Letext0:
+ 184              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
+ 185              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
+ 186              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
+ 187              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_dbgmcu.c
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:23     .text:00000000 DBGMCU_GetREVID
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:40     .text:00000008 $d
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:44     .text:0000000c $t
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:49     .text:0000000c DBGMCU_GetDEVID
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:65     .text:00000018 $d
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:69     .text:0000001c $t
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:74     .text:0000001c DBGMCU_Config
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:103    .text:00000034 $d
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:107    .text:00000038 $t
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:112    .text:00000038 DBGMCU_APB1PeriphConfig
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:141    .text:00000050 $d
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:145    .text:00000054 $t
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:150    .text:00000054 DBGMCU_APB2PeriphConfig
+C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:179    .text:0000006c $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
+                           .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
+                           .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7
+                           .group:00000000 wm4._default_types.h.15.8b2cb27e528498f8ff711db085d6e489
+                           .group:00000000 wm4.stdint.h.20.796e373797e732130a803d4c0338fa1b
+                           .group:00000000 wm4.core_cmInstr.h.25.f50f886f2edf670cf199b35fd96f5c91
+                           .group:00000000 wm4.core_cm4_simd.h.29.b4a3fdfb606cb3b26119424324d4b963
+                           .group:00000000 wm4.core_cm4.h.153.5393ef7e6cebf34dd51ca528f9218ab3
+                           .group:00000000 wm4.stm32f4xx.h.288.7f55b1a1f5e5bad6ffa2308f97f537d1
+                           .group:00000000 wm4.stm32f4xx_conf.h.24.a762e2483b8e31b68046e44b31e1d406
+                           .group:00000000 wm4.stm32f4xx_adc.h.102.2061aa73008746f3c2cc6ce8f635cad3
+                           .group:00000000 wm4.stm32f4xx_can.h.25.87f18ca48b2692d39f76e87b1f07c953
+                           .group:00000000 wm4.stm32f4xx_cryp.h.25.db1951c06ee684df97ea3a11aba6cb51
+                           .group:00000000 wm4.stm32f4xx_dac.h.25.c43557a6416ea4dfa986c1209c2558d6
+                           .group:00000000 wm4.stm32f4xx_dcmi.h.24.64883d9be802a535b1d7770d14da73e0
+                           .group:00000000 wm4.stm32f4xx_dma.h.25.c1fa1d44ae0bc9c2b3a0d1d355d8c1e6
+                           .group:00000000 wm4.stm32f4xx_exti.h.25.620998268d5d3d9042a8297fbe07d507
+                           .group:00000000 wm4.stm32f4xx_flash.h.25.65d4f351b72ee41355279f70305f361a
+                           .group:00000000 wm4.stm32f4xx_fsmc.h.25.b907ac7bd9bec46e02d06b137d53cfd8
+                           .group:00000000 wm4.stm32f4xx_hash.h.25.633fb84f031cf2ab1bd834e536716dfa
+                           .group:00000000 wm4.stm32f4xx_gpio.h.25.5bd1d790d742a307b55aea5fa8fcdae8
+                           .group:00000000 wm4.stm32f4xx_i2c.h.25.8fcdb817a00a67d4624d79bab0d9275f
+                           .group:00000000 wm4.stm32f4xx_iwdg.h.25.3013e8d2058415cb9d51af77f748a146
+                           .group:00000000 wm4.stm32f4xx_pwr.h.25.41ffcb5dc896ed2d26edf4d9bbbfbe6f
+                           .group:00000000 wm4.stm32f4xx_rcc.h.24.a10ec6e94989efb0f8f7f56448e9bb60
+                           .group:00000000 wm4.stm32f4xx_rng.h.25.cdb5c5c07de6a48aedfde608da3f447e
+                           .group:00000000 wm4.stm32f4xx_rtc.h.25.4809a79ad46ad97b4a01e735a96738eb
+                           .group:00000000 wm4.stm32f4xx_sdio.h.25.406302aabae34eada94e5f2cde635a3e
+                           .group:00000000 wm4.stm32f4xx_spi.h.25.980a9e96afe182c8b9cb91058a0693d6
+                           .group:00000000 wm4.stm32f4xx_syscfg.h.25.9d5caab5677661b69e959531364e23d7
+                           .group:00000000 wm4.stm32f4xx_tim.h.25.948f7fc943f34bd206e29758e77ee0a2
+                           .group:00000000 wm4.stm32f4xx_usart.h.25.32a7aeff79714f90f8c4da45bf79808c
+                           .group:00000000 wm4.stm32f4xx_wwdg.h.25.09d70b7849c6894ddf1e83c8e86b70e1
+                           .group:00000000 wm4.misc.h.25.a0cb758c1f091b46f201b19cec9e63a1
+                           .group:00000000 wm4.stm32f4xx.h.6972.f31ddedd83a17c461a3fab76f77123cb
+                           .group:00000000 wm4.stm32f4xx_dbgmcu.h.47.8cfe3e283b7c85998040fd1c20b05268
+
+NO UNDEFINED SYMBOLS

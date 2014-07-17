@@ -1,0 +1,2815 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"stm32f4xx_cryp_aes.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.align	2
+  19              		.global	CRYP_AES_ECB
+  20              		.thumb
+  21              		.thumb_func
+  23              	CRYP_AES_ECB:
+  24              	.LFB110:
+  25              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c"
+   1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /**
+   2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ******************************************************************************
+   3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @file    stm32f4xx_cryp_aes.c
+   4:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @author  MCD Application Team
+   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @version V1.0.0
+   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @date    30-September-2011
+   7:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @brief   This file provides high level functions to encrypt and decrypt an 
+   8:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          input message using AES in ECB/CBC/CTR modes.
+   9:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          It uses the stm32f4xx_cryp.c/.h drivers to access the STM32F4xx CRYP
+  10:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          peripheral.
+  11:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *
+  12:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *  @verbatim
+  13:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *
+  14:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          ===================================================================
+  15:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *                                   How to use this driver
+  16:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          ===================================================================
+  17:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          1. Enable The CRYP controller clock using 
+  18:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *            RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_CRYP, ENABLE); function.
+  19:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *
+  20:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          2. Encrypt and decrypt using AES in ECB Mode using CRYP_AES_ECB()
+  21:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *             function.
+  22:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *
+  23:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          3. Encrypt and decrypt using AES in CBC Mode using CRYP_AES_CBC()
+  24:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *             function.
+  25:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *
+  26:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          4. Encrypt and decrypt using AES in CTR Mode using CRYP_AES_CTR()
+  27:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *             function.
+  28:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *
+  29:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *  @endverbatim
+  30:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *
+  31:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ******************************************************************************
+  32:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @attention
+  33:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *
+  34:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  35:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  36:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  37:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  38:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  39:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  40:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *
+  41:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  42:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ******************************************************************************  
+  43:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   */
+  44:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  45:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /* Includes ------------------------------------------------------------------*/
+  46:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** #include "stm32f4xx_cryp.h"
+  47:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  48:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /** @addtogroup STM32F4xx_StdPeriph_Driver
+  49:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @{
+  50:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   */
+  51:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  52:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /** @defgroup CRYP 
+  53:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @brief CRYP driver modules
+  54:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @{
+  55:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   */
+  56:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  57:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /* Private typedef -----------------------------------------------------------*/
+  58:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /* Private define ------------------------------------------------------------*/
+  59:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** #define AESBUSY_TIMEOUT    ((uint32_t) 0x00010000)
+  60:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  61:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /* Private macro -------------------------------------------------------------*/
+  62:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /* Private variables ---------------------------------------------------------*/
+  63:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /* Private function prototypes -----------------------------------------------*/
+  64:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /* Private functions ---------------------------------------------------------*/
+  65:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  66:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /** @defgroup CRYP_Private_Functions
+  67:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @{
+  68:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   */ 
+  69:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  70:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /** @defgroup CRYP_Group6 High Level AES functions
+  71:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****  *  @brief   High Level AES functions 
+  72:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****  *
+  73:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** @verbatim   
+  74:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****  ===============================================================================
+  75:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****                           High Level AES functions
+  76:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****  ===============================================================================
+  77:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  78:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  79:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** @endverbatim
+  80:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @{
+  81:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   */
+  82:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+  83:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /**
+  84:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @brief  Encrypt and decrypt using AES in ECB Mode
+  85:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Mode: encryption or decryption Mode.
+  86:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          This parameter can be one of the following values:
+  87:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *            @arg MODE_ENCRYPT: Encryption
+  88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *            @arg MODE_DECRYPT: Decryption
+  89:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Key: Key used for AES algorithm.
+  90:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Keysize: length of the Key, must be a 128, 192 or 256.
+  91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Input: pointer to the Input buffer.
+  92:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Ilength: length of the Input buffer, must be a multiple of 16.
+  93:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Output: pointer to the returned buffer.
+  94:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @retval An ErrorStatus enumeration value:
+  95:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          - SUCCESS: Operation done
+  96:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          - ERROR: Operation failed
+  97:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   */
+  98:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** ErrorStatus CRYP_AES_ECB(uint8_t Mode, uint8_t* Key, uint16_t Keysize,
+  99:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****                          uint8_t* Input, uint32_t Ilength, uint8_t* Output)
+ 100:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** {
+  26              		.loc 1 100 0
+  27              		.cfi_startproc
+  28              		@ args = 8, pretend = 0, frame = 48
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              	.LVL0:
+  31 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+  32              		.cfi_def_cfa_offset 32
+  33              		.cfi_offset 4, -32
+  34              		.cfi_offset 5, -28
+  35              		.cfi_offset 6, -24
+  36              		.cfi_offset 7, -20
+  37              		.cfi_offset 8, -16
+  38              		.cfi_offset 9, -12
+  39              		.cfi_offset 10, -8
+  40              		.cfi_offset 14, -4
+  41 0004 8CB0     		sub	sp, sp, #48
+  42              		.cfi_def_cfa_offset 80
+  43 0006 0746     		mov	r7, r0
+  44 0008 0C46     		mov	r4, r1
+  45 000a 1646     		mov	r6, r2
+  46 000c DDF850A0 		ldr	r10, [sp, #80]
+ 101:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_InitTypeDef AES_CRYP_InitStructure;
+ 102:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_KeyInitTypeDef AES_CRYP_KeyInitStructure;
+ 103:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   __IO uint32_t counter = 0;
+  47              		.loc 1 103 0
+  48 0010 0022     		movs	r2, #0
+  49              	.LVL1:
+  50 0012 0192     		str	r2, [sp, #4]
+  51              	.LVL2:
+ 104:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t busystatus = 0;
+ 105:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ErrorStatus status = SUCCESS;
+ 106:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t keyaddr    = (uint32_t)Key;
+ 107:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t inputaddr  = (uint32_t)Input;
+  52              		.loc 1 107 0
+  53 0014 1D46     		mov	r5, r3
+  54              	.LVL3:
+ 108:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t outputaddr = (uint32_t)Output;
+  55              		.loc 1 108 0
+  56 0016 DDF85490 		ldr	r9, [sp, #84]
+  57              	.LVL4:
+ 109:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t i = 0;
+ 110:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 111:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Crypto structures initialisation*/
+ 112:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_KeyStructInit(&AES_CRYP_KeyInitStructure);
+  58              		.loc 1 112 0
+  59 001a 02A8     		add	r0, sp, #8
+  60              	.LVL5:
+  61 001c FFF7FEFF 		bl	CRYP_KeyStructInit
+  62              	.LVL6:
+ 113:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 114:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   switch(Keysize)
+  63              		.loc 1 114 0
+  64 0020 C02E     		cmp	r6, #192
+  65 0022 14D0     		beq	.L3
+  66 0024 B6F5807F 		cmp	r6, #256
+  67 0028 28D0     		beq	.L4
+  68 002a 802E     		cmp	r6, #128
+  69 002c 42D1     		bne	.L2
+ 115:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     case 128:
+ 117:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_KeySize = CRYP_KeySize_128b;
+  70              		.loc 1 117 0
+  71 002e 0023     		movs	r3, #0
+  72 0030 ADF82E30 		strh	r3, [sp, #46]	@ movhi
+ 118:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Left = __REV(*(uint32_t*)(keyaddr));
+  73              		.loc 1 118 0
+  74 0034 2368     		ldr	r3, [r4]
+  75              	.LVL7:
+  76              	.LBB126:
+  77              	.LBB127:
+  78              		.file 2 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cmInstr.h"
+   1:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /**************************************************************************//**
+   2:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @file     core_cmInstr.h
+   3:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @brief    CMSIS Cortex-M Core Instruction Access Header File
+   4:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @version  V2.10
+   5:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @date     19. July 2011
+   6:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  *
+   7:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @note
+   8:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * Copyright (C) 2009-2011 ARM Limited. All rights reserved.
+   9:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  *
+  10:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @par
+  11:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M 
+  12:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * processor based microcontrollers.  This file can be freely distributed 
+  13:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * within development tools that are supporting such ARM based processors. 
+  14:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  *
+  15:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @par
+  16:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  17:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  18:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  19:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  20:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  21:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  *
+  22:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  ******************************************************************************/
+  23:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  24:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #ifndef __CORE_CMINSTR_H
+  25:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __CORE_CMINSTR_H
+  26:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  27:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  28:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /* ##########################  Core Instruction Access  ######################### */
+  29:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
+  30:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   Access to dedicated instructions
+  31:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   @{
+  32:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** */
+  33:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  34:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
+  35:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /* ARM armcc specific functions */
+  36:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  37:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #if (__ARMCC_VERSION < 400677)
+  38:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
+  39:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #endif
+  40:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  41:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  42:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
+  43:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  44:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+  45:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+  46:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __NOP                             __nop
+  47:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  48:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  49:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
+  50:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  51:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+  52:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
+  53:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+  54:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __WFI                             __wfi
+  55:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  56:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  57:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
+  58:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  59:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+  60:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+  61:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+  62:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __WFE                             __wfe
+  63:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  64:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  65:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
+  66:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  67:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+  68:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+  69:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __SEV                             __sev
+  70:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  71:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  72:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
+  73:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  74:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
+  75:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
+  76:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
+  77:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+  78:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __ISB()                           __isb(0xF)
+  79:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  80:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  81:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
+  82:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  83:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
+  84:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
+  85:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+  86:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __DSB()                           __dsb(0xF)
+  87:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  88:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  89:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
+  90:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  91:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
+  92:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
+  93:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+  94:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __DMB()                           __dmb(0xF)
+  95:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  96:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  97:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
+  98:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+  99:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
+ 100:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 101:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 102:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 103:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 104:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __REV                             __rev
+ 105:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 106:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 107:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (16 bit)
+ 108:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 109:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in two unsigned short values.
+ 110:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 111:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 112:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 113:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 114:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM uint32_t __REV16(uint32_t value)
+ 115:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 116:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   rev16 r0, r0
+ 117:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   bx lr
+ 118:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
+ 119:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 120:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 121:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order in signed short value
+ 122:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 123:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in a signed short value with sign extension to integer.
+ 124:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 125:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 126:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 127:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 128:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM int32_t __REVSH(int32_t value)
+ 129:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 130:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   revsh r0, r0
+ 131:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   bx lr
+ 132:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
+ 133:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 134:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 135:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #if       (__CORTEX_M >= 0x03)
+ 136:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 137:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse bit order of value
+ 138:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 139:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the bit order of the given value.
+ 140:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 141:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 142:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 143:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 144:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __RBIT                            __rbit
+ 145:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 146:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 147:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (8 bit)
+ 148:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 149:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 8 bit value.
+ 150:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 151:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 152:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return             value of type uint8_t at (*ptr)
+ 153:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 154:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __LDREXB(ptr)                     ((uint8_t ) __ldrex(ptr))
+ 155:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 156:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 157:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (16 bit)
+ 158:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 159:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 16 bit values.
+ 160:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 161:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 162:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint16_t at (*ptr)
+ 163:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 164:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __LDREXH(ptr)                     ((uint16_t) __ldrex(ptr))
+ 165:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 166:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 167:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (32 bit)
+ 168:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 169:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 32 bit values.
+ 170:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 171:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 172:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint32_t at (*ptr)
+ 173:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 174:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __LDREXW(ptr)                     ((uint32_t ) __ldrex(ptr))
+ 175:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 176:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 177:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (8 bit)
+ 178:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 179:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 8 bit values.
+ 180:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 181:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 182:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 183:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 184:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 185:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 186:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __STREXB(value, ptr)              __strex(value, ptr)
+ 187:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 188:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 189:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (16 bit)
+ 190:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 191:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 16 bit values.
+ 192:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 193:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 194:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 195:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 196:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 197:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 198:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __STREXH(value, ptr)              __strex(value, ptr)
+ 199:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 200:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 201:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (32 bit)
+ 202:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 203:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 32 bit values.
+ 204:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 205:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 206:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 207:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 208:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 209:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 210:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __STREXW(value, ptr)              __strex(value, ptr)
+ 211:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 212:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 213:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Remove the exclusive lock
+ 214:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 215:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function removes the exclusive lock which is created by LDREX.
+ 216:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 217:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 218:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __CLREX                           __clrex
+ 219:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 220:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 221:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Signed Saturate
+ 222:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 223:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function saturates a signed value.
+ 224:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 225:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 226:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (1..32)
+ 227:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
+ 228:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 229:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __SSAT                            __ssat
+ 230:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 231:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 232:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Unsigned Saturate
+ 233:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 234:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function saturates an unsigned value.
+ 235:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 236:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 237:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (0..31)
+ 238:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
+ 239:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 240:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __USAT                            __usat
+ 241:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 242:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 243:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Count leading zeros
+ 244:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 245:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function counts the number of leading zeros of a data value.
+ 246:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 247:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to count the leading zeros
+ 248:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return             number of leading zeros in value
+ 249:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 250:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __CLZ                             __clz 
+ 251:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 252:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #endif /* (__CORTEX_M >= 0x03) */
+ 253:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 254:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 255:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 256:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
+ 257:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /* IAR iccarm specific functions */
+ 258:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 259:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #include <cmsis_iar.h>
+ 260:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 261:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 262:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
+ 263:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /* GNU gcc specific functions */
+ 264:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 265:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
+ 266:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 267:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+ 268:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 269:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __NOP(void)
+ 270:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 271:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("nop");
+ 272:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
+ 273:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 274:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 275:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
+ 276:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 277:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+ 278:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
+ 279:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 280:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFI(void)
+ 281:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 282:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfi");
+ 283:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
+ 284:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 285:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 286:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
+ 287:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 288:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+ 289:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+ 290:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 291:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFE(void)
+ 292:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 293:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfe");
+ 294:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
+ 295:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 296:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 297:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
+ 298:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 299:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+ 300:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 301:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __SEV(void)
+ 302:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 303:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("sev");
+ 304:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
+ 305:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 306:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 307:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
+ 308:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 309:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
+ 310:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
+ 311:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
+ 312:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 313:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __ISB(void)
+ 314:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 315:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("isb");
+ 316:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
+ 317:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 318:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 319:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
+ 320:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 321:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
+ 322:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
+ 323:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 324:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __DSB(void)
+ 325:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 326:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("dsb");
+ 327:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
+ 328:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 329:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 330:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
+ 331:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 332:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
+ 333:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
+ 334:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 335:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __DMB(void)
+ 336:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 337:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("dmb");
+ 338:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
+ 339:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 340:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 341:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
+ 342:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 343:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
+ 344:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
+ 345:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 346:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 347:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
+ 348:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __REV(uint32_t value)
+ 349:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
+ 350:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   uint32_t result;
+ 351:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   
+ 352:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("rev %0, %1" : "=r" (result) : "r" (value) );
+  79              		.loc 2 352 0
+  80              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+  81 0036 1BBA     		rev r3, r3
+  82              	@ 0 "" 2
+  83              	.LVL8:
+  84              		.thumb
+  85              	.LBE127:
+  86              	.LBE126:
+  87              		.loc 1 118 0
+  88 0038 0693     		str	r3, [sp, #24]
+  89              	.LVL9:
+ 119:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 120:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Right= __REV(*(uint32_t*)(keyaddr));
+  90              		.loc 1 120 0
+  91 003a 6368     		ldr	r3, [r4, #4]
+  92              	.LVL10:
+  93              	.LBB128:
+  94              	.LBB129:
+  95              		.loc 2 352 0
+  96              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+  97 003c 1BBA     		rev r3, r3
+  98              	@ 0 "" 2
+  99              	.LVL11:
+ 100              		.thumb
+ 101              	.LBE129:
+ 102              	.LBE128:
+ 103              		.loc 1 120 0
+ 104 003e 0793     		str	r3, [sp, #28]
+ 105              	.LVL12:
+ 121:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 122:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Left = __REV(*(uint32_t*)(keyaddr));
+ 106              		.loc 1 122 0
+ 107 0040 A368     		ldr	r3, [r4, #8]
+ 108              	.LVL13:
+ 109              	.LBB130:
+ 110              	.LBB131:
+ 111              		.loc 2 352 0
+ 112              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 113 0042 1BBA     		rev r3, r3
+ 114              	@ 0 "" 2
+ 115              	.LVL14:
+ 116              		.thumb
+ 117              	.LBE131:
+ 118              	.LBE130:
+ 119              		.loc 1 122 0
+ 120 0044 0893     		str	r3, [sp, #32]
+ 121              	.LVL15:
+ 123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 124:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Right= __REV(*(uint32_t*)(keyaddr));
+ 122              		.loc 1 124 0
+ 123 0046 E368     		ldr	r3, [r4, #12]
+ 124              	.LVL16:
+ 125              	.LBB132:
+ 126              	.LBB133:
+ 127              		.loc 2 352 0
+ 128              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 129 0048 1BBA     		rev r3, r3
+ 130              	@ 0 "" 2
+ 131              	.LVL17:
+ 132              		.thumb
+ 133              	.LBE133:
+ 134              	.LBE132:
+ 135              		.loc 1 124 0
+ 136 004a 0993     		str	r3, [sp, #36]
+ 125:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 137              		.loc 1 125 0
+ 138 004c 32E0     		b	.L2
+ 139              	.LVL18:
+ 140              	.L3:
+ 126:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     case 192:
+ 127:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_KeySize  = CRYP_KeySize_192b;
+ 141              		.loc 1 127 0
+ 142 004e 4FF48073 		mov	r3, #256
+ 143 0052 ADF82E30 		strh	r3, [sp, #46]	@ movhi
+ 128:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Left = __REV(*(uint32_t*)(keyaddr));
+ 144              		.loc 1 128 0
+ 145 0056 2368     		ldr	r3, [r4]
+ 146              	.LVL19:
+ 147              	.LBB134:
+ 148              	.LBB135:
+ 149              		.loc 2 352 0
+ 150              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 151 0058 1BBA     		rev r3, r3
+ 152              	@ 0 "" 2
+ 153              	.LVL20:
+ 154              		.thumb
+ 155              	.LBE135:
+ 156              	.LBE134:
+ 157              		.loc 1 128 0
+ 158 005a 0493     		str	r3, [sp, #16]
+ 159              	.LVL21:
+ 129:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 130:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Right= __REV(*(uint32_t*)(keyaddr));
+ 160              		.loc 1 130 0
+ 161 005c 6368     		ldr	r3, [r4, #4]
+ 162              	.LVL22:
+ 163              	.LBB136:
+ 164              	.LBB137:
+ 165              		.loc 2 352 0
+ 166              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 167 005e 1BBA     		rev r3, r3
+ 168              	@ 0 "" 2
+ 169              	.LVL23:
+ 170              		.thumb
+ 171              	.LBE137:
+ 172              	.LBE136:
+ 173              		.loc 1 130 0
+ 174 0060 0593     		str	r3, [sp, #20]
+ 175              	.LVL24:
+ 131:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 132:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Left = __REV(*(uint32_t*)(keyaddr));
+ 176              		.loc 1 132 0
+ 177 0062 A368     		ldr	r3, [r4, #8]
+ 178              	.LVL25:
+ 179              	.LBB138:
+ 180              	.LBB139:
+ 181              		.loc 2 352 0
+ 182              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 183 0064 1BBA     		rev r3, r3
+ 184              	@ 0 "" 2
+ 185              	.LVL26:
+ 186              		.thumb
+ 187              	.LBE139:
+ 188              	.LBE138:
+ 189              		.loc 1 132 0
+ 190 0066 0693     		str	r3, [sp, #24]
+ 191              	.LVL27:
+ 133:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Right= __REV(*(uint32_t*)(keyaddr));
+ 192              		.loc 1 134 0
+ 193 0068 E368     		ldr	r3, [r4, #12]
+ 194              	.LVL28:
+ 195              	.LBB140:
+ 196              	.LBB141:
+ 197              		.loc 2 352 0
+ 198              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 199 006a 1BBA     		rev r3, r3
+ 200              	@ 0 "" 2
+ 201              	.LVL29:
+ 202              		.thumb
+ 203              	.LBE141:
+ 204              	.LBE140:
+ 205              		.loc 1 134 0
+ 206 006c 0793     		str	r3, [sp, #28]
+ 207              	.LVL30:
+ 135:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 136:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Left = __REV(*(uint32_t*)(keyaddr));
+ 208              		.loc 1 136 0
+ 209 006e 2369     		ldr	r3, [r4, #16]
+ 210              	.LVL31:
+ 211              	.LBB142:
+ 212              	.LBB143:
+ 213              		.loc 2 352 0
+ 214              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 215 0070 1BBA     		rev r3, r3
+ 216              	@ 0 "" 2
+ 217              	.LVL32:
+ 218              		.thumb
+ 219              	.LBE143:
+ 220              	.LBE142:
+ 221              		.loc 1 136 0
+ 222 0072 0893     		str	r3, [sp, #32]
+ 223              	.LVL33:
+ 137:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 138:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Right= __REV(*(uint32_t*)(keyaddr));
+ 224              		.loc 1 138 0
+ 225 0074 6369     		ldr	r3, [r4, #20]
+ 226              	.LVL34:
+ 227              	.LBB144:
+ 228              	.LBB145:
+ 229              		.loc 2 352 0
+ 230              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 231 0076 1BBA     		rev r3, r3
+ 232              	@ 0 "" 2
+ 233              	.LVL35:
+ 234              		.thumb
+ 235              	.LBE145:
+ 236              	.LBE144:
+ 237              		.loc 1 138 0
+ 238 0078 0993     		str	r3, [sp, #36]
+ 139:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 239              		.loc 1 139 0
+ 240 007a 1BE0     		b	.L2
+ 241              	.LVL36:
+ 242              	.L4:
+ 140:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     case 256:
+ 141:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_KeySize  = CRYP_KeySize_256b;
+ 243              		.loc 1 141 0
+ 244 007c 4FF40073 		mov	r3, #512
+ 245 0080 ADF82E30 		strh	r3, [sp, #46]	@ movhi
+ 142:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key0Left = __REV(*(uint32_t*)(keyaddr));
+ 246              		.loc 1 142 0
+ 247 0084 2368     		ldr	r3, [r4]
+ 248              	.LVL37:
+ 249              	.LBB146:
+ 250              	.LBB147:
+ 251              		.loc 2 352 0
+ 252              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 253 0086 1BBA     		rev r3, r3
+ 254              	@ 0 "" 2
+ 255              	.LVL38:
+ 256              		.thumb
+ 257              	.LBE147:
+ 258              	.LBE146:
+ 259              		.loc 1 142 0
+ 260 0088 0293     		str	r3, [sp, #8]
+ 261              	.LVL39:
+ 143:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 144:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key0Right= __REV(*(uint32_t*)(keyaddr));
+ 262              		.loc 1 144 0
+ 263 008a 6368     		ldr	r3, [r4, #4]
+ 264              	.LVL40:
+ 265              	.LBB148:
+ 266              	.LBB149:
+ 267              		.loc 2 352 0
+ 268              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 269 008c 1BBA     		rev r3, r3
+ 270              	@ 0 "" 2
+ 271              	.LVL41:
+ 272              		.thumb
+ 273              	.LBE149:
+ 274              	.LBE148:
+ 275              		.loc 1 144 0
+ 276 008e 0393     		str	r3, [sp, #12]
+ 277              	.LVL42:
+ 145:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 146:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Left = __REV(*(uint32_t*)(keyaddr));
+ 278              		.loc 1 146 0
+ 279 0090 A368     		ldr	r3, [r4, #8]
+ 280              	.LVL43:
+ 281              	.LBB150:
+ 282              	.LBB151:
+ 283              		.loc 2 352 0
+ 284              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 285 0092 1BBA     		rev r3, r3
+ 286              	@ 0 "" 2
+ 287              	.LVL44:
+ 288              		.thumb
+ 289              	.LBE151:
+ 290              	.LBE150:
+ 291              		.loc 1 146 0
+ 292 0094 0493     		str	r3, [sp, #16]
+ 293              	.LVL45:
+ 147:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 148:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Right= __REV(*(uint32_t*)(keyaddr));
+ 294              		.loc 1 148 0
+ 295 0096 E368     		ldr	r3, [r4, #12]
+ 296              	.LVL46:
+ 297              	.LBB152:
+ 298              	.LBB153:
+ 299              		.loc 2 352 0
+ 300              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 301 0098 1BBA     		rev r3, r3
+ 302              	@ 0 "" 2
+ 303              	.LVL47:
+ 304              		.thumb
+ 305              	.LBE153:
+ 306              	.LBE152:
+ 307              		.loc 1 148 0
+ 308 009a 0593     		str	r3, [sp, #20]
+ 309              	.LVL48:
+ 149:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 150:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Left = __REV(*(uint32_t*)(keyaddr));
+ 310              		.loc 1 150 0
+ 311 009c 2369     		ldr	r3, [r4, #16]
+ 312              	.LVL49:
+ 313              	.LBB154:
+ 314              	.LBB155:
+ 315              		.loc 2 352 0
+ 316              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 317 009e 1BBA     		rev r3, r3
+ 318              	@ 0 "" 2
+ 319              	.LVL50:
+ 320              		.thumb
+ 321              	.LBE155:
+ 322              	.LBE154:
+ 323              		.loc 1 150 0
+ 324 00a0 0693     		str	r3, [sp, #24]
+ 325              	.LVL51:
+ 151:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 152:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Right= __REV(*(uint32_t*)(keyaddr));
+ 326              		.loc 1 152 0
+ 327 00a2 6369     		ldr	r3, [r4, #20]
+ 328              	.LVL52:
+ 329              	.LBB156:
+ 330              	.LBB157:
+ 331              		.loc 2 352 0
+ 332              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 333 00a4 1BBA     		rev r3, r3
+ 334              	@ 0 "" 2
+ 335              	.LVL53:
+ 336              		.thumb
+ 337              	.LBE157:
+ 338              	.LBE156:
+ 339              		.loc 1 152 0
+ 340 00a6 0793     		str	r3, [sp, #28]
+ 341              	.LVL54:
+ 153:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 154:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Left = __REV(*(uint32_t*)(keyaddr));
+ 342              		.loc 1 154 0
+ 343 00a8 A369     		ldr	r3, [r4, #24]
+ 344              	.LVL55:
+ 345              	.LBB158:
+ 346              	.LBB159:
+ 347              		.loc 2 352 0
+ 348              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 349 00aa 1BBA     		rev r3, r3
+ 350              	@ 0 "" 2
+ 351              	.LVL56:
+ 352              		.thumb
+ 353              	.LBE159:
+ 354              	.LBE158:
+ 355              		.loc 1 154 0
+ 356 00ac 0893     		str	r3, [sp, #32]
+ 357              	.LVL57:
+ 155:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 156:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Right= __REV(*(uint32_t*)(keyaddr));
+ 358              		.loc 1 156 0
+ 359 00ae E369     		ldr	r3, [r4, #28]
+ 360              	.LVL58:
+ 361              	.LBB160:
+ 362              	.LBB161:
+ 363              		.loc 2 352 0
+ 364              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 365 00b0 1BBA     		rev r3, r3
+ 366              	@ 0 "" 2
+ 367              	.LVL59:
+ 368              		.thumb
+ 369              	.LBE161:
+ 370              	.LBE160:
+ 371              		.loc 1 156 0
+ 372 00b2 0993     		str	r3, [sp, #36]
+ 373              	.LVL60:
+ 374              	.L2:
+ 157:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 158:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     default:
+ 159:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 160:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 161:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 162:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /*------------------ AES Decryption ------------------*/
+ 163:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   if(Mode == MODE_DECRYPT) /* AES decryption */
+ 375              		.loc 1 163 0
+ 376 00b4 3FBB     		cbnz	r7, .L6
+ 164:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 165:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Flush IN/OUT FIFOs */
+ 166:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_FIFOFlush();
+ 377              		.loc 1 166 0
+ 378 00b6 FFF7FEFF 		bl	CRYP_FIFOFlush
+ 379              	.LVL61:
+ 167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 168:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Crypto Init for Key preparation for decryption process */
+ 169:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_AlgoDir = CRYP_AlgoDir_Decrypt;
+ 380              		.loc 1 169 0
+ 381 00ba 0423     		movs	r3, #4
+ 382 00bc ADF82830 		strh	r3, [sp, #40]	@ movhi
+ 170:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_AlgoMode = CRYP_AlgoMode_AES_Key;
+ 383              		.loc 1 170 0
+ 384 00c0 3823     		movs	r3, #56
+ 385 00c2 ADF82A30 		strh	r3, [sp, #42]	@ movhi
+ 171:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_DataType = CRYP_DataType_32b;
+ 386              		.loc 1 171 0
+ 387 00c6 0023     		movs	r3, #0
+ 388 00c8 ADF82C30 		strh	r3, [sp, #44]	@ movhi
+ 172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_Init(&AES_CRYP_InitStructure);
+ 389              		.loc 1 172 0
+ 390 00cc 0AA8     		add	r0, sp, #40
+ 391 00ce FFF7FEFF 		bl	CRYP_Init
+ 392              	.LVL62:
+ 173:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 174:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Key Initialisation */
+ 175:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_KeyInit(&AES_CRYP_KeyInitStructure);
+ 393              		.loc 1 175 0
+ 394 00d2 02A8     		add	r0, sp, #8
+ 395 00d4 FFF7FEFF 		bl	CRYP_KeyInit
+ 396              	.LVL63:
+ 176:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 177:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Enable Crypto processor */
+ 178:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_Cmd(ENABLE);
+ 397              		.loc 1 178 0
+ 398 00d8 0120     		movs	r0, #1
+ 399 00da FFF7FEFF 		bl	CRYP_Cmd
+ 400              	.LVL64:
+ 179:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 180:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* wait until the Busy flag is RESET */
+ 181:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     do
+ 182:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 183:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       busystatus = CRYP_GetFlagStatus(CRYP_FLAG_BUSY);
+ 401              		.loc 1 183 0
+ 402 00de 1024     		movs	r4, #16
+ 403              	.LVL65:
+ 404              	.L8:
+ 405              		.loc 1 183 0 is_stmt 0 discriminator 1
+ 406 00e0 2046     		mov	r0, r4
+ 407 00e2 FFF7FEFF 		bl	CRYP_GetFlagStatus
+ 408              	.LVL66:
+ 409 00e6 0246     		mov	r2, r0
+ 410              	.LVL67:
+ 184:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       counter++;
+ 411              		.loc 1 184 0 is_stmt 1 discriminator 1
+ 412 00e8 019B     		ldr	r3, [sp, #4]
+ 413 00ea 0133     		adds	r3, r3, #1
+ 414 00ec 0193     		str	r3, [sp, #4]
+ 185:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }while ((counter != AESBUSY_TIMEOUT) && (busystatus != RESET));
+ 415              		.loc 1 185 0 discriminator 1
+ 416 00ee 019B     		ldr	r3, [sp, #4]
+ 417 00f0 B3F5803F 		cmp	r3, #65536
+ 418 00f4 01D0     		beq	.L7
+ 419 00f6 0028     		cmp	r0, #0
+ 420 00f8 F2D1     		bne	.L8
+ 421              	.L7:
+ 186:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 187:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     if (busystatus != RESET)
+ 422              		.loc 1 187 0
+ 423 00fa 62B9     		cbnz	r2, .L16
+ 188:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****    {
+ 189:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 190:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 191:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     else
+ 192:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       /* Crypto Init for decryption process */  
+ 194:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       AES_CRYP_InitStructure.CRYP_AlgoDir = CRYP_AlgoDir_Decrypt;
+ 424              		.loc 1 194 0
+ 425 00fc 0423     		movs	r3, #4
+ 426 00fe ADF82830 		strh	r3, [sp, #40]	@ movhi
+ 105:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ErrorStatus status = SUCCESS;
+ 427              		.loc 1 105 0
+ 428 0102 0127     		movs	r7, #1
+ 429 0104 08E0     		b	.L9
+ 430              	.LVL68:
+ 431              	.L6:
+ 195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 196:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 197:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /*------------------ AES Encryption ------------------*/
+ 198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   else /* AES encryption */
+ 199:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_KeyInit(&AES_CRYP_KeyInitStructure);
+ 432              		.loc 1 201 0
+ 433 0106 02A8     		add	r0, sp, #8
+ 434 0108 FFF7FEFF 		bl	CRYP_KeyInit
+ 435              	.LVL69:
+ 202:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 203:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Crypto Init for Encryption process */
+ 204:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_AlgoDir  = CRYP_AlgoDir_Encrypt;
+ 436              		.loc 1 204 0
+ 437 010c 0023     		movs	r3, #0
+ 438 010e ADF82830 		strh	r3, [sp, #40]	@ movhi
+ 105:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ErrorStatus status = SUCCESS;
+ 439              		.loc 1 105 0
+ 440 0112 0127     		movs	r7, #1
+ 441 0114 00E0     		b	.L9
+ 442              	.LVL70:
+ 443              	.L16:
+ 189:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 444              		.loc 1 189 0
+ 445 0116 0027     		movs	r7, #0
+ 446              	.LVL71:
+ 447              	.L9:
+ 205:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 207:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_InitStructure.CRYP_AlgoMode = CRYP_AlgoMode_AES_ECB;
+ 448              		.loc 1 207 0
+ 449 0118 2023     		movs	r3, #32
+ 450 011a ADF82A30 		strh	r3, [sp, #42]	@ movhi
+ 208:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_InitStructure.CRYP_DataType = CRYP_DataType_8b;
+ 451              		.loc 1 208 0
+ 452 011e 8023     		movs	r3, #128
+ 453 0120 ADF82C30 		strh	r3, [sp, #44]	@ movhi
+ 209:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_Init(&AES_CRYP_InitStructure);
+ 454              		.loc 1 209 0
+ 455 0124 0AA8     		add	r0, sp, #40
+ 456 0126 FFF7FEFF 		bl	CRYP_Init
+ 457              	.LVL72:
+ 210:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Flush IN/OUT FIFOs */
+ 212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_FIFOFlush();
+ 458              		.loc 1 212 0
+ 459 012a FFF7FEFF 		bl	CRYP_FIFOFlush
+ 460              	.LVL73:
+ 213:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Enable Crypto processor */
+ 215:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_Cmd(ENABLE);
+ 461              		.loc 1 215 0
+ 462 012e 0120     		movs	r0, #1
+ 463 0130 FFF7FEFF 		bl	CRYP_Cmd
+ 464              	.LVL74:
+ 216:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 465              		.loc 1 217 0
+ 466 0134 0026     		movs	r6, #0
+ 218:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 219:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 220:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Write the Input block in the IN FIFO */
+ 221:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 222:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 223:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 226:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 229:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 230:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Wait until the complete message has been processed */
+ 231:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     counter = 0;
+ 467              		.loc 1 231 0
+ 468 0136 B046     		mov	r8, r6
+ 232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     do
+ 233:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 234:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       busystatus = CRYP_GetFlagStatus(CRYP_FLAG_BUSY);
+ 469              		.loc 1 234 0
+ 470 0138 1024     		movs	r4, #16
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 471              		.loc 1 217 0
+ 472 013a 31E0     		b	.L10
+ 473              	.LVL75:
+ 474              	.L15:
+ 221:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 475              		.loc 1 221 0
+ 476 013c 2868     		ldr	r0, [r5]
+ 477 013e FFF7FEFF 		bl	CRYP_DataIn
+ 478              	.LVL76:
+ 223:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 479              		.loc 1 223 0
+ 480 0142 6868     		ldr	r0, [r5, #4]
+ 481 0144 FFF7FEFF 		bl	CRYP_DataIn
+ 482              	.LVL77:
+ 225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 483              		.loc 1 225 0
+ 484 0148 A868     		ldr	r0, [r5, #8]
+ 485 014a FFF7FEFF 		bl	CRYP_DataIn
+ 486              	.LVL78:
+ 227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 487              		.loc 1 227 0
+ 488 014e E868     		ldr	r0, [r5, #12]
+ 489 0150 FFF7FEFF 		bl	CRYP_DataIn
+ 490              	.LVL79:
+ 228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 491              		.loc 1 228 0
+ 492 0154 1035     		adds	r5, r5, #16
+ 493              	.LVL80:
+ 231:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     counter = 0;
+ 494              		.loc 1 231 0
+ 495 0156 CDF80480 		str	r8, [sp, #4]
+ 496              	.L12:
+ 497              		.loc 1 234 0 discriminator 1
+ 498 015a 2046     		mov	r0, r4
+ 499 015c FFF7FEFF 		bl	CRYP_GetFlagStatus
+ 500              	.LVL81:
+ 501 0160 0246     		mov	r2, r0
+ 502              	.LVL82:
+ 235:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       counter++;
+ 503              		.loc 1 235 0 discriminator 1
+ 504 0162 019B     		ldr	r3, [sp, #4]
+ 505 0164 0133     		adds	r3, r3, #1
+ 506 0166 0193     		str	r3, [sp, #4]
+ 236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }while ((counter != AESBUSY_TIMEOUT) && (busystatus != RESET));
+ 507              		.loc 1 236 0 discriminator 1
+ 508 0168 019B     		ldr	r3, [sp, #4]
+ 509 016a B3F5803F 		cmp	r3, #65536
+ 510 016e 01D0     		beq	.L11
+ 511 0170 0028     		cmp	r0, #0
+ 512 0172 F2D1     		bne	.L12
+ 513              	.L11:
+ 237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 238:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     if (busystatus != RESET)
+ 514              		.loc 1 238 0
+ 515 0174 92B9     		cbnz	r2, .L17
+ 239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****    {
+ 240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     else
+ 243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       /* Read the Output block from the Output FIFO */
+ 246:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 516              		.loc 1 246 0
+ 517 0176 FFF7FEFF 		bl	CRYP_DataOut
+ 518              	.LVL83:
+ 519 017a C9F80000 		str	r0, [r9]
+ 520              	.LVL84:
+ 247:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 248:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 521              		.loc 1 248 0
+ 522 017e FFF7FEFF 		bl	CRYP_DataOut
+ 523              	.LVL85:
+ 524 0182 C9F80400 		str	r0, [r9, #4]
+ 525              	.LVL86:
+ 249:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 250:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 526              		.loc 1 250 0
+ 527 0186 FFF7FEFF 		bl	CRYP_DataOut
+ 528              	.LVL87:
+ 529 018a C9F80800 		str	r0, [r9, #8]
+ 530              	.LVL88:
+ 251:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 252:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut(); 
+ 531              		.loc 1 252 0
+ 532 018e FFF7FEFF 		bl	CRYP_DataOut
+ 533              	.LVL89:
+ 534 0192 C9F80C00 		str	r0, [r9, #12]
+ 253:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 535              		.loc 1 253 0
+ 536 0196 09F11009 		add	r9, r9, #16
+ 537              	.LVL90:
+ 538 019a 00E0     		b	.L13
+ 539              	.LVL91:
+ 540              	.L17:
+ 240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 541              		.loc 1 240 0
+ 542 019c 4746     		mov	r7, r8
+ 543              	.LVL92:
+ 544              	.L13:
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 545              		.loc 1 217 0
+ 546 019e 1036     		adds	r6, r6, #16
+ 547              	.LVL93:
+ 548              	.L10:
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 549              		.loc 1 217 0 is_stmt 0 discriminator 1
+ 550 01a0 5645     		cmp	r6, r10
+ 551 01a2 01D2     		bcs	.L14
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 552              		.loc 1 217 0 discriminator 2
+ 553 01a4 002F     		cmp	r7, #0
+ 554 01a6 C9D1     		bne	.L15
+ 555              	.L14:
+ 254:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 255:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 256:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 257:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Disable Crypto */
+ 258:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_Cmd(DISABLE);
+ 556              		.loc 1 258 0 is_stmt 1
+ 557 01a8 0020     		movs	r0, #0
+ 558 01aa FFF7FEFF 		bl	CRYP_Cmd
+ 559              	.LVL94:
+ 259:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   return status; 
+ 261:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** }
+ 560              		.loc 1 261 0
+ 561 01ae 3846     		mov	r0, r7
+ 562 01b0 0CB0     		add	sp, sp, #48
+ 563              		@ sp needed
+ 564 01b2 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 565              		.cfi_endproc
+ 566              	.LFE110:
+ 568 01b6 00BF     		.align	2
+ 569              		.global	CRYP_AES_CBC
+ 570              		.thumb
+ 571              		.thumb_func
+ 573              	CRYP_AES_CBC:
+ 574              	.LFB111:
+ 262:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 263:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /**
+ 264:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @brief  Encrypt and decrypt using AES in CBC Mode
+ 265:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Mode: encryption or decryption Mode.
+ 266:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          This parameter can be one of the following values:
+ 267:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *            @arg MODE_ENCRYPT: Encryption
+ 268:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *            @arg MODE_DECRYPT: Decryption
+ 269:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  InitVectors: Initialisation Vectors used for AES algorithm.
+ 270:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Key: Key used for AES algorithm.
+ 271:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Keysize: length of the Key, must be a 128, 192 or 256.
+ 272:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Input: pointer to the Input buffer.
+ 273:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Ilength: length of the Input buffer, must be a multiple of 16.
+ 274:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Output: pointer to the returned buffer.
+ 275:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @retval An ErrorStatus enumeration value:
+ 276:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          - SUCCESS: Operation done
+ 277:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          - ERROR: Operation failed
+ 278:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   */
+ 279:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** ErrorStatus CRYP_AES_CBC(uint8_t Mode, uint8_t InitVectors[16], uint8_t *Key,
+ 280:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****                          uint16_t Keysize, uint8_t *Input, uint32_t Ilength,
+ 281:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****                          uint8_t *Output)
+ 282:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** {
+ 575              		.loc 1 282 0
+ 576              		.cfi_startproc
+ 577              		@ args = 12, pretend = 0, frame = 64
+ 578              		@ frame_needed = 0, uses_anonymous_args = 0
+ 579              	.LVL95:
+ 580 01b8 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 581              		.cfi_def_cfa_offset 32
+ 582              		.cfi_offset 4, -32
+ 583              		.cfi_offset 5, -28
+ 584              		.cfi_offset 6, -24
+ 585              		.cfi_offset 7, -20
+ 586              		.cfi_offset 8, -16
+ 587              		.cfi_offset 9, -12
+ 588              		.cfi_offset 10, -8
+ 589              		.cfi_offset 14, -4
+ 590 01bc 90B0     		sub	sp, sp, #64
+ 591              		.cfi_def_cfa_offset 96
+ 592 01be 8046     		mov	r8, r0
+ 593 01c0 0E46     		mov	r6, r1
+ 594 01c2 1446     		mov	r4, r2
+ 595 01c4 1F46     		mov	r7, r3
+ 596 01c6 DDF864A0 		ldr	r10, [sp, #100]
+ 283:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_InitTypeDef AES_CRYP_InitStructure;
+ 284:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_KeyInitTypeDef AES_CRYP_KeyInitStructure;
+ 285:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_IVInitTypeDef AES_CRYP_IVInitStructure;
+ 286:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   __IO uint32_t counter = 0;
+ 597              		.loc 1 286 0
+ 598 01ca 0023     		movs	r3, #0
+ 599              	.LVL96:
+ 600 01cc 0193     		str	r3, [sp, #4]
+ 601              	.LVL97:
+ 287:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t busystatus = 0;
+ 288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ErrorStatus status = SUCCESS;
+ 289:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t keyaddr    = (uint32_t)Key;
+ 290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t inputaddr  = (uint32_t)Input;
+ 602              		.loc 1 290 0
+ 603 01ce 189D     		ldr	r5, [sp, #96]
+ 604              	.LVL98:
+ 291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t outputaddr = (uint32_t)Output;
+ 605              		.loc 1 291 0
+ 606 01d0 DDF86890 		ldr	r9, [sp, #104]
+ 607              	.LVL99:
+ 292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t ivaddr     = (uint32_t)InitVectors;
+ 293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t i = 0;
+ 294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 295:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Crypto structures initialisation*/
+ 296:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_KeyStructInit(&AES_CRYP_KeyInitStructure);
+ 608              		.loc 1 296 0
+ 609 01d4 06A8     		add	r0, sp, #24
+ 610              	.LVL100:
+ 611 01d6 FFF7FEFF 		bl	CRYP_KeyStructInit
+ 612              	.LVL101:
+ 297:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 298:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   switch(Keysize)
+ 613              		.loc 1 298 0
+ 614 01da C02F     		cmp	r7, #192
+ 615 01dc 14D0     		beq	.L22
+ 616 01de B7F5807F 		cmp	r7, #256
+ 617 01e2 28D0     		beq	.L23
+ 618 01e4 802F     		cmp	r7, #128
+ 619 01e6 42D1     		bne	.L21
+ 299:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 300:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     case 128:
+ 301:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_KeySize = CRYP_KeySize_128b;
+ 620              		.loc 1 301 0
+ 621 01e8 0023     		movs	r3, #0
+ 622 01ea ADF83E30 		strh	r3, [sp, #62]	@ movhi
+ 302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Left = __REV(*(uint32_t*)(keyaddr));
+ 623              		.loc 1 302 0
+ 624 01ee 2368     		ldr	r3, [r4]
+ 625              	.LVL102:
+ 626              	.LBB162:
+ 627              	.LBB163:
+ 628              		.loc 2 352 0
+ 629              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 630 01f0 1BBA     		rev r3, r3
+ 631              	@ 0 "" 2
+ 632              	.LVL103:
+ 633              		.thumb
+ 634              	.LBE163:
+ 635              	.LBE162:
+ 636              		.loc 1 302 0
+ 637 01f2 0A93     		str	r3, [sp, #40]
+ 638              	.LVL104:
+ 303:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 304:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Right= __REV(*(uint32_t*)(keyaddr));
+ 639              		.loc 1 304 0
+ 640 01f4 6368     		ldr	r3, [r4, #4]
+ 641              	.LVL105:
+ 642              	.LBB164:
+ 643              	.LBB165:
+ 644              		.loc 2 352 0
+ 645              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 646 01f6 1BBA     		rev r3, r3
+ 647              	@ 0 "" 2
+ 648              	.LVL106:
+ 649              		.thumb
+ 650              	.LBE165:
+ 651              	.LBE164:
+ 652              		.loc 1 304 0
+ 653 01f8 0B93     		str	r3, [sp, #44]
+ 654              	.LVL107:
+ 305:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 306:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Left = __REV(*(uint32_t*)(keyaddr));
+ 655              		.loc 1 306 0
+ 656 01fa A368     		ldr	r3, [r4, #8]
+ 657              	.LVL108:
+ 658              	.LBB166:
+ 659              	.LBB167:
+ 660              		.loc 2 352 0
+ 661              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 662 01fc 1BBA     		rev r3, r3
+ 663              	@ 0 "" 2
+ 664              	.LVL109:
+ 665              		.thumb
+ 666              	.LBE167:
+ 667              	.LBE166:
+ 668              		.loc 1 306 0
+ 669 01fe 0C93     		str	r3, [sp, #48]
+ 670              	.LVL110:
+ 307:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 308:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Right= __REV(*(uint32_t*)(keyaddr));
+ 671              		.loc 1 308 0
+ 672 0200 E368     		ldr	r3, [r4, #12]
+ 673              	.LVL111:
+ 674              	.LBB168:
+ 675              	.LBB169:
+ 676              		.loc 2 352 0
+ 677              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 678 0202 1BBA     		rev r3, r3
+ 679              	@ 0 "" 2
+ 680              	.LVL112:
+ 681              		.thumb
+ 682              	.LBE169:
+ 683              	.LBE168:
+ 684              		.loc 1 308 0
+ 685 0204 0D93     		str	r3, [sp, #52]
+ 309:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 686              		.loc 1 309 0
+ 687 0206 32E0     		b	.L21
+ 688              	.LVL113:
+ 689              	.L22:
+ 310:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     case 192:
+ 311:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_KeySize  = CRYP_KeySize_192b;
+ 690              		.loc 1 311 0
+ 691 0208 4FF48073 		mov	r3, #256
+ 692 020c ADF83E30 		strh	r3, [sp, #62]	@ movhi
+ 312:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Left = __REV(*(uint32_t*)(keyaddr));
+ 693              		.loc 1 312 0
+ 694 0210 2368     		ldr	r3, [r4]
+ 695              	.LVL114:
+ 696              	.LBB170:
+ 697              	.LBB171:
+ 698              		.loc 2 352 0
+ 699              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 700 0212 1BBA     		rev r3, r3
+ 701              	@ 0 "" 2
+ 702              	.LVL115:
+ 703              		.thumb
+ 704              	.LBE171:
+ 705              	.LBE170:
+ 706              		.loc 1 312 0
+ 707 0214 0893     		str	r3, [sp, #32]
+ 708              	.LVL116:
+ 313:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 314:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Right= __REV(*(uint32_t*)(keyaddr));
+ 709              		.loc 1 314 0
+ 710 0216 6368     		ldr	r3, [r4, #4]
+ 711              	.LVL117:
+ 712              	.LBB172:
+ 713              	.LBB173:
+ 714              		.loc 2 352 0
+ 715              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 716 0218 1BBA     		rev r3, r3
+ 717              	@ 0 "" 2
+ 718              	.LVL118:
+ 719              		.thumb
+ 720              	.LBE173:
+ 721              	.LBE172:
+ 722              		.loc 1 314 0
+ 723 021a 0993     		str	r3, [sp, #36]
+ 724              	.LVL119:
+ 315:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 316:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Left = __REV(*(uint32_t*)(keyaddr));
+ 725              		.loc 1 316 0
+ 726 021c A368     		ldr	r3, [r4, #8]
+ 727              	.LVL120:
+ 728              	.LBB174:
+ 729              	.LBB175:
+ 730              		.loc 2 352 0
+ 731              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 732 021e 1BBA     		rev r3, r3
+ 733              	@ 0 "" 2
+ 734              	.LVL121:
+ 735              		.thumb
+ 736              	.LBE175:
+ 737              	.LBE174:
+ 738              		.loc 1 316 0
+ 739 0220 0A93     		str	r3, [sp, #40]
+ 740              	.LVL122:
+ 317:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 318:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Right= __REV(*(uint32_t*)(keyaddr));
+ 741              		.loc 1 318 0
+ 742 0222 E368     		ldr	r3, [r4, #12]
+ 743              	.LVL123:
+ 744              	.LBB176:
+ 745              	.LBB177:
+ 746              		.loc 2 352 0
+ 747              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 748 0224 1BBA     		rev r3, r3
+ 749              	@ 0 "" 2
+ 750              	.LVL124:
+ 751              		.thumb
+ 752              	.LBE177:
+ 753              	.LBE176:
+ 754              		.loc 1 318 0
+ 755 0226 0B93     		str	r3, [sp, #44]
+ 756              	.LVL125:
+ 319:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 320:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Left = __REV(*(uint32_t*)(keyaddr));
+ 757              		.loc 1 320 0
+ 758 0228 2369     		ldr	r3, [r4, #16]
+ 759              	.LVL126:
+ 760              	.LBB178:
+ 761              	.LBB179:
+ 762              		.loc 2 352 0
+ 763              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 764 022a 1BBA     		rev r3, r3
+ 765              	@ 0 "" 2
+ 766              	.LVL127:
+ 767              		.thumb
+ 768              	.LBE179:
+ 769              	.LBE178:
+ 770              		.loc 1 320 0
+ 771 022c 0C93     		str	r3, [sp, #48]
+ 772              	.LVL128:
+ 321:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 322:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Right= __REV(*(uint32_t*)(keyaddr));
+ 773              		.loc 1 322 0
+ 774 022e 6369     		ldr	r3, [r4, #20]
+ 775              	.LVL129:
+ 776              	.LBB180:
+ 777              	.LBB181:
+ 778              		.loc 2 352 0
+ 779              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 780 0230 1BBA     		rev r3, r3
+ 781              	@ 0 "" 2
+ 782              	.LVL130:
+ 783              		.thumb
+ 784              	.LBE181:
+ 785              	.LBE180:
+ 786              		.loc 1 322 0
+ 787 0232 0D93     		str	r3, [sp, #52]
+ 323:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 788              		.loc 1 323 0
+ 789 0234 1BE0     		b	.L21
+ 790              	.LVL131:
+ 791              	.L23:
+ 324:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     case 256:
+ 325:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_KeySize  = CRYP_KeySize_256b;
+ 792              		.loc 1 325 0
+ 793 0236 4FF40073 		mov	r3, #512
+ 794 023a ADF83E30 		strh	r3, [sp, #62]	@ movhi
+ 326:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key0Left = __REV(*(uint32_t*)(keyaddr));
+ 795              		.loc 1 326 0
+ 796 023e 2368     		ldr	r3, [r4]
+ 797              	.LVL132:
+ 798              	.LBB182:
+ 799              	.LBB183:
+ 800              		.loc 2 352 0
+ 801              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 802 0240 1BBA     		rev r3, r3
+ 803              	@ 0 "" 2
+ 804              	.LVL133:
+ 805              		.thumb
+ 806              	.LBE183:
+ 807              	.LBE182:
+ 808              		.loc 1 326 0
+ 809 0242 0693     		str	r3, [sp, #24]
+ 810              	.LVL134:
+ 327:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 328:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key0Right= __REV(*(uint32_t*)(keyaddr));
+ 811              		.loc 1 328 0
+ 812 0244 6368     		ldr	r3, [r4, #4]
+ 813              	.LVL135:
+ 814              	.LBB184:
+ 815              	.LBB185:
+ 816              		.loc 2 352 0
+ 817              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 818 0246 1BBA     		rev r3, r3
+ 819              	@ 0 "" 2
+ 820              	.LVL136:
+ 821              		.thumb
+ 822              	.LBE185:
+ 823              	.LBE184:
+ 824              		.loc 1 328 0
+ 825 0248 0793     		str	r3, [sp, #28]
+ 826              	.LVL137:
+ 329:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 330:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Left = __REV(*(uint32_t*)(keyaddr));
+ 827              		.loc 1 330 0
+ 828 024a A368     		ldr	r3, [r4, #8]
+ 829              	.LVL138:
+ 830              	.LBB186:
+ 831              	.LBB187:
+ 832              		.loc 2 352 0
+ 833              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 834 024c 1BBA     		rev r3, r3
+ 835              	@ 0 "" 2
+ 836              	.LVL139:
+ 837              		.thumb
+ 838              	.LBE187:
+ 839              	.LBE186:
+ 840              		.loc 1 330 0
+ 841 024e 0893     		str	r3, [sp, #32]
+ 842              	.LVL140:
+ 331:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 332:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Right= __REV(*(uint32_t*)(keyaddr));
+ 843              		.loc 1 332 0
+ 844 0250 E368     		ldr	r3, [r4, #12]
+ 845              	.LVL141:
+ 846              	.LBB188:
+ 847              	.LBB189:
+ 848              		.loc 2 352 0
+ 849              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 850 0252 1BBA     		rev r3, r3
+ 851              	@ 0 "" 2
+ 852              	.LVL142:
+ 853              		.thumb
+ 854              	.LBE189:
+ 855              	.LBE188:
+ 856              		.loc 1 332 0
+ 857 0254 0993     		str	r3, [sp, #36]
+ 858              	.LVL143:
+ 333:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 334:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Left = __REV(*(uint32_t*)(keyaddr));
+ 859              		.loc 1 334 0
+ 860 0256 2369     		ldr	r3, [r4, #16]
+ 861              	.LVL144:
+ 862              	.LBB190:
+ 863              	.LBB191:
+ 864              		.loc 2 352 0
+ 865              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 866 0258 1BBA     		rev r3, r3
+ 867              	@ 0 "" 2
+ 868              	.LVL145:
+ 869              		.thumb
+ 870              	.LBE191:
+ 871              	.LBE190:
+ 872              		.loc 1 334 0
+ 873 025a 0A93     		str	r3, [sp, #40]
+ 874              	.LVL146:
+ 335:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 336:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Right= __REV(*(uint32_t*)(keyaddr));
+ 875              		.loc 1 336 0
+ 876 025c 6369     		ldr	r3, [r4, #20]
+ 877              	.LVL147:
+ 878              	.LBB192:
+ 879              	.LBB193:
+ 880              		.loc 2 352 0
+ 881              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 882 025e 1BBA     		rev r3, r3
+ 883              	@ 0 "" 2
+ 884              	.LVL148:
+ 885              		.thumb
+ 886              	.LBE193:
+ 887              	.LBE192:
+ 888              		.loc 1 336 0
+ 889 0260 0B93     		str	r3, [sp, #44]
+ 890              	.LVL149:
+ 337:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 338:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Left = __REV(*(uint32_t*)(keyaddr));
+ 891              		.loc 1 338 0
+ 892 0262 A369     		ldr	r3, [r4, #24]
+ 893              	.LVL150:
+ 894              	.LBB194:
+ 895              	.LBB195:
+ 896              		.loc 2 352 0
+ 897              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 898 0264 1BBA     		rev r3, r3
+ 899              	@ 0 "" 2
+ 900              	.LVL151:
+ 901              		.thumb
+ 902              	.LBE195:
+ 903              	.LBE194:
+ 904              		.loc 1 338 0
+ 905 0266 0C93     		str	r3, [sp, #48]
+ 906              	.LVL152:
+ 339:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 340:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Right= __REV(*(uint32_t*)(keyaddr));
+ 907              		.loc 1 340 0
+ 908 0268 E369     		ldr	r3, [r4, #28]
+ 909              	.LVL153:
+ 910              	.LBB196:
+ 911              	.LBB197:
+ 912              		.loc 2 352 0
+ 913              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 914 026a 1BBA     		rev r3, r3
+ 915              	@ 0 "" 2
+ 916              	.LVL154:
+ 917              		.thumb
+ 918              	.LBE197:
+ 919              	.LBE196:
+ 920              		.loc 1 340 0
+ 921 026c 0D93     		str	r3, [sp, #52]
+ 922              	.LVL155:
+ 923              	.L21:
+ 341:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 342:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     default:
+ 343:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 344:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 345:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 346:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* CRYP Initialization Vectors */
+ 347:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_IVInitStructure.CRYP_IV0Left = __REV(*(uint32_t*)(ivaddr));
+ 924              		.loc 1 347 0
+ 925 026e 3368     		ldr	r3, [r6]
+ 926              	.LVL156:
+ 927              	.LBB198:
+ 928              	.LBB199:
+ 929              		.loc 2 352 0
+ 930              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 931 0270 1BBA     		rev r3, r3
+ 932              	@ 0 "" 2
+ 933              	.LVL157:
+ 934              		.thumb
+ 935              	.LBE199:
+ 936              	.LBE198:
+ 937              		.loc 1 347 0
+ 938 0272 0293     		str	r3, [sp, #8]
+ 939              	.LVL158:
+ 348:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ivaddr+=4;
+ 349:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_IVInitStructure.CRYP_IV0Right= __REV(*(uint32_t*)(ivaddr));
+ 940              		.loc 1 349 0
+ 941 0274 7368     		ldr	r3, [r6, #4]
+ 942              	.LVL159:
+ 943              	.LBB200:
+ 944              	.LBB201:
+ 945              		.loc 2 352 0
+ 946              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 947 0276 1BBA     		rev r3, r3
+ 948              	@ 0 "" 2
+ 949              	.LVL160:
+ 950              		.thumb
+ 951              	.LBE201:
+ 952              	.LBE200:
+ 953              		.loc 1 349 0
+ 954 0278 0393     		str	r3, [sp, #12]
+ 955              	.LVL161:
+ 350:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ivaddr+=4;
+ 351:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_IVInitStructure.CRYP_IV1Left = __REV(*(uint32_t*)(ivaddr));
+ 956              		.loc 1 351 0
+ 957 027a B368     		ldr	r3, [r6, #8]
+ 958              	.LVL162:
+ 959              	.LBB202:
+ 960              	.LBB203:
+ 961              		.loc 2 352 0
+ 962              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 963 027c 1BBA     		rev r3, r3
+ 964              	@ 0 "" 2
+ 965              	.LVL163:
+ 966              		.thumb
+ 967              	.LBE203:
+ 968              	.LBE202:
+ 969              		.loc 1 351 0
+ 970 027e 0493     		str	r3, [sp, #16]
+ 971              	.LVL164:
+ 352:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ivaddr+=4;
+ 353:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_IVInitStructure.CRYP_IV1Right= __REV(*(uint32_t*)(ivaddr));
+ 972              		.loc 1 353 0
+ 973 0280 F368     		ldr	r3, [r6, #12]
+ 974              	.LVL165:
+ 975              	.LBB204:
+ 976              	.LBB205:
+ 977              		.loc 2 352 0
+ 978              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 979 0282 1BBA     		rev r3, r3
+ 980              	@ 0 "" 2
+ 981              	.LVL166:
+ 982              		.thumb
+ 983              	.LBE205:
+ 984              	.LBE204:
+ 985              		.loc 1 353 0
+ 986 0284 0593     		str	r3, [sp, #20]
+ 354:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 355:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /*------------------ AES Decryption ------------------*/
+ 357:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   if(Mode == MODE_DECRYPT) /* AES decryption */
+ 987              		.loc 1 357 0
+ 988 0286 B8F1000F 		cmp	r8, #0
+ 989 028a 27D1     		bne	.L25
+ 358:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 359:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Flush IN/OUT FIFOs */
+ 360:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_FIFOFlush();
+ 990              		.loc 1 360 0
+ 991 028c FFF7FEFF 		bl	CRYP_FIFOFlush
+ 992              	.LVL167:
+ 361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 362:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Crypto Init for Key preparation for decryption process */
+ 363:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_AlgoDir = CRYP_AlgoDir_Decrypt;
+ 993              		.loc 1 363 0
+ 994 0290 0423     		movs	r3, #4
+ 995 0292 ADF83830 		strh	r3, [sp, #56]	@ movhi
+ 364:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_AlgoMode = CRYP_AlgoMode_AES_Key;
+ 996              		.loc 1 364 0
+ 997 0296 3823     		movs	r3, #56
+ 998 0298 ADF83A30 		strh	r3, [sp, #58]	@ movhi
+ 365:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_DataType = CRYP_DataType_32b;
+ 999              		.loc 1 365 0
+ 1000 029c 0023     		movs	r3, #0
+ 1001 029e ADF83C30 		strh	r3, [sp, #60]	@ movhi
+ 366:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 367:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_Init(&AES_CRYP_InitStructure);
+ 1002              		.loc 1 367 0
+ 1003 02a2 0EA8     		add	r0, sp, #56
+ 1004 02a4 FFF7FEFF 		bl	CRYP_Init
+ 1005              	.LVL168:
+ 368:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Key Initialisation */
+ 370:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_KeyInit(&AES_CRYP_KeyInitStructure);
+ 1006              		.loc 1 370 0
+ 1007 02a8 06A8     		add	r0, sp, #24
+ 1008 02aa FFF7FEFF 		bl	CRYP_KeyInit
+ 1009              	.LVL169:
+ 371:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Enable Crypto processor */
+ 373:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_Cmd(ENABLE);
+ 1010              		.loc 1 373 0
+ 1011 02ae 0120     		movs	r0, #1
+ 1012 02b0 FFF7FEFF 		bl	CRYP_Cmd
+ 1013              	.LVL170:
+ 374:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* wait until the Busy flag is RESET */
+ 376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     do
+ 377:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 378:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       busystatus = CRYP_GetFlagStatus(CRYP_FLAG_BUSY);
+ 1014              		.loc 1 378 0
+ 1015 02b4 1024     		movs	r4, #16
+ 1016              	.LVL171:
+ 1017              	.L27:
+ 1018              		.loc 1 378 0 is_stmt 0 discriminator 1
+ 1019 02b6 2046     		mov	r0, r4
+ 1020 02b8 FFF7FEFF 		bl	CRYP_GetFlagStatus
+ 1021              	.LVL172:
+ 1022 02bc 0246     		mov	r2, r0
+ 1023              	.LVL173:
+ 379:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       counter++;
+ 1024              		.loc 1 379 0 is_stmt 1 discriminator 1
+ 1025 02be 019B     		ldr	r3, [sp, #4]
+ 1026 02c0 0133     		adds	r3, r3, #1
+ 1027 02c2 0193     		str	r3, [sp, #4]
+ 380:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }while ((counter != AESBUSY_TIMEOUT) && (busystatus != RESET));
+ 1028              		.loc 1 380 0 discriminator 1
+ 1029 02c4 019B     		ldr	r3, [sp, #4]
+ 1030 02c6 B3F5803F 		cmp	r3, #65536
+ 1031 02ca 01D0     		beq	.L26
+ 1032 02cc 0028     		cmp	r0, #0
+ 1033 02ce F2D1     		bne	.L27
+ 1034              	.L26:
+ 381:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 382:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     if (busystatus != RESET)
+ 1035              		.loc 1 382 0
+ 1036 02d0 62B9     		cbnz	r2, .L35
+ 383:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****    {
+ 384:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 385:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 386:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     else
+ 387:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 388:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       /* Crypto Init for decryption process */  
+ 389:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       AES_CRYP_InitStructure.CRYP_AlgoDir = CRYP_AlgoDir_Decrypt;
+ 1037              		.loc 1 389 0
+ 1038 02d2 0423     		movs	r3, #4
+ 1039 02d4 ADF83830 		strh	r3, [sp, #56]	@ movhi
+ 288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ErrorStatus status = SUCCESS;
+ 1040              		.loc 1 288 0
+ 1041 02d8 0127     		movs	r7, #1
+ 1042 02da 08E0     		b	.L28
+ 1043              	.LVL174:
+ 1044              	.L25:
+ 390:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 391:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 392:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /*------------------ AES Encryption ------------------*/
+ 393:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   else /* AES encryption */
+ 394:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 395:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_KeyInit(&AES_CRYP_KeyInitStructure);
+ 1045              		.loc 1 395 0
+ 1046 02dc 06A8     		add	r0, sp, #24
+ 1047 02de FFF7FEFF 		bl	CRYP_KeyInit
+ 1048              	.LVL175:
+ 396:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 397:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Crypto Init for Encryption process */
+ 398:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_AlgoDir  = CRYP_AlgoDir_Encrypt;
+ 1049              		.loc 1 398 0
+ 1050 02e2 0023     		movs	r3, #0
+ 1051 02e4 ADF83830 		strh	r3, [sp, #56]	@ movhi
+ 288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ErrorStatus status = SUCCESS;
+ 1052              		.loc 1 288 0
+ 1053 02e8 0127     		movs	r7, #1
+ 1054 02ea 00E0     		b	.L28
+ 1055              	.LVL176:
+ 1056              	.L35:
+ 384:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 1057              		.loc 1 384 0
+ 1058 02ec 0027     		movs	r7, #0
+ 1059              	.LVL177:
+ 1060              	.L28:
+ 399:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 400:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_InitStructure.CRYP_AlgoMode = CRYP_AlgoMode_AES_CBC;
+ 1061              		.loc 1 400 0
+ 1062 02ee 2823     		movs	r3, #40
+ 1063 02f0 ADF83A30 		strh	r3, [sp, #58]	@ movhi
+ 401:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_InitStructure.CRYP_DataType = CRYP_DataType_8b;
+ 1064              		.loc 1 401 0
+ 1065 02f4 8023     		movs	r3, #128
+ 1066 02f6 ADF83C30 		strh	r3, [sp, #60]	@ movhi
+ 402:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_Init(&AES_CRYP_InitStructure);
+ 1067              		.loc 1 402 0
+ 1068 02fa 0EA8     		add	r0, sp, #56
+ 1069 02fc FFF7FEFF 		bl	CRYP_Init
+ 1070              	.LVL178:
+ 403:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 404:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* CRYP Initialization Vectors */
+ 405:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_IVInit(&AES_CRYP_IVInitStructure);
+ 1071              		.loc 1 405 0
+ 1072 0300 02A8     		add	r0, sp, #8
+ 1073 0302 FFF7FEFF 		bl	CRYP_IVInit
+ 1074              	.LVL179:
+ 406:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 407:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Flush IN/OUT FIFOs */
+ 408:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_FIFOFlush();
+ 1075              		.loc 1 408 0
+ 1076 0306 FFF7FEFF 		bl	CRYP_FIFOFlush
+ 1077              	.LVL180:
+ 409:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 410:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Enable Crypto processor */
+ 411:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_Cmd(ENABLE);
+ 1078              		.loc 1 411 0
+ 1079 030a 0120     		movs	r0, #1
+ 1080 030c FFF7FEFF 		bl	CRYP_Cmd
+ 1081              	.LVL181:
+ 412:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 413:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1082              		.loc 1 414 0
+ 1083 0310 0026     		movs	r6, #0
+ 1084              	.LVL182:
+ 415:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 416:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 417:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Write the Input block in the IN FIFO */
+ 418:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 419:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 420:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 421:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 422:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 423:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 426:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Wait until the complete message has been processed */
+ 427:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     counter = 0;
+ 1085              		.loc 1 427 0
+ 1086 0312 B046     		mov	r8, r6
+ 428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     do
+ 429:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 430:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       busystatus = CRYP_GetFlagStatus(CRYP_FLAG_BUSY);
+ 1087              		.loc 1 430 0
+ 1088 0314 1024     		movs	r4, #16
+ 414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1089              		.loc 1 414 0
+ 1090 0316 31E0     		b	.L29
+ 1091              	.LVL183:
+ 1092              	.L34:
+ 418:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 1093              		.loc 1 418 0
+ 1094 0318 2868     		ldr	r0, [r5]
+ 1095 031a FFF7FEFF 		bl	CRYP_DataIn
+ 1096              	.LVL184:
+ 420:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 1097              		.loc 1 420 0
+ 1098 031e 6868     		ldr	r0, [r5, #4]
+ 1099 0320 FFF7FEFF 		bl	CRYP_DataIn
+ 1100              	.LVL185:
+ 422:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 1101              		.loc 1 422 0
+ 1102 0324 A868     		ldr	r0, [r5, #8]
+ 1103 0326 FFF7FEFF 		bl	CRYP_DataIn
+ 1104              	.LVL186:
+ 424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 1105              		.loc 1 424 0
+ 1106 032a E868     		ldr	r0, [r5, #12]
+ 1107 032c FFF7FEFF 		bl	CRYP_DataIn
+ 1108              	.LVL187:
+ 425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 1109              		.loc 1 425 0
+ 1110 0330 1035     		adds	r5, r5, #16
+ 1111              	.LVL188:
+ 427:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     counter = 0;
+ 1112              		.loc 1 427 0
+ 1113 0332 CDF80480 		str	r8, [sp, #4]
+ 1114              	.L31:
+ 1115              		.loc 1 430 0 discriminator 1
+ 1116 0336 2046     		mov	r0, r4
+ 1117 0338 FFF7FEFF 		bl	CRYP_GetFlagStatus
+ 1118              	.LVL189:
+ 1119 033c 0246     		mov	r2, r0
+ 1120              	.LVL190:
+ 431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       counter++;
+ 1121              		.loc 1 431 0 discriminator 1
+ 1122 033e 019B     		ldr	r3, [sp, #4]
+ 1123 0340 0133     		adds	r3, r3, #1
+ 1124 0342 0193     		str	r3, [sp, #4]
+ 432:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }while ((counter != AESBUSY_TIMEOUT) && (busystatus != RESET));
+ 1125              		.loc 1 432 0 discriminator 1
+ 1126 0344 019B     		ldr	r3, [sp, #4]
+ 1127 0346 B3F5803F 		cmp	r3, #65536
+ 1128 034a 01D0     		beq	.L30
+ 1129 034c 0028     		cmp	r0, #0
+ 1130 034e F2D1     		bne	.L31
+ 1131              	.L30:
+ 433:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     if (busystatus != RESET)
+ 1132              		.loc 1 434 0
+ 1133 0350 92B9     		cbnz	r2, .L36
+ 435:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****    {
+ 436:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 438:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     else
+ 439:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 441:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       /* Read the Output block from the Output FIFO */
+ 442:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 1134              		.loc 1 442 0
+ 1135 0352 FFF7FEFF 		bl	CRYP_DataOut
+ 1136              	.LVL191:
+ 1137 0356 C9F80000 		str	r0, [r9]
+ 1138              	.LVL192:
+ 443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 444:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 1139              		.loc 1 444 0
+ 1140 035a FFF7FEFF 		bl	CRYP_DataOut
+ 1141              	.LVL193:
+ 1142 035e C9F80400 		str	r0, [r9, #4]
+ 1143              	.LVL194:
+ 445:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 446:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 1144              		.loc 1 446 0
+ 1145 0362 FFF7FEFF 		bl	CRYP_DataOut
+ 1146              	.LVL195:
+ 1147 0366 C9F80800 		str	r0, [r9, #8]
+ 1148              	.LVL196:
+ 447:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 448:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 1149              		.loc 1 448 0
+ 1150 036a FFF7FEFF 		bl	CRYP_DataOut
+ 1151              	.LVL197:
+ 1152 036e C9F80C00 		str	r0, [r9, #12]
+ 449:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 1153              		.loc 1 449 0
+ 1154 0372 09F11009 		add	r9, r9, #16
+ 1155              	.LVL198:
+ 1156 0376 00E0     		b	.L32
+ 1157              	.LVL199:
+ 1158              	.L36:
+ 436:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 1159              		.loc 1 436 0
+ 1160 0378 4746     		mov	r7, r8
+ 1161              	.LVL200:
+ 1162              	.L32:
+ 414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1163              		.loc 1 414 0
+ 1164 037a 1036     		adds	r6, r6, #16
+ 1165              	.LVL201:
+ 1166              	.L29:
+ 414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1167              		.loc 1 414 0 is_stmt 0 discriminator 1
+ 1168 037c 5645     		cmp	r6, r10
+ 1169 037e 01D2     		bcs	.L33
+ 414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1170              		.loc 1 414 0 discriminator 2
+ 1171 0380 002F     		cmp	r7, #0
+ 1172 0382 C9D1     		bne	.L34
+ 1173              	.L33:
+ 450:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 451:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 452:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 453:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Disable Crypto */
+ 454:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_Cmd(DISABLE);
+ 1174              		.loc 1 454 0 is_stmt 1
+ 1175 0384 0020     		movs	r0, #0
+ 1176 0386 FFF7FEFF 		bl	CRYP_Cmd
+ 1177              	.LVL202:
+ 455:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 456:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   return status;
+ 457:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** }
+ 1178              		.loc 1 457 0
+ 1179 038a 3846     		mov	r0, r7
+ 1180 038c 10B0     		add	sp, sp, #64
+ 1181              		@ sp needed
+ 1182 038e BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 1183              		.cfi_endproc
+ 1184              	.LFE111:
+ 1186 0392 00BF     		.align	2
+ 1187              		.global	CRYP_AES_CTR
+ 1188              		.thumb
+ 1189              		.thumb_func
+ 1191              	CRYP_AES_CTR:
+ 1192              	.LFB112:
+ 458:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 459:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** /**
+ 460:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @brief  Encrypt and decrypt using AES in CTR Mode
+ 461:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Mode: encryption or decryption Mode.
+ 462:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *           This parameter can be one of the following values:
+ 463:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *            @arg MODE_ENCRYPT: Encryption
+ 464:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *            @arg MODE_DECRYPT: Decryption
+ 465:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  InitVectors: Initialisation Vectors used for AES algorithm.
+ 466:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Key: Key used for AES algorithm.
+ 467:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Keysize: length of the Key, must be a 128, 192 or 256.
+ 468:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Input: pointer to the Input buffer.
+ 469:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Ilength: length of the Input buffer, must be a multiple of 16.
+ 470:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @param  Output: pointer to the returned buffer.
+ 471:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   * @retval An ErrorStatus enumeration value:
+ 472:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          - SUCCESS: Operation done
+ 473:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   *          - ERROR: Operation failed
+ 474:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   */
+ 475:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** ErrorStatus CRYP_AES_CTR(uint8_t Mode, uint8_t InitVectors[16], uint8_t *Key, 
+ 476:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****                          uint16_t Keysize, uint8_t *Input, uint32_t Ilength,
+ 477:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****                          uint8_t *Output)
+ 478:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** {
+ 1193              		.loc 1 478 0
+ 1194              		.cfi_startproc
+ 1195              		@ args = 12, pretend = 0, frame = 64
+ 1196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1197              	.LVL203:
+ 1198 0394 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 1199              		.cfi_def_cfa_offset 32
+ 1200              		.cfi_offset 4, -32
+ 1201              		.cfi_offset 5, -28
+ 1202              		.cfi_offset 6, -24
+ 1203              		.cfi_offset 7, -20
+ 1204              		.cfi_offset 8, -16
+ 1205              		.cfi_offset 9, -12
+ 1206              		.cfi_offset 10, -8
+ 1207              		.cfi_offset 14, -4
+ 1208 0398 90B0     		sub	sp, sp, #64
+ 1209              		.cfi_def_cfa_offset 96
+ 1210 039a 8046     		mov	r8, r0
+ 1211 039c 0E46     		mov	r6, r1
+ 1212 039e 1446     		mov	r4, r2
+ 1213 03a0 1F46     		mov	r7, r3
+ 1214 03a2 DDF864A0 		ldr	r10, [sp, #100]
+ 479:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_InitTypeDef AES_CRYP_InitStructure;
+ 480:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_KeyInitTypeDef AES_CRYP_KeyInitStructure;
+ 481:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_IVInitTypeDef AES_CRYP_IVInitStructure;
+ 482:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   __IO uint32_t counter = 0;
+ 1215              		.loc 1 482 0
+ 1216 03a6 0023     		movs	r3, #0
+ 1217              	.LVL204:
+ 1218 03a8 0193     		str	r3, [sp, #4]
+ 1219              	.LVL205:
+ 483:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t busystatus = 0;
+ 484:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ErrorStatus status = SUCCESS;
+ 485:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t keyaddr    = (uint32_t)Key;
+ 486:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t inputaddr  = (uint32_t)Input;
+ 1220              		.loc 1 486 0
+ 1221 03aa 189D     		ldr	r5, [sp, #96]
+ 1222              	.LVL206:
+ 487:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t outputaddr = (uint32_t)Output;
+ 1223              		.loc 1 487 0
+ 1224 03ac DDF86890 		ldr	r9, [sp, #104]
+ 1225              	.LVL207:
+ 488:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t ivaddr     = (uint32_t)InitVectors;
+ 489:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   uint32_t i = 0;
+ 490:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 491:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Crypto structures initialisation*/
+ 492:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_KeyStructInit(&AES_CRYP_KeyInitStructure);
+ 1226              		.loc 1 492 0
+ 1227 03b0 06A8     		add	r0, sp, #24
+ 1228              	.LVL208:
+ 1229 03b2 FFF7FEFF 		bl	CRYP_KeyStructInit
+ 1230              	.LVL209:
+ 493:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 494:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   switch(Keysize)
+ 1231              		.loc 1 494 0
+ 1232 03b6 C02F     		cmp	r7, #192
+ 1233 03b8 14D0     		beq	.L41
+ 1234 03ba B7F5807F 		cmp	r7, #256
+ 1235 03be 28D0     		beq	.L42
+ 1236 03c0 802F     		cmp	r7, #128
+ 1237 03c2 42D1     		bne	.L40
+ 495:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 496:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     case 128:
+ 497:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_KeySize = CRYP_KeySize_128b;
+ 1238              		.loc 1 497 0
+ 1239 03c4 0023     		movs	r3, #0
+ 1240 03c6 ADF83E30 		strh	r3, [sp, #62]	@ movhi
+ 498:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Left = __REV(*(uint32_t*)(keyaddr));
+ 1241              		.loc 1 498 0
+ 1242 03ca 2368     		ldr	r3, [r4]
+ 1243              	.LVL210:
+ 1244              	.LBB206:
+ 1245              	.LBB207:
+ 1246              		.loc 2 352 0
+ 1247              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1248 03cc 1BBA     		rev r3, r3
+ 1249              	@ 0 "" 2
+ 1250              	.LVL211:
+ 1251              		.thumb
+ 1252              	.LBE207:
+ 1253              	.LBE206:
+ 1254              		.loc 1 498 0
+ 1255 03ce 0A93     		str	r3, [sp, #40]
+ 1256              	.LVL212:
+ 499:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 500:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Right= __REV(*(uint32_t*)(keyaddr));
+ 1257              		.loc 1 500 0
+ 1258 03d0 6368     		ldr	r3, [r4, #4]
+ 1259              	.LVL213:
+ 1260              	.LBB208:
+ 1261              	.LBB209:
+ 1262              		.loc 2 352 0
+ 1263              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1264 03d2 1BBA     		rev r3, r3
+ 1265              	@ 0 "" 2
+ 1266              	.LVL214:
+ 1267              		.thumb
+ 1268              	.LBE209:
+ 1269              	.LBE208:
+ 1270              		.loc 1 500 0
+ 1271 03d4 0B93     		str	r3, [sp, #44]
+ 1272              	.LVL215:
+ 501:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 502:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Left = __REV(*(uint32_t*)(keyaddr));
+ 1273              		.loc 1 502 0
+ 1274 03d6 A368     		ldr	r3, [r4, #8]
+ 1275              	.LVL216:
+ 1276              	.LBB210:
+ 1277              	.LBB211:
+ 1278              		.loc 2 352 0
+ 1279              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1280 03d8 1BBA     		rev r3, r3
+ 1281              	@ 0 "" 2
+ 1282              	.LVL217:
+ 1283              		.thumb
+ 1284              	.LBE211:
+ 1285              	.LBE210:
+ 1286              		.loc 1 502 0
+ 1287 03da 0C93     		str	r3, [sp, #48]
+ 1288              	.LVL218:
+ 503:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 504:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Right= __REV(*(uint32_t*)(keyaddr));
+ 1289              		.loc 1 504 0
+ 1290 03dc E368     		ldr	r3, [r4, #12]
+ 1291              	.LVL219:
+ 1292              	.LBB212:
+ 1293              	.LBB213:
+ 1294              		.loc 2 352 0
+ 1295              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1296 03de 1BBA     		rev r3, r3
+ 1297              	@ 0 "" 2
+ 1298              	.LVL220:
+ 1299              		.thumb
+ 1300              	.LBE213:
+ 1301              	.LBE212:
+ 1302              		.loc 1 504 0
+ 1303 03e0 0D93     		str	r3, [sp, #52]
+ 505:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 1304              		.loc 1 505 0
+ 1305 03e2 32E0     		b	.L40
+ 1306              	.LVL221:
+ 1307              	.L41:
+ 506:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     case 192:
+ 507:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_KeySize  = CRYP_KeySize_192b;
+ 1308              		.loc 1 507 0
+ 1309 03e4 4FF48073 		mov	r3, #256
+ 1310 03e8 ADF83E30 		strh	r3, [sp, #62]	@ movhi
+ 508:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Left = __REV(*(uint32_t*)(keyaddr));
+ 1311              		.loc 1 508 0
+ 1312 03ec 2368     		ldr	r3, [r4]
+ 1313              	.LVL222:
+ 1314              	.LBB214:
+ 1315              	.LBB215:
+ 1316              		.loc 2 352 0
+ 1317              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1318 03ee 1BBA     		rev r3, r3
+ 1319              	@ 0 "" 2
+ 1320              	.LVL223:
+ 1321              		.thumb
+ 1322              	.LBE215:
+ 1323              	.LBE214:
+ 1324              		.loc 1 508 0
+ 1325 03f0 0893     		str	r3, [sp, #32]
+ 1326              	.LVL224:
+ 509:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 510:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Right= __REV(*(uint32_t*)(keyaddr));
+ 1327              		.loc 1 510 0
+ 1328 03f2 6368     		ldr	r3, [r4, #4]
+ 1329              	.LVL225:
+ 1330              	.LBB216:
+ 1331              	.LBB217:
+ 1332              		.loc 2 352 0
+ 1333              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1334 03f4 1BBA     		rev r3, r3
+ 1335              	@ 0 "" 2
+ 1336              	.LVL226:
+ 1337              		.thumb
+ 1338              	.LBE217:
+ 1339              	.LBE216:
+ 1340              		.loc 1 510 0
+ 1341 03f6 0993     		str	r3, [sp, #36]
+ 1342              	.LVL227:
+ 511:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 512:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Left = __REV(*(uint32_t*)(keyaddr));
+ 1343              		.loc 1 512 0
+ 1344 03f8 A368     		ldr	r3, [r4, #8]
+ 1345              	.LVL228:
+ 1346              	.LBB218:
+ 1347              	.LBB219:
+ 1348              		.loc 2 352 0
+ 1349              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1350 03fa 1BBA     		rev r3, r3
+ 1351              	@ 0 "" 2
+ 1352              	.LVL229:
+ 1353              		.thumb
+ 1354              	.LBE219:
+ 1355              	.LBE218:
+ 1356              		.loc 1 512 0
+ 1357 03fc 0A93     		str	r3, [sp, #40]
+ 1358              	.LVL230:
+ 513:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 514:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Right= __REV(*(uint32_t*)(keyaddr));
+ 1359              		.loc 1 514 0
+ 1360 03fe E368     		ldr	r3, [r4, #12]
+ 1361              	.LVL231:
+ 1362              	.LBB220:
+ 1363              	.LBB221:
+ 1364              		.loc 2 352 0
+ 1365              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1366 0400 1BBA     		rev r3, r3
+ 1367              	@ 0 "" 2
+ 1368              	.LVL232:
+ 1369              		.thumb
+ 1370              	.LBE221:
+ 1371              	.LBE220:
+ 1372              		.loc 1 514 0
+ 1373 0402 0B93     		str	r3, [sp, #44]
+ 1374              	.LVL233:
+ 515:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 516:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Left = __REV(*(uint32_t*)(keyaddr));
+ 1375              		.loc 1 516 0
+ 1376 0404 2369     		ldr	r3, [r4, #16]
+ 1377              	.LVL234:
+ 1378              	.LBB222:
+ 1379              	.LBB223:
+ 1380              		.loc 2 352 0
+ 1381              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1382 0406 1BBA     		rev r3, r3
+ 1383              	@ 0 "" 2
+ 1384              	.LVL235:
+ 1385              		.thumb
+ 1386              	.LBE223:
+ 1387              	.LBE222:
+ 1388              		.loc 1 516 0
+ 1389 0408 0C93     		str	r3, [sp, #48]
+ 1390              	.LVL236:
+ 517:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 518:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Right= __REV(*(uint32_t*)(keyaddr));
+ 1391              		.loc 1 518 0
+ 1392 040a 6369     		ldr	r3, [r4, #20]
+ 1393              	.LVL237:
+ 1394              	.LBB224:
+ 1395              	.LBB225:
+ 1396              		.loc 2 352 0
+ 1397              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1398 040c 1BBA     		rev r3, r3
+ 1399              	@ 0 "" 2
+ 1400              	.LVL238:
+ 1401              		.thumb
+ 1402              	.LBE225:
+ 1403              	.LBE224:
+ 1404              		.loc 1 518 0
+ 1405 040e 0D93     		str	r3, [sp, #52]
+ 519:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 1406              		.loc 1 519 0
+ 1407 0410 1BE0     		b	.L40
+ 1408              	.LVL239:
+ 1409              	.L42:
+ 520:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     case 256:
+ 521:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_KeySize  = CRYP_KeySize_256b;
+ 1410              		.loc 1 521 0
+ 1411 0412 4FF40073 		mov	r3, #512
+ 1412 0416 ADF83E30 		strh	r3, [sp, #62]	@ movhi
+ 522:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key0Left = __REV(*(uint32_t*)(keyaddr));
+ 1413              		.loc 1 522 0
+ 1414 041a 2368     		ldr	r3, [r4]
+ 1415              	.LVL240:
+ 1416              	.LBB226:
+ 1417              	.LBB227:
+ 1418              		.loc 2 352 0
+ 1419              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1420 041c 1BBA     		rev r3, r3
+ 1421              	@ 0 "" 2
+ 1422              	.LVL241:
+ 1423              		.thumb
+ 1424              	.LBE227:
+ 1425              	.LBE226:
+ 1426              		.loc 1 522 0
+ 1427 041e 0693     		str	r3, [sp, #24]
+ 1428              	.LVL242:
+ 523:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 524:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key0Right= __REV(*(uint32_t*)(keyaddr));
+ 1429              		.loc 1 524 0
+ 1430 0420 6368     		ldr	r3, [r4, #4]
+ 1431              	.LVL243:
+ 1432              	.LBB228:
+ 1433              	.LBB229:
+ 1434              		.loc 2 352 0
+ 1435              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1436 0422 1BBA     		rev r3, r3
+ 1437              	@ 0 "" 2
+ 1438              	.LVL244:
+ 1439              		.thumb
+ 1440              	.LBE229:
+ 1441              	.LBE228:
+ 1442              		.loc 1 524 0
+ 1443 0424 0793     		str	r3, [sp, #28]
+ 1444              	.LVL245:
+ 525:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 526:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Left = __REV(*(uint32_t*)(keyaddr));
+ 1445              		.loc 1 526 0
+ 1446 0426 A368     		ldr	r3, [r4, #8]
+ 1447              	.LVL246:
+ 1448              	.LBB230:
+ 1449              	.LBB231:
+ 1450              		.loc 2 352 0
+ 1451              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1452 0428 1BBA     		rev r3, r3
+ 1453              	@ 0 "" 2
+ 1454              	.LVL247:
+ 1455              		.thumb
+ 1456              	.LBE231:
+ 1457              	.LBE230:
+ 1458              		.loc 1 526 0
+ 1459 042a 0893     		str	r3, [sp, #32]
+ 1460              	.LVL248:
+ 527:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 528:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key1Right= __REV(*(uint32_t*)(keyaddr));
+ 1461              		.loc 1 528 0
+ 1462 042c E368     		ldr	r3, [r4, #12]
+ 1463              	.LVL249:
+ 1464              	.LBB232:
+ 1465              	.LBB233:
+ 1466              		.loc 2 352 0
+ 1467              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1468 042e 1BBA     		rev r3, r3
+ 1469              	@ 0 "" 2
+ 1470              	.LVL250:
+ 1471              		.thumb
+ 1472              	.LBE233:
+ 1473              	.LBE232:
+ 1474              		.loc 1 528 0
+ 1475 0430 0993     		str	r3, [sp, #36]
+ 1476              	.LVL251:
+ 529:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 530:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Left = __REV(*(uint32_t*)(keyaddr));
+ 1477              		.loc 1 530 0
+ 1478 0432 2369     		ldr	r3, [r4, #16]
+ 1479              	.LVL252:
+ 1480              	.LBB234:
+ 1481              	.LBB235:
+ 1482              		.loc 2 352 0
+ 1483              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1484 0434 1BBA     		rev r3, r3
+ 1485              	@ 0 "" 2
+ 1486              	.LVL253:
+ 1487              		.thumb
+ 1488              	.LBE235:
+ 1489              	.LBE234:
+ 1490              		.loc 1 530 0
+ 1491 0436 0A93     		str	r3, [sp, #40]
+ 1492              	.LVL254:
+ 531:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 532:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key2Right= __REV(*(uint32_t*)(keyaddr));
+ 1493              		.loc 1 532 0
+ 1494 0438 6369     		ldr	r3, [r4, #20]
+ 1495              	.LVL255:
+ 1496              	.LBB236:
+ 1497              	.LBB237:
+ 1498              		.loc 2 352 0
+ 1499              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1500 043a 1BBA     		rev r3, r3
+ 1501              	@ 0 "" 2
+ 1502              	.LVL256:
+ 1503              		.thumb
+ 1504              	.LBE237:
+ 1505              	.LBE236:
+ 1506              		.loc 1 532 0
+ 1507 043c 0B93     		str	r3, [sp, #44]
+ 1508              	.LVL257:
+ 533:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 534:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Left = __REV(*(uint32_t*)(keyaddr));
+ 1509              		.loc 1 534 0
+ 1510 043e A369     		ldr	r3, [r4, #24]
+ 1511              	.LVL258:
+ 1512              	.LBB238:
+ 1513              	.LBB239:
+ 1514              		.loc 2 352 0
+ 1515              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1516 0440 1BBA     		rev r3, r3
+ 1517              	@ 0 "" 2
+ 1518              	.LVL259:
+ 1519              		.thumb
+ 1520              	.LBE239:
+ 1521              	.LBE238:
+ 1522              		.loc 1 534 0
+ 1523 0442 0C93     		str	r3, [sp, #48]
+ 1524              	.LVL260:
+ 535:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     keyaddr+=4;
+ 536:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_KeyInitStructure.CRYP_Key3Right= __REV(*(uint32_t*)(keyaddr));
+ 1525              		.loc 1 536 0
+ 1526 0444 E369     		ldr	r3, [r4, #28]
+ 1527              	.LVL261:
+ 1528              	.LBB240:
+ 1529              	.LBB241:
+ 1530              		.loc 2 352 0
+ 1531              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1532 0446 1BBA     		rev r3, r3
+ 1533              	@ 0 "" 2
+ 1534              	.LVL262:
+ 1535              		.thumb
+ 1536              	.LBE241:
+ 1537              	.LBE240:
+ 1538              		.loc 1 536 0
+ 1539 0448 0D93     		str	r3, [sp, #52]
+ 1540              	.LVL263:
+ 1541              	.L40:
+ 537:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 538:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     default:
+ 539:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     break;
+ 540:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 541:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* CRYP Initialization Vectors */
+ 542:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_IVInitStructure.CRYP_IV0Left = __REV(*(uint32_t*)(ivaddr));
+ 1542              		.loc 1 542 0
+ 1543 044a 3368     		ldr	r3, [r6]
+ 1544              	.LVL264:
+ 1545              	.LBB242:
+ 1546              	.LBB243:
+ 1547              		.loc 2 352 0
+ 1548              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1549 044c 1BBA     		rev r3, r3
+ 1550              	@ 0 "" 2
+ 1551              	.LVL265:
+ 1552              		.thumb
+ 1553              	.LBE243:
+ 1554              	.LBE242:
+ 1555              		.loc 1 542 0
+ 1556 044e 0293     		str	r3, [sp, #8]
+ 1557              	.LVL266:
+ 543:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ivaddr+=4;
+ 544:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_IVInitStructure.CRYP_IV0Right= __REV(*(uint32_t*)(ivaddr));
+ 1558              		.loc 1 544 0
+ 1559 0450 7368     		ldr	r3, [r6, #4]
+ 1560              	.LVL267:
+ 1561              	.LBB244:
+ 1562              	.LBB245:
+ 1563              		.loc 2 352 0
+ 1564              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1565 0452 1BBA     		rev r3, r3
+ 1566              	@ 0 "" 2
+ 1567              	.LVL268:
+ 1568              		.thumb
+ 1569              	.LBE245:
+ 1570              	.LBE244:
+ 1571              		.loc 1 544 0
+ 1572 0454 0393     		str	r3, [sp, #12]
+ 1573              	.LVL269:
+ 545:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ivaddr+=4;
+ 546:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_IVInitStructure.CRYP_IV1Left = __REV(*(uint32_t*)(ivaddr));
+ 1574              		.loc 1 546 0
+ 1575 0456 B368     		ldr	r3, [r6, #8]
+ 1576              	.LVL270:
+ 1577              	.LBB246:
+ 1578              	.LBB247:
+ 1579              		.loc 2 352 0
+ 1580              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1581 0458 1BBA     		rev r3, r3
+ 1582              	@ 0 "" 2
+ 1583              	.LVL271:
+ 1584              		.thumb
+ 1585              	.LBE247:
+ 1586              	.LBE246:
+ 1587              		.loc 1 546 0
+ 1588 045a 0493     		str	r3, [sp, #16]
+ 1589              	.LVL272:
+ 547:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ivaddr+=4;
+ 548:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_IVInitStructure.CRYP_IV1Right= __REV(*(uint32_t*)(ivaddr));
+ 1590              		.loc 1 548 0
+ 1591 045c F368     		ldr	r3, [r6, #12]
+ 1592              	.LVL273:
+ 1593              	.LBB248:
+ 1594              	.LBB249:
+ 1595              		.loc 2 352 0
+ 1596              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 1597 045e 1BBA     		rev r3, r3
+ 1598              	@ 0 "" 2
+ 1599              	.LVL274:
+ 1600              		.thumb
+ 1601              	.LBE249:
+ 1602              	.LBE248:
+ 1603              		.loc 1 548 0
+ 1604 0460 0593     		str	r3, [sp, #20]
+ 549:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 550:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Key Initialisation */
+ 551:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_KeyInit(&AES_CRYP_KeyInitStructure);
+ 1605              		.loc 1 551 0
+ 1606 0462 06A8     		add	r0, sp, #24
+ 1607 0464 FFF7FEFF 		bl	CRYP_KeyInit
+ 1608              	.LVL275:
+ 552:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 553:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /*------------------ AES Decryption ------------------*/
+ 554:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   if(Mode == MODE_DECRYPT) /* AES decryption */
+ 1609              		.loc 1 554 0
+ 1610 0468 B8F1000F 		cmp	r8, #0
+ 1611 046c 03D1     		bne	.L44
+ 555:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 556:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Crypto Init for decryption process */
+ 557:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_AlgoDir = CRYP_AlgoDir_Decrypt;
+ 1612              		.loc 1 557 0
+ 1613 046e 0423     		movs	r3, #4
+ 1614 0470 ADF83830 		strh	r3, [sp, #56]	@ movhi
+ 1615 0474 02E0     		b	.L45
+ 1616              	.L44:
+ 558:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 559:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /*------------------ AES Encryption ------------------*/
+ 560:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   else /* AES encryption */
+ 561:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 562:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Crypto Init for Encryption process */
+ 563:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     AES_CRYP_InitStructure.CRYP_AlgoDir = CRYP_AlgoDir_Encrypt;
+ 1617              		.loc 1 563 0
+ 1618 0476 0023     		movs	r3, #0
+ 1619 0478 ADF83830 		strh	r3, [sp, #56]	@ movhi
+ 1620              	.L45:
+ 564:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 565:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_InitStructure.CRYP_AlgoMode = CRYP_AlgoMode_AES_CTR;
+ 1621              		.loc 1 565 0
+ 1622 047c 3023     		movs	r3, #48
+ 1623 047e ADF83A30 		strh	r3, [sp, #58]	@ movhi
+ 566:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   AES_CRYP_InitStructure.CRYP_DataType = CRYP_DataType_8b;
+ 1624              		.loc 1 566 0
+ 1625 0482 8023     		movs	r3, #128
+ 1626 0484 ADF83C30 		strh	r3, [sp, #60]	@ movhi
+ 567:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_Init(&AES_CRYP_InitStructure);
+ 1627              		.loc 1 567 0
+ 1628 0488 0EA8     		add	r0, sp, #56
+ 1629 048a FFF7FEFF 		bl	CRYP_Init
+ 1630              	.LVL276:
+ 568:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 569:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* CRYP Initialization Vectors */
+ 570:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_IVInit(&AES_CRYP_IVInitStructure);
+ 1631              		.loc 1 570 0
+ 1632 048e 02A8     		add	r0, sp, #8
+ 1633 0490 FFF7FEFF 		bl	CRYP_IVInit
+ 1634              	.LVL277:
+ 571:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 572:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Flush IN/OUT FIFOs */
+ 573:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_FIFOFlush();
+ 1635              		.loc 1 573 0
+ 1636 0494 FFF7FEFF 		bl	CRYP_FIFOFlush
+ 1637              	.LVL278:
+ 574:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 575:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Enable Crypto processor */
+ 576:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_Cmd(ENABLE);
+ 1638              		.loc 1 576 0
+ 1639 0498 0120     		movs	r0, #1
+ 1640 049a FFF7FEFF 		bl	CRYP_Cmd
+ 1641              	.LVL279:
+ 577:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 578:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1642              		.loc 1 578 0
+ 1643 049e 0026     		movs	r6, #0
+ 1644              	.LVL280:
+ 484:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   ErrorStatus status = SUCCESS;
+ 1645              		.loc 1 484 0
+ 1646 04a0 0127     		movs	r7, #1
+ 579:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   {
+ 580:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 581:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Write the Input block in the IN FIFO */
+ 582:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 583:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 584:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 585:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 586:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 587:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 588:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 589:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 590:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     /* Wait until the complete message has been processed */
+ 591:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     counter = 0;
+ 1647              		.loc 1 591 0
+ 1648 04a2 B046     		mov	r8, r6
+ 592:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     do
+ 593:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 594:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       busystatus = CRYP_GetFlagStatus(CRYP_FLAG_BUSY);
+ 1649              		.loc 1 594 0
+ 1650 04a4 1024     		movs	r4, #16
+ 1651              	.LVL281:
+ 578:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1652              		.loc 1 578 0
+ 1653 04a6 31E0     		b	.L46
+ 1654              	.LVL282:
+ 1655              	.L51:
+ 582:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 1656              		.loc 1 582 0
+ 1657 04a8 2868     		ldr	r0, [r5]
+ 1658 04aa FFF7FEFF 		bl	CRYP_DataIn
+ 1659              	.LVL283:
+ 584:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 1660              		.loc 1 584 0
+ 1661 04ae 6868     		ldr	r0, [r5, #4]
+ 1662 04b0 FFF7FEFF 		bl	CRYP_DataIn
+ 1663              	.LVL284:
+ 586:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 1664              		.loc 1 586 0
+ 1665 04b4 A868     		ldr	r0, [r5, #8]
+ 1666 04b6 FFF7FEFF 		bl	CRYP_DataIn
+ 1667              	.LVL285:
+ 588:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     CRYP_DataIn(*(uint32_t*)(inputaddr));
+ 1668              		.loc 1 588 0
+ 1669 04ba E868     		ldr	r0, [r5, #12]
+ 1670 04bc FFF7FEFF 		bl	CRYP_DataIn
+ 1671              	.LVL286:
+ 589:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     inputaddr+=4;
+ 1672              		.loc 1 589 0
+ 1673 04c0 1035     		adds	r5, r5, #16
+ 1674              	.LVL287:
+ 591:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     counter = 0;
+ 1675              		.loc 1 591 0
+ 1676 04c2 CDF80480 		str	r8, [sp, #4]
+ 1677              	.L48:
+ 1678              		.loc 1 594 0 discriminator 1
+ 1679 04c6 2046     		mov	r0, r4
+ 1680 04c8 FFF7FEFF 		bl	CRYP_GetFlagStatus
+ 1681              	.LVL288:
+ 1682 04cc 0246     		mov	r2, r0
+ 1683              	.LVL289:
+ 595:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       counter++;
+ 1684              		.loc 1 595 0 discriminator 1
+ 1685 04ce 019B     		ldr	r3, [sp, #4]
+ 1686 04d0 0133     		adds	r3, r3, #1
+ 1687 04d2 0193     		str	r3, [sp, #4]
+ 596:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }while ((counter != AESBUSY_TIMEOUT) && (busystatus != RESET));
+ 1688              		.loc 1 596 0 discriminator 1
+ 1689 04d4 019B     		ldr	r3, [sp, #4]
+ 1690 04d6 B3F5803F 		cmp	r3, #65536
+ 1691 04da 01D0     		beq	.L47
+ 1692 04dc 0028     		cmp	r0, #0
+ 1693 04de F2D1     		bne	.L48
+ 1694              	.L47:
+ 597:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 598:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     if (busystatus != RESET)
+ 1695              		.loc 1 598 0
+ 1696 04e0 92B9     		cbnz	r2, .L52
+ 599:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****    {
+ 600:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 601:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 602:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     else
+ 603:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     {
+ 604:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 605:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       /* Read the Output block from the Output FIFO */
+ 606:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 1697              		.loc 1 606 0
+ 1698 04e2 FFF7FEFF 		bl	CRYP_DataOut
+ 1699              	.LVL290:
+ 1700 04e6 C9F80000 		str	r0, [r9]
+ 1701              	.LVL291:
+ 607:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 608:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 1702              		.loc 1 608 0
+ 1703 04ea FFF7FEFF 		bl	CRYP_DataOut
+ 1704              	.LVL292:
+ 1705 04ee C9F80400 		str	r0, [r9, #4]
+ 1706              	.LVL293:
+ 609:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 610:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 1707              		.loc 1 610 0
+ 1708 04f2 FFF7FEFF 		bl	CRYP_DataOut
+ 1709              	.LVL294:
+ 1710 04f6 C9F80800 		str	r0, [r9, #8]
+ 1711              	.LVL295:
+ 611:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 612:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       *(uint32_t*)(outputaddr) = CRYP_DataOut();
+ 1712              		.loc 1 612 0
+ 1713 04fa FFF7FEFF 		bl	CRYP_DataOut
+ 1714              	.LVL296:
+ 1715 04fe C9F80C00 		str	r0, [r9, #12]
+ 613:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****       outputaddr+=4;
+ 1716              		.loc 1 613 0
+ 1717 0502 09F11009 		add	r9, r9, #16
+ 1718              	.LVL297:
+ 1719 0506 00E0     		b	.L49
+ 1720              	.LVL298:
+ 1721              	.L52:
+ 600:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****        status = ERROR;
+ 1722              		.loc 1 600 0
+ 1723 0508 4746     		mov	r7, r8
+ 1724              	.LVL299:
+ 1725              	.L49:
+ 578:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1726              		.loc 1 578 0
+ 1727 050a 1036     		adds	r6, r6, #16
+ 1728              	.LVL300:
+ 1729              	.L46:
+ 578:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1730              		.loc 1 578 0 is_stmt 0 discriminator 1
+ 1731 050c 5645     		cmp	r6, r10
+ 1732 050e 01D2     		bcs	.L50
+ 578:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   for(i=0; ((i<Ilength) && (status != ERROR)); i+=16)
+ 1733              		.loc 1 578 0 discriminator 2
+ 1734 0510 002F     		cmp	r7, #0
+ 1735 0512 C9D1     		bne	.L51
+ 1736              	.L50:
+ 614:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****     }
+ 615:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   }
+ 616:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   /* Disable Crypto */
+ 617:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   CRYP_Cmd(DISABLE);
+ 1737              		.loc 1 617 0 is_stmt 1
+ 1738 0514 0020     		movs	r0, #0
+ 1739 0516 FFF7FEFF 		bl	CRYP_Cmd
+ 1740              	.LVL301:
+ 618:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** 
+ 619:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c ****   return status;
+ 620:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c **** }
+ 1741              		.loc 1 620 0
+ 1742 051a 3846     		mov	r0, r7
+ 1743 051c 10B0     		add	sp, sp, #64
+ 1744              		@ sp needed
+ 1745 051e BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 1746              		.cfi_endproc
+ 1747              	.LFE112:
+ 1749              	.Letext0:
+ 1750              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
+ 1751              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
+ 1752              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
+ 1753              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_cryp.h"
+ 1754              		.file 7 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_cryp_aes.c
+C:\Users\Filip\AppData\Local\Temp\ccO0qoaJ.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccO0qoaJ.s:23     .text:00000000 CRYP_AES_ECB
+C:\Users\Filip\AppData\Local\Temp\ccO0qoaJ.s:573    .text:000001b8 CRYP_AES_CBC
+C:\Users\Filip\AppData\Local\Temp\ccO0qoaJ.s:1191   .text:00000394 CRYP_AES_CTR
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
+                           .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
+                           .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7
+                           .group:00000000 wm4._default_types.h.15.8b2cb27e528498f8ff711db085d6e489
+                           .group:00000000 wm4.stdint.h.20.796e373797e732130a803d4c0338fa1b
+                           .group:00000000 wm4.core_cmInstr.h.25.f50f886f2edf670cf199b35fd96f5c91
+                           .group:00000000 wm4.core_cm4_simd.h.29.b4a3fdfb606cb3b26119424324d4b963
+                           .group:00000000 wm4.core_cm4.h.153.5393ef7e6cebf34dd51ca528f9218ab3
+                           .group:00000000 wm4.stm32f4xx.h.288.7f55b1a1f5e5bad6ffa2308f97f537d1
+                           .group:00000000 wm4.stm32f4xx_conf.h.24.a762e2483b8e31b68046e44b31e1d406
+                           .group:00000000 wm4.stm32f4xx_adc.h.102.2061aa73008746f3c2cc6ce8f635cad3
+                           .group:00000000 wm4.stm32f4xx_can.h.25.87f18ca48b2692d39f76e87b1f07c953
+                           .group:00000000 wm4.stm32f4xx_dac.h.25.c43557a6416ea4dfa986c1209c2558d6
+                           .group:00000000 wm4.stm32f4xx_dbgmcu.h.24.7aedfdcf091890b5cb96019bd29a2bfc
+                           .group:00000000 wm4.stm32f4xx_dcmi.h.24.64883d9be802a535b1d7770d14da73e0
+                           .group:00000000 wm4.stm32f4xx_dma.h.25.c1fa1d44ae0bc9c2b3a0d1d355d8c1e6
+                           .group:00000000 wm4.stm32f4xx_exti.h.25.620998268d5d3d9042a8297fbe07d507
+                           .group:00000000 wm4.stm32f4xx_flash.h.25.65d4f351b72ee41355279f70305f361a
+                           .group:00000000 wm4.stm32f4xx_fsmc.h.25.b907ac7bd9bec46e02d06b137d53cfd8
+                           .group:00000000 wm4.stm32f4xx_hash.h.25.633fb84f031cf2ab1bd834e536716dfa
+                           .group:00000000 wm4.stm32f4xx_gpio.h.25.5bd1d790d742a307b55aea5fa8fcdae8
+                           .group:00000000 wm4.stm32f4xx_i2c.h.25.8fcdb817a00a67d4624d79bab0d9275f
+                           .group:00000000 wm4.stm32f4xx_iwdg.h.25.3013e8d2058415cb9d51af77f748a146
+                           .group:00000000 wm4.stm32f4xx_pwr.h.25.41ffcb5dc896ed2d26edf4d9bbbfbe6f
+                           .group:00000000 wm4.stm32f4xx_rcc.h.24.a10ec6e94989efb0f8f7f56448e9bb60
+                           .group:00000000 wm4.stm32f4xx_rng.h.25.cdb5c5c07de6a48aedfde608da3f447e
+                           .group:00000000 wm4.stm32f4xx_rtc.h.25.4809a79ad46ad97b4a01e735a96738eb
+                           .group:00000000 wm4.stm32f4xx_sdio.h.25.406302aabae34eada94e5f2cde635a3e
+                           .group:00000000 wm4.stm32f4xx_spi.h.25.980a9e96afe182c8b9cb91058a0693d6
+                           .group:00000000 wm4.stm32f4xx_syscfg.h.25.9d5caab5677661b69e959531364e23d7
+                           .group:00000000 wm4.stm32f4xx_tim.h.25.948f7fc943f34bd206e29758e77ee0a2
+                           .group:00000000 wm4.stm32f4xx_usart.h.25.32a7aeff79714f90f8c4da45bf79808c
+                           .group:00000000 wm4.stm32f4xx_wwdg.h.25.09d70b7849c6894ddf1e83c8e86b70e1
+                           .group:00000000 wm4.misc.h.25.a0cb758c1f091b46f201b19cec9e63a1
+                           .group:00000000 wm4.stm32f4xx.h.6972.f31ddedd83a17c461a3fab76f77123cb
+                           .group:00000000 wm4.stm32f4xx_cryp.h.119.d9dc2f059ca5f1650f6b9481919a2fab
+
+UNDEFINED SYMBOLS
+CRYP_KeyStructInit
+CRYP_FIFOFlush
+CRYP_Init
+CRYP_KeyInit
+CRYP_Cmd
+CRYP_GetFlagStatus
+CRYP_DataIn
+CRYP_DataOut
+CRYP_IVInit

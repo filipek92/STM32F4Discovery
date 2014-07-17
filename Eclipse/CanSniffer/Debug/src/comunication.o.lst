@@ -1,0 +1,552 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"comunication.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.align	2
+  19              		.global	Init_Comunication
+  20              		.thumb
+  21              		.thumb_func
+  23              	Init_Comunication:
+  24              	.LFB110:
+  25              		.file 1 "../src/comunication.c"
+   1:../src/comunication.c **** #include "comunication.h"
+   2:../src/comunication.c **** 
+   3:../src/comunication.c **** void Init_Comunication(void){
+  26              		.loc 1 3 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 32
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 70B5     		push	{r4, r5, r6, lr}
+  31              		.cfi_def_cfa_offset 16
+  32              		.cfi_offset 4, -16
+  33              		.cfi_offset 5, -12
+  34              		.cfi_offset 6, -8
+  35              		.cfi_offset 14, -4
+  36 0002 88B0     		sub	sp, sp, #32
+  37              		.cfi_def_cfa_offset 48
+   4:../src/comunication.c **** 	GPIO_InitTypeDef GPIO_InitStructure;
+   5:../src/comunication.c **** 	USART_InitTypeDef USART_InitStructure;
+   6:../src/comunication.c **** 	NVIC_InitTypeDef NVIC_InitStructure;
+   7:../src/comunication.c **** 	
+   8:../src/comunication.c **** 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART6, ENABLE);
+  38              		.loc 1 8 0
+  39 0004 2020     		movs	r0, #32
+  40 0006 0121     		movs	r1, #1
+  41 0008 FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
+  42              	.LVL0:
+   9:../src/comunication.c **** 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
+  43              		.loc 1 9 0
+  44 000c 0420     		movs	r0, #4
+  45 000e 0121     		movs	r1, #1
+  46 0010 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+  47              	.LVL1:
+  10:../src/comunication.c **** 	
+  11:../src/comunication.c **** 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+  48              		.loc 1 11 0
+  49 0014 C023     		movs	r3, #192
+  50 0016 0693     		str	r3, [sp, #24]
+  12:../src/comunication.c **** 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+  51              		.loc 1 12 0
+  52 0018 0223     		movs	r3, #2
+  53 001a 8DF81C30 		strb	r3, [sp, #28]
+  13:../src/comunication.c **** 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  54              		.loc 1 13 0
+  55 001e 8DF81D30 		strb	r3, [sp, #29]
+  14:../src/comunication.c **** 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  56              		.loc 1 14 0
+  57 0022 0024     		movs	r4, #0
+  58 0024 8DF81E40 		strb	r4, [sp, #30]
+  15:../src/comunication.c **** 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP ;
+  59              		.loc 1 15 0
+  60 0028 0125     		movs	r5, #1
+  61 002a 8DF81F50 		strb	r5, [sp, #31]
+  16:../src/comunication.c **** 	GPIO_Init(GPIOC, &GPIO_InitStructure);
+  62              		.loc 1 16 0
+  63 002e 1F4E     		ldr	r6, .L2
+  64 0030 3046     		mov	r0, r6
+  65 0032 06A9     		add	r1, sp, #24
+  66 0034 FFF7FEFF 		bl	GPIO_Init
+  67              	.LVL2:
+  17:../src/comunication.c **** 	
+  18:../src/comunication.c **** 	GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_USART6);	
+  68              		.loc 1 18 0
+  69 0038 3046     		mov	r0, r6
+  70 003a 0621     		movs	r1, #6
+  71 003c 0822     		movs	r2, #8
+  72 003e FFF7FEFF 		bl	GPIO_PinAFConfig
+  73              	.LVL3:
+  19:../src/comunication.c **** 	GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_USART6);
+  74              		.loc 1 19 0
+  75 0042 3046     		mov	r0, r6
+  76 0044 0721     		movs	r1, #7
+  77 0046 0822     		movs	r2, #8
+  78 0048 FFF7FEFF 		bl	GPIO_PinAFConfig
+  79              	.LVL4:
+  20:../src/comunication.c **** 	
+  21:../src/comunication.c **** 	USART_InitStructure.USART_BaudRate = 115200;
+  80              		.loc 1 21 0
+  81 004c 4FF4E133 		mov	r3, #115200
+  82 0050 0293     		str	r3, [sp, #8]
+  22:../src/comunication.c **** 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+  83              		.loc 1 22 0
+  84 0052 ADF80C40 		strh	r4, [sp, #12]	@ movhi
+  23:../src/comunication.c **** 	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+  85              		.loc 1 23 0
+  86 0056 ADF80E40 		strh	r4, [sp, #14]	@ movhi
+  24:../src/comunication.c **** 	USART_InitStructure.USART_Parity = USART_Parity_No;
+  87              		.loc 1 24 0
+  88 005a ADF81040 		strh	r4, [sp, #16]	@ movhi
+  25:../src/comunication.c **** 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+  89              		.loc 1 25 0
+  90 005e ADF81440 		strh	r4, [sp, #20]	@ movhi
+  26:../src/comunication.c **** 	USART_InitStructure.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;
+  91              		.loc 1 26 0
+  92 0062 0C23     		movs	r3, #12
+  93 0064 ADF81230 		strh	r3, [sp, #18]	@ movhi
+  27:../src/comunication.c **** 	USART_Init(USART6, &USART_InitStructure);
+  94              		.loc 1 27 0
+  95 0068 A6F57446 		sub	r6, r6, #62464
+  96 006c 3046     		mov	r0, r6
+  97 006e 02A9     		add	r1, sp, #8
+  98 0070 FFF7FEFF 		bl	USART_Init
+  99              	.LVL5:
+  28:../src/comunication.c **** 
+  29:../src/comunication.c **** 	USART_Cmd(USART6, ENABLE); // enable USART6
+ 100              		.loc 1 29 0
+ 101 0074 3046     		mov	r0, r6
+ 102 0076 2946     		mov	r1, r5
+ 103 0078 FFF7FEFF 		bl	USART_Cmd
+ 104              	.LVL6:
+  30:../src/comunication.c **** 	USART_ITConfig(USART6, USART_IT_RXNE, ENABLE);
+ 105              		.loc 1 30 0
+ 106 007c 3046     		mov	r0, r6
+ 107 007e 40F22551 		movw	r1, #1317
+ 108 0082 2A46     		mov	r2, r5
+ 109 0084 FFF7FEFF 		bl	USART_ITConfig
+ 110              	.LVL7:
+  31:../src/comunication.c **** 	
+  32:../src/comunication.c **** 	NVIC_InitStructure.NVIC_IRQChannel = USART6_IRQn;		 // we want to configure the USART1 interrupts
+ 111              		.loc 1 32 0
+ 112 0088 4723     		movs	r3, #71
+ 113 008a 8DF80430 		strb	r3, [sp, #4]
+  33:../src/comunication.c **** 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;// this sets the priority group of the US
+ 114              		.loc 1 33 0
+ 115 008e 8DF80540 		strb	r4, [sp, #5]
+  34:../src/comunication.c **** 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;		 // this sets the subpriority inside the group
+ 116              		.loc 1 34 0
+ 117 0092 8DF80640 		strb	r4, [sp, #6]
+  35:../src/comunication.c **** 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			 // the USART1 interrupts are globally enabled
+ 118              		.loc 1 35 0
+ 119 0096 8DF80750 		strb	r5, [sp, #7]
+  36:../src/comunication.c **** 	NVIC_Init(&NVIC_InitStructure);							 // the properties are passed to the NVIC_Init function whic
+ 120              		.loc 1 36 0
+ 121 009a 01A8     		add	r0, sp, #4
+ 122 009c FFF7FEFF 		bl	NVIC_Init
+ 123              	.LVL8:
+  37:../src/comunication.c **** 
+  38:../src/comunication.c **** 	// finally this enables the complete USART1 peripheral
+  39:../src/comunication.c **** 	USART_Cmd(USART6, ENABLE);
+ 124              		.loc 1 39 0
+ 125 00a0 3046     		mov	r0, r6
+ 126 00a2 2946     		mov	r1, r5
+ 127 00a4 FFF7FEFF 		bl	USART_Cmd
+ 128              	.LVL9:
+  40:../src/comunication.c **** }
+ 129              		.loc 1 40 0
+ 130 00a8 08B0     		add	sp, sp, #32
+ 131              		@ sp needed
+ 132 00aa 70BD     		pop	{r4, r5, r6, pc}
+ 133              	.L3:
+ 134              		.align	2
+ 135              	.L2:
+ 136 00ac 00080240 		.word	1073874944
+ 137              		.cfi_endproc
+ 138              	.LFE110:
+ 140              		.align	2
+ 141              		.global	USART_SendString
+ 142              		.thumb
+ 143              		.thumb_func
+ 145              	USART_SendString:
+ 146              	.LFB111:
+  41:../src/comunication.c **** 
+  42:../src/comunication.c **** void USART_SendString(USART_TypeDef* USARTx, char* s){
+ 147              		.loc 1 42 0
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 0
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+ 151              	.LVL10:
+ 152 00b0 38B5     		push	{r3, r4, r5, lr}
+ 153              		.cfi_def_cfa_offset 16
+ 154              		.cfi_offset 3, -16
+ 155              		.cfi_offset 4, -12
+ 156              		.cfi_offset 5, -8
+ 157              		.cfi_offset 14, -4
+ 158 00b2 0446     		mov	r4, r0
+ 159 00b4 0D46     		mov	r5, r1
+  43:../src/comunication.c **** 	while(*s){
+ 160              		.loc 1 43 0
+ 161 00b6 09E0     		b	.L5
+ 162              	.LVL11:
+ 163              	.L7:
+  44:../src/comunication.c **** 		// wait until data register is empty
+  45:../src/comunication.c **** 		while( !(USARTx->SR & 0x00000040) ); 
+ 164              		.loc 1 45 0 discriminator 1
+ 165 00b8 2388     		ldrh	r3, [r4]
+ 166 00ba 03F04003 		and	r3, r3, #64
+ 167 00be 9BB2     		uxth	r3, r3
+ 168 00c0 002B     		cmp	r3, #0
+ 169 00c2 F9D0     		beq	.L7
+  46:../src/comunication.c **** 		USART_SendData(USARTx, *s);
+ 170              		.loc 1 46 0
+ 171 00c4 2046     		mov	r0, r4
+ 172 00c6 FFF7FEFF 		bl	USART_SendData
+ 173              	.LVL12:
+  47:../src/comunication.c **** 		s++;
+ 174              		.loc 1 47 0
+ 175 00ca 0135     		adds	r5, r5, #1
+ 176              	.LVL13:
+ 177              	.L5:
+  43:../src/comunication.c **** 	while(*s){
+ 178              		.loc 1 43 0 discriminator 1
+ 179 00cc 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
+ 180 00ce 0029     		cmp	r1, #0
+ 181 00d0 F2D1     		bne	.L7
+  48:../src/comunication.c **** 	}
+  49:../src/comunication.c **** }
+ 182              		.loc 1 49 0
+ 183 00d2 38BD     		pop	{r3, r4, r5, pc}
+ 184              		.cfi_endproc
+ 185              	.LFE111:
+ 187              		.align	2
+ 188              		.global	USART_SendNumber
+ 189              		.thumb
+ 190              		.thumb_func
+ 192              	USART_SendNumber:
+ 193              	.LFB112:
+  50:../src/comunication.c **** 
+  51:../src/comunication.c **** void USART_SendNumber(USART_TypeDef* USARTx, uint32_t n){
+ 194              		.loc 1 51 0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 16
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 198              	.LVL14:
+ 199 00d4 30B5     		push	{r4, r5, lr}
+ 200              		.cfi_def_cfa_offset 12
+ 201              		.cfi_offset 4, -12
+ 202              		.cfi_offset 5, -8
+ 203              		.cfi_offset 14, -4
+ 204 00d6 85B0     		sub	sp, sp, #20
+ 205              		.cfi_def_cfa_offset 32
+ 206 00d8 0A46     		mov	r2, r1
+  52:../src/comunication.c **** 	char buffer[15];
+  53:../src/comunication.c **** 	char *p;
+  54:../src/comunication.c **** 	buffer[14] = 0;
+ 207              		.loc 1 54 0
+ 208 00da 04A9     		add	r1, sp, #16
+ 209              	.LVL15:
+ 210 00dc 0023     		movs	r3, #0
+ 211 00de 01F8023D 		strb	r3, [r1, #-2]!
+ 212              	.LVL16:
+  55:../src/comunication.c **** 	p = buffer+14;
+  56:../src/comunication.c **** 	
+  57:../src/comunication.c **** 	while(n>0){
+  58:../src/comunication.c **** 		p--;
+  59:../src/comunication.c **** 		*p = (n%10)+'0';
+ 213              		.loc 1 59 0
+ 214 00e2 0A4D     		ldr	r5, .L12
+  57:../src/comunication.c **** 	while(n>0){
+ 215              		.loc 1 57 0
+ 216 00e4 0BE0     		b	.L10
+ 217              	.LVL17:
+ 218              	.L11:
+ 219              		.loc 1 59 0
+ 220 00e6 A5FB0243 		umull	r4, r3, r5, r2
+ 221 00ea DB08     		lsrs	r3, r3, #3
+ 222 00ec 1C46     		mov	r4, r3
+ 223 00ee 03EB8303 		add	r3, r3, r3, lsl #2
+ 224 00f2 A2EB4303 		sub	r3, r2, r3, lsl #1
+ 225 00f6 3033     		adds	r3, r3, #48
+ 226 00f8 01F8013D 		strb	r3, [r1, #-1]!
+ 227              	.LVL18:
+  60:../src/comunication.c **** 	  n = n/10;
+ 228              		.loc 1 60 0
+ 229 00fc 2246     		mov	r2, r4
+ 230              	.LVL19:
+ 231              	.L10:
+  57:../src/comunication.c **** 	while(n>0){
+ 232              		.loc 1 57 0 discriminator 1
+ 233 00fe 002A     		cmp	r2, #0
+ 234 0100 F1D1     		bne	.L11
+  61:../src/comunication.c **** 	}
+  62:../src/comunication.c **** 	USART_SendString(USARTx, p);
+ 235              		.loc 1 62 0
+ 236 0102 FFF7FEFF 		bl	USART_SendString
+ 237              	.LVL20:
+  63:../src/comunication.c **** }
+ 238              		.loc 1 63 0
+ 239 0106 05B0     		add	sp, sp, #20
+ 240              		@ sp needed
+ 241 0108 30BD     		pop	{r4, r5, pc}
+ 242              	.L13:
+ 243 010a 00BF     		.align	2
+ 244              	.L12:
+ 245 010c CDCCCCCC 		.word	-858993459
+ 246              		.cfi_endproc
+ 247              	.LFE112:
+ 249              		.align	2
+ 250              		.global	USART_SendHex
+ 251              		.thumb
+ 252              		.thumb_func
+ 254              	USART_SendHex:
+ 255              	.LFB113:
+  64:../src/comunication.c **** 
+  65:../src/comunication.c **** void USART_SendHex(USART_TypeDef* USARTx, uint32_t n){
+ 256              		.loc 1 65 0
+ 257              		.cfi_startproc
+ 258              		@ args = 0, pretend = 0, frame = 16
+ 259              		@ frame_needed = 0, uses_anonymous_args = 0
+ 260              	.LVL21:
+ 261 0110 70B5     		push	{r4, r5, r6, lr}
+ 262              		.cfi_def_cfa_offset 16
+ 263              		.cfi_offset 4, -16
+ 264              		.cfi_offset 5, -12
+ 265              		.cfi_offset 6, -8
+ 266              		.cfi_offset 14, -4
+ 267 0112 84B0     		sub	sp, sp, #16
+ 268              		.cfi_def_cfa_offset 32
+  66:../src/comunication.c ****   char buffer[11];
+  67:../src/comunication.c **** 	uint8_t i; 
+  68:../src/comunication.c **** 	buffer[0] = '0';
+ 269              		.loc 1 68 0
+ 270 0114 3023     		movs	r3, #48
+ 271 0116 8DF80430 		strb	r3, [sp, #4]
+  69:../src/comunication.c **** 	buffer[1] = 'x';
+ 272              		.loc 1 69 0
+ 273 011a 7823     		movs	r3, #120
+ 274 011c 8DF80530 		strb	r3, [sp, #5]
+  70:../src/comunication.c **** 	buffer[10] = 0;
+ 275              		.loc 1 70 0
+ 276 0120 0023     		movs	r3, #0
+ 277 0122 8DF80E30 		strb	r3, [sp, #14]
+ 278              	.LVL22:
+  71:../src/comunication.c **** 	
+  72:../src/comunication.c **** 	for(i=0; i<8; i++){
+  73:../src/comunication.c **** 		buffer[9-i] = "0123456789ABCDEF"[n & 0xF];
+ 279              		.loc 1 73 0
+ 280 0126 094D     		ldr	r5, .L17
+  72:../src/comunication.c **** 	for(i=0; i<8; i++){
+ 281              		.loc 1 72 0
+ 282 0128 09E0     		b	.L15
+ 283              	.LVL23:
+ 284              	.L16:
+ 285              		.loc 1 73 0 discriminator 2
+ 286 012a 01F00F02 		and	r2, r1, #15
+ 287 012e AC5C     		ldrb	r4, [r5, r2]	@ zero_extendqisi2
+ 288 0130 04AE     		add	r6, sp, #16
+ 289 0132 F21A     		subs	r2, r6, r3
+ 290 0134 02F8034C 		strb	r4, [r2, #-3]
+  74:../src/comunication.c **** 		n = n >> 4;
+ 291              		.loc 1 74 0 discriminator 2
+ 292 0138 0909     		lsrs	r1, r1, #4
+ 293              	.LVL24:
+  72:../src/comunication.c **** 	for(i=0; i<8; i++){
+ 294              		.loc 1 72 0 discriminator 2
+ 295 013a 0133     		adds	r3, r3, #1
+ 296              	.LVL25:
+ 297 013c DBB2     		uxtb	r3, r3
+ 298              	.LVL26:
+ 299              	.L15:
+  72:../src/comunication.c **** 	for(i=0; i<8; i++){
+ 300              		.loc 1 72 0 is_stmt 0 discriminator 1
+ 301 013e 072B     		cmp	r3, #7
+ 302 0140 F3D9     		bls	.L16
+  75:../src/comunication.c **** 	}
+  76:../src/comunication.c **** 	
+  77:../src/comunication.c **** 	USART_SendString(USARTx, buffer);
+ 303              		.loc 1 77 0 is_stmt 1
+ 304 0142 01A9     		add	r1, sp, #4
+ 305              	.LVL27:
+ 306 0144 FFF7FEFF 		bl	USART_SendString
+ 307              	.LVL28:
+  78:../src/comunication.c **** }
+ 308              		.loc 1 78 0
+ 309 0148 04B0     		add	sp, sp, #16
+ 310              		@ sp needed
+ 311 014a 70BD     		pop	{r4, r5, r6, pc}
+ 312              	.L18:
+ 313              		.align	2
+ 314              	.L17:
+ 315 014c 00000000 		.word	.LC0
+ 316              		.cfi_endproc
+ 317              	.LFE113:
+ 319              		.align	2
+ 320              		.global	StringToInt
+ 321              		.thumb
+ 322              		.thumb_func
+ 324              	StringToInt:
+ 325              	.LFB114:
+  79:../src/comunication.c **** 
+  80:../src/comunication.c **** uint32_t StringToInt(char *s, int size){
+ 326              		.loc 1 80 0
+ 327              		.cfi_startproc
+ 328              		@ args = 0, pretend = 0, frame = 0
+ 329              		@ frame_needed = 0, uses_anonymous_args = 0
+ 330              		@ link register save eliminated.
+ 331              	.LVL29:
+ 332 0150 10B4     		push	{r4}
+ 333              		.cfi_def_cfa_offset 4
+ 334              		.cfi_offset 4, -4
+ 335              	.LVL30:
+  81:../src/comunication.c **** 	uint32_t ret=0;
+ 336              		.loc 1 81 0
+ 337 0152 0023     		movs	r3, #0
+  82:../src/comunication.c **** 	uint32_t n;
+  83:../src/comunication.c **** 	while(*s && size){
+ 338              		.loc 1 83 0
+ 339 0154 09E0     		b	.L20
+ 340              	.LVL31:
+ 341              	.L23:
+  84:../src/comunication.c **** 		ret *= 10;
+ 342              		.loc 1 84 0
+ 343 0156 03EB8303 		add	r3, r3, r3, lsl #2
+ 344              	.LVL32:
+ 345 015a 5C00     		lsls	r4, r3, #1
+ 346 015c 2346     		mov	r3, r4
+ 347              	.LVL33:
+  85:../src/comunication.c **** 		n = *s - '0';
+ 348              		.loc 1 85 0
+ 349 015e 303A     		subs	r2, r2, #48
+ 350              	.LVL34:
+  86:../src/comunication.c **** 		if(n < 10){
+ 351              		.loc 1 86 0
+ 352 0160 092A     		cmp	r2, #9
+  87:../src/comunication.c **** 			ret += n;
+ 353              		.loc 1 87 0
+ 354 0162 98BF     		it	ls
+ 355 0164 A318     		addls	r3, r4, r2
+ 356              	.LVL35:
+  88:../src/comunication.c **** 		}
+  89:../src/comunication.c **** 		s++;
+ 357              		.loc 1 89 0
+ 358 0166 0130     		adds	r0, r0, #1
+ 359              	.LVL36:
+  90:../src/comunication.c **** 		size--;
+ 360              		.loc 1 90 0
+ 361 0168 0139     		subs	r1, r1, #1
+ 362              	.LVL37:
+ 363              	.L20:
+  83:../src/comunication.c **** 	while(*s && size){
+ 364              		.loc 1 83 0 discriminator 1
+ 365 016a 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 366 016c 0AB1     		cbz	r2, .L22
+  83:../src/comunication.c **** 	while(*s && size){
+ 367              		.loc 1 83 0 is_stmt 0 discriminator 2
+ 368 016e 0029     		cmp	r1, #0
+ 369 0170 F1D1     		bne	.L23
+ 370              	.L22:
+  91:../src/comunication.c **** 	}
+  92:../src/comunication.c **** 	return ret;
+  93:../src/comunication.c **** }
+ 371              		.loc 1 93 0 is_stmt 1
+ 372 0172 1846     		mov	r0, r3
+ 373              	.LVL38:
+ 374 0174 5DF8044B 		ldr	r4, [sp], #4
+ 375 0178 7047     		bx	lr
+ 376              		.cfi_endproc
+ 377              	.LFE114:
+ 379              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 380              		.align	2
+ 381              	.LC0:
+ 382 0000 30313233 		.ascii	"0123456789ABCDEF\000"
+ 382      34353637 
+ 382      38394142 
+ 382      43444546 
+ 382      00
+ 383 0011 000000   		.text
+ 384              	.Letext0:
+ 385              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
+ 386              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
+ 387              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
+ 388              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_gpio.h"
+ 389              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_usart.h"
+ 390              		.file 7 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/misc.h"
+ 391              		.file 8 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_rcc.h"
+ 392              		.file 9 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 comunication.c
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:23     .text:00000000 Init_Comunication
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:136    .text:000000ac $d
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:140    .text:000000b0 $t
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:145    .text:000000b0 USART_SendString
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:192    .text:000000d4 USART_SendNumber
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:245    .text:0000010c $d
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:249    .text:00000110 $t
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:254    .text:00000110 USART_SendHex
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:315    .text:0000014c $d
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:319    .text:00000150 $t
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:324    .text:00000150 StringToInt
+C:\Users\Filip\AppData\Local\Temp\ccZFqcAe.s:380    .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
+                           .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
+                           .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7
+                           .group:00000000 wm4._default_types.h.15.8b2cb27e528498f8ff711db085d6e489
+                           .group:00000000 wm4.stdint.h.20.796e373797e732130a803d4c0338fa1b
+                           .group:00000000 wm4.core_cmInstr.h.25.f50f886f2edf670cf199b35fd96f5c91
+                           .group:00000000 wm4.core_cm4_simd.h.29.b4a3fdfb606cb3b26119424324d4b963
+                           .group:00000000 wm4.core_cm4.h.153.5393ef7e6cebf34dd51ca528f9218ab3
+                           .group:00000000 wm4.stm32f4xx.h.288.7f55b1a1f5e5bad6ffa2308f97f537d1
+                           .group:00000000 wm4.stm32f4xx_conf.h.24.a762e2483b8e31b68046e44b31e1d406
+                           .group:00000000 wm4.stm32f4xx_adc.h.102.2061aa73008746f3c2cc6ce8f635cad3
+                           .group:00000000 wm4.stm32f4xx_can.h.25.87f18ca48b2692d39f76e87b1f07c953
+                           .group:00000000 wm4.stm32f4xx_cryp.h.25.db1951c06ee684df97ea3a11aba6cb51
+                           .group:00000000 wm4.stm32f4xx_dac.h.25.c43557a6416ea4dfa986c1209c2558d6
+                           .group:00000000 wm4.stm32f4xx_dbgmcu.h.24.7aedfdcf091890b5cb96019bd29a2bfc
+                           .group:00000000 wm4.stm32f4xx_dcmi.h.24.64883d9be802a535b1d7770d14da73e0
+                           .group:00000000 wm4.stm32f4xx_dma.h.25.c1fa1d44ae0bc9c2b3a0d1d355d8c1e6
+                           .group:00000000 wm4.stm32f4xx_exti.h.25.620998268d5d3d9042a8297fbe07d507
+                           .group:00000000 wm4.stm32f4xx_flash.h.25.65d4f351b72ee41355279f70305f361a
+                           .group:00000000 wm4.stm32f4xx_fsmc.h.25.b907ac7bd9bec46e02d06b137d53cfd8
+                           .group:00000000 wm4.stm32f4xx_hash.h.25.633fb84f031cf2ab1bd834e536716dfa
+                           .group:00000000 wm4.stm32f4xx_gpio.h.25.5bd1d790d742a307b55aea5fa8fcdae8
+                           .group:00000000 wm4.stm32f4xx_i2c.h.25.8fcdb817a00a67d4624d79bab0d9275f
+                           .group:00000000 wm4.stm32f4xx_iwdg.h.25.3013e8d2058415cb9d51af77f748a146
+                           .group:00000000 wm4.stm32f4xx_pwr.h.25.41ffcb5dc896ed2d26edf4d9bbbfbe6f
+                           .group:00000000 wm4.stm32f4xx_rcc.h.24.a10ec6e94989efb0f8f7f56448e9bb60
+                           .group:00000000 wm4.stm32f4xx_rng.h.25.cdb5c5c07de6a48aedfde608da3f447e
+                           .group:00000000 wm4.stm32f4xx_rtc.h.25.4809a79ad46ad97b4a01e735a96738eb
+                           .group:00000000 wm4.stm32f4xx_sdio.h.25.406302aabae34eada94e5f2cde635a3e
+                           .group:00000000 wm4.stm32f4xx_spi.h.25.980a9e96afe182c8b9cb91058a0693d6
+                           .group:00000000 wm4.stm32f4xx_syscfg.h.25.9d5caab5677661b69e959531364e23d7
+                           .group:00000000 wm4.stm32f4xx_tim.h.25.948f7fc943f34bd206e29758e77ee0a2
+                           .group:00000000 wm4.stm32f4xx_usart.h.25.32a7aeff79714f90f8c4da45bf79808c
+                           .group:00000000 wm4.stm32f4xx_wwdg.h.25.09d70b7849c6894ddf1e83c8e86b70e1
+                           .group:00000000 wm4.misc.h.25.a0cb758c1f091b46f201b19cec9e63a1
+                           .group:00000000 wm4.stm32f4xx.h.6972.f31ddedd83a17c461a3fab76f77123cb
+                           .group:00000000 wm4.stm32f4_discovery.h.78.c367165d107ea55282abe6aeafb37731
+
+UNDEFINED SYMBOLS
+RCC_APB2PeriphClockCmd
+RCC_AHB1PeriphClockCmd
+GPIO_Init
+GPIO_PinAFConfig
+USART_Init
+USART_Cmd
+USART_ITConfig
+NVIC_Init
+USART_SendData

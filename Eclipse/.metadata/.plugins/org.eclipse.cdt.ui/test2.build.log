@@ -1,0 +1,14 @@
+09:47:04 **** Incremental Build of configuration Debug for project test2 ****
+make all 
+Building file: ../src/stm32f4xx_it.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -Wall -Wextra  -g3 -DDEBUG -DUSE_FULL_ASSERT -DSTM32F407xx -DUSE_HAL_DRIVER -DHSE_VALUE=8000000 -I"../include" -I"../system/include" -I"../system/include/cmsis" -I"../system/include/stm32f4-hal" -std=gnu11 -MMD -MP -MF"src/stm32f4xx_it.d" -MT"src/stm32f4xx_it.o" -c -o "src/stm32f4xx_it.o" "../src/stm32f4xx_it.c"
+In file included from ../src/stm32f4xx_it.c:2:0:
+../src/main.h:27:31: fatal error: stm32f4_discovery.h: No such file or directory
+ #include "stm32f4_discovery.h"
+                               ^
+compilation terminated.
+make: *** [src/stm32f4xx_it.o] Error 1
+
+09:47:05 Build Finished (took 718ms)
+

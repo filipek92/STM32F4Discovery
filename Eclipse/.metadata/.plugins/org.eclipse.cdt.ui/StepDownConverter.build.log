@@ -1,0 +1,24 @@
+16:27:00 **** Build of configuration Debug for project StepDownConverter ****
+make all 
+Building target: StepDownConverter.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -T "C:\Users\Filip\Eclipse\StepDownConverter\stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"StepDownConverter.map" -Xlinker --cref -o "StepDownConverter.elf"  ./src/comunication.o ./src/main.o ./src/measure.o ./src/stm32f4xx_it.o ./src/system_stm32f4xx.o  ./STM32F4xx_StdPeriph_Driver/src/misc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o  ./STM32F4xx/Source/startup_stm32f4xx.o  ./Discovery/stm32f4_discovery.o   
+Finished building target: StepDownConverter.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O ihex "StepDownConverter.elf"  "StepDownConverter.hex"
+Finished building: StepDownConverter.hex
+ 
+Invoking: Cross ARM GNU Create Listing
+arm-none-eabi-objdump --source --all-headers --demangle --line-numbers --wide "StepDownConverter.elf" > "StepDownConverter.lst"
+Finished building: StepDownConverter.lst
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "StepDownConverter.elf"
+   text	   data	    bss	    dec	    hex	filename
+  12044	     60	   1140	  13244	   33bc	StepDownConverter.elf
+Finished building: StepDownConverter.siz
+ 
+
+16:27:04 Build Finished (took 4s.302ms)
+

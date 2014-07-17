@@ -1,0 +1,2450 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"stm32f4xx_flash.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.align	2
+  19              		.global	FLASH_SetLatency
+  20              		.thumb
+  21              		.thumb_func
+  23              	FLASH_SetLatency:
+  24              	.LFB110:
+  25              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c"
+   1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+   2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   ******************************************************************************
+   3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @file    stm32f4xx_flash.c
+   4:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @author  MCD Application Team
+   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @version V1.0.0
+   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @date    30-September-2011
+   7:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief   This file provides firmware functions to manage the following 
+   8:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          functionalities of the FLASH peripheral:
+   9:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            - FLASH Interface configuration
+  10:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            - FLASH Memory Programming
+  11:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            - Option Bytes Programming
+  12:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            - Interrupts and flags management
+  13:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *  
+  14:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *  @verbatim
+  15:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *  
+  16:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          ===================================================================
+  17:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                                 How to use this driver
+  18:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          ===================================================================
+  19:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                           
+  20:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This driver provides functions to configure and program the FLASH 
+  21:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          memory of all STM32F4xx devices.
+  22:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          These functions are split in 4 groups:
+  23:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * 
+  24:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           1. FLASH Interface configuration functions: this group includes the
+  25:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *              management of the following features:
+  26:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Set the latency
+  27:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Enable/Disable the prefetch buffer
+  28:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Enable/Disable the Instruction cache and the Data cache
+  29:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Reset the Instruction cache and the Data cache
+  30:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *  
+  31:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           2. FLASH Memory Programming functions: this group includes all needed
+  32:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *              functions to erase and program the main memory:
+  33:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Lock and Unlock the FLASH interface
+  34:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Erase function: Erase sector, erase all sectors
+  35:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Program functions: byte, half word, word and double word
+  36:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *  
+  37:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           3. Option Bytes Programming functions: this group includes all needed
+  38:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *              functions to manage the Option Bytes:
+  39:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Set/Reset the write protection
+  40:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Set the Read protection Level
+  41:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Set the BOR level
+  42:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Program the user Option Bytes
+  43:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Launch the Option Bytes loader
+  44:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *  
+  45:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           4. Interrupts and flags management functions: this group 
+  46:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *              includes all needed functions to:
+  47:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Enable/Disable the FLASH interrupt sources
+  48:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Get flags status
+  49:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Clear flags
+  50:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Get FLASH operation status
+  51:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                    - Wait for last FLASH operation
+  52:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * 
+  53:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *  @endverbatim
+  54:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                      
+  55:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   ******************************************************************************
+  56:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @attention
+  57:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *
+  58:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  59:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  60:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  61:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  62:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  63:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  64:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *
+  65:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  66:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   ******************************************************************************
+  67:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+  68:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+  69:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /* Includes ------------------------------------------------------------------*/
+  70:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** #include "stm32f4xx_flash.h"
+  71:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+  72:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /** @addtogroup STM32F4xx_StdPeriph_Driver
+  73:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @{
+  74:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+  75:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+  76:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /** @defgroup FLASH 
+  77:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief FLASH driver modules
+  78:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @{
+  79:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */ 
+  80:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+  81:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /* Private typedef -----------------------------------------------------------*/
+  82:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /* Private define ------------------------------------------------------------*/ 
+  83:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** #define SECTOR_MASK               ((uint32_t)0xFFFFFF07)
+  84:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+  85:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /* Private macro -------------------------------------------------------------*/
+  86:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /* Private variables ---------------------------------------------------------*/
+  87:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /* Private function prototypes -----------------------------------------------*/
+  88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /* Private functions ---------------------------------------------------------*/
+  89:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+  90:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /** @defgroup FLASH_Private_Functions
+  91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @{
+  92:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */ 
+  93:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+  94:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /** @defgroup FLASH_Group1 FLASH Interface configuration functions
+  95:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *  @brief   FLASH Interface configuration functions 
+  96:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  *
+  97:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+  98:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** @verbatim   
+  99:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  ===============================================================================
+ 100:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****                        FLASH Interface configuration functions
+ 101:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  ===============================================================================
+ 102:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 103:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    This group includes the following functions:
+ 104:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - void FLASH_SetLatency(uint32_t FLASH_Latency)
+ 105:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****        To correctly read data from FLASH memory, the number of wait states (LATENCY) 
+ 106:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****        must be correctly programmed according to the frequency of the CPU clock 
+ 107:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       (HCLK) and the supply voltage of the device.
+ 108:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  +-------------------------------------------------------------------------------------+     
+ 109:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  | Latency       |                HCLK clock frequency (MHz)                           |
+ 110:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |               |---------------------------------------------------------------------|     
+ 111:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |               | voltage range  | voltage range  | voltage range   | voltage range   |
+ 112:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |               | 2.7 V - 3.6 V  | 2.4 V - 2.7 V  | 2.1 V - 2.4 V   | 1.8 V - 2.1 V   |
+ 113:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------|           
+ 114:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |0WS(1CPU cycle)|0 < HCLK <= 30  |0 < HCLK <= 24  |0 < HCLK <= 18   |0 < HCLK <= 16   |
+ 115:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------|   
+ 116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |1WS(2CPU cycle)|30 < HCLK <= 60 |24 < HCLK <= 48 |18 < HCLK <= 36  |16 < HCLK <= 32  | 
+ 117:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------|   
+ 118:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |2WS(3CPU cycle)|60 < HCLK <= 90 |48 < HCLK <= 72 |36 < HCLK <= 54  |32 < HCLK <= 48  |
+ 119:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------| 
+ 120:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |3WS(4CPU cycle)|90 < HCLK <= 120|72 < HCLK <= 96 |54 < HCLK <= 72  |48 < HCLK <= 64  |
+ 121:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------| 
+ 122:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |4WS(5CPU cycle)|120< HCLK <= 150|96 < HCLK <= 120|72 < HCLK <= 90  |64 < HCLK <= 80  |
+ 123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------| 
+ 124:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |5WS(6CPU cycle)|120< HCLK <= 168|120< HCLK <= 144|90 < HCLK <= 108 |80 < HCLK <= 96  | 
+ 125:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------| 
+ 126:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |6WS(7CPU cycle)|      NA        |144< HCLK <= 168|108 < HCLK <= 120|96 < HCLK <= 112 | 
+ 127:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------| 
+ 128:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |7WS(8CPU cycle)|      NA        |      NA        |120 < HCLK <= 138|112 < HCLK <= 120| 
+ 129:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |***************|****************|****************|*****************|*****************|***********
+ 130:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |               | voltage range  | voltage range  | voltage range   | voltage range   | voltage ra
+ 131:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |               | 2.7 V - 3.6 V  | 2.4 V - 2.7 V  | 2.1 V - 2.4 V   | 1.8 V - 2.1 V   | with Exter
+ 132:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------|-----------
+ 133:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |Max Parallelism|      x32       |               x16                |       x8        |          x
+ 134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |---------------|----------------|----------------|-----------------|-----------------|-----------
+ 135:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  |PSIZE[1:0]     |      10        |               01                 |       00        |           
+ 136:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  +-------------------------------------------------------------------------------------------------
+ 137:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    @note When VOS bit (in PWR_CR register) is reset to '0’, the maximum value of HCLK is 144 MHz.
+ 138:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****          You can use PWR_MainRegulatorModeConfig() function to set or reset this bit.
+ 139:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****              
+ 140:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - void FLASH_PrefetchBufferCmd(FunctionalState NewState)
+ 141:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - void FLASH_InstructionCacheCmd(FunctionalState NewState)
+ 142:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - void FLASH_DataCacheCmd(FunctionalState NewState)
+ 143:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - void FLASH_InstructionCacheReset(void)
+ 144:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - void FLASH_DataCacheReset(void)
+ 145:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    
+ 146:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    The unlock sequence is not needed for these functions.
+ 147:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  
+ 148:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** @endverbatim
+ 149:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @{
+ 150:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 151:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  
+ 152:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 153:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Sets the code latency value.
+ 154:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  FLASH_Latency: specifies the FLASH Latency value.
+ 155:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be one of the following values:
+ 156:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_Latency_0: FLASH Zero Latency cycle
+ 157:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_Latency_1: FLASH One Latency cycle
+ 158:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_Latency_2: FLASH Two Latency cycles
+ 159:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_Latency_3: FLASH Three Latency cycles
+ 160:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_Latency_4: FLASH Four Latency cycles 
+ 161:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_Latency_5: FLASH Five Latency cycles 
+ 162:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_Latency_6: FLASH Six Latency cycles
+ 163:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_Latency_7: FLASH Seven Latency cycles      
+ 164:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 165:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 166:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_SetLatency(uint32_t FLASH_Latency)
+ 167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+  26              		.loc 1 167 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  31              	.LVL0:
+ 168:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 169:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FLASH_LATENCY(FLASH_Latency));
+ 170:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 171:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Perform Byte access to FLASH_ACR[8:0] to set the Latency value */
+ 172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *(__IO uint8_t *)ACR_BYTE0_ADDRESS = (uint8_t)FLASH_Latency;
+  32              		.loc 1 172 0
+  33 0000 C0B2     		uxtb	r0, r0
+  34              	.LVL1:
+  35 0002 014B     		ldr	r3, .L2
+  36 0004 1870     		strb	r0, [r3]
+  37 0006 7047     		bx	lr
+  38              	.L3:
+  39              		.align	2
+  40              	.L2:
+  41 0008 003C0240 		.word	1073888256
+  42              		.cfi_endproc
+  43              	.LFE110:
+  45              		.align	2
+  46              		.global	FLASH_PrefetchBufferCmd
+  47              		.thumb
+  48              		.thumb_func
+  50              	FLASH_PrefetchBufferCmd:
+  51              	.LFB111:
+ 173:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 174:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 175:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 176:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Enables or disables the Prefetch Buffer.
+ 177:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  NewState: new state of the Prefetch Buffer.
+ 178:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter  can be: ENABLE or DISABLE.
+ 179:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 180:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 181:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_PrefetchBufferCmd(FunctionalState NewState)
+ 182:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+  52              		.loc 1 182 0
+  53              		.cfi_startproc
+  54              		@ args = 0, pretend = 0, frame = 0
+  55              		@ frame_needed = 0, uses_anonymous_args = 0
+  56              		@ link register save eliminated.
+  57              	.LVL2:
+ 183:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 184:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 185:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 186:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Enable or disable the Prefetch Buffer */
+ 187:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(NewState != DISABLE)
+  58              		.loc 1 187 0
+  59 000c 28B1     		cbz	r0, .L5
+ 188:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 189:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->ACR |= FLASH_ACR_PRFTEN;
+  60              		.loc 1 189 0
+  61 000e 064B     		ldr	r3, .L7
+  62 0010 1A68     		ldr	r2, [r3]
+  63 0012 42F48072 		orr	r2, r2, #256
+  64 0016 1A60     		str	r2, [r3]
+  65 0018 7047     		bx	lr
+  66              	.L5:
+ 190:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 191:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else
+ 192:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->ACR &= (~FLASH_ACR_PRFTEN);
+  67              		.loc 1 193 0
+  68 001a 034B     		ldr	r3, .L7
+  69 001c 1A68     		ldr	r2, [r3]
+  70 001e 22F48072 		bic	r2, r2, #256
+  71 0022 1A60     		str	r2, [r3]
+  72 0024 7047     		bx	lr
+  73              	.L8:
+  74 0026 00BF     		.align	2
+  75              	.L7:
+  76 0028 003C0240 		.word	1073888256
+  77              		.cfi_endproc
+  78              	.LFE111:
+  80              		.align	2
+  81              		.global	FLASH_InstructionCacheCmd
+  82              		.thumb
+  83              		.thumb_func
+  85              	FLASH_InstructionCacheCmd:
+  86              	.LFB112:
+ 194:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 196:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 197:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Enables or disables the Instruction Cache feature.
+ 199:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  NewState: new state of the Instruction Cache.
+ 200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter  can be: ENABLE or DISABLE.
+ 201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 202:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 203:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_InstructionCacheCmd(FunctionalState NewState)
+ 204:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+  87              		.loc 1 204 0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		@ link register save eliminated.
+  92              	.LVL3:
+ 205:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 207:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 208:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(NewState != DISABLE)
+  93              		.loc 1 208 0
+  94 002c 28B1     		cbz	r0, .L10
+ 209:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 210:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->ACR |= FLASH_ACR_ICEN;
+  95              		.loc 1 210 0
+  96 002e 064B     		ldr	r3, .L12
+  97 0030 1A68     		ldr	r2, [r3]
+  98 0032 42F40072 		orr	r2, r2, #512
+  99 0036 1A60     		str	r2, [r3]
+ 100 0038 7047     		bx	lr
+ 101              	.L10:
+ 211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else
+ 213:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->ACR &= (~FLASH_ACR_ICEN);
+ 102              		.loc 1 214 0
+ 103 003a 034B     		ldr	r3, .L12
+ 104 003c 1A68     		ldr	r2, [r3]
+ 105 003e 22F40072 		bic	r2, r2, #512
+ 106 0042 1A60     		str	r2, [r3]
+ 107 0044 7047     		bx	lr
+ 108              	.L13:
+ 109 0046 00BF     		.align	2
+ 110              	.L12:
+ 111 0048 003C0240 		.word	1073888256
+ 112              		.cfi_endproc
+ 113              	.LFE112:
+ 115              		.align	2
+ 116              		.global	FLASH_DataCacheCmd
+ 117              		.thumb
+ 118              		.thumb_func
+ 120              	FLASH_DataCacheCmd:
+ 121              	.LFB113:
+ 215:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 216:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 218:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 219:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Enables or disables the Data Cache feature.
+ 220:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  NewState: new state of the Data Cache.
+ 221:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter  can be: ENABLE or DISABLE.
+ 222:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 223:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_DataCacheCmd(FunctionalState NewState)
+ 225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 122              		.loc 1 225 0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 127              	.LVL4:
+ 226:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 229:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(NewState != DISABLE)
+ 128              		.loc 1 229 0
+ 129 004c 28B1     		cbz	r0, .L15
+ 230:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 231:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->ACR |= FLASH_ACR_DCEN;
+ 130              		.loc 1 231 0
+ 131 004e 064B     		ldr	r3, .L17
+ 132 0050 1A68     		ldr	r2, [r3]
+ 133 0052 42F48062 		orr	r2, r2, #1024
+ 134 0056 1A60     		str	r2, [r3]
+ 135 0058 7047     		bx	lr
+ 136              	.L15:
+ 232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 233:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else
+ 234:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 235:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->ACR &= (~FLASH_ACR_DCEN);
+ 137              		.loc 1 235 0
+ 138 005a 034B     		ldr	r3, .L17
+ 139 005c 1A68     		ldr	r2, [r3]
+ 140 005e 22F48062 		bic	r2, r2, #1024
+ 141 0062 1A60     		str	r2, [r3]
+ 142 0064 7047     		bx	lr
+ 143              	.L18:
+ 144 0066 00BF     		.align	2
+ 145              	.L17:
+ 146 0068 003C0240 		.word	1073888256
+ 147              		.cfi_endproc
+ 148              	.LFE113:
+ 150              		.align	2
+ 151              		.global	FLASH_InstructionCacheReset
+ 152              		.thumb
+ 153              		.thumb_func
+ 155              	FLASH_InstructionCacheReset:
+ 156              	.LFB114:
+ 236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 238:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Resets the Instruction Cache.
+ 241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @note   This function must be used only when the Instruction Cache is disabled.  
+ 242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_InstructionCacheReset(void)
+ 246:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 157              		.loc 1 246 0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 0
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161              		@ link register save eliminated.
+ 247:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH->ACR |= FLASH_ACR_ICRST;
+ 162              		.loc 1 247 0
+ 163 006c 024B     		ldr	r3, .L20
+ 164 006e 1A68     		ldr	r2, [r3]
+ 165 0070 42F40062 		orr	r2, r2, #2048
+ 166 0074 1A60     		str	r2, [r3]
+ 167 0076 7047     		bx	lr
+ 168              	.L21:
+ 169              		.align	2
+ 170              	.L20:
+ 171 0078 003C0240 		.word	1073888256
+ 172              		.cfi_endproc
+ 173              	.LFE114:
+ 175              		.align	2
+ 176              		.global	FLASH_DataCacheReset
+ 177              		.thumb
+ 178              		.thumb_func
+ 180              	FLASH_DataCacheReset:
+ 181              	.LFB115:
+ 248:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 249:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 250:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 251:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Resets the Data Cache.
+ 252:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @note   This function must be used only when the Data Cache is disabled.  
+ 253:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 254:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 255:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 256:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_DataCacheReset(void)
+ 257:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 182              		.loc 1 257 0
+ 183              		.cfi_startproc
+ 184              		@ args = 0, pretend = 0, frame = 0
+ 185              		@ frame_needed = 0, uses_anonymous_args = 0
+ 186              		@ link register save eliminated.
+ 258:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH->ACR |= FLASH_ACR_DCRST;
+ 187              		.loc 1 258 0
+ 188 007c 024B     		ldr	r3, .L23
+ 189 007e 1A68     		ldr	r2, [r3]
+ 190 0080 42F48052 		orr	r2, r2, #4096
+ 191 0084 1A60     		str	r2, [r3]
+ 192 0086 7047     		bx	lr
+ 193              	.L24:
+ 194              		.align	2
+ 195              	.L23:
+ 196 0088 003C0240 		.word	1073888256
+ 197              		.cfi_endproc
+ 198              	.LFE115:
+ 200              		.align	2
+ 201              		.global	FLASH_Unlock
+ 202              		.thumb
+ 203              		.thumb_func
+ 205              	FLASH_Unlock:
+ 206              	.LFB116:
+ 259:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 261:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 262:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @}
+ 263:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 264:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 265:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /** @defgroup FLASH_Group2 FLASH Memory Programming functions
+ 266:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  *  @brief   FLASH Memory Programming functions
+ 267:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  *
+ 268:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** @verbatim   
+ 269:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  ===============================================================================
+ 270:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****                       FLASH Memory Programming functions
+ 271:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  ===============================================================================   
+ 272:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 273:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    This group includes the following functions:
+ 274:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - void FLASH_Unlock(void)
+ 275:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - void FLASH_Lock(void)
+ 276:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - FLASH_Status FLASH_EraseSector(uint32_t FLASH_Sector, uint8_t VoltageRange)
+ 277:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - FLASH_Status FLASH_EraseAllSectors(uint8_t VoltageRange)
+ 278:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - FLASH_Status FLASH_ProgramDoubleWord(uint32_t Address, uint64_t Data)
+ 279:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - FLASH_Status FLASH_ProgramWord(uint32_t Address, uint32_t Data)
+ 280:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - FLASH_Status FLASH_ProgramHalfWord(uint32_t Address, uint16_t Data)
+ 281:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     - FLASH_Status FLASH_ProgramByte(uint32_t Address, uint8_t Data)
+ 282:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    
+ 283:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    Any operation of erase or program should follow these steps:
+ 284:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    1. Call the FLASH_Unlock() function to enable the FLASH control register access
+ 285:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 286:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    2. Call the desired function to erase sector(s) or program data
+ 287:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    3. Call the FLASH_Lock() function to disable the FLASH control register access
+ 289:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       (recommended to protect the FLASH memory against possible unwanted operation)
+ 290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     
+ 291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** @endverbatim
+ 292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @{
+ 293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 295:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 296:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Unlocks the FLASH control register access
+ 297:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 298:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 299:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 300:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_Unlock(void)
+ 301:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 207              		.loc 1 301 0
+ 208              		.cfi_startproc
+ 209              		@ args = 0, pretend = 0, frame = 0
+ 210              		@ frame_needed = 0, uses_anonymous_args = 0
+ 211              		@ link register save eliminated.
+ 302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if((FLASH->CR & FLASH_CR_LOCK) != RESET)
+ 212              		.loc 1 302 0
+ 213 008c 054B     		ldr	r3, .L27
+ 214 008e 1B69     		ldr	r3, [r3, #16]
+ 215 0090 002B     		cmp	r3, #0
+ 216 0092 05DA     		bge	.L25
+ 303:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 304:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Authorize the FLASH Registers access */
+ 305:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->KEYR = FLASH_KEY1;
+ 217              		.loc 1 305 0
+ 218 0094 034B     		ldr	r3, .L27
+ 219 0096 044A     		ldr	r2, .L27+4
+ 220 0098 5A60     		str	r2, [r3, #4]
+ 306:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->KEYR = FLASH_KEY2;
+ 221              		.loc 1 306 0
+ 222 009a 02F18832 		add	r2, r2, #-2004318072
+ 223 009e 5A60     		str	r2, [r3, #4]
+ 224              	.L25:
+ 225 00a0 7047     		bx	lr
+ 226              	.L28:
+ 227 00a2 00BF     		.align	2
+ 228              	.L27:
+ 229 00a4 003C0240 		.word	1073888256
+ 230 00a8 23016745 		.word	1164378403
+ 231              		.cfi_endproc
+ 232              	.LFE116:
+ 234              		.align	2
+ 235              		.global	FLASH_Lock
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	FLASH_Lock:
+ 240              	.LFB117:
+ 307:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }  
+ 308:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 309:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 310:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 311:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Locks the FLASH control register access
+ 312:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 313:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 314:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 315:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_Lock(void)
+ 316:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 241              		.loc 1 316 0
+ 242              		.cfi_startproc
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245              		@ link register save eliminated.
+ 317:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Set the LOCK Bit to lock the FLASH Registers access */
+ 318:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH->CR |= FLASH_CR_LOCK;
+ 246              		.loc 1 318 0
+ 247 00ac 024B     		ldr	r3, .L30
+ 248 00ae 1A69     		ldr	r2, [r3, #16]
+ 249 00b0 42F00042 		orr	r2, r2, #-2147483648
+ 250 00b4 1A61     		str	r2, [r3, #16]
+ 251 00b6 7047     		bx	lr
+ 252              	.L31:
+ 253              		.align	2
+ 254              	.L30:
+ 255 00b8 003C0240 		.word	1073888256
+ 256              		.cfi_endproc
+ 257              	.LFE117:
+ 259              		.align	2
+ 260              		.global	FLASH_OB_Unlock
+ 261              		.thumb
+ 262              		.thumb_func
+ 264              	FLASH_OB_Unlock:
+ 265              	.LFB124:
+ 319:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 320:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 321:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 322:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Erases a specified FLASH Sector.
+ 323:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *   
+ 324:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  FLASH_Sector: The Sector number to be erased.
+ 325:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be a value between FLASH_Sector_0 and FLASH_Sector_11
+ 326:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *    
+ 327:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  VoltageRange: The device voltage range which defines the erase parallelism.  
+ 328:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be one of the following values:
+ 329:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg VoltageRange_1: when the device voltage range is 1.8V to 2.1V, 
+ 330:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                                  the operation will be done by byte (8-bit) 
+ 331:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg VoltageRange_2: when the device voltage range is 2.1V to 2.7V,
+ 332:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                                  the operation will be done by half word (16-bit)
+ 333:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg VoltageRange_3: when the device voltage range is 2.7V to 3.6V,
+ 334:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                                  the operation will be done by word (32-bit)
+ 335:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg VoltageRange_4: when the device voltage range is 2.7V to 3.6V + External Vpp, 
+ 336:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                                  the operation will be done by double word (64-bit)
+ 337:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *       
+ 338:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH Status: The returned value can be: FLASH_BUSY, FLASH_ERROR_PROGRAM,
+ 339:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                       FLASH_ERROR_WRP, FLASH_ERROR_OPERATION or FLASH_COMPLETE.
+ 340:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 341:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FLASH_Status FLASH_EraseSector(uint32_t FLASH_Sector, uint8_t VoltageRange)
+ 342:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 343:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   uint32_t tmp_psize = 0x0;
+ 344:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE;
+ 345:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 346:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 347:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FLASH_SECTOR(FLASH_Sector));
+ 348:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_VOLTAGERANGE(VoltageRange));
+ 349:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 350:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(VoltageRange == VoltageRange_1)
+ 351:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 352:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      tmp_psize = FLASH_PSIZE_BYTE;
+ 353:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 354:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else if(VoltageRange == VoltageRange_2)
+ 355:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_HALF_WORD;
+ 357:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 358:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else if(VoltageRange == VoltageRange_3)
+ 359:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 360:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_WORD;
+ 361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 362:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else
+ 363:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 364:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_DOUBLE_WORD;
+ 365:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 366:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Wait for last operation to be completed */
+ 367:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 368:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 370:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   { 
+ 371:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the previous operation is completed, proceed to erase the sector */
+ 372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 373:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= tmp_psize;
+ 374:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= SECTOR_MASK;
+ 375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_SER | FLASH_Sector;
+ 376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_STRT;
+ 377:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     
+ 378:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Wait for last operation to be completed */
+ 379:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 380:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     
+ 381:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the erase operation is completed, disable the SER Bit */
+ 382:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_SER);
+ 383:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= SECTOR_MASK; 
+ 384:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 385:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the Erase Status */
+ 386:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return status;
+ 387:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 388:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 389:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 390:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Erases all FLASH Sectors.
+ 391:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *    
+ 392:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  VoltageRange: The device voltage range which defines the erase parallelism.  
+ 393:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be one of the following values:
+ 394:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg VoltageRange_1: when the device voltage range is 1.8V to 2.1V, 
+ 395:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                                  the operation will be done by byte (8-bit) 
+ 396:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg VoltageRange_2: when the device voltage range is 2.1V to 2.7V,
+ 397:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                                  the operation will be done by half word (16-bit)
+ 398:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg VoltageRange_3: when the device voltage range is 2.7V to 3.6V,
+ 399:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                                  the operation will be done by word (32-bit)
+ 400:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg VoltageRange_4: when the device voltage range is 2.7V to 3.6V + External Vpp, 
+ 401:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                                  the operation will be done by double word (64-bit)
+ 402:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *       
+ 403:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH Status: The returned value can be: FLASH_BUSY, FLASH_ERROR_PROGRAM,
+ 404:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                       FLASH_ERROR_WRP, FLASH_ERROR_OPERATION or FLASH_COMPLETE.
+ 405:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 406:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FLASH_Status FLASH_EraseAllSectors(uint8_t VoltageRange)
+ 407:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 408:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   uint32_t tmp_psize = 0x0;
+ 409:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE;
+ 410:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 411:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Wait for last operation to be completed */
+ 412:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 413:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_VOLTAGERANGE(VoltageRange));
+ 414:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 415:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(VoltageRange == VoltageRange_1)
+ 416:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 417:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      tmp_psize = FLASH_PSIZE_BYTE;
+ 418:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 419:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else if(VoltageRange == VoltageRange_2)
+ 420:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 421:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_HALF_WORD;
+ 422:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 423:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else if(VoltageRange == VoltageRange_3)
+ 424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_WORD;
+ 426:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 427:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else
+ 428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 429:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_DOUBLE_WORD;
+ 430:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }  
+ 431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 432:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 433:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the previous operation is completed, proceed to erase all sectors */
+ 434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      FLASH->CR &= CR_PSIZE_MASK;
+ 435:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      FLASH->CR |= tmp_psize;
+ 436:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      FLASH->CR |= FLASH_CR_MER;
+ 437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      FLASH->CR |= FLASH_CR_STRT;
+ 438:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     
+ 439:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Wait for last operation to be completed */
+ 440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 441:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 442:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the erase operation is completed, disable the MER Bit */
+ 443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_MER);
+ 444:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 445:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }   
+ 446:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the Erase Status */
+ 447:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return status;
+ 448:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 449:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 450:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 451:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Programs a double word (64-bit) at a specified address.
+ 452:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @note   This function must be used when the device voltage range is from
+ 453:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *         2.7V to 3.6V and an External Vpp is present.           
+ 454:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  Address: specifies the address to be programmed.
+ 455:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  Data: specifies the data to be programmed.
+ 456:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH Status: The returned value can be: FLASH_BUSY, FLASH_ERROR_PROGRAM,
+ 457:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                       FLASH_ERROR_WRP, FLASH_ERROR_OPERATION or FLASH_COMPLETE.
+ 458:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 459:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FLASH_Status FLASH_ProgramDoubleWord(uint32_t Address, uint64_t Data)
+ 460:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 461:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE;
+ 462:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 463:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 464:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FLASH_ADDRESS(Address));
+ 465:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 466:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Wait for last operation to be completed */
+ 467:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 468:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 469:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 470:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 471:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the previous operation is completed, proceed to program the new data */
+ 472:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 473:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_PSIZE_DOUBLE_WORD;
+ 474:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_PG;
+ 475:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 476:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint64_t*)Address = Data;
+ 477:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         
+ 478:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Wait for last operation to be completed */
+ 479:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 480:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 481:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the program operation is completed, disable the PG Bit */
+ 482:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_PG);
+ 483:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   } 
+ 484:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the Program Status */
+ 485:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return status;
+ 486:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 487:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 488:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 489:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Programs a word (32-bit) at a specified address.
+ 490:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  Address: specifies the address to be programmed.
+ 491:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *         This parameter can be any address in Program memory zone or in OTP zone.  
+ 492:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @note   This function must be used when the device voltage range is from 2.7V to 3.6V. 
+ 493:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  Data: specifies the data to be programmed.
+ 494:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH Status: The returned value can be: FLASH_BUSY, FLASH_ERROR_PROGRAM,
+ 495:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                       FLASH_ERROR_WRP, FLASH_ERROR_OPERATION or FLASH_COMPLETE.
+ 496:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 497:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FLASH_Status FLASH_ProgramWord(uint32_t Address, uint32_t Data)
+ 498:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 499:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE;
+ 500:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 501:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 502:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FLASH_ADDRESS(Address));
+ 503:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 504:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Wait for last operation to be completed */
+ 505:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 506:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 507:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 508:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 509:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the previous operation is completed, proceed to program the new data */
+ 510:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 511:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_PSIZE_WORD;
+ 512:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_PG;
+ 513:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 514:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint32_t*)Address = Data;
+ 515:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         
+ 516:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Wait for last operation to be completed */
+ 517:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 518:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 519:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the program operation is completed, disable the PG Bit */
+ 520:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_PG);
+ 521:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   } 
+ 522:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the Program Status */
+ 523:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return status;
+ 524:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 525:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 526:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 527:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Programs a half word (16-bit) at a specified address. 
+ 528:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @note   This function must be used when the device voltage range is from 2.1V to 3.6V.         
+ 529:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  Address: specifies the address to be programmed.
+ 530:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *         This parameter can be any address in Program memory zone or in OTP zone.  
+ 531:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  Data: specifies the data to be programmed.
+ 532:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH Status: The returned value can be: FLASH_BUSY, FLASH_ERROR_PROGRAM,
+ 533:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                       FLASH_ERROR_WRP, FLASH_ERROR_OPERATION or FLASH_COMPLETE.
+ 534:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 535:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FLASH_Status FLASH_ProgramHalfWord(uint32_t Address, uint16_t Data)
+ 536:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 537:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE;
+ 538:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 539:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 540:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FLASH_ADDRESS(Address));
+ 541:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 542:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Wait for last operation to be completed */
+ 543:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 544:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 545:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 546:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 547:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the previous operation is completed, proceed to program the new data */
+ 548:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 549:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_PSIZE_HALF_WORD;
+ 550:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_PG;
+ 551:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 552:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint16_t*)Address = Data;
+ 553:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         
+ 554:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Wait for last operation to be completed */
+ 555:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 556:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 557:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the program operation is completed, disable the PG Bit */
+ 558:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_PG);
+ 559:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   } 
+ 560:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the Program Status */
+ 561:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return status;
+ 562:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 563:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 564:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 565:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Programs a byte (8-bit) at a specified address.
+ 566:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @note   This function can be used within all the device supply voltage ranges.               
+ 567:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  Address: specifies the address to be programmed.
+ 568:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *         This parameter can be any address in Program memory zone or in OTP zone.  
+ 569:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  Data: specifies the data to be programmed.
+ 570:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH Status: The returned value can be: FLASH_BUSY, FLASH_ERROR_PROGRAM,
+ 571:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                       FLASH_ERROR_WRP, FLASH_ERROR_OPERATION or FLASH_COMPLETE.
+ 572:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 573:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FLASH_Status FLASH_ProgramByte(uint32_t Address, uint8_t Data)
+ 574:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 575:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE;
+ 576:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 577:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 578:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FLASH_ADDRESS(Address));
+ 579:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 580:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Wait for last operation to be completed */
+ 581:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 582:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 583:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 584:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 585:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the previous operation is completed, proceed to program the new data */
+ 586:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 587:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_PSIZE_BYTE;
+ 588:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_PG;
+ 589:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 590:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint8_t*)Address = Data;
+ 591:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         
+ 592:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Wait for last operation to be completed */
+ 593:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 594:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 595:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* if the program operation is completed, disable the PG Bit */
+ 596:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_PG);
+ 597:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   } 
+ 598:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 599:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the Program Status */
+ 600:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return status;
+ 601:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 602:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 603:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 604:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @}
+ 605:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 606:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 607:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /** @defgroup FLASH_Group3 Option Bytes Programming functions
+ 608:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  *  @brief   Option Bytes Programming functions 
+ 609:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  *
+ 610:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** @verbatim   
+ 611:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  ===============================================================================
+ 612:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****                         Option Bytes Programming functions
+ 613:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  ===============================================================================  
+ 614:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  
+ 615:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    This group includes the following functions:
+ 616:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - void FLASH_OB_Unlock(void)
+ 617:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - void FLASH_OB_Lock(void)
+ 618:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - void FLASH_OB_WRPConfig(uint32_t OB_WRP, FunctionalState NewState)
+ 619:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - void FLASH_OB_RDPConfig(uint8_t OB_RDP)
+ 620:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - void FLASH_OB_UserConfig(uint8_t OB_IWDG, uint8_t OB_STOP, uint8_t OB_STDBY)
+ 621:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - void FLASH_OB_BORConfig(uint8_t OB_BOR)
+ 622:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - FLASH_Status FLASH_ProgramOTP(uint32_t Address, uint32_t Data)							
+ 623:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - FLASH_Status FLASH_OB_Launch(void)
+ 624:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - uint32_t FLASH_OB_GetUser(void)						
+ 625:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - uint8_t FLASH_OB_GetWRP(void)						
+ 626:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - uint8_t FLASH_OB_GetRDP(void)							
+ 627:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    - uint8_t FLASH_OB_GetBOR(void)
+ 628:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    
+ 629:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    Any operation of erase or program should follow these steps:
+ 630:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    1. Call the FLASH_OB_Unlock() function to enable the FLASH option control register access
+ 631:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 632:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    2. Call one or several functions to program the desired Option Bytes:
+ 633:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       - void FLASH_OB_WRPConfig(uint32_t OB_WRP, FunctionalState NewState) => to Enable/Disable 
+ 634:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         the desired sector write protection
+ 635:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       - void FLASH_OB_RDPConfig(uint8_t OB_RDP) => to set the desired read Protection Level
+ 636:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       - void FLASH_OB_UserConfig(uint8_t OB_IWDG, uint8_t OB_STOP, uint8_t OB_STDBY) => to configur
+ 637:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         the user Option Bytes.
+ 638:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       - void FLASH_OB_BORConfig(uint8_t OB_BOR) => to set the BOR Level 			 
+ 639:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 640:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    3. Once all needed Option Bytes to be programmed are correctly written, call the
+ 641:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       FLASH_OB_Launch() function to launch the Option Bytes programming process.
+ 642:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      
+ 643:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      @note When changing the IWDG mode from HW to SW or from SW to HW, a system 
+ 644:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****            reset is needed to make the change effective.  
+ 645:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 646:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    4. Call the FLASH_OB_Lock() function to disable the FLASH option control register
+ 647:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       access (recommended to protect the Option Bytes against possible unwanted operations)
+ 648:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     
+ 649:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** @endverbatim
+ 650:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @{
+ 651:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 652:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 653:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 654:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Unlocks the FLASH Option Control Registers access.
+ 655:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 656:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 657:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 658:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_OB_Unlock(void)
+ 659:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 266              		.loc 1 659 0
+ 267              		.cfi_startproc
+ 268              		@ args = 0, pretend = 0, frame = 0
+ 269              		@ frame_needed = 0, uses_anonymous_args = 0
+ 270              		@ link register save eliminated.
+ 660:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if((FLASH->OPTCR & FLASH_OPTCR_OPTLOCK) != RESET)
+ 271              		.loc 1 660 0
+ 272 00bc 054B     		ldr	r3, .L34
+ 273 00be 5B69     		ldr	r3, [r3, #20]
+ 274 00c0 13F0010F 		tst	r3, #1
+ 275 00c4 05D0     		beq	.L32
+ 661:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 662:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Authorizes the Option Byte register programming */
+ 663:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->OPTKEYR = FLASH_OPT_KEY1;
+ 276              		.loc 1 663 0
+ 277 00c6 034B     		ldr	r3, .L34
+ 278 00c8 034A     		ldr	r2, .L34+4
+ 279 00ca 9A60     		str	r2, [r3, #8]
+ 664:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->OPTKEYR = FLASH_OPT_KEY2;
+ 280              		.loc 1 664 0
+ 281 00cc 02F14432 		add	r2, r2, #1145324612
+ 282 00d0 9A60     		str	r2, [r3, #8]
+ 283              	.L32:
+ 284 00d2 7047     		bx	lr
+ 285              	.L35:
+ 286              		.align	2
+ 287              	.L34:
+ 288 00d4 003C0240 		.word	1073888256
+ 289 00d8 3B2A1908 		.word	135866939
+ 290              		.cfi_endproc
+ 291              	.LFE124:
+ 293              		.align	2
+ 294              		.global	FLASH_OB_Lock
+ 295              		.thumb
+ 296              		.thumb_func
+ 298              	FLASH_OB_Lock:
+ 299              	.LFB125:
+ 665:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }  
+ 666:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 667:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 668:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 669:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Locks the FLASH Option Control Registers access.
+ 670:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 671:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 672:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 673:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_OB_Lock(void)
+ 674:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 300              		.loc 1 674 0
+ 301              		.cfi_startproc
+ 302              		@ args = 0, pretend = 0, frame = 0
+ 303              		@ frame_needed = 0, uses_anonymous_args = 0
+ 304              		@ link register save eliminated.
+ 675:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Set the OPTLOCK Bit to lock the FLASH Option Byte Registers access */
+ 676:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH->OPTCR |= FLASH_OPTCR_OPTLOCK;
+ 305              		.loc 1 676 0
+ 306 00dc 024B     		ldr	r3, .L37
+ 307 00de 5A69     		ldr	r2, [r3, #20]
+ 308 00e0 42F00102 		orr	r2, r2, #1
+ 309 00e4 5A61     		str	r2, [r3, #20]
+ 310 00e6 7047     		bx	lr
+ 311              	.L38:
+ 312              		.align	2
+ 313              	.L37:
+ 314 00e8 003C0240 		.word	1073888256
+ 315              		.cfi_endproc
+ 316              	.LFE125:
+ 318              		.align	2
+ 319              		.global	FLASH_OB_BORConfig
+ 320              		.thumb
+ 321              		.thumb_func
+ 323              	FLASH_OB_BORConfig:
+ 324              	.LFB129:
+ 677:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 678:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 679:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 680:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Enables or disables the write protection of the desired sectors
+ 681:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  OB_WRP: specifies the sector(s) to be write protected or unprotected.
+ 682:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be one of the following values:
+ 683:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_WRP: A value between OB_WRP_Sector0 and OB_WRP_Sector11                     
+ 684:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_WRP_Sector_All
+ 685:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  Newstate: new state of the Write Protection.
+ 686:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be: ENABLE or DISABLE.
+ 687:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None  
+ 688:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 689:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_OB_WRPConfig(uint32_t OB_WRP, FunctionalState NewState)
+ 690:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** { 
+ 691:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE;
+ 692:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 693:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 694:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_OB_WRP(OB_WRP));
+ 695:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 696:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     
+ 697:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 698:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 699:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 700:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   { 
+ 701:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     if(NewState != DISABLE)
+ 702:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     {
+ 703:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       *(__IO uint16_t*)OPTCR_BYTE2_ADDRESS &= (~OB_WRP);
+ 704:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     }
+ 705:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     else
+ 706:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     {
+ 707:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       *(__IO uint16_t*)OPTCR_BYTE2_ADDRESS |= (uint16_t)OB_WRP;
+ 708:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     }
+ 709:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 710:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 711:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 712:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 713:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Sets the read protection level.
+ 714:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  OB_RDP: specifies the read protection level.
+ 715:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be one of the following values:
+ 716:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_RDP_Level_0: No protection
+ 717:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_RDP_Level_1: Read protection of the memory
+ 718:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_RDP_Level_2: Full chip protection
+ 719:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *   
+ 720:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * !!!Warning!!! When enabling OB_RDP level 2 it's no more possible to go back to level 1 or 0
+ 721:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *    
+ 722:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 723:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 724:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_OB_RDPConfig(uint8_t OB_RDP)
+ 725:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 726:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE;
+ 727:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 728:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 729:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_OB_RDP(OB_RDP));
+ 730:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 731:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 732:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 733:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 734:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 735:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint8_t*)OPTCR_BYTE1_ADDRESS = OB_RDP;
+ 736:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 737:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 738:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 739:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 740:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 741:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Programs the FLASH User Option Byte: IWDG_SW / RST_STOP / RST_STDBY.    
+ 742:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  OB_IWDG: Selects the IWDG mode
+ 743:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be one of the following values:
+ 744:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_IWDG_SW: Software IWDG selected
+ 745:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_IWDG_HW: Hardware IWDG selected
+ 746:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  OB_STOP: Reset event when entering STOP mode.
+ 747:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter  can be one of the following values:
+ 748:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_STOP_NoRST: No reset generated when entering in STOP
+ 749:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_STOP_RST: Reset generated when entering in STOP
+ 750:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  OB_STDBY: Reset event when entering Standby mode.
+ 751:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter  can be one of the following values:
+ 752:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_STDBY_NoRST: No reset generated when entering in STANDBY
+ 753:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_STDBY_RST: Reset generated when entering in STANDBY
+ 754:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 755:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 756:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_OB_UserConfig(uint8_t OB_IWDG, uint8_t OB_STOP, uint8_t OB_STDBY)
+ 757:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 758:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   uint8_t optiontmp = 0xFF;
+ 759:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE; 
+ 760:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 761:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 762:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_OB_IWDG_SOURCE(OB_IWDG));
+ 763:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_OB_STOP_SOURCE(OB_STOP));
+ 764:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_OB_STDBY_SOURCE(OB_STDBY));
+ 765:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 766:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Wait for last operation to be completed */
+ 767:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 768:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 769:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 770:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   { 
+ 771:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Mask OPTLOCK, OPTSTRT and BOR_LEV bits */
+ 772:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     optiontmp =  (uint8_t)((*(__IO uint8_t *)OPTCR_BYTE0_ADDRESS) & (uint8_t)0x0F); 
+ 773:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 774:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Update User Option Byte */
+ 775:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint8_t *)OPTCR_BYTE0_ADDRESS = OB_IWDG | (uint8_t)(OB_STDBY | (uint8_t)(OB_STOP | ((uin
+ 776:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }  
+ 777:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 778:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 779:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 780:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Sets the BOR Level. 
+ 781:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  OB_BOR: specifies the Option Bytes BOR Reset Level.
+ 782:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be one of the following values:
+ 783:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_BOR_LEVEL3: Supply voltage ranges from 2.7 to 3.6 V
+ 784:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_BOR_LEVEL2: Supply voltage ranges from 2.4 to 2.7 V
+ 785:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_BOR_LEVEL1: Supply voltage ranges from 2.1 to 2.4 V
+ 786:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg OB_BOR_OFF: Supply voltage ranges from 1.62 to 2.1 V
+ 787:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 788:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 789:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_OB_BORConfig(uint8_t OB_BOR)
+ 790:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 325              		.loc 1 790 0
+ 326              		.cfi_startproc
+ 327              		@ args = 0, pretend = 0, frame = 0
+ 328              		@ frame_needed = 0, uses_anonymous_args = 0
+ 329              		@ link register save eliminated.
+ 330              	.LVL5:
+ 791:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 792:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_OB_BOR(OB_BOR));
+ 793:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 794:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Set the BOR Level */
+ 795:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *(__IO uint8_t *)OPTCR_BYTE0_ADDRESS &= (~FLASH_OPTCR_BOR_LEV);
+ 331              		.loc 1 795 0
+ 332 00ec 044B     		ldr	r3, .L40
+ 333 00ee 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 334 00f0 02F0F302 		and	r2, r2, #243
+ 335 00f4 1A70     		strb	r2, [r3]
+ 796:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *(__IO uint8_t *)OPTCR_BYTE0_ADDRESS |= OB_BOR;
+ 336              		.loc 1 796 0
+ 337 00f6 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 338 00f8 1043     		orrs	r0, r0, r2
+ 339              	.LVL6:
+ 340 00fa 1870     		strb	r0, [r3]
+ 341 00fc 7047     		bx	lr
+ 342              	.L41:
+ 343 00fe 00BF     		.align	2
+ 344              	.L40:
+ 345 0100 143C0240 		.word	1073888276
+ 346              		.cfi_endproc
+ 347              	.LFE129:
+ 349              		.align	2
+ 350              		.global	FLASH_OB_GetUser
+ 351              		.thumb
+ 352              		.thumb_func
+ 354              	FLASH_OB_GetUser:
+ 355              	.LFB131:
+ 797:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 798:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 799:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 800:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 801:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Launch the option byte loading.
+ 802:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 803:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH Status: The returned value can be: FLASH_BUSY, FLASH_ERROR_PROGRAM,
+ 804:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                       FLASH_ERROR_WRP, FLASH_ERROR_OPERATION or FLASH_COMPLETE.
+ 805:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 806:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FLASH_Status FLASH_OB_Launch(void)
+ 807:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 808:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status status = FLASH_COMPLETE;
+ 809:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 810:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Set the OPTSTRT bit in OPTCR register */
+ 811:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *(__IO uint8_t *)OPTCR_BYTE0_ADDRESS |= FLASH_OPTCR_OPTSTRT;
+ 812:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 813:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Wait for last operation to be completed */
+ 814:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 815:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 816:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return status;
+ 817:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 818:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 819:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 820:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Returns the FLASH User Option Bytes values.
+ 821:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 822:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval The FLASH User Option Bytes values: IWDG_SW(Bit0), RST_STOP(Bit1)
+ 823:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *         and RST_STDBY(Bit2).
+ 824:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 825:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** uint8_t FLASH_OB_GetUser(void)
+ 826:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 356              		.loc 1 826 0
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 0
+ 359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360              		@ link register save eliminated.
+ 827:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the User Option Byte */
+ 828:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return (uint8_t)(FLASH->OPTCR >> 5);
+ 361              		.loc 1 828 0
+ 362 0104 024B     		ldr	r3, .L43
+ 363 0106 5869     		ldr	r0, [r3, #20]
+ 829:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 364              		.loc 1 829 0
+ 365 0108 C0F34710 		ubfx	r0, r0, #5, #8
+ 366 010c 7047     		bx	lr
+ 367              	.L44:
+ 368 010e 00BF     		.align	2
+ 369              	.L43:
+ 370 0110 003C0240 		.word	1073888256
+ 371              		.cfi_endproc
+ 372              	.LFE131:
+ 374              		.align	2
+ 375              		.global	FLASH_OB_GetWRP
+ 376              		.thumb
+ 377              		.thumb_func
+ 379              	FLASH_OB_GetWRP:
+ 380              	.LFB132:
+ 830:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 831:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 832:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Returns the FLASH Write Protection Option Bytes value.
+ 833:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 834:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval The FLASH Write Protection  Option Bytes value
+ 835:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 836:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** uint16_t FLASH_OB_GetWRP(void)
+ 837:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 381              		.loc 1 837 0
+ 382              		.cfi_startproc
+ 383              		@ args = 0, pretend = 0, frame = 0
+ 384              		@ frame_needed = 0, uses_anonymous_args = 0
+ 385              		@ link register save eliminated.
+ 838:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the FLASH write protection Register value */
+ 839:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return (*(__IO uint16_t *)(OPTCR_BYTE2_ADDRESS));
+ 386              		.loc 1 839 0
+ 387 0114 014B     		ldr	r3, .L46
+ 388 0116 1888     		ldrh	r0, [r3]
+ 840:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 389              		.loc 1 840 0
+ 390 0118 80B2     		uxth	r0, r0
+ 391 011a 7047     		bx	lr
+ 392              	.L47:
+ 393              		.align	2
+ 394              	.L46:
+ 395 011c 163C0240 		.word	1073888278
+ 396              		.cfi_endproc
+ 397              	.LFE132:
+ 399              		.align	2
+ 400              		.global	FLASH_OB_GetRDP
+ 401              		.thumb
+ 402              		.thumb_func
+ 404              	FLASH_OB_GetRDP:
+ 405              	.LFB133:
+ 841:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 842:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 843:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Returns the FLASH Read Protection level.
+ 844:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 845:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH ReadOut Protection Status:
+ 846:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           - SET, when OB_RDP_Level_1 or OB_RDP_Level_2 is set
+ 847:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           - RESET, when OB_RDP_Level_0 is set
+ 848:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 849:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FlagStatus FLASH_OB_GetRDP(void)
+ 850:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 406              		.loc 1 850 0
+ 407              		.cfi_startproc
+ 408              		@ args = 0, pretend = 0, frame = 0
+ 409              		@ frame_needed = 0, uses_anonymous_args = 0
+ 410              		@ link register save eliminated.
+ 411              	.LVL7:
+ 851:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FlagStatus readstatus = RESET;
+ 852:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 853:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if ((*(__IO uint8_t*)(OPTCR_BYTE1_ADDRESS) != (uint8_t)OB_RDP_Level_0))
+ 412              		.loc 1 853 0
+ 413 0120 034B     		ldr	r3, .L51
+ 414 0122 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 415 0124 C0B2     		uxtb	r0, r0
+ 416              	.LVL8:
+ 854:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 855:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     readstatus = SET;
+ 856:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 857:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else
+ 858:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 859:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     readstatus = RESET;
+ 860:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 861:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return readstatus;
+ 862:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 417              		.loc 1 862 0
+ 418 0126 AA38     		subs	r0, r0, #170
+ 419              	.LVL9:
+ 420 0128 18BF     		it	ne
+ 421 012a 0120     		movne	r0, #1
+ 422              	.LVL10:
+ 423 012c 7047     		bx	lr
+ 424              	.L52:
+ 425 012e 00BF     		.align	2
+ 426              	.L51:
+ 427 0130 153C0240 		.word	1073888277
+ 428              		.cfi_endproc
+ 429              	.LFE133:
+ 431              		.align	2
+ 432              		.global	FLASH_OB_GetBOR
+ 433              		.thumb
+ 434              		.thumb_func
+ 436              	FLASH_OB_GetBOR:
+ 437              	.LFB134:
+ 863:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 864:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 865:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Returns the FLASH BOR level.
+ 866:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 867:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval The FLASH BOR level:
+ 868:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           - OB_BOR_LEVEL3: Supply voltage ranges from 2.7 to 3.6 V
+ 869:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           - OB_BOR_LEVEL2: Supply voltage ranges from 2.4 to 2.7 V
+ 870:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           - OB_BOR_LEVEL1: Supply voltage ranges from 2.1 to 2.4 V
+ 871:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *           - OB_BOR_OFF   : Supply voltage ranges from 1.62 to 2.1 V  
+ 872:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 873:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** uint8_t FLASH_OB_GetBOR(void)
+ 874:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 438              		.loc 1 874 0
+ 439              		.cfi_startproc
+ 440              		@ args = 0, pretend = 0, frame = 0
+ 441              		@ frame_needed = 0, uses_anonymous_args = 0
+ 442              		@ link register save eliminated.
+ 875:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the FLASH BOR level */
+ 876:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return (uint8_t)(*(__IO uint8_t *)(OPTCR_BYTE0_ADDRESS) & (uint8_t)0x0C);
+ 443              		.loc 1 876 0
+ 444 0134 024B     		ldr	r3, .L54
+ 445 0136 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 877:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 446              		.loc 1 877 0
+ 447 0138 00F00C00 		and	r0, r0, #12
+ 448 013c 7047     		bx	lr
+ 449              	.L55:
+ 450 013e 00BF     		.align	2
+ 451              	.L54:
+ 452 0140 143C0240 		.word	1073888276
+ 453              		.cfi_endproc
+ 454              	.LFE134:
+ 456              		.align	2
+ 457              		.global	FLASH_ITConfig
+ 458              		.thumb
+ 459              		.thumb_func
+ 461              	FLASH_ITConfig:
+ 462              	.LFB135:
+ 878:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 879:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 880:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @}
+ 881:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 882:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 883:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /** @defgroup FLASH_Group4 Interrupts and flags management functions
+ 884:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  *  @brief   Interrupts and flags management functions
+ 885:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  *
+ 886:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** @verbatim   
+ 887:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  ===============================================================================
+ 888:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****                   Interrupts and flags management functions
+ 889:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****  ===============================================================================  
+ 890:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 891:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** @endverbatim
+ 892:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @{
+ 893:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 894:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 895:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 896:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Enables or disables the specified FLASH interrupts.
+ 897:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  FLASH_IT: specifies the FLASH interrupt sources to be enabled or disabled.
+ 898:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be any combination of the following values:
+ 899:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_IT_ERR: FLASH Error Interrupt
+ 900:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_IT_EOP: FLASH end of operation Interrupt
+ 901:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None 
+ 902:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 903:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_ITConfig(uint32_t FLASH_IT, FunctionalState NewState)
+ 904:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 463              		.loc 1 904 0
+ 464              		.cfi_startproc
+ 465              		@ args = 0, pretend = 0, frame = 0
+ 466              		@ frame_needed = 0, uses_anonymous_args = 0
+ 467              		@ link register save eliminated.
+ 468              	.LVL11:
+ 905:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 906:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FLASH_IT(FLASH_IT)); 
+ 907:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 908:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 909:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(NewState != DISABLE)
+ 469              		.loc 1 909 0
+ 470 0144 21B1     		cbz	r1, .L57
+ 910:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 911:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Enable the interrupt sources */
+ 912:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_IT;
+ 471              		.loc 1 912 0
+ 472 0146 054B     		ldr	r3, .L59
+ 473 0148 1A69     		ldr	r2, [r3, #16]
+ 474 014a 1043     		orrs	r0, r0, r2
+ 475              	.LVL12:
+ 476 014c 1861     		str	r0, [r3, #16]
+ 477 014e 7047     		bx	lr
+ 478              	.LVL13:
+ 479              	.L57:
+ 913:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 914:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else
+ 915:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 916:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     /* Disable the interrupt sources */
+ 917:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= ~(uint32_t)FLASH_IT;
+ 480              		.loc 1 917 0
+ 481 0150 024B     		ldr	r3, .L59
+ 482 0152 1A69     		ldr	r2, [r3, #16]
+ 483 0154 22EA0000 		bic	r0, r2, r0
+ 484              	.LVL14:
+ 485 0158 1861     		str	r0, [r3, #16]
+ 486 015a 7047     		bx	lr
+ 487              	.L60:
+ 488              		.align	2
+ 489              	.L59:
+ 490 015c 003C0240 		.word	1073888256
+ 491              		.cfi_endproc
+ 492              	.LFE135:
+ 494              		.align	2
+ 495              		.global	FLASH_GetFlagStatus
+ 496              		.thumb
+ 497              		.thumb_func
+ 499              	FLASH_GetFlagStatus:
+ 500              	.LFB136:
+ 918:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 919:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 920:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 921:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 922:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Checks whether the specified FLASH flag is set or not.
+ 923:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  FLASH_FLAG: specifies the FLASH flag to check.
+ 924:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be one of the following values:
+ 925:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_EOP: FLASH End of Operation flag 
+ 926:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_OPERR: FLASH operation Error flag 
+ 927:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_WRPERR: FLASH Write protected error flag 
+ 928:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_PGAERR: FLASH Programming Alignment error flag
+ 929:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_PGPERR: FLASH Programming Parallelism error flag
+ 930:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_PGSERR: FLASH Programming Sequence error flag
+ 931:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_BSY: FLASH Busy flag
+ 932:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval The new state of FLASH_FLAG (SET or RESET).
+ 933:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 934:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FlagStatus FLASH_GetFlagStatus(uint32_t FLASH_FLAG)
+ 935:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 501              		.loc 1 935 0
+ 502              		.cfi_startproc
+ 503              		@ args = 0, pretend = 0, frame = 0
+ 504              		@ frame_needed = 0, uses_anonymous_args = 0
+ 505              		@ link register save eliminated.
+ 506              	.LVL15:
+ 936:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FlagStatus bitstatus = RESET;
+ 937:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 938:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FLASH_GET_FLAG(FLASH_FLAG));
+ 939:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 940:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if((FLASH->SR & FLASH_FLAG) != (uint32_t)RESET)
+ 507              		.loc 1 940 0
+ 508 0160 034B     		ldr	r3, .L64
+ 509 0162 DB68     		ldr	r3, [r3, #12]
+ 510 0164 1840     		ands	r0, r0, r3
+ 511              	.LVL16:
+ 941:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 942:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     bitstatus = SET;
+ 943:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 944:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else
+ 945:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 946:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     bitstatus = RESET;
+ 947:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 948:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the new state of FLASH_FLAG (SET or RESET) */
+ 949:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return bitstatus; 
+ 950:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 512              		.loc 1 950 0
+ 513 0166 0030     		adds	r0, r0, #0
+ 514 0168 18BF     		it	ne
+ 515 016a 0120     		movne	r0, #1
+ 516              	.LVL17:
+ 517 016c 7047     		bx	lr
+ 518              	.L65:
+ 519 016e 00BF     		.align	2
+ 520              	.L64:
+ 521 0170 003C0240 		.word	1073888256
+ 522              		.cfi_endproc
+ 523              	.LFE136:
+ 525              		.align	2
+ 526              		.global	FLASH_ClearFlag
+ 527              		.thumb
+ 528              		.thumb_func
+ 530              	FLASH_ClearFlag:
+ 531              	.LFB137:
+ 951:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 952:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 953:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Clears the FLASH's pending flags.
+ 954:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  FLASH_FLAG: specifies the FLASH flags to clear.
+ 955:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *          This parameter can be any combination of the following values:
+ 956:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_EOP: FLASH End of Operation flag 
+ 957:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_OPERR: FLASH operation Error flag 
+ 958:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_WRPERR: FLASH Write protected error flag 
+ 959:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_PGAERR: FLASH Programming Alignment error flag 
+ 960:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_PGPERR: FLASH Programming Parallelism error flag
+ 961:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *            @arg FLASH_FLAG_PGSERR: FLASH Programming Sequence error flag
+ 962:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval None
+ 963:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 964:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** void FLASH_ClearFlag(uint32_t FLASH_FLAG)
+ 965:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 532              		.loc 1 965 0
+ 533              		.cfi_startproc
+ 534              		@ args = 0, pretend = 0, frame = 0
+ 535              		@ frame_needed = 0, uses_anonymous_args = 0
+ 536              		@ link register save eliminated.
+ 537              	.LVL18:
+ 966:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check the parameters */
+ 967:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   assert_param(IS_FLASH_CLEAR_FLAG(FLASH_FLAG));
+ 968:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 969:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Clear the flags */
+ 970:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH->SR = FLASH_FLAG;
+ 538              		.loc 1 970 0
+ 539 0174 014B     		ldr	r3, .L67
+ 540 0176 D860     		str	r0, [r3, #12]
+ 541 0178 7047     		bx	lr
+ 542              	.L68:
+ 543 017a 00BF     		.align	2
+ 544              	.L67:
+ 545 017c 003C0240 		.word	1073888256
+ 546              		.cfi_endproc
+ 547              	.LFE137:
+ 549              		.align	2
+ 550              		.global	FLASH_GetStatus
+ 551              		.thumb
+ 552              		.thumb_func
+ 554              	FLASH_GetStatus:
+ 555              	.LFB138:
+ 971:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 972:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+ 973:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+ 974:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Returns the FLASH Status.
+ 975:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+ 976:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH Status: The returned value can be: FLASH_BUSY, FLASH_ERROR_PROGRAM,
+ 977:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                       FLASH_ERROR_WRP, FLASH_ERROR_OPERATION or FLASH_COMPLETE.
+ 978:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+ 979:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FLASH_Status FLASH_GetStatus(void)
+ 980:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 556              		.loc 1 980 0
+ 557              		.cfi_startproc
+ 558              		@ args = 0, pretend = 0, frame = 0
+ 559              		@ frame_needed = 0, uses_anonymous_args = 0
+ 560              		@ link register save eliminated.
+ 561              	.LVL19:
+ 981:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   FLASH_Status flashstatus = FLASH_COMPLETE;
+ 982:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   
+ 983:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if((FLASH->SR & FLASH_FLAG_BSY) == FLASH_FLAG_BSY) 
+ 562              		.loc 1 983 0
+ 563 0180 0E4B     		ldr	r3, .L75
+ 564 0182 DB68     		ldr	r3, [r3, #12]
+ 565 0184 13F4803F 		tst	r3, #65536
+ 566 0188 12D1     		bne	.L71
+ 984:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+ 985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     flashstatus = FLASH_BUSY;
+ 986:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+ 987:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else 
+ 988:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {  
+ 989:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     if((FLASH->SR & FLASH_FLAG_WRPERR) != (uint32_t)0x00)
+ 567              		.loc 1 989 0
+ 568 018a 0C4B     		ldr	r3, .L75
+ 569 018c DB68     		ldr	r3, [r3, #12]
+ 570 018e 13F0100F 		tst	r3, #16
+ 571 0192 0FD1     		bne	.L72
+ 990:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     { 
+ 991:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       flashstatus = FLASH_ERROR_WRP;
+ 992:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     }
+ 993:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     else 
+ 994:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     {
+ 995:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       if((FLASH->SR & (uint32_t)0xEF) != (uint32_t)0x00)
+ 572              		.loc 1 995 0
+ 573 0194 094B     		ldr	r3, .L75
+ 574 0196 DB68     		ldr	r3, [r3, #12]
+ 575 0198 13F0EF0F 		tst	r3, #239
+ 576 019c 0CD1     		bne	.L73
+ 996:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       {
+ 997:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         flashstatus = FLASH_ERROR_PROGRAM; 
+ 998:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       }
+ 999:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       else
+1000:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       {
+1001:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         if((FLASH->SR & FLASH_FLAG_OPERR) != (uint32_t)0x00)
+ 577              		.loc 1 1001 0
+ 578 019e 074B     		ldr	r3, .L75
+ 579 01a0 DB68     		ldr	r3, [r3, #12]
+ 580 01a2 03F00203 		and	r3, r3, #2
+1002:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         {
+1003:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****           flashstatus = FLASH_ERROR_OPERATION;
+ 581              		.loc 1 1003 0
+ 582 01a6 002B     		cmp	r3, #0
+ 583 01a8 0CBF     		ite	eq
+ 584 01aa 0820     		moveq	r0, #8
+ 585 01ac 0720     		movne	r0, #7
+ 586 01ae 7047     		bx	lr
+ 587              	.L71:
+ 985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     flashstatus = FLASH_BUSY;
+ 588              		.loc 1 985 0
+ 589 01b0 0120     		movs	r0, #1
+ 590 01b2 7047     		bx	lr
+ 591              	.L72:
+ 991:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       flashstatus = FLASH_ERROR_WRP;
+ 592              		.loc 1 991 0
+ 593 01b4 0520     		movs	r0, #5
+ 594 01b6 7047     		bx	lr
+ 595              	.L73:
+ 997:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         flashstatus = FLASH_ERROR_PROGRAM; 
+ 596              		.loc 1 997 0
+ 597 01b8 0620     		movs	r0, #6
+ 598              	.LVL20:
+1004:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         }
+1005:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         else
+1006:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         {
+1007:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****           flashstatus = FLASH_COMPLETE;
+1008:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****         }
+1009:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       }
+1010:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     }
+1011:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+1012:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the FLASH Status */
+1013:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return flashstatus;
+1014:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 599              		.loc 1 1014 0
+ 600 01ba 7047     		bx	lr
+ 601              	.L76:
+ 602              		.align	2
+ 603              	.L75:
+ 604 01bc 003C0240 		.word	1073888256
+ 605              		.cfi_endproc
+ 606              	.LFE138:
+ 608              		.align	2
+ 609              		.global	FLASH_WaitForLastOperation
+ 610              		.thumb
+ 611              		.thumb_func
+ 613              	FLASH_WaitForLastOperation:
+ 614              	.LFB139:
+1015:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+1016:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** /**
+1017:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @brief  Waits for a FLASH operation to complete.
+1018:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @param  None
+1019:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   * @retval FLASH Status: The returned value can be: FLASH_BUSY, FLASH_ERROR_PROGRAM,
+1020:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *                       FLASH_ERROR_WRP, FLASH_ERROR_OPERATION or FLASH_COMPLETE.
+1021:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   */
+1022:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** FLASH_Status FLASH_WaitForLastOperation(void)
+1023:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** { 
+ 615              		.loc 1 1023 0
+ 616              		.cfi_startproc
+ 617              		@ args = 0, pretend = 0, frame = 8
+ 618              		@ frame_needed = 0, uses_anonymous_args = 0
+ 619 01c0 00B5     		push	{lr}
+ 620              		.cfi_def_cfa_offset 4
+ 621              		.cfi_offset 14, -4
+ 622 01c2 83B0     		sub	sp, sp, #12
+ 623              		.cfi_def_cfa_offset 16
+1024:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   __IO FLASH_Status status = FLASH_COMPLETE;
+ 624              		.loc 1 1024 0
+ 625 01c4 0823     		movs	r3, #8
+ 626 01c6 8DF80730 		strb	r3, [sp, #7]
+1025:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****    
+1026:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Check for the FLASH Status */
+1027:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_GetStatus();
+ 627              		.loc 1 1027 0
+ 628 01ca FFF7FEFF 		bl	FLASH_GetStatus
+ 629              	.LVL21:
+ 630 01ce 8DF80700 		strb	r0, [sp, #7]
+1028:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** 
+1029:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Wait for the FLASH operation to complete by polling on BUSY flag to be reset.
+1030:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      Even if the FLASH operation fails, the BUSY flag will be reset and an error
+1031:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      flag will be set */
+1032:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   while(status == FLASH_BUSY)
+ 631              		.loc 1 1032 0
+ 632 01d2 03E0     		b	.L78
+ 633              	.L79:
+1033:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   {
+1034:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_GetStatus();
+ 634              		.loc 1 1034 0
+ 635 01d4 FFF7FEFF 		bl	FLASH_GetStatus
+ 636              	.LVL22:
+ 637 01d8 8DF80700 		strb	r0, [sp, #7]
+ 638              	.L78:
+1032:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   while(status == FLASH_BUSY)
+ 639              		.loc 1 1032 0 discriminator 1
+ 640 01dc 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 641 01e0 DBB2     		uxtb	r3, r3
+ 642 01e2 012B     		cmp	r3, #1
+ 643 01e4 F6D0     		beq	.L79
+1035:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   }
+1036:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   /* Return the operation status */
+1037:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   return status;
+ 644              		.loc 1 1037 0
+ 645 01e6 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+1038:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 646              		.loc 1 1038 0
+ 647 01ea 03B0     		add	sp, sp, #12
+ 648              		@ sp needed
+ 649 01ec 5DF804FB 		ldr	pc, [sp], #4
+ 650              		.cfi_endproc
+ 651              	.LFE139:
+ 653              		.align	2
+ 654              		.global	FLASH_EraseSector
+ 655              		.thumb
+ 656              		.thumb_func
+ 658              	FLASH_EraseSector:
+ 659              	.LFB118:
+ 342:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 660              		.loc 1 342 0
+ 661              		.cfi_startproc
+ 662              		@ args = 0, pretend = 0, frame = 0
+ 663              		@ frame_needed = 0, uses_anonymous_args = 0
+ 664              	.LVL23:
+ 665 01f0 70B5     		push	{r4, r5, r6, lr}
+ 666              		.cfi_def_cfa_offset 16
+ 667              		.cfi_offset 4, -16
+ 668              		.cfi_offset 5, -12
+ 669              		.cfi_offset 6, -8
+ 670              		.cfi_offset 14, -4
+ 671 01f2 0546     		mov	r5, r0
+ 672              	.LVL24:
+ 350:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(VoltageRange == VoltageRange_1)
+ 673              		.loc 1 350 0
+ 674 01f4 41B1     		cbz	r1, .L83
+ 354:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else if(VoltageRange == VoltageRange_2)
+ 675              		.loc 1 354 0
+ 676 01f6 0129     		cmp	r1, #1
+ 677 01f8 08D0     		beq	.L84
+ 360:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_WORD;
+ 678              		.loc 1 360 0
+ 679 01fa 0229     		cmp	r1, #2
+ 680 01fc 14BF     		ite	ne
+ 681 01fe 4FF44076 		movne	r6, #768
+ 682 0202 4FF40076 		moveq	r6, #512
+ 683 0206 03E0     		b	.L81
+ 684              	.L83:
+ 352:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      tmp_psize = FLASH_PSIZE_BYTE;
+ 685              		.loc 1 352 0
+ 686 0208 0026     		movs	r6, #0
+ 687 020a 01E0     		b	.L81
+ 688              	.L84:
+ 356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_HALF_WORD;
+ 689              		.loc 1 356 0
+ 690 020c 4FF48076 		mov	r6, #256
+ 691              	.L81:
+ 692              	.LVL25:
+ 367:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 693              		.loc 1 367 0
+ 694 0210 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 695              	.LVL26:
+ 369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 696              		.loc 1 369 0
+ 697 0214 0828     		cmp	r0, #8
+ 698 0216 1ED1     		bne	.L82
+ 372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 699              		.loc 1 372 0
+ 700 0218 0F4C     		ldr	r4, .L86
+ 701 021a 2369     		ldr	r3, [r4, #16]
+ 702 021c 23F44073 		bic	r3, r3, #768
+ 703 0220 2361     		str	r3, [r4, #16]
+ 373:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= tmp_psize;
+ 704              		.loc 1 373 0
+ 705 0222 2369     		ldr	r3, [r4, #16]
+ 706 0224 1E43     		orrs	r6, r6, r3
+ 707              	.LVL27:
+ 708 0226 2661     		str	r6, [r4, #16]
+ 374:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= SECTOR_MASK;
+ 709              		.loc 1 374 0
+ 710 0228 2369     		ldr	r3, [r4, #16]
+ 711 022a 23F0F803 		bic	r3, r3, #248
+ 712 022e 2361     		str	r3, [r4, #16]
+ 375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_SER | FLASH_Sector;
+ 713              		.loc 1 375 0
+ 714 0230 2369     		ldr	r3, [r4, #16]
+ 715 0232 1D43     		orrs	r5, r5, r3
+ 716              	.LVL28:
+ 717 0234 45F00205 		orr	r5, r5, #2
+ 718 0238 2561     		str	r5, [r4, #16]
+ 376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_STRT;
+ 719              		.loc 1 376 0
+ 720 023a 2369     		ldr	r3, [r4, #16]
+ 721 023c 43F48033 		orr	r3, r3, #65536
+ 722 0240 2361     		str	r3, [r4, #16]
+ 379:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 723              		.loc 1 379 0
+ 724 0242 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 725              	.LVL29:
+ 382:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_SER);
+ 726              		.loc 1 382 0
+ 727 0246 2369     		ldr	r3, [r4, #16]
+ 728 0248 23F00203 		bic	r3, r3, #2
+ 729 024c 2361     		str	r3, [r4, #16]
+ 383:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= SECTOR_MASK; 
+ 730              		.loc 1 383 0
+ 731 024e 2369     		ldr	r3, [r4, #16]
+ 732 0250 23F0F803 		bic	r3, r3, #248
+ 733 0254 2361     		str	r3, [r4, #16]
+ 734              	.LVL30:
+ 735              	.L82:
+ 387:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 736              		.loc 1 387 0
+ 737 0256 70BD     		pop	{r4, r5, r6, pc}
+ 738              	.L87:
+ 739              		.align	2
+ 740              	.L86:
+ 741 0258 003C0240 		.word	1073888256
+ 742              		.cfi_endproc
+ 743              	.LFE118:
+ 745              		.align	2
+ 746              		.global	FLASH_EraseAllSectors
+ 747              		.thumb
+ 748              		.thumb_func
+ 750              	FLASH_EraseAllSectors:
+ 751              	.LFB119:
+ 407:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 752              		.loc 1 407 0
+ 753              		.cfi_startproc
+ 754              		@ args = 0, pretend = 0, frame = 0
+ 755              		@ frame_needed = 0, uses_anonymous_args = 0
+ 756              	.LVL31:
+ 757 025c 10B5     		push	{r4, lr}
+ 758              		.cfi_def_cfa_offset 8
+ 759              		.cfi_offset 4, -8
+ 760              		.cfi_offset 14, -4
+ 761 025e 0446     		mov	r4, r0
+ 762              	.LVL32:
+ 412:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 763              		.loc 1 412 0
+ 764 0260 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 765              	.LVL33:
+ 415:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(VoltageRange == VoltageRange_1)
+ 766              		.loc 1 415 0
+ 767 0264 44B1     		cbz	r4, .L91
+ 419:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   else if(VoltageRange == VoltageRange_2)
+ 768              		.loc 1 419 0
+ 769 0266 012C     		cmp	r4, #1
+ 770 0268 08D0     		beq	.L92
+ 425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_WORD;
+ 771              		.loc 1 425 0
+ 772 026a 022C     		cmp	r4, #2
+ 773 026c 14BF     		ite	ne
+ 774 026e 4FF44073 		movne	r3, #768
+ 775 0272 4FF40073 		moveq	r3, #512
+ 776 0276 03E0     		b	.L89
+ 777              	.L91:
+ 417:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      tmp_psize = FLASH_PSIZE_BYTE;
+ 778              		.loc 1 417 0
+ 779 0278 0023     		movs	r3, #0
+ 780 027a 01E0     		b	.L89
+ 781              	.L92:
+ 421:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     tmp_psize = FLASH_PSIZE_HALF_WORD;
+ 782              		.loc 1 421 0
+ 783 027c 4FF48073 		mov	r3, #256
+ 784              	.L89:
+ 785              	.LVL34:
+ 431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 786              		.loc 1 431 0
+ 787 0280 0828     		cmp	r0, #8
+ 788 0282 15D1     		bne	.L90
+ 434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      FLASH->CR &= CR_PSIZE_MASK;
+ 789              		.loc 1 434 0
+ 790 0284 0B4C     		ldr	r4, .L94
+ 791 0286 2269     		ldr	r2, [r4, #16]
+ 792 0288 22F44072 		bic	r2, r2, #768
+ 793 028c 2261     		str	r2, [r4, #16]
+ 435:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      FLASH->CR |= tmp_psize;
+ 794              		.loc 1 435 0
+ 795 028e 2269     		ldr	r2, [r4, #16]
+ 796 0290 1343     		orrs	r3, r3, r2
+ 797              	.LVL35:
+ 798 0292 2361     		str	r3, [r4, #16]
+ 436:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      FLASH->CR |= FLASH_CR_MER;
+ 799              		.loc 1 436 0
+ 800 0294 2369     		ldr	r3, [r4, #16]
+ 801 0296 43F00403 		orr	r3, r3, #4
+ 802 029a 2361     		str	r3, [r4, #16]
+ 437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****      FLASH->CR |= FLASH_CR_STRT;
+ 803              		.loc 1 437 0
+ 804 029c 2369     		ldr	r3, [r4, #16]
+ 805 029e 43F48033 		orr	r3, r3, #65536
+ 806 02a2 2361     		str	r3, [r4, #16]
+ 440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 807              		.loc 1 440 0
+ 808 02a4 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 809              	.LVL36:
+ 443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_MER);
+ 810              		.loc 1 443 0
+ 811 02a8 2369     		ldr	r3, [r4, #16]
+ 812 02aa 23F00403 		bic	r3, r3, #4
+ 813 02ae 2361     		str	r3, [r4, #16]
+ 814              	.LVL37:
+ 815              	.L90:
+ 448:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 816              		.loc 1 448 0
+ 817 02b0 10BD     		pop	{r4, pc}
+ 818              	.L95:
+ 819 02b2 00BF     		.align	2
+ 820              	.L94:
+ 821 02b4 003C0240 		.word	1073888256
+ 822              		.cfi_endproc
+ 823              	.LFE119:
+ 825              		.align	2
+ 826              		.global	FLASH_ProgramDoubleWord
+ 827              		.thumb
+ 828              		.thumb_func
+ 830              	FLASH_ProgramDoubleWord:
+ 831              	.LFB120:
+ 460:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 832              		.loc 1 460 0
+ 833              		.cfi_startproc
+ 834              		@ args = 0, pretend = 0, frame = 0
+ 835              		@ frame_needed = 0, uses_anonymous_args = 0
+ 836              	.LVL38:
+ 837 02b8 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 838              		.cfi_def_cfa_offset 24
+ 839              		.cfi_offset 3, -24
+ 840              		.cfi_offset 4, -20
+ 841              		.cfi_offset 5, -16
+ 842              		.cfi_offset 6, -12
+ 843              		.cfi_offset 7, -8
+ 844              		.cfi_offset 14, -4
+ 845 02ba 0746     		mov	r7, r0
+ 846 02bc 1446     		mov	r4, r2
+ 847 02be 1D46     		mov	r5, r3
+ 848              	.LVL39:
+ 467:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 849              		.loc 1 467 0
+ 850 02c0 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 851              	.LVL40:
+ 469:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 852              		.loc 1 469 0
+ 853 02c4 0828     		cmp	r0, #8
+ 854 02c6 14D1     		bne	.L97
+ 472:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 855              		.loc 1 472 0
+ 856 02c8 0A4E     		ldr	r6, .L98
+ 857 02ca 3369     		ldr	r3, [r6, #16]
+ 858 02cc 23F44073 		bic	r3, r3, #768
+ 859 02d0 3361     		str	r3, [r6, #16]
+ 473:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_PSIZE_DOUBLE_WORD;
+ 860              		.loc 1 473 0
+ 861 02d2 3369     		ldr	r3, [r6, #16]
+ 862 02d4 43F44073 		orr	r3, r3, #768
+ 863 02d8 3361     		str	r3, [r6, #16]
+ 474:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_PG;
+ 864              		.loc 1 474 0
+ 865 02da 3369     		ldr	r3, [r6, #16]
+ 866 02dc 43F00103 		orr	r3, r3, #1
+ 867 02e0 3361     		str	r3, [r6, #16]
+ 476:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint64_t*)Address = Data;
+ 868              		.loc 1 476 0
+ 869 02e2 C7E90045 		strd	r4, [r7]
+ 479:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 870              		.loc 1 479 0
+ 871 02e6 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 872              	.LVL41:
+ 482:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_PG);
+ 873              		.loc 1 482 0
+ 874 02ea 3369     		ldr	r3, [r6, #16]
+ 875 02ec 23F00103 		bic	r3, r3, #1
+ 876 02f0 3361     		str	r3, [r6, #16]
+ 877              	.LVL42:
+ 878              	.L97:
+ 486:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 879              		.loc 1 486 0
+ 880 02f2 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 881              	.LVL43:
+ 882              	.L99:
+ 883              		.align	2
+ 884              	.L98:
+ 885 02f4 003C0240 		.word	1073888256
+ 886              		.cfi_endproc
+ 887              	.LFE120:
+ 889              		.align	2
+ 890              		.global	FLASH_ProgramWord
+ 891              		.thumb
+ 892              		.thumb_func
+ 894              	FLASH_ProgramWord:
+ 895              	.LFB121:
+ 498:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 896              		.loc 1 498 0
+ 897              		.cfi_startproc
+ 898              		@ args = 0, pretend = 0, frame = 0
+ 899              		@ frame_needed = 0, uses_anonymous_args = 0
+ 900              	.LVL44:
+ 901 02f8 70B5     		push	{r4, r5, r6, lr}
+ 902              		.cfi_def_cfa_offset 16
+ 903              		.cfi_offset 4, -16
+ 904              		.cfi_offset 5, -12
+ 905              		.cfi_offset 6, -8
+ 906              		.cfi_offset 14, -4
+ 907 02fa 0546     		mov	r5, r0
+ 908 02fc 0E46     		mov	r6, r1
+ 909              	.LVL45:
+ 505:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 910              		.loc 1 505 0
+ 911 02fe FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 912              	.LVL46:
+ 507:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 913              		.loc 1 507 0
+ 914 0302 0828     		cmp	r0, #8
+ 915 0304 13D1     		bne	.L101
+ 510:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 916              		.loc 1 510 0
+ 917 0306 0A4C     		ldr	r4, .L102
+ 918 0308 2369     		ldr	r3, [r4, #16]
+ 919 030a 23F44073 		bic	r3, r3, #768
+ 920 030e 2361     		str	r3, [r4, #16]
+ 511:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_PSIZE_WORD;
+ 921              		.loc 1 511 0
+ 922 0310 2369     		ldr	r3, [r4, #16]
+ 923 0312 43F40073 		orr	r3, r3, #512
+ 924 0316 2361     		str	r3, [r4, #16]
+ 512:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_PG;
+ 925              		.loc 1 512 0
+ 926 0318 2369     		ldr	r3, [r4, #16]
+ 927 031a 43F00103 		orr	r3, r3, #1
+ 928 031e 2361     		str	r3, [r4, #16]
+ 514:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint32_t*)Address = Data;
+ 929              		.loc 1 514 0
+ 930 0320 2E60     		str	r6, [r5]
+ 517:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 931              		.loc 1 517 0
+ 932 0322 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 933              	.LVL47:
+ 520:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_PG);
+ 934              		.loc 1 520 0
+ 935 0326 2369     		ldr	r3, [r4, #16]
+ 936 0328 23F00103 		bic	r3, r3, #1
+ 937 032c 2361     		str	r3, [r4, #16]
+ 938              	.LVL48:
+ 939              	.L101:
+ 524:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 940              		.loc 1 524 0
+ 941 032e 70BD     		pop	{r4, r5, r6, pc}
+ 942              	.LVL49:
+ 943              	.L103:
+ 944              		.align	2
+ 945              	.L102:
+ 946 0330 003C0240 		.word	1073888256
+ 947              		.cfi_endproc
+ 948              	.LFE121:
+ 950              		.align	2
+ 951              		.global	FLASH_ProgramHalfWord
+ 952              		.thumb
+ 953              		.thumb_func
+ 955              	FLASH_ProgramHalfWord:
+ 956              	.LFB122:
+ 536:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 957              		.loc 1 536 0
+ 958              		.cfi_startproc
+ 959              		@ args = 0, pretend = 0, frame = 0
+ 960              		@ frame_needed = 0, uses_anonymous_args = 0
+ 961              	.LVL50:
+ 962 0334 70B5     		push	{r4, r5, r6, lr}
+ 963              		.cfi_def_cfa_offset 16
+ 964              		.cfi_offset 4, -16
+ 965              		.cfi_offset 5, -12
+ 966              		.cfi_offset 6, -8
+ 967              		.cfi_offset 14, -4
+ 968 0336 0546     		mov	r5, r0
+ 969 0338 0E46     		mov	r6, r1
+ 970              	.LVL51:
+ 543:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 971              		.loc 1 543 0
+ 972 033a FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 973              	.LVL52:
+ 545:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 974              		.loc 1 545 0
+ 975 033e 0828     		cmp	r0, #8
+ 976 0340 13D1     		bne	.L105
+ 548:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 977              		.loc 1 548 0
+ 978 0342 0A4C     		ldr	r4, .L106
+ 979 0344 2369     		ldr	r3, [r4, #16]
+ 980 0346 23F44073 		bic	r3, r3, #768
+ 981 034a 2361     		str	r3, [r4, #16]
+ 549:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_PSIZE_HALF_WORD;
+ 982              		.loc 1 549 0
+ 983 034c 2369     		ldr	r3, [r4, #16]
+ 984 034e 43F48073 		orr	r3, r3, #256
+ 985 0352 2361     		str	r3, [r4, #16]
+ 550:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_PG;
+ 986              		.loc 1 550 0
+ 987 0354 2369     		ldr	r3, [r4, #16]
+ 988 0356 43F00103 		orr	r3, r3, #1
+ 989 035a 2361     		str	r3, [r4, #16]
+ 552:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint16_t*)Address = Data;
+ 990              		.loc 1 552 0
+ 991 035c 2E80     		strh	r6, [r5]	@ movhi
+ 555:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 992              		.loc 1 555 0
+ 993 035e FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 994              	.LVL53:
+ 558:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_PG);
+ 995              		.loc 1 558 0
+ 996 0362 2369     		ldr	r3, [r4, #16]
+ 997 0364 23F00103 		bic	r3, r3, #1
+ 998 0368 2361     		str	r3, [r4, #16]
+ 999              	.LVL54:
+ 1000              	.L105:
+ 562:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 1001              		.loc 1 562 0
+ 1002 036a 70BD     		pop	{r4, r5, r6, pc}
+ 1003              	.LVL55:
+ 1004              	.L107:
+ 1005              		.align	2
+ 1006              	.L106:
+ 1007 036c 003C0240 		.word	1073888256
+ 1008              		.cfi_endproc
+ 1009              	.LFE122:
+ 1011              		.align	2
+ 1012              		.global	FLASH_ProgramByte
+ 1013              		.thumb
+ 1014              		.thumb_func
+ 1016              	FLASH_ProgramByte:
+ 1017              	.LFB123:
+ 574:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 1018              		.loc 1 574 0
+ 1019              		.cfi_startproc
+ 1020              		@ args = 0, pretend = 0, frame = 0
+ 1021              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1022              	.LVL56:
+ 1023 0370 70B5     		push	{r4, r5, r6, lr}
+ 1024              		.cfi_def_cfa_offset 16
+ 1025              		.cfi_offset 4, -16
+ 1026              		.cfi_offset 5, -12
+ 1027              		.cfi_offset 6, -8
+ 1028              		.cfi_offset 14, -4
+ 1029 0372 0546     		mov	r5, r0
+ 1030 0374 0E46     		mov	r6, r1
+ 1031              	.LVL57:
+ 581:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 1032              		.loc 1 581 0
+ 1033 0376 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 1034              	.LVL58:
+ 583:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 1035              		.loc 1 583 0
+ 1036 037a 0828     		cmp	r0, #8
+ 1037 037c 11D1     		bne	.L109
+ 586:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= CR_PSIZE_MASK;
+ 1038              		.loc 1 586 0
+ 1039 037e 094C     		ldr	r4, .L110
+ 1040 0380 2369     		ldr	r3, [r4, #16]
+ 1041 0382 23F44073 		bic	r3, r3, #768
+ 1042 0386 2361     		str	r3, [r4, #16]
+ 587:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_PSIZE_BYTE;
+ 1043              		.loc 1 587 0
+ 1044 0388 2369     		ldr	r3, [r4, #16]
+ 1045 038a 2361     		str	r3, [r4, #16]
+ 588:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR |= FLASH_CR_PG;
+ 1046              		.loc 1 588 0
+ 1047 038c 2369     		ldr	r3, [r4, #16]
+ 1048 038e 43F00103 		orr	r3, r3, #1
+ 1049 0392 2361     		str	r3, [r4, #16]
+ 590:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint8_t*)Address = Data;
+ 1050              		.loc 1 590 0
+ 1051 0394 2E70     		strb	r6, [r5]
+ 593:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     status = FLASH_WaitForLastOperation();
+ 1052              		.loc 1 593 0
+ 1053 0396 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 1054              	.LVL59:
+ 596:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     FLASH->CR &= (~FLASH_CR_PG);
+ 1055              		.loc 1 596 0
+ 1056 039a 2369     		ldr	r3, [r4, #16]
+ 1057 039c 23F00103 		bic	r3, r3, #1
+ 1058 03a0 2361     		str	r3, [r4, #16]
+ 1059              	.LVL60:
+ 1060              	.L109:
+ 601:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 1061              		.loc 1 601 0
+ 1062 03a2 70BD     		pop	{r4, r5, r6, pc}
+ 1063              	.LVL61:
+ 1064              	.L111:
+ 1065              		.align	2
+ 1066              	.L110:
+ 1067 03a4 003C0240 		.word	1073888256
+ 1068              		.cfi_endproc
+ 1069              	.LFE123:
+ 1071              		.align	2
+ 1072              		.global	FLASH_OB_WRPConfig
+ 1073              		.thumb
+ 1074              		.thumb_func
+ 1076              	FLASH_OB_WRPConfig:
+ 1077              	.LFB126:
+ 690:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** { 
+ 1078              		.loc 1 690 0
+ 1079              		.cfi_startproc
+ 1080              		@ args = 0, pretend = 0, frame = 0
+ 1081              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1082              	.LVL62:
+ 1083 03a8 38B5     		push	{r3, r4, r5, lr}
+ 1084              		.cfi_def_cfa_offset 16
+ 1085              		.cfi_offset 3, -16
+ 1086              		.cfi_offset 4, -12
+ 1087              		.cfi_offset 5, -8
+ 1088              		.cfi_offset 14, -4
+ 1089 03aa 0546     		mov	r5, r0
+ 1090 03ac 0C46     		mov	r4, r1
+ 1091              	.LVL63:
+ 697:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 1092              		.loc 1 697 0
+ 1093 03ae FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 1094              	.LVL64:
+ 699:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 1095              		.loc 1 699 0
+ 1096 03b2 0828     		cmp	r0, #8
+ 1097 03b4 0CD1     		bne	.L112
+ 701:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     if(NewState != DISABLE)
+ 1098              		.loc 1 701 0
+ 1099 03b6 34B1     		cbz	r4, .L114
+ 703:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       *(__IO uint16_t*)OPTCR_BYTE2_ADDRESS &= (~OB_WRP);
+ 1100              		.loc 1 703 0
+ 1101 03b8 064B     		ldr	r3, .L115
+ 1102 03ba 1A88     		ldrh	r2, [r3]
+ 1103 03bc 92B2     		uxth	r2, r2
+ 1104 03be 22EA0505 		bic	r5, r2, r5
+ 1105              	.LVL65:
+ 1106 03c2 1D80     		strh	r5, [r3]	@ movhi
+ 1107 03c4 38BD     		pop	{r3, r4, r5, pc}
+ 1108              	.LVL66:
+ 1109              	.L114:
+ 707:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****       *(__IO uint16_t*)OPTCR_BYTE2_ADDRESS |= (uint16_t)OB_WRP;
+ 1110              		.loc 1 707 0
+ 1111 03c6 034B     		ldr	r3, .L115
+ 1112 03c8 1A88     		ldrh	r2, [r3]
+ 1113 03ca 1543     		orrs	r5, r5, r2
+ 1114              	.LVL67:
+ 1115 03cc ADB2     		uxth	r5, r5
+ 1116 03ce 1D80     		strh	r5, [r3]	@ movhi
+ 1117              	.L112:
+ 1118 03d0 38BD     		pop	{r3, r4, r5, pc}
+ 1119              	.L116:
+ 1120 03d2 00BF     		.align	2
+ 1121              	.L115:
+ 1122 03d4 163C0240 		.word	1073888278
+ 1123              		.cfi_endproc
+ 1124              	.LFE126:
+ 1126              		.align	2
+ 1127              		.global	FLASH_OB_RDPConfig
+ 1128              		.thumb
+ 1129              		.thumb_func
+ 1131              	FLASH_OB_RDPConfig:
+ 1132              	.LFB127:
+ 725:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 1133              		.loc 1 725 0
+ 1134              		.cfi_startproc
+ 1135              		@ args = 0, pretend = 0, frame = 0
+ 1136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1137              	.LVL68:
+ 1138 03d8 10B5     		push	{r4, lr}
+ 1139              		.cfi_def_cfa_offset 8
+ 1140              		.cfi_offset 4, -8
+ 1141              		.cfi_offset 14, -4
+ 1142 03da 0446     		mov	r4, r0
+ 1143              	.LVL69:
+ 731:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 1144              		.loc 1 731 0
+ 1145 03dc FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 1146              	.LVL70:
+ 733:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 1147              		.loc 1 733 0
+ 1148 03e0 0828     		cmp	r0, #8
+ 735:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint8_t*)OPTCR_BYTE1_ADDRESS = OB_RDP;
+ 1149              		.loc 1 735 0
+ 1150 03e2 04BF     		itt	eq
+ 1151 03e4 014B     		ldreq	r3, .L119
+ 1152 03e6 1C70     		strbeq	r4, [r3]
+ 1153 03e8 10BD     		pop	{r4, pc}
+ 1154              	.L120:
+ 1155 03ea 00BF     		.align	2
+ 1156              	.L119:
+ 1157 03ec 153C0240 		.word	1073888277
+ 1158              		.cfi_endproc
+ 1159              	.LFE127:
+ 1161              		.align	2
+ 1162              		.global	FLASH_OB_UserConfig
+ 1163              		.thumb
+ 1164              		.thumb_func
+ 1166              	FLASH_OB_UserConfig:
+ 1167              	.LFB128:
+ 757:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 1168              		.loc 1 757 0
+ 1169              		.cfi_startproc
+ 1170              		@ args = 0, pretend = 0, frame = 0
+ 1171              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1172              	.LVL71:
+ 1173 03f0 70B5     		push	{r4, r5, r6, lr}
+ 1174              		.cfi_def_cfa_offset 16
+ 1175              		.cfi_offset 4, -16
+ 1176              		.cfi_offset 5, -12
+ 1177              		.cfi_offset 6, -8
+ 1178              		.cfi_offset 14, -4
+ 1179 03f2 0446     		mov	r4, r0
+ 1180 03f4 0E46     		mov	r6, r1
+ 1181 03f6 1546     		mov	r5, r2
+ 1182              	.LVL72:
+ 767:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 1183              		.loc 1 767 0
+ 1184 03f8 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 1185              	.LVL73:
+ 769:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   if(status == FLASH_COMPLETE)
+ 1186              		.loc 1 769 0
+ 1187 03fc 0828     		cmp	r0, #8
+ 1188 03fe 07D1     		bne	.L121
+ 772:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     optiontmp =  (uint8_t)((*(__IO uint8_t *)OPTCR_BYTE0_ADDRESS) & (uint8_t)0x0F); 
+ 1189              		.loc 1 772 0
+ 1190 0400 044B     		ldr	r3, .L123
+ 1191 0402 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1192 0404 02F00F02 		and	r2, r2, #15
+ 1193              	.LVL74:
+ 775:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****     *(__IO uint8_t *)OPTCR_BYTE0_ADDRESS = OB_IWDG | (uint8_t)(OB_STDBY | (uint8_t)(OB_STOP | ((uin
+ 1194              		.loc 1 775 0
+ 1195 0408 1643     		orrs	r6, r6, r2
+ 1196 040a 3543     		orrs	r5, r5, r6
+ 1197 040c 2C43     		orrs	r4, r4, r5
+ 1198 040e 1C70     		strb	r4, [r3]
+ 1199              	.LVL75:
+ 1200              	.L121:
+ 1201 0410 70BD     		pop	{r4, r5, r6, pc}
+ 1202              	.L124:
+ 1203 0412 00BF     		.align	2
+ 1204              	.L123:
+ 1205 0414 143C0240 		.word	1073888276
+ 1206              		.cfi_endproc
+ 1207              	.LFE128:
+ 1209              		.align	2
+ 1210              		.global	FLASH_OB_Launch
+ 1211              		.thumb
+ 1212              		.thumb_func
+ 1214              	FLASH_OB_Launch:
+ 1215              	.LFB130:
+ 807:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** {
+ 1216              		.loc 1 807 0
+ 1217              		.cfi_startproc
+ 1218              		@ args = 0, pretend = 0, frame = 0
+ 1219              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1220 0418 08B5     		push	{r3, lr}
+ 1221              		.cfi_def_cfa_offset 8
+ 1222              		.cfi_offset 3, -8
+ 1223              		.cfi_offset 14, -4
+ 1224              	.LVL76:
+ 811:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   *(__IO uint8_t *)OPTCR_BYTE0_ADDRESS |= FLASH_OPTCR_OPTSTRT;
+ 1225              		.loc 1 811 0
+ 1226 041a 044B     		ldr	r3, .L126
+ 1227 041c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1228 041e 42F00202 		orr	r2, r2, #2
+ 1229 0422 1A70     		strb	r2, [r3]
+ 814:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c ****   status = FLASH_WaitForLastOperation();
+ 1230              		.loc 1 814 0
+ 1231 0424 FFF7FEFF 		bl	FLASH_WaitForLastOperation
+ 1232              	.LVL77:
+ 817:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c **** }
+ 1233              		.loc 1 817 0
+ 1234 0428 08BD     		pop	{r3, pc}
+ 1235              	.L127:
+ 1236 042a 00BF     		.align	2
+ 1237              	.L126:
+ 1238 042c 143C0240 		.word	1073888276
+ 1239              		.cfi_endproc
+ 1240              	.LFE130:
+ 1242              	.Letext0:
+ 1243              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
+ 1244              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
+ 1245              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
+ 1246              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_flash.h"
+ 1247              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_flash.c
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:23     .text:00000000 FLASH_SetLatency
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:41     .text:00000008 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:45     .text:0000000c $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:50     .text:0000000c FLASH_PrefetchBufferCmd
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:76     .text:00000028 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:80     .text:0000002c $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:85     .text:0000002c FLASH_InstructionCacheCmd
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:111    .text:00000048 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:115    .text:0000004c $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:120    .text:0000004c FLASH_DataCacheCmd
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:146    .text:00000068 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:150    .text:0000006c $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:155    .text:0000006c FLASH_InstructionCacheReset
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:171    .text:00000078 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:175    .text:0000007c $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:180    .text:0000007c FLASH_DataCacheReset
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:196    .text:00000088 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:200    .text:0000008c $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:205    .text:0000008c FLASH_Unlock
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:229    .text:000000a4 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:234    .text:000000ac $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:239    .text:000000ac FLASH_Lock
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:255    .text:000000b8 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:259    .text:000000bc $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:264    .text:000000bc FLASH_OB_Unlock
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:288    .text:000000d4 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:293    .text:000000dc $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:298    .text:000000dc FLASH_OB_Lock
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:314    .text:000000e8 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:318    .text:000000ec $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:323    .text:000000ec FLASH_OB_BORConfig
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:345    .text:00000100 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:349    .text:00000104 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:354    .text:00000104 FLASH_OB_GetUser
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:370    .text:00000110 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:374    .text:00000114 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:379    .text:00000114 FLASH_OB_GetWRP
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:395    .text:0000011c $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:399    .text:00000120 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:404    .text:00000120 FLASH_OB_GetRDP
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:427    .text:00000130 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:431    .text:00000134 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:436    .text:00000134 FLASH_OB_GetBOR
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:452    .text:00000140 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:456    .text:00000144 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:461    .text:00000144 FLASH_ITConfig
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:490    .text:0000015c $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:494    .text:00000160 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:499    .text:00000160 FLASH_GetFlagStatus
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:521    .text:00000170 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:525    .text:00000174 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:530    .text:00000174 FLASH_ClearFlag
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:545    .text:0000017c $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:549    .text:00000180 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:554    .text:00000180 FLASH_GetStatus
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:604    .text:000001bc $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:608    .text:000001c0 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:613    .text:000001c0 FLASH_WaitForLastOperation
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:658    .text:000001f0 FLASH_EraseSector
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:741    .text:00000258 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:745    .text:0000025c $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:750    .text:0000025c FLASH_EraseAllSectors
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:821    .text:000002b4 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:825    .text:000002b8 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:830    .text:000002b8 FLASH_ProgramDoubleWord
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:885    .text:000002f4 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:889    .text:000002f8 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:894    .text:000002f8 FLASH_ProgramWord
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:946    .text:00000330 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:950    .text:00000334 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:955    .text:00000334 FLASH_ProgramHalfWord
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1007   .text:0000036c $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1011   .text:00000370 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1016   .text:00000370 FLASH_ProgramByte
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1067   .text:000003a4 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1071   .text:000003a8 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1076   .text:000003a8 FLASH_OB_WRPConfig
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1122   .text:000003d4 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1126   .text:000003d8 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1131   .text:000003d8 FLASH_OB_RDPConfig
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1157   .text:000003ec $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1161   .text:000003f0 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1166   .text:000003f0 FLASH_OB_UserConfig
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1205   .text:00000414 $d
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1209   .text:00000418 $t
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1214   .text:00000418 FLASH_OB_Launch
+C:\Users\Filip\AppData\Local\Temp\ccYb5m8t.s:1238   .text:0000042c $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
+                           .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
+                           .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7
+                           .group:00000000 wm4._default_types.h.15.8b2cb27e528498f8ff711db085d6e489
+                           .group:00000000 wm4.stdint.h.20.796e373797e732130a803d4c0338fa1b
+                           .group:00000000 wm4.core_cmInstr.h.25.f50f886f2edf670cf199b35fd96f5c91
+                           .group:00000000 wm4.core_cm4_simd.h.29.b4a3fdfb606cb3b26119424324d4b963
+                           .group:00000000 wm4.core_cm4.h.153.5393ef7e6cebf34dd51ca528f9218ab3
+                           .group:00000000 wm4.stm32f4xx.h.288.7f55b1a1f5e5bad6ffa2308f97f537d1
+                           .group:00000000 wm4.stm32f4xx_conf.h.24.a762e2483b8e31b68046e44b31e1d406
+                           .group:00000000 wm4.stm32f4xx_adc.h.102.2061aa73008746f3c2cc6ce8f635cad3
+                           .group:00000000 wm4.stm32f4xx_can.h.25.87f18ca48b2692d39f76e87b1f07c953
+                           .group:00000000 wm4.stm32f4xx_cryp.h.25.db1951c06ee684df97ea3a11aba6cb51
+                           .group:00000000 wm4.stm32f4xx_dac.h.25.c43557a6416ea4dfa986c1209c2558d6
+                           .group:00000000 wm4.stm32f4xx_dbgmcu.h.24.7aedfdcf091890b5cb96019bd29a2bfc
+                           .group:00000000 wm4.stm32f4xx_dcmi.h.24.64883d9be802a535b1d7770d14da73e0
+                           .group:00000000 wm4.stm32f4xx_dma.h.25.c1fa1d44ae0bc9c2b3a0d1d355d8c1e6
+                           .group:00000000 wm4.stm32f4xx_exti.h.25.620998268d5d3d9042a8297fbe07d507
+                           .group:00000000 wm4.stm32f4xx_fsmc.h.25.b907ac7bd9bec46e02d06b137d53cfd8
+                           .group:00000000 wm4.stm32f4xx_hash.h.25.633fb84f031cf2ab1bd834e536716dfa
+                           .group:00000000 wm4.stm32f4xx_gpio.h.25.5bd1d790d742a307b55aea5fa8fcdae8
+                           .group:00000000 wm4.stm32f4xx_i2c.h.25.8fcdb817a00a67d4624d79bab0d9275f
+                           .group:00000000 wm4.stm32f4xx_iwdg.h.25.3013e8d2058415cb9d51af77f748a146
+                           .group:00000000 wm4.stm32f4xx_pwr.h.25.41ffcb5dc896ed2d26edf4d9bbbfbe6f
+                           .group:00000000 wm4.stm32f4xx_rcc.h.24.a10ec6e94989efb0f8f7f56448e9bb60
+                           .group:00000000 wm4.stm32f4xx_rng.h.25.cdb5c5c07de6a48aedfde608da3f447e
+                           .group:00000000 wm4.stm32f4xx_rtc.h.25.4809a79ad46ad97b4a01e735a96738eb
+                           .group:00000000 wm4.stm32f4xx_sdio.h.25.406302aabae34eada94e5f2cde635a3e
+                           .group:00000000 wm4.stm32f4xx_spi.h.25.980a9e96afe182c8b9cb91058a0693d6
+                           .group:00000000 wm4.stm32f4xx_syscfg.h.25.9d5caab5677661b69e959531364e23d7
+                           .group:00000000 wm4.stm32f4xx_tim.h.25.948f7fc943f34bd206e29758e77ee0a2
+                           .group:00000000 wm4.stm32f4xx_usart.h.25.32a7aeff79714f90f8c4da45bf79808c
+                           .group:00000000 wm4.stm32f4xx_wwdg.h.25.09d70b7849c6894ddf1e83c8e86b70e1
+                           .group:00000000 wm4.misc.h.25.a0cb758c1f091b46f201b19cec9e63a1
+                           .group:00000000 wm4.stm32f4xx.h.6972.f31ddedd83a17c461a3fab76f77123cb
+                           .group:00000000 wm4.stm32f4xx_flash.h.67.a9130a79f202a943738a2869b521b956
+
+NO UNDEFINED SYMBOLS

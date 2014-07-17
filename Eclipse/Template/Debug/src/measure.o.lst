@@ -1,0 +1,344 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"measure.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.align	2
+  19              		.global	Init_Measure
+  20              		.thumb
+  21              		.thumb_func
+  23              	Init_Measure:
+  24              	.LFB110:
+  25              		.file 1 "../src/measure.c"
+   1:../src/measure.c **** #include "measure.h"
+   2:../src/measure.c **** 
+   3:../src/measure.c **** __IO uint16_t ADC_Value[2];
+   4:../src/measure.c **** 
+   5:../src/measure.c **** void Init_Measure(void){
+  26              		.loc 1 5 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 112
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  31              		.cfi_def_cfa_offset 20
+  32              		.cfi_offset 4, -20
+  33              		.cfi_offset 5, -16
+  34              		.cfi_offset 6, -12
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 9DB0     		sub	sp, sp, #116
+  38              		.cfi_def_cfa_offset 136
+   6:../src/measure.c **** 	ADC_InitTypeDef       ADC_InitStructure;
+   7:../src/measure.c **** 	ADC_CommonInitTypeDef ADC_CommonInitStructure;
+   8:../src/measure.c **** 	DMA_InitTypeDef       DMA_InitStructure;
+   9:../src/measure.c **** 	GPIO_InitTypeDef      GPIO_InitStructure;
+  10:../src/measure.c **** 	
+  11:../src/measure.c ****   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2 | RCC_AHB1Periph_GPIOC, ENABLE);
+  39              		.loc 1 11 0
+  40 0004 3C48     		ldr	r0, .L2
+  41 0006 0121     		movs	r1, #1
+  42 0008 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+  43              	.LVL0:
+  12:../src/measure.c ****   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 | RCC_APB2Periph_ADC2, ENABLE);
+  44              		.loc 1 12 0
+  45 000c 4FF44070 		mov	r0, #768
+  46 0010 0121     		movs	r1, #1
+  47 0012 FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
+  48              	.LVL1:
+  13:../src/measure.c **** 
+  14:../src/measure.c ****   /* Configure ADC Channel 11 and 12 pin as analog input */ 
+  15:../src/measure.c ****   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;
+  49              		.loc 1 15 0
+  50 0016 0623     		movs	r3, #6
+  51 0018 0193     		str	r3, [sp, #4]
+  16:../src/measure.c ****   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+  52              		.loc 1 16 0
+  53 001a 0323     		movs	r3, #3
+  54 001c 8DF80830 		strb	r3, [sp, #8]
+  17:../src/measure.c ****   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
+  55              		.loc 1 17 0
+  56 0020 0024     		movs	r4, #0
+  57 0022 8DF80B40 		strb	r4, [sp, #11]
+  18:../src/measure.c ****   GPIO_Init(GPIOC, &GPIO_InitStructure);
+  58              		.loc 1 18 0
+  59 0026 3548     		ldr	r0, .L2+4
+  60 0028 01A9     		add	r1, sp, #4
+  61 002a FFF7FEFF 		bl	GPIO_Init
+  62              	.LVL2:
+  19:../src/measure.c **** 
+  20:../src/measure.c ****   /* DMA2 Stream0 channel0 configuration */
+  21:../src/measure.c ****   DMA_InitStructure.DMA_Channel = DMA_Channel_0;  
+  63              		.loc 1 21 0
+  64 002e 0394     		str	r4, [sp, #12]
+  22:../src/measure.c ****   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t) &(ADC->CDR);
+  65              		.loc 1 22 0
+  66 0030 334B     		ldr	r3, .L2+8
+  67 0032 0493     		str	r3, [sp, #16]
+  23:../src/measure.c ****   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t) ADC_Value;
+  68              		.loc 1 23 0
+  69 0034 334B     		ldr	r3, .L2+12
+  70 0036 0593     		str	r3, [sp, #20]
+  24:../src/measure.c ****   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
+  71              		.loc 1 24 0
+  72 0038 0694     		str	r4, [sp, #24]
+  25:../src/measure.c ****   DMA_InitStructure.DMA_BufferSize = 1;
+  73              		.loc 1 25 0
+  74 003a 0125     		movs	r5, #1
+  75 003c 0795     		str	r5, [sp, #28]
+  26:../src/measure.c ****   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+  76              		.loc 1 26 0
+  77 003e 0894     		str	r4, [sp, #32]
+  27:../src/measure.c ****   DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+  78              		.loc 1 27 0
+  79 0040 4FF48063 		mov	r3, #1024
+  80 0044 0993     		str	r3, [sp, #36]
+  28:../src/measure.c ****   DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
+  81              		.loc 1 28 0
+  82 0046 4FF48053 		mov	r3, #4096
+  83 004a 0A93     		str	r3, [sp, #40]
+  29:../src/measure.c ****   DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
+  84              		.loc 1 29 0
+  85 004c 4FF48043 		mov	r3, #16384
+  86 0050 0B93     		str	r3, [sp, #44]
+  30:../src/measure.c ****   DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+  87              		.loc 1 30 0
+  88 0052 4FF48073 		mov	r3, #256
+  89 0056 0C93     		str	r3, [sp, #48]
+  31:../src/measure.c ****   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+  90              		.loc 1 31 0
+  91 0058 4FF40033 		mov	r3, #131072
+  92 005c 0D93     		str	r3, [sp, #52]
+  32:../src/measure.c ****   DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;         
+  93              		.loc 1 32 0
+  94 005e 0E94     		str	r4, [sp, #56]
+  33:../src/measure.c ****   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
+  95              		.loc 1 33 0
+  96 0060 0F95     		str	r5, [sp, #60]
+  34:../src/measure.c ****   DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+  97              		.loc 1 34 0
+  98 0062 1094     		str	r4, [sp, #64]
+  35:../src/measure.c ****   DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+  99              		.loc 1 35 0
+ 100 0064 1194     		str	r4, [sp, #68]
+  36:../src/measure.c ****   DMA_Init(DMA2_Stream0, &DMA_InitStructure);
+ 101              		.loc 1 36 0
+ 102 0066 284E     		ldr	r6, .L2+16
+ 103 0068 3046     		mov	r0, r6
+ 104 006a 03A9     		add	r1, sp, #12
+ 105 006c FFF7FEFF 		bl	DMA_Init
+ 106              	.LVL3:
+  37:../src/measure.c **** 
+  38:../src/measure.c ****   /* DMA2_Stream0 enable */
+  39:../src/measure.c ****   DMA_Cmd(DMA2_Stream0, ENABLE);
+ 107              		.loc 1 39 0
+ 108 0070 3046     		mov	r0, r6
+ 109 0072 2946     		mov	r1, r5
+ 110 0074 FFF7FEFF 		bl	DMA_Cmd
+ 111              	.LVL4:
+  40:../src/measure.c **** 
+  41:../src/measure.c **** 
+  42:../src/measure.c **** /******************************************************************************/
+  43:../src/measure.c **** /*  ADCs configuration: double interleaved with 5cycles delay to reach 6Msps  */
+  44:../src/measure.c **** /******************************************************************************/
+  45:../src/measure.c **** 
+  46:../src/measure.c ****   /* ADC Common configuration *************************************************/
+  47:../src/measure.c ****   ADC_CommonInitStructure.ADC_Mode = ADC_DualMode_Interl;
+ 112              		.loc 1 47 0
+ 113 0078 0723     		movs	r3, #7
+ 114 007a 1293     		str	r3, [sp, #72]
+  48:../src/measure.c ****   ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_5Cycles;
+ 115              		.loc 1 48 0
+ 116 007c 1594     		str	r4, [sp, #84]
+  49:../src/measure.c ****   ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_2;  
+ 117              		.loc 1 49 0
+ 118 007e 4FF40043 		mov	r3, #32768
+ 119 0082 1493     		str	r3, [sp, #80]
+  50:../src/measure.c ****   ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2; 
+ 120              		.loc 1 50 0
+ 121 0084 1394     		str	r4, [sp, #76]
+  51:../src/measure.c ****   ADC_CommonInit(&ADC_CommonInitStructure);
+ 122              		.loc 1 51 0
+ 123 0086 12A8     		add	r0, sp, #72
+ 124 0088 FFF7FEFF 		bl	ADC_CommonInit
+ 125              	.LVL5:
+  52:../src/measure.c **** 
+  53:../src/measure.c ****   /* ADC1 regular channel 12 configuration ************************************/
+  54:../src/measure.c ****   ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
+ 126              		.loc 1 54 0
+ 127 008c 1694     		str	r4, [sp, #88]
+  55:../src/measure.c ****   ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+ 128              		.loc 1 55 0
+ 129 008e 8DF85C40 		strb	r4, [sp, #92]
+  56:../src/measure.c ****   ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
+ 130              		.loc 1 56 0
+ 131 0092 8DF85D50 		strb	r5, [sp, #93]
+  57:../src/measure.c ****   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
+ 132              		.loc 1 57 0
+ 133 0096 1894     		str	r4, [sp, #96]
+  58:../src/measure.c ****   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+ 134              		.loc 1 58 0
+ 135 0098 1A94     		str	r4, [sp, #104]
+  59:../src/measure.c ****   ADC_InitStructure.ADC_NbrOfConversion = 1;
+ 136              		.loc 1 59 0
+ 137 009a 8DF86C50 		strb	r5, [sp, #108]
+  60:../src/measure.c ****   ADC_Init(ADC1, &ADC_InitStructure);
+ 138              		.loc 1 60 0
+ 139 009e A6F5A236 		sub	r6, r6, #82944
+ 140 00a2 103E     		subs	r6, r6, #16
+ 141 00a4 3046     		mov	r0, r6
+ 142 00a6 16A9     		add	r1, sp, #88
+ 143 00a8 FFF7FEFF 		bl	ADC_Init
+ 144              	.LVL6:
+  61:../src/measure.c **** 	ADC_Init(ADC2, &ADC_InitStructure);
+ 145              		.loc 1 61 0
+ 146 00ac 174F     		ldr	r7, .L2+20
+ 147 00ae 3846     		mov	r0, r7
+ 148 00b0 16A9     		add	r1, sp, #88
+ 149 00b2 FFF7FEFF 		bl	ADC_Init
+ 150              	.LVL7:
+  62:../src/measure.c **** 
+  63:../src/measure.c ****   ADC_RegularChannelConfig(ADC1, ADC_Channel_11, 1, ADC_SampleTime_3Cycles);
+ 151              		.loc 1 63 0
+ 152 00b6 3046     		mov	r0, r6
+ 153 00b8 0B21     		movs	r1, #11
+ 154 00ba 2A46     		mov	r2, r5
+ 155 00bc 2346     		mov	r3, r4
+ 156 00be FFF7FEFF 		bl	ADC_RegularChannelConfig
+ 157              	.LVL8:
+  64:../src/measure.c ****   ADC_RegularChannelConfig(ADC2, ADC_Channel_12, 1, ADC_SampleTime_3Cycles);
+ 158              		.loc 1 64 0
+ 159 00c2 3846     		mov	r0, r7
+ 160 00c4 0C21     		movs	r1, #12
+ 161 00c6 2A46     		mov	r2, r5
+ 162 00c8 2346     		mov	r3, r4
+ 163 00ca FFF7FEFF 		bl	ADC_RegularChannelConfig
+ 164              	.LVL9:
+  65:../src/measure.c **** 	
+  66:../src/measure.c ****   ADC_DMACmd(ADC1, ENABLE);
+ 165              		.loc 1 66 0
+ 166 00ce 3046     		mov	r0, r6
+ 167 00d0 2946     		mov	r1, r5
+ 168 00d2 FFF7FEFF 		bl	ADC_DMACmd
+ 169              	.LVL10:
+  67:../src/measure.c ****   ADC_MultiModeDMARequestAfterLastTransferCmd(ENABLE);
+ 170              		.loc 1 67 0
+ 171 00d6 2846     		mov	r0, r5
+ 172 00d8 FFF7FEFF 		bl	ADC_MultiModeDMARequestAfterLastTransferCmd
+ 173              	.LVL11:
+  68:../src/measure.c **** 
+  69:../src/measure.c ****   ADC_Cmd(ADC1, ENABLE);
+ 174              		.loc 1 69 0
+ 175 00dc 3046     		mov	r0, r6
+ 176 00de 2946     		mov	r1, r5
+ 177 00e0 FFF7FEFF 		bl	ADC_Cmd
+ 178              	.LVL12:
+  70:../src/measure.c ****   ADC_Cmd(ADC2, ENABLE);
+ 179              		.loc 1 70 0
+ 180 00e4 3846     		mov	r0, r7
+ 181 00e6 2946     		mov	r1, r5
+ 182 00e8 FFF7FEFF 		bl	ADC_Cmd
+ 183              	.LVL13:
+  71:../src/measure.c **** 	
+  72:../src/measure.c ****   ADC_SoftwareStartConv(ADC1);
+ 184              		.loc 1 72 0
+ 185 00ec 3046     		mov	r0, r6
+ 186 00ee FFF7FEFF 		bl	ADC_SoftwareStartConv
+ 187              	.LVL14:
+  73:../src/measure.c **** }
+ 188              		.loc 1 73 0
+ 189 00f2 1DB0     		add	sp, sp, #116
+ 190              		@ sp needed
+ 191 00f4 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 192              	.L3:
+ 193 00f6 00BF     		.align	2
+ 194              	.L2:
+ 195 00f8 04004000 		.word	4194308
+ 196 00fc 00080240 		.word	1073874944
+ 197 0100 08230140 		.word	1073816328
+ 198 0104 00000000 		.word	ADC_Value
+ 199 0108 10640240 		.word	1073898512
+ 200 010c 00210140 		.word	1073815808
+ 201              		.cfi_endproc
+ 202              	.LFE110:
+ 204              		.comm	ADC_Value,4,4
+ 205              	.Letext0:
+ 206              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
+ 207              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
+ 208              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
+ 209              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_adc.h"
+ 210              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_dma.h"
+ 211              		.file 7 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_gpio.h"
+ 212              		.file 8 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+ 213              		.file 9 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_rcc.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 measure.c
+C:\Users\Filip\AppData\Local\Temp\ccJqhKEP.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccJqhKEP.s:23     .text:00000000 Init_Measure
+C:\Users\Filip\AppData\Local\Temp\ccJqhKEP.s:195    .text:000000f8 $d
+                            *COM*:00000004 ADC_Value
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
+                           .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
+                           .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7
+                           .group:00000000 wm4._default_types.h.15.8b2cb27e528498f8ff711db085d6e489
+                           .group:00000000 wm4.stdint.h.20.796e373797e732130a803d4c0338fa1b
+                           .group:00000000 wm4.core_cmInstr.h.25.f50f886f2edf670cf199b35fd96f5c91
+                           .group:00000000 wm4.core_cm4_simd.h.29.b4a3fdfb606cb3b26119424324d4b963
+                           .group:00000000 wm4.core_cm4.h.153.5393ef7e6cebf34dd51ca528f9218ab3
+                           .group:00000000 wm4.stm32f4xx.h.288.7f55b1a1f5e5bad6ffa2308f97f537d1
+                           .group:00000000 wm4.stm32f4xx_conf.h.24.a762e2483b8e31b68046e44b31e1d406
+                           .group:00000000 wm4.stm32f4xx_adc.h.102.2061aa73008746f3c2cc6ce8f635cad3
+                           .group:00000000 wm4.stm32f4xx_can.h.25.87f18ca48b2692d39f76e87b1f07c953
+                           .group:00000000 wm4.stm32f4xx_cryp.h.25.db1951c06ee684df97ea3a11aba6cb51
+                           .group:00000000 wm4.stm32f4xx_dac.h.25.c43557a6416ea4dfa986c1209c2558d6
+                           .group:00000000 wm4.stm32f4xx_dbgmcu.h.24.7aedfdcf091890b5cb96019bd29a2bfc
+                           .group:00000000 wm4.stm32f4xx_dcmi.h.24.64883d9be802a535b1d7770d14da73e0
+                           .group:00000000 wm4.stm32f4xx_dma.h.25.c1fa1d44ae0bc9c2b3a0d1d355d8c1e6
+                           .group:00000000 wm4.stm32f4xx_exti.h.25.620998268d5d3d9042a8297fbe07d507
+                           .group:00000000 wm4.stm32f4xx_flash.h.25.65d4f351b72ee41355279f70305f361a
+                           .group:00000000 wm4.stm32f4xx_fsmc.h.25.b907ac7bd9bec46e02d06b137d53cfd8
+                           .group:00000000 wm4.stm32f4xx_hash.h.25.633fb84f031cf2ab1bd834e536716dfa
+                           .group:00000000 wm4.stm32f4xx_gpio.h.25.5bd1d790d742a307b55aea5fa8fcdae8
+                           .group:00000000 wm4.stm32f4xx_i2c.h.25.8fcdb817a00a67d4624d79bab0d9275f
+                           .group:00000000 wm4.stm32f4xx_iwdg.h.25.3013e8d2058415cb9d51af77f748a146
+                           .group:00000000 wm4.stm32f4xx_pwr.h.25.41ffcb5dc896ed2d26edf4d9bbbfbe6f
+                           .group:00000000 wm4.stm32f4xx_rcc.h.24.a10ec6e94989efb0f8f7f56448e9bb60
+                           .group:00000000 wm4.stm32f4xx_rng.h.25.cdb5c5c07de6a48aedfde608da3f447e
+                           .group:00000000 wm4.stm32f4xx_rtc.h.25.4809a79ad46ad97b4a01e735a96738eb
+                           .group:00000000 wm4.stm32f4xx_sdio.h.25.406302aabae34eada94e5f2cde635a3e
+                           .group:00000000 wm4.stm32f4xx_spi.h.25.980a9e96afe182c8b9cb91058a0693d6
+                           .group:00000000 wm4.stm32f4xx_syscfg.h.25.9d5caab5677661b69e959531364e23d7
+                           .group:00000000 wm4.stm32f4xx_tim.h.25.948f7fc943f34bd206e29758e77ee0a2
+                           .group:00000000 wm4.stm32f4xx_usart.h.25.32a7aeff79714f90f8c4da45bf79808c
+                           .group:00000000 wm4.stm32f4xx_wwdg.h.25.09d70b7849c6894ddf1e83c8e86b70e1
+                           .group:00000000 wm4.misc.h.25.a0cb758c1f091b46f201b19cec9e63a1
+                           .group:00000000 wm4.stm32f4xx.h.6972.f31ddedd83a17c461a3fab76f77123cb
+                           .group:00000000 wm4.stm32f4_discovery.h.78.c367165d107ea55282abe6aeafb37731
+                           .group:00000000 wm4.measure.h.5.dbc979c6ac8f64e063b683259987882f
+
+UNDEFINED SYMBOLS
+RCC_AHB1PeriphClockCmd
+RCC_APB2PeriphClockCmd
+GPIO_Init
+DMA_Init
+DMA_Cmd
+ADC_CommonInit
+ADC_Init
+ADC_RegularChannelConfig
+ADC_DMACmd
+ADC_MultiModeDMARequestAfterLastTransferCmd
+ADC_Cmd
+ADC_SoftwareStartConv

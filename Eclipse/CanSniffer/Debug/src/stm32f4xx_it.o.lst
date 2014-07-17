@@ -1,0 +1,501 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"stm32f4xx_it.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.align	2
+  19              		.global	NMI_Handler
+  20              		.thumb
+  21              		.thumb_func
+  23              	NMI_Handler:
+  24              	.LFB110:
+  25              		.file 1 "../src/stm32f4xx_it.c"
+   1:../src/stm32f4xx_it.c **** #include "stm32f4xx_it.h"
+   2:../src/stm32f4xx_it.c **** #include "main.h"
+   3:../src/stm32f4xx_it.c **** 
+   4:../src/stm32f4xx_it.c **** #define debug_string(str)
+   5:../src/stm32f4xx_it.c **** 
+   6:../src/stm32f4xx_it.c **** extern volatile uint32_t TimingDelay;
+   7:../src/stm32f4xx_it.c **** volatile uint32_t Time;
+   8:../src/stm32f4xx_it.c **** 
+   9:../src/stm32f4xx_it.c **** /******************************************************************************/
+  10:../src/stm32f4xx_it.c **** /*            Cortex-M3 Processor Exceptions Handlers                         */
+  11:../src/stm32f4xx_it.c **** /******************************************************************************/
+  12:../src/stm32f4xx_it.c **** 
+  13:../src/stm32f4xx_it.c **** /**
+  14:../src/stm32f4xx_it.c ****   * @brief   This function handles NMI exception.
+  15:../src/stm32f4xx_it.c ****   * @param  None
+  16:../src/stm32f4xx_it.c ****   * @retval None
+  17:../src/stm32f4xx_it.c ****   */
+  18:../src/stm32f4xx_it.c **** void NMI_Handler(void)
+  19:../src/stm32f4xx_it.c **** {
+  26              		.loc 1 19 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  31 0000 7047     		bx	lr
+  32              		.cfi_endproc
+  33              	.LFE110:
+  35 0002 00BF     		.align	2
+  36              		.global	HardFault_Handler
+  37              		.thumb
+  38              		.thumb_func
+  40              	HardFault_Handler:
+  41              	.LFB111:
+  20:../src/stm32f4xx_it.c **** 	debug_string("NMI_Exception");
+  21:../src/stm32f4xx_it.c **** }
+  22:../src/stm32f4xx_it.c **** 
+  23:../src/stm32f4xx_it.c **** /**
+  24:../src/stm32f4xx_it.c ****   * @brief  This function handles Hard Fault exception.
+  25:../src/stm32f4xx_it.c ****   * @param  None
+  26:../src/stm32f4xx_it.c ****   * @retval None
+  27:../src/stm32f4xx_it.c ****   */
+  28:../src/stm32f4xx_it.c **** void HardFault_Handler(void)
+  29:../src/stm32f4xx_it.c **** {
+  42              		.loc 1 29 0
+  43              		.cfi_startproc
+  44              		@ Volatile: function does not return.
+  45              		@ args = 0, pretend = 0, frame = 0
+  46              		@ frame_needed = 0, uses_anonymous_args = 0
+  47              		@ link register save eliminated.
+  48              	.L3:
+  49 0004 FEE7     		b	.L3
+  50              		.cfi_endproc
+  51              	.LFE111:
+  53 0006 00BF     		.align	2
+  54              		.global	MemManage_Handler
+  55              		.thumb
+  56              		.thumb_func
+  58              	MemManage_Handler:
+  59              	.LFB112:
+  30:../src/stm32f4xx_it.c ****   /* Go to infinite loop when Hard Fault exception occurs */
+  31:../src/stm32f4xx_it.c **** 	debug_string("HardFault_Exception");
+  32:../src/stm32f4xx_it.c ****   while (1)
+  33:../src/stm32f4xx_it.c ****   {
+  34:../src/stm32f4xx_it.c ****   }
+  35:../src/stm32f4xx_it.c **** }
+  36:../src/stm32f4xx_it.c **** 
+  37:../src/stm32f4xx_it.c **** /**
+  38:../src/stm32f4xx_it.c ****   * @brief  This function handles Memory Manage exception.
+  39:../src/stm32f4xx_it.c ****   * @param  None
+  40:../src/stm32f4xx_it.c ****   * @retval None
+  41:../src/stm32f4xx_it.c ****   */
+  42:../src/stm32f4xx_it.c **** void MemManage_Handler(void)
+  43:../src/stm32f4xx_it.c **** {
+  60              		.loc 1 43 0
+  61              		.cfi_startproc
+  62              		@ Volatile: function does not return.
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  66              	.L5:
+  67 0008 FEE7     		b	.L5
+  68              		.cfi_endproc
+  69              	.LFE112:
+  71 000a 00BF     		.align	2
+  72              		.global	BusFault_Handler
+  73              		.thumb
+  74              		.thumb_func
+  76              	BusFault_Handler:
+  77              	.LFB113:
+  44:../src/stm32f4xx_it.c ****   /* Go to infinite loop when Memory Manage exception occurs */
+  45:../src/stm32f4xx_it.c **** 	debug_string("MemManage_Exception");
+  46:../src/stm32f4xx_it.c ****   while (1)
+  47:../src/stm32f4xx_it.c ****   {
+  48:../src/stm32f4xx_it.c ****   }
+  49:../src/stm32f4xx_it.c **** }
+  50:../src/stm32f4xx_it.c **** 
+  51:../src/stm32f4xx_it.c **** /**
+  52:../src/stm32f4xx_it.c ****   * @brief  This function handles Bus Fault exception.
+  53:../src/stm32f4xx_it.c ****   * @param  None
+  54:../src/stm32f4xx_it.c ****   * @retval None
+  55:../src/stm32f4xx_it.c ****   */
+  56:../src/stm32f4xx_it.c **** void BusFault_Handler(void)
+  57:../src/stm32f4xx_it.c **** {
+  78              		.loc 1 57 0
+  79              		.cfi_startproc
+  80              		@ Volatile: function does not return.
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              		@ link register save eliminated.
+  84              	.L7:
+  85 000c FEE7     		b	.L7
+  86              		.cfi_endproc
+  87              	.LFE113:
+  89 000e 00BF     		.align	2
+  90              		.global	UsageFault_Handler
+  91              		.thumb
+  92              		.thumb_func
+  94              	UsageFault_Handler:
+  95              	.LFB114:
+  58:../src/stm32f4xx_it.c ****   /* Go to infinite loop when Bus Fault exception occurs */
+  59:../src/stm32f4xx_it.c **** 	debug_string("BusFault_Exception");
+  60:../src/stm32f4xx_it.c ****   while (1)
+  61:../src/stm32f4xx_it.c ****   {
+  62:../src/stm32f4xx_it.c ****   }
+  63:../src/stm32f4xx_it.c **** }
+  64:../src/stm32f4xx_it.c **** 
+  65:../src/stm32f4xx_it.c **** /**
+  66:../src/stm32f4xx_it.c ****   * @brief  This function handles Usage Fault exception.
+  67:../src/stm32f4xx_it.c ****   * @param  None
+  68:../src/stm32f4xx_it.c ****   * @retval None
+  69:../src/stm32f4xx_it.c ****   */
+  70:../src/stm32f4xx_it.c **** void UsageFault_Handler(void)
+  71:../src/stm32f4xx_it.c **** {
+  96              		.loc 1 71 0
+  97              		.cfi_startproc
+  98              		@ Volatile: function does not return.
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101              		@ link register save eliminated.
+ 102              	.L9:
+ 103 0010 FEE7     		b	.L9
+ 104              		.cfi_endproc
+ 105              	.LFE114:
+ 107 0012 00BF     		.align	2
+ 108              		.global	SVC_Handler
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	SVC_Handler:
+ 113              	.LFB115:
+  72:../src/stm32f4xx_it.c ****   /* Go to infinite loop when Usage Fault exception occurs */
+  73:../src/stm32f4xx_it.c **** 	debug_string("UsageFault_Exception");
+  74:../src/stm32f4xx_it.c ****   while (1)
+  75:../src/stm32f4xx_it.c ****   {
+  76:../src/stm32f4xx_it.c ****   }
+  77:../src/stm32f4xx_it.c **** }
+  78:../src/stm32f4xx_it.c **** 
+  79:../src/stm32f4xx_it.c **** /**
+  80:../src/stm32f4xx_it.c ****   * @brief  This function handles SVCall exception.
+  81:../src/stm32f4xx_it.c ****   * @param  None
+  82:../src/stm32f4xx_it.c ****   * @retval None
+  83:../src/stm32f4xx_it.c ****   */
+  84:../src/stm32f4xx_it.c **** void SVC_Handler(void)
+  85:../src/stm32f4xx_it.c **** {
+ 114              		.loc 1 85 0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118              		@ link register save eliminated.
+ 119 0014 7047     		bx	lr
+ 120              		.cfi_endproc
+ 121              	.LFE115:
+ 123 0016 00BF     		.align	2
+ 124              		.global	DebugMon_Handler
+ 125              		.thumb
+ 126              		.thumb_func
+ 128              	DebugMon_Handler:
+ 129              	.LFB116:
+  86:../src/stm32f4xx_it.c **** 	debug_string("SVC_Exception");
+  87:../src/stm32f4xx_it.c **** }
+  88:../src/stm32f4xx_it.c **** 
+  89:../src/stm32f4xx_it.c **** /**
+  90:../src/stm32f4xx_it.c ****   * @brief  This function handles Debug Monitor exception.
+  91:../src/stm32f4xx_it.c ****   * @param  None
+  92:../src/stm32f4xx_it.c ****   * @retval None
+  93:../src/stm32f4xx_it.c ****   */
+  94:../src/stm32f4xx_it.c **** void DebugMon_Handler(void)
+  95:../src/stm32f4xx_it.c **** {
+ 130              		.loc 1 95 0
+ 131              		.cfi_startproc
+ 132              		@ args = 0, pretend = 0, frame = 0
+ 133              		@ frame_needed = 0, uses_anonymous_args = 0
+ 134              		@ link register save eliminated.
+ 135 0018 7047     		bx	lr
+ 136              		.cfi_endproc
+ 137              	.LFE116:
+ 139 001a 00BF     		.align	2
+ 140              		.global	PendSV_Handler
+ 141              		.thumb
+ 142              		.thumb_func
+ 144              	PendSV_Handler:
+ 145              	.LFB117:
+  96:../src/stm32f4xx_it.c **** 	debug_string("DebugMon_Exception");
+  97:../src/stm32f4xx_it.c **** }
+  98:../src/stm32f4xx_it.c **** 
+  99:../src/stm32f4xx_it.c **** /**
+ 100:../src/stm32f4xx_it.c ****   * @brief  This function handles PendSVC exception.
+ 101:../src/stm32f4xx_it.c ****   * @param  None
+ 102:../src/stm32f4xx_it.c ****   * @retval None
+ 103:../src/stm32f4xx_it.c ****   */
+ 104:../src/stm32f4xx_it.c **** void PendSV_Handler(void)
+ 105:../src/stm32f4xx_it.c **** {
+ 146              		.loc 1 105 0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		@ link register save eliminated.
+ 151 001c 7047     		bx	lr
+ 152              		.cfi_endproc
+ 153              	.LFE117:
+ 155 001e 00BF     		.align	2
+ 156              		.global	EXTI0_IRQHandler
+ 157              		.thumb
+ 158              		.thumb_func
+ 160              	EXTI0_IRQHandler:
+ 161              	.LFB119:
+ 106:../src/stm32f4xx_it.c **** 	debug_string("PendSVC_Exception");
+ 107:../src/stm32f4xx_it.c **** }
+ 108:../src/stm32f4xx_it.c **** 
+ 109:../src/stm32f4xx_it.c **** /**
+ 110:../src/stm32f4xx_it.c ****   * @brief  This function handles SysTick Handler.
+ 111:../src/stm32f4xx_it.c ****   * @param  None
+ 112:../src/stm32f4xx_it.c ****   * @retval None
+ 113:../src/stm32f4xx_it.c ****   */
+ 114:../src/stm32f4xx_it.c **** void SysTick_Handler(void)
+ 115:../src/stm32f4xx_it.c **** {  
+ 116:../src/stm32f4xx_it.c ****   if (TimingDelay != 0x00)
+ 117:../src/stm32f4xx_it.c ****   {
+ 118:../src/stm32f4xx_it.c ****     TimingDelay_Decrement();
+ 119:../src/stm32f4xx_it.c ****   }
+ 120:../src/stm32f4xx_it.c **** 	Time++;
+ 121:../src/stm32f4xx_it.c **** }
+ 122:../src/stm32f4xx_it.c **** 
+ 123:../src/stm32f4xx_it.c **** /******************************************************************************/
+ 124:../src/stm32f4xx_it.c **** /*                 STM32F4xx Peripherals Interrupt Handlers                   */
+ 125:../src/stm32f4xx_it.c **** /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
+ 126:../src/stm32f4xx_it.c **** /*  available peripheral interrupt handler's name please refer to the startup */
+ 127:../src/stm32f4xx_it.c **** /*  file (startup_stm32f4xx.s).                                               */
+ 128:../src/stm32f4xx_it.c **** /******************************************************************************/
+ 129:../src/stm32f4xx_it.c **** 
+ 130:../src/stm32f4xx_it.c **** void EXTI0_IRQHandler(void)
+ 131:../src/stm32f4xx_it.c **** {
+ 162              		.loc 1 131 0
+ 163              		.cfi_startproc
+ 164              		@ args = 0, pretend = 0, frame = 0
+ 165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166              		.loc 1 131 0
+ 167 0020 08B5     		push	{r3, lr}
+ 168              		.cfi_def_cfa_offset 8
+ 169              		.cfi_offset 3, -8
+ 170              		.cfi_offset 14, -4
+ 132:../src/stm32f4xx_it.c **** 	uint32_t i;
+ 133:../src/stm32f4xx_it.c ****   if(EXTI_GetITStatus(EXTI_Line0) != RESET)
+ 171              		.loc 1 133 0
+ 172 0022 0120     		movs	r0, #1
+ 173 0024 FFF7FEFF 		bl	EXTI_GetITStatus
+ 174              	.LVL0:
+ 175 0028 10B1     		cbz	r0, .L13
+ 134:../src/stm32f4xx_it.c ****   {
+ 135:../src/stm32f4xx_it.c ****     EXTI_ClearITPendingBit(EXTI_Line0);
+ 176              		.loc 1 135 0
+ 177 002a 0120     		movs	r0, #1
+ 178 002c FFF7FEFF 		bl	EXTI_ClearITPendingBit
+ 179              	.LVL1:
+ 180              	.L13:
+ 181 0030 08BD     		pop	{r3, pc}
+ 182              		.cfi_endproc
+ 183              	.LFE119:
+ 185 0032 00BF     		.align	2
+ 186              		.global	Delay
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	Delay:
+ 191              	.LFB120:
+ 136:../src/stm32f4xx_it.c ****   }
+ 137:../src/stm32f4xx_it.c **** }
+ 138:../src/stm32f4xx_it.c **** 
+ 139:../src/stm32f4xx_it.c **** /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+ 140:../src/stm32f4xx_it.c **** __IO uint32_t TimingDelay = 0;
+ 141:../src/stm32f4xx_it.c **** 
+ 142:../src/stm32f4xx_it.c **** void Delay(__IO uint32_t nTime)
+ 143:../src/stm32f4xx_it.c **** { 
+ 192              		.loc 1 143 0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 8
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196              		@ link register save eliminated.
+ 197              	.LVL2:
+ 198 0034 82B0     		sub	sp, sp, #8
+ 199              		.cfi_def_cfa_offset 8
+ 200 0036 0190     		str	r0, [sp, #4]
+ 144:../src/stm32f4xx_it.c ****   TimingDelay = nTime;
+ 201              		.loc 1 144 0
+ 202 0038 019A     		ldr	r2, [sp, #4]
+ 203 003a 044B     		ldr	r3, .L18
+ 204 003c 1A60     		str	r2, [r3]
+ 145:../src/stm32f4xx_it.c **** 
+ 146:../src/stm32f4xx_it.c ****   while(TimingDelay != 0);
+ 205              		.loc 1 146 0
+ 206 003e 1A46     		mov	r2, r3
+ 207              	.L16:
+ 208              		.loc 1 146 0 is_stmt 0 discriminator 1
+ 209 0040 1368     		ldr	r3, [r2]
+ 210 0042 002B     		cmp	r3, #0
+ 211 0044 FCD1     		bne	.L16
+ 147:../src/stm32f4xx_it.c **** }
+ 212              		.loc 1 147 0 is_stmt 1
+ 213 0046 02B0     		add	sp, sp, #8
+ 214              		@ sp needed
+ 215 0048 7047     		bx	lr
+ 216              	.L19:
+ 217 004a 00BF     		.align	2
+ 218              	.L18:
+ 219 004c 00000000 		.word	.LANCHOR0
+ 220              		.cfi_endproc
+ 221              	.LFE120:
+ 223              		.align	2
+ 224              		.global	TimingDelay_Decrement
+ 225              		.thumb
+ 226              		.thumb_func
+ 228              	TimingDelay_Decrement:
+ 229              	.LFB121:
+ 148:../src/stm32f4xx_it.c **** 
+ 149:../src/stm32f4xx_it.c **** void TimingDelay_Decrement(void)
+ 150:../src/stm32f4xx_it.c **** {
+ 230              		.loc 1 150 0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 0
+ 233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234              		@ link register save eliminated.
+ 151:../src/stm32f4xx_it.c ****   if (TimingDelay != 0x00)
+ 235              		.loc 1 151 0
+ 236 0050 034B     		ldr	r3, .L22
+ 237 0052 1B68     		ldr	r3, [r3]
+ 238 0054 1BB1     		cbz	r3, .L20
+ 152:../src/stm32f4xx_it.c ****   { 
+ 153:../src/stm32f4xx_it.c ****     TimingDelay--;
+ 239              		.loc 1 153 0
+ 240 0056 024B     		ldr	r3, .L22
+ 241 0058 1A68     		ldr	r2, [r3]
+ 242 005a 013A     		subs	r2, r2, #1
+ 243 005c 1A60     		str	r2, [r3]
+ 244              	.L20:
+ 245 005e 7047     		bx	lr
+ 246              	.L23:
+ 247              		.align	2
+ 248              	.L22:
+ 249 0060 00000000 		.word	.LANCHOR0
+ 250              		.cfi_endproc
+ 251              	.LFE121:
+ 253              		.align	2
+ 254              		.global	SysTick_Handler
+ 255              		.thumb
+ 256              		.thumb_func
+ 258              	SysTick_Handler:
+ 259              	.LFB118:
+ 115:../src/stm32f4xx_it.c **** {  
+ 260              		.loc 1 115 0
+ 261              		.cfi_startproc
+ 262              		@ args = 0, pretend = 0, frame = 0
+ 263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 264 0064 08B5     		push	{r3, lr}
+ 265              		.cfi_def_cfa_offset 8
+ 266              		.cfi_offset 3, -8
+ 267              		.cfi_offset 14, -4
+ 116:../src/stm32f4xx_it.c ****   if (TimingDelay != 0x00)
+ 268              		.loc 1 116 0
+ 269 0066 054B     		ldr	r3, .L26
+ 270 0068 1B68     		ldr	r3, [r3]
+ 271 006a 0BB1     		cbz	r3, .L25
+ 118:../src/stm32f4xx_it.c ****     TimingDelay_Decrement();
+ 272              		.loc 1 118 0
+ 273 006c FFF7FEFF 		bl	TimingDelay_Decrement
+ 274              	.LVL3:
+ 275              	.L25:
+ 120:../src/stm32f4xx_it.c **** 	Time++;
+ 276              		.loc 1 120 0
+ 277 0070 034B     		ldr	r3, .L26+4
+ 278 0072 1A68     		ldr	r2, [r3]
+ 279 0074 0132     		adds	r2, r2, #1
+ 280 0076 1A60     		str	r2, [r3]
+ 281 0078 08BD     		pop	{r3, pc}
+ 282              	.L27:
+ 283 007a 00BF     		.align	2
+ 284              	.L26:
+ 285 007c 00000000 		.word	.LANCHOR0
+ 286 0080 00000000 		.word	Time
+ 287              		.cfi_endproc
+ 288              	.LFE118:
+ 290              		.global	TimingDelay
+ 291              		.comm	Time,4,4
+ 292              		.bss
+ 293              		.align	2
+ 294              		.set	.LANCHOR0,. + 0
+ 297              	TimingDelay:
+ 298 0000 00000000 		.space	4
+ 299              		.text
+ 300              	.Letext0:
+ 301              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
+ 302              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
+ 303              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
+ 304              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+ 305              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_exti.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_it.c
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:23     .text:00000000 NMI_Handler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:40     .text:00000004 HardFault_Handler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:58     .text:00000008 MemManage_Handler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:76     .text:0000000c BusFault_Handler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:94     .text:00000010 UsageFault_Handler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:112    .text:00000014 SVC_Handler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:128    .text:00000018 DebugMon_Handler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:144    .text:0000001c PendSV_Handler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:160    .text:00000020 EXTI0_IRQHandler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:190    .text:00000034 Delay
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:219    .text:0000004c $d
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:223    .text:00000050 $t
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:228    .text:00000050 TimingDelay_Decrement
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:249    .text:00000060 $d
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:253    .text:00000064 $t
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:258    .text:00000064 SysTick_Handler
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:285    .text:0000007c $d
+                            *COM*:00000004 Time
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:297    .bss:00000000 TimingDelay
+C:\Users\Filip\AppData\Local\Temp\ccp0Jx8e.s:293    .bss:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
+                           .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
+                           .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7
+                           .group:00000000 wm4._default_types.h.15.8b2cb27e528498f8ff711db085d6e489
+                           .group:00000000 wm4.stdint.h.20.796e373797e732130a803d4c0338fa1b
+                           .group:00000000 wm4.core_cmInstr.h.25.f50f886f2edf670cf199b35fd96f5c91
+                           .group:00000000 wm4.core_cm4_simd.h.29.b4a3fdfb606cb3b26119424324d4b963
+                           .group:00000000 wm4.core_cm4.h.153.5393ef7e6cebf34dd51ca528f9218ab3
+                           .group:00000000 wm4.stm32f4xx.h.288.7f55b1a1f5e5bad6ffa2308f97f537d1
+                           .group:00000000 wm4.stm32f4xx_conf.h.24.a762e2483b8e31b68046e44b31e1d406
+                           .group:00000000 wm4.stm32f4xx_adc.h.102.2061aa73008746f3c2cc6ce8f635cad3
+                           .group:00000000 wm4.stm32f4xx_can.h.25.87f18ca48b2692d39f76e87b1f07c953
+                           .group:00000000 wm4.stm32f4xx_cryp.h.25.db1951c06ee684df97ea3a11aba6cb51
+                           .group:00000000 wm4.stm32f4xx_dac.h.25.c43557a6416ea4dfa986c1209c2558d6
+                           .group:00000000 wm4.stm32f4xx_dbgmcu.h.24.7aedfdcf091890b5cb96019bd29a2bfc
+                           .group:00000000 wm4.stm32f4xx_dcmi.h.24.64883d9be802a535b1d7770d14da73e0
+                           .group:00000000 wm4.stm32f4xx_dma.h.25.c1fa1d44ae0bc9c2b3a0d1d355d8c1e6
+                           .group:00000000 wm4.stm32f4xx_exti.h.25.620998268d5d3d9042a8297fbe07d507
+                           .group:00000000 wm4.stm32f4xx_flash.h.25.65d4f351b72ee41355279f70305f361a
+                           .group:00000000 wm4.stm32f4xx_fsmc.h.25.b907ac7bd9bec46e02d06b137d53cfd8
+                           .group:00000000 wm4.stm32f4xx_hash.h.25.633fb84f031cf2ab1bd834e536716dfa
+                           .group:00000000 wm4.stm32f4xx_gpio.h.25.5bd1d790d742a307b55aea5fa8fcdae8
+                           .group:00000000 wm4.stm32f4xx_i2c.h.25.8fcdb817a00a67d4624d79bab0d9275f
+                           .group:00000000 wm4.stm32f4xx_iwdg.h.25.3013e8d2058415cb9d51af77f748a146
+                           .group:00000000 wm4.stm32f4xx_pwr.h.25.41ffcb5dc896ed2d26edf4d9bbbfbe6f
+                           .group:00000000 wm4.stm32f4xx_rcc.h.24.a10ec6e94989efb0f8f7f56448e9bb60
+                           .group:00000000 wm4.stm32f4xx_rng.h.25.cdb5c5c07de6a48aedfde608da3f447e
+                           .group:00000000 wm4.stm32f4xx_rtc.h.25.4809a79ad46ad97b4a01e735a96738eb
+                           .group:00000000 wm4.stm32f4xx_sdio.h.25.406302aabae34eada94e5f2cde635a3e
+                           .group:00000000 wm4.stm32f4xx_spi.h.25.980a9e96afe182c8b9cb91058a0693d6
+                           .group:00000000 wm4.stm32f4xx_syscfg.h.25.9d5caab5677661b69e959531364e23d7
+                           .group:00000000 wm4.stm32f4xx_tim.h.25.948f7fc943f34bd206e29758e77ee0a2
+                           .group:00000000 wm4.stm32f4xx_usart.h.25.32a7aeff79714f90f8c4da45bf79808c
+                           .group:00000000 wm4.stm32f4xx_wwdg.h.25.09d70b7849c6894ddf1e83c8e86b70e1
+                           .group:00000000 wm4.misc.h.25.a0cb758c1f091b46f201b19cec9e63a1
+                           .group:00000000 wm4.stm32f4xx.h.6972.f31ddedd83a17c461a3fab76f77123cb
+
+UNDEFINED SYMBOLS
+EXTI_GetITStatus
+EXTI_ClearITPendingBit
