@@ -1,19 +1,11 @@
 #include "main.h"
 #include "discovery.h"
-#include "hd44780.h"
 
 //extern volatile uint32_t Time;
 
 int main(void)
 {	
   SysTick_Config(SystemCoreClock/1000);
-  hd44780_init(GPIOE, GPIO_Pin_4, GPIO_Pin_5, GPIO_Pin_6, GPIO_Pin_0,
-  			GPIO_Pin_1, GPIO_Pin_2, GPIO_Pin_3, HD44780_LINES_2,
-  			HD44780_FONT_5x8);
-
-  hd44780_print("Hello World! ");
-  hd44780_display(true, false, false);
-
   while(1)
   {
   }

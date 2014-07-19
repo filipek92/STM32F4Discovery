@@ -6,8 +6,7 @@
 int main(void)
 {	
   SysTick_Config(SystemCoreClock/1000);
-  InitLeds();
-  LedOn(LED_R | LED_G);
+  GPIO_SetPin(GPIOC, GPIO_Pin_5);
   while(1)
   {
   }

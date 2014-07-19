@@ -1,5 +1,0 @@
-#include "discovery.h"
-
-void InitLeds(){
-
-}

@@ -1,0 +1,35 @@
+#include "main.h"
+
+#define LED_R GPIO_Pin_14
+#define LED_G GPIO_Pin_12
+#define LED_B GPIO_Pin_15
+#define LED_O GPIO_Pin_13
+
+#define SETREG BSRRL
+#define CLRREG BSRRH
+
+//extern volatile uint32_t Time;
+
+int main(void)
+{	
+	SysTick_Config(SystemCoreClock/1000);
+
+  while(1)
+  {
+  }
+}
+
+
+#ifdef  USE_FULL_ASSERT
+
+void assert_failed(uint8_t* file, uint32_t line)
+{ 
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+
+  /* Infinite loop */
+  while (1)
+  {
+  }
+}
+#endif

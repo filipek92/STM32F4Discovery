@@ -107,7 +107,7 @@ C_DEPS += \
 STM32F4xx_StdPeriph_Driver/src/%.o: ../STM32F4xx_StdPeriph_Driver/src/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\Template\STM32F4xx\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\Template\STM32F4xx\Source" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\Template\CMSIS\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\Template\Discovery" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\Template\src" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\Template\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="$@.lst" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Eclipse\Template\STM32F4xx\Include" -I"C:\Users\Filip\Eclipse\Template\STM32F4xx\Source" -I"C:\Users\Filip\Eclipse\Template\CMSIS\Include" -I"C:\Users\Filip\Eclipse\Template\Discovery" -I"C:\Users\Filip\Eclipse\Template\src" -I"C:\Users\Filip\Eclipse\Template\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="$@.lst" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
