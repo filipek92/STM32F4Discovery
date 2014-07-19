@@ -47,7 +47,7 @@ all: Template.elf secondary-outputs
 Template.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM C Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -T "C:\Users\Filip\Eclipse\Template\stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"Template.map" -Xlinker --cref -o "Template.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -T "C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\Template\stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"Template.map" -Xlinker --cref -o "Template.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

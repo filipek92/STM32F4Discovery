@@ -1,0 +1,7 @@
+#include "discovery.h"
+
+void InitLeds(){
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Pin = LED_R | LED_G | LED_B | LED_O;
+
+}
