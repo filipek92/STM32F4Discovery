@@ -1,0 +1,3581 @@
+
+CanSniffer.elf:     file format elf32-littlearm
+CanSniffer.elf
+architecture: arm, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0x08001575
+
+Program Header:
+    LOAD off    0x00008000 vaddr 0x08000000 paddr 0x08000000 align 2**15
+         filesz 0x000015c4 memsz 0x000015c4 flags r-x
+    LOAD off    0x00010000 vaddr 0x20000000 paddr 0x080015c4 align 2**15
+         filesz 0x00000024 memsz 0x0000042c flags rw-
+private flags = 5000002: [Version5 EABI] [has entry point]
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn  Flags
+  0 .isr_vector   00000188  08000000  08000000  00008000  2**0  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  1 .text         0000143c  08000188  08000188  00008188  2**2  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .data         00000024  20000000  080015c4  00010000  2**2  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00000008  20000024  080015e8  00010024  2**2  ALLOC
+  4 ._user_heap_stack 00000400  2000002c  080015f0  00010024  2**0  ALLOC
+  5 .ARM.attributes 00000031  00000000  00000000  00010024  2**0  CONTENTS, READONLY
+  6 .debug_info   00003be0  00000000  00000000  00010055  2**0  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000cef  00000000  00000000  00013c35  2**0  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    00001a9e  00000000  00000000  00014924  2**0  CONTENTS, READONLY, DEBUGGING
+  9 .debug_aranges 00000108  00000000  00000000  000163c8  2**3  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_macro  0000e403  00000000  00000000  000164d0  2**0  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_line   000029d2  00000000  00000000  000248d3  2**0  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_str    000577d4  00000000  00000000  000272a5  2**0  CONTENTS, READONLY, DEBUGGING
+ 13 .comment      00000070  00000000  00000000  0007ea79  2**0  CONTENTS, READONLY
+ 14 .debug_frame  00000834  00000000  00000000  0007eaec  2**2  CONTENTS, READONLY, DEBUGGING
+ 15 .debug_ranges 00000020  00000000  00000000  0007f320  2**3  CONTENTS, READONLY, DEBUGGING
+SYMBOL TABLE:
+08000000 l    d  .isr_vector	00000000 .isr_vector
+08000188 l    d  .text	00000000 .text
+20000000 l    d  .data	00000000 .data
+20000024 l    d  .bss	00000000 .bss
+2000002c l    d  ._user_heap_stack	00000000 ._user_heap_stack
+00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_loc	00000000 .debug_loc
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .debug_frame	00000000 .debug_frame
+00000000 l    d  .debug_ranges	00000000 .debug_ranges
+00000000 l    df *ABS*	00000000 ./STM32F4xx/Source/startup_stm32f4xx.o
+08001582 l       .text	00000000 LoopCopyDataInit
+0800157a l       .text	00000000 CopyDataInit
+0800159a l       .text	00000000 LoopFillZerobss
+08001594 l       .text	00000000 FillZerobss
+080015c0 l       .text	00000000 Infinite_Loop
+00000000 l    df *ABS*	00000000 main.c
+00000000 l    df *ABS*	00000000 stm32f4xx_it.c
+00000000 l    df *ABS*	00000000 system_stm32f4xx.c
+0800035c l     F .text	000000c0 SetSysClock
+00000000 l    df *ABS*	00000000 stm32f4xx_can.c
+080004ec l     F .text	0000000a CheckITStatus
+00000000 l    df *ABS*	00000000 stm32f4xx_exti.c
+00000000 l    df *ABS*	00000000 stm32f4xx_gpio.c
+00000000 l    df *ABS*	00000000 stm32f4xx_rcc.c
+20000014 l     O .data	00000010 APBAHBPrescTable
+00000000 l    df *ABS*	00000000 
+00000400 l       *ABS*	00000000 _Min_Stack_Size
+00000000 l       *ABS*	00000000 _Min_Heap_Size
+080015c0  w    F .text	00000004 RTC_Alarm_IRQHandler
+080015c0  w    F .text	00000004 HASH_RNG_IRQHandler
+080015c0  w    F .text	00000004 EXTI2_IRQHandler
+080015c0  w    F .text	00000004 TIM8_CC_IRQHandler
+0800110c g     F .text	0000000c RCC_HSICmd
+0800116c g     F .text	0000000c RCC_PLLCmd
+080002f0 g     F .text	00000002 DebugMon_Handler
+08001178 g     F .text	00000014 RCC_PLLI2SConfig
+08001084 g     F .text	0000002e GPIO_PinAFConfig
+08001568 g     F .text	0000000c RCC_ClearITPendingBit
+08001050 g     F .text	0000000c GPIO_ReadOutputDataBit
+080015c0  w    F .text	00000004 TIM1_CC_IRQHandler
+080015c0  w    F .text	00000004 DMA2_Stream5_IRQHandler
+080002dc g     F .text	00000002 HardFault_Handler
+08000bc8 g     F .text	000000f4 CAN_GetITStatus
+08000cbc g     F .text	000000a0 CAN_ClearITPendingBit
+0800061c g     F .text	000000f0 CAN_FilterInit
+080015c0  w    F .text	00000004 DMA1_Stream5_IRQHandler
+0800033c g     F .text	00000020 SysTick_Handler
+080013d0 g     F .text	0000001c RCC_AHB2PeriphResetCmd
+080015c0  w    F .text	00000004 PVD_IRQHandler
+080015c0  w    F .text	00000004 SDIO_IRQHandler
+080015c0  w    F .text	00000004 TAMP_STAMP_IRQHandler
+080015c4 g       .text	00000000 _sidata
+080002f4 g     F .text	00000002 PendSV_Handler
+080002d8 g     F .text	00000002 NMI_Handler
+080008b4 g     F .text	00000074 CAN_TransmitStatus
+080015c4 g       .data	00000000 __exidx_end
+080015c0  w    F .text	00000004 CAN2_RX1_IRQHandler
+080015c0  w    F .text	00000004 EXTI3_IRQHandler
+080014cc g     F .text	0000001c RCC_ITConfig
+080015c0  w    F .text	00000004 TIM8_TRG_COM_TIM14_IRQHandler
+080015c0  w    F .text	00000004 TIM1_UP_TIM10_IRQHandler
+080013b4 g     F .text	0000001c RCC_AHB1PeriphResetCmd
+080015c4 g       .text	00000000 _etext
+20000024 g       .bss	00000000 _sbss
+080011cc g     F .text	00000014 RCC_SYSCLKConfig
+080009f4 g     F .text	00000016 CAN_FIFORelease
+080015c0  w    F .text	00000004 TIM8_UP_TIM13_IRQHandler
+080015c0  w    F .text	00000004 I2C3_ER_IRQHandler
+08000d5c g     F .text	0000001c EXTI_DeInit
+08001510 g     F .text	00000032 RCC_WaitForHSEStartUp
+08001310 g     F .text	0000000c RCC_BackupResetCmd
+08000b1c g     F .text	00000008 CAN_GetLSBTransmitErrorCounter
+08001198 g     F .text	0000000c RCC_ClockSecuritySystemCmd
+0800072c g     F .text	0000003c CAN_SlaveStartBank
+080002f8 g     F .text	00000012 EXTI0_IRQHandler
+080015c0  w    F .text	00000004 I2C2_EV_IRQHandler
+08001544 g     F .text	00000010 RCC_ClearFlag
+080015c0  w    F .text	00000004 DMA1_Stream2_IRQHandler
+080015c0  w    F .text	00000004 CAN1_RX0_IRQHandler
+080015c0  w    F .text	00000004 FPU_IRQHandler
+20000000 g     O .data	00000004 SystemCoreClock
+08000928 g     F .text	0000002a CAN_CancelTransmit
+080015c0  w    F .text	00000004 OTG_HS_WKUP_IRQHandler
+080010e8 g     F .text	00000010 RCC_HSEConfig
+08000780 g     F .text	0000005e CAN_TTComModeCmd
+080002d4 g     F .text	00000002 CAN_Tx
+0800107c g     F .text	00000008 GPIO_ToggleBits
+080002e8 g     F .text	00000002 UsageFault_Handler
+08001398 g     F .text	0000001c RCC_APB2PeriphClockCmd
+080015c0  w    F .text	00000004 CAN2_SCE_IRQHandler
+080015c0  w    F .text	00000004 DMA2_Stream2_IRQHandler
+08000f74 g     F .text	00000090 GPIO_Init
+0800114c g     F .text	00000020 RCC_PLLConfig
+20000024 g       .bss	00000000 __bss_start__
+08000b14 g     F .text	00000006 CAN_GetReceiveErrorCounter
+20000000 g       .data	00000000 _sdata
+080015c0  w    F .text	00000004 SPI1_IRQHandler
+08001478 g     F .text	0000001c RCC_AHB3PeriphClockLPModeCmd
+08001078 g     F .text	00000004 GPIO_Write
+080015c0  w    F .text	00000004 TIM6_DAC_IRQHandler
+0800105c g     F .text	00000006 GPIO_ReadOutputData
+080015c0  w    F .text	00000004 TIM1_BRK_TIM9_IRQHandler
+08001118 g     F .text	00000028 RCC_LSEConfig
+080015c0  w    F .text	00000004 DCMI_IRQHandler
+080001c4 g     F .text	000000c4 Can_Init
+080015c0  w    F .text	00000004 CAN2_RX0_IRQHandler
+08001304 g     F .text	0000000c RCC_RTCCLKCmd
+0800137c g     F .text	0000001c RCC_APB1PeriphClockCmd
+08000b38 g     F .text	0000005a CAN_GetFlagStatus
+08001554 g     F .text	00000014 RCC_GetITStatus
+080015c4 g       .data	00000000 __exidx_start
+080015c0  w    F .text	00000004 DMA2_Stream3_IRQHandler
+08001344 g     F .text	0000001c RCC_AHB2PeriphClockCmd
+080004f8 g     F .text	00000038 CAN_DeInit
+080015c0  w    F .text	00000004 USART6_IRQHandler
+080011a4 g     F .text	00000014 RCC_MCO1Config
+080015c0  w    F .text	00000004 USART3_IRQHandler
+08000e64 g     F .text	0000000c EXTI_ClearITPendingBit
+20000024 g     O .bss	00000004 TimingDelay
+080015c0  w    F .text	00000004 CRYP_IRQHandler
+2000002c g       .bss	00000000 _ebss
+08000ac4 g     F .text	0000001c CAN_Sleep
+08001574  w    F .text	00000038 Reset_Handler
+08001048 g     F .text	00000006 GPIO_ReadInputData
+080015c0  w    F .text	00000004 CAN1_RX1_IRQHandler
+08000188 g     F .text	0000003c init_leds
+080015c0  w    F .text	00000004 UART5_IRQHandler
+080014e8 g     F .text	00000028 RCC_GetFlagStatus
+080015c0  w    F .text	00000004 DMA2_Stream0_IRQHandler
+08000a24 g     F .text	0000009e CAN_OperatingModeRequest
+08001064 g     F .text	00000004 GPIO_SetBits
+080015c0  w    F .text	00000004 TIM4_IRQHandler
+08000e28 g     F .text	00000014 EXTI_GetFlagStatus
+080011e0 g     F .text	00000010 RCC_GetSYSCLKSource
+0800106c g     F .text	0000000a GPIO_WriteBit
+080015c0  w    F .text	00000004 I2C1_EV_IRQHandler
+080015c0  w    F .text	00000004 DMA1_Stream6_IRQHandler
+080013ec g     F .text	0000001c RCC_AHB3PeriphResetCmd
+0800122c g     F .text	000000a8 RCC_GetClocksFreq
+080015c0  w    F .text	00000004 DMA1_Stream1_IRQHandler
+080014b0 g     F .text	0000001c RCC_APB2PeriphClockLPModeCmd
+080015c0  w    F .text	00000004 UART4_IRQHandler
+08000e18 g     F .text	00000010 EXTI_GenerateSWInterrupt
+2000002c g       .bss	00000000 __bss_end__
+080015c0  w    F .text	00000004 TIM3_IRQHandler
+080015c0  w    F .text	00000004 RCC_IRQHandler
+08000954 g     F .text	000000a0 CAN_Receive
+080015c0  w    F .text	00000004 TIM8_BRK_TIM12_IRQHandler
+08000b94 g     F .text	00000034 CAN_ClearFlag
+08000530 g     F .text	000000ec CAN_Init
+080015c0 g       .text	00000004 Default_Handler
+0800070c g     F .text	00000020 CAN_StructInit
+20000004 g     O .data	00000010 AHBPrescTable
+08000e3c g     F .text	0000000c EXTI_ClearFlag
+080012d4 g     F .text	00000030 RCC_RTCCLKConfig
+080015c0  w    F .text	00000004 EXTI15_10_IRQHandler
+080015c0  w    F .text	00000004 ADC_IRQHandler
+08000d78 g     F .text	00000090 EXTI_Init
+0800118c g     F .text	0000000c RCC_PLLI2SCmd
+080015c0  w    F .text	00000004 DMA1_Stream7_IRQHandler
+08001068 g     F .text	00000004 GPIO_ResetBits
+080015c0  w    F .text	00000004 TIM7_IRQHandler
+080015c0  w    F .text	00000004 CAN2_TX_IRQHandler
+080015c0  w    F .text	00000004 TIM5_IRQHandler
+080015c0  w    F .text	00000004 DMA2_Stream7_IRQHandler
+08000b24 g     F .text	00000014 CAN_ITConfig
+080015c0  w    F .text	00000004 I2C3_EV_IRQHandler
+080015c0  w    F .text	00000004 EXTI9_5_IRQHandler
+08000ae0 g     F .text	0000002c CAN_WakeUp
+080015c0  w    F .text	00000004 RTC_WKUP_IRQHandler
+08001494 g     F .text	0000001c RCC_APB1PeriphClockLPModeCmd
+080015c0  w    F .text	00000004 ETH_WKUP_IRQHandler
+08000e48 g     F .text	0000001c EXTI_GetITStatus
+080015c0  w    F .text	00000004 SPI2_IRQHandler
+080015c0  w    F .text	00000004 OTG_HS_EP1_IN_IRQHandler
+080002e0 g     F .text	00000002 MemManage_Handler
+080010f8 g     F .text	00000014 RCC_AdjustHSICalibrationValue
+08000288 g     F .text	0000004c main
+080015c0  w    F .text	00000004 DMA1_Stream0_IRQHandler
+08001440 g     F .text	0000001c RCC_AHB1PeriphClockLPModeCmd
+080015c0  w    F .text	00000004 CAN1_TX_IRQHandler
+080002ec g     F .text	00000002 SVC_Handler
+08001204 g     F .text	00000014 RCC_PCLK1Config
+08000e08 g     F .text	0000000e EXTI_StructInit
+08000a0c g     F .text	00000018 CAN_MessagePending
+080015c0  w    F .text	00000004 EXTI4_IRQHandler
+08001218 g     F .text	00000014 RCC_PCLK2Config
+0800041c g     F .text	00000044 SystemInit
+08000e70 g     F .text	00000104 GPIO_DeInit
+080010b4 g     F .text	00000034 RCC_DeInit
+080011b8 g     F .text	00000014 RCC_MCO2Config
+080015c0  w    F .text	00000004 FSMC_IRQHandler
+080015c0  w    F .text	00000004 ETH_IRQHandler
+080015c0  w    F .text	00000004 OTG_HS_EP1_OUT_IRQHandler
+080015c0  w    F .text	00000004 WWDG_IRQHandler
+0800145c g     F .text	0000001c RCC_AHB2PeriphClockLPModeCmd
+08001408 g     F .text	0000001c RCC_APB1PeriphResetCmd
+0800030c g     F .text	0000001c Delay
+080015c0  w    F .text	00000004 TIM2_IRQHandler
+08001004 g     F .text	00000012 GPIO_StructInit
+080015c0  w    F .text	00000004 OTG_FS_WKUP_IRQHandler
+080015c0  w    F .text	00000004 TIM1_TRG_COM_TIM11_IRQHandler
+080015c0  w    F .text	00000004 OTG_HS_IRQHandler
+20020000 g       *ABS*	00000000 _estack
+080015c0  w    F .text	00000004 EXTI1_IRQHandler
+20000028 g     O .bss	00000004 Time
+20000024 g       .data	00000000 _edata
+08000768 g     F .text	00000016 CAN_DBGFreeze
+080015c0  w    F .text	00000004 USART2_IRQHandler
+08000b0c g     F .text	00000008 CAN_GetLastErrorCode
+08000000 g     O .isr_vector	00000000 g_pfnVectors
+08000460 g     F .text	0000008c SystemCoreClockUpdate
+080015c0  w    F .text	00000004 I2C2_ER_IRQHandler
+080015c0  w    F .text	00000004 DMA2_Stream1_IRQHandler
+08000328 g     F .text	00000014 TimingDelay_Decrement
+080015c0  w    F .text	00000004 CAN1_SCE_IRQHandler
+08001360 g     F .text	0000001c RCC_AHB3PeriphClockCmd
+0800131c g     F .text	0000000c RCC_I2SCLKConfig
+080015c0  w    F .text	00000004 FLASH_IRQHandler
+080015c0  w    F .text	00000004 DMA2_Stream4_IRQHandler
+08001018 g     F .text	00000024 GPIO_PinLockConfig
+080002e4 g     F .text	00000002 BusFault_Handler
+08001328 g     F .text	0000001c RCC_AHB1PeriphClockCmd
+080015c0  w    F .text	00000004 USART1_IRQHandler
+08001140 g     F .text	0000000c RCC_LSICmd
+080015c0  w    F .text	00000004 OTG_FS_IRQHandler
+080015c0  w    F .text	00000004 SPI3_IRQHandler
+080015c0  w    F .text	00000004 DMA1_Stream4_IRQHandler
+08001424 g     F .text	0000001c RCC_APB2PeriphResetCmd
+080015c0  w    F .text	00000004 I2C1_ER_IRQHandler
+0800103c g     F .text	0000000c GPIO_ReadInputDataBit
+080015c0  w    F .text	00000004 DMA2_Stream6_IRQHandler
+080007e0 g     F .text	000000d4 CAN_Transmit
+080011f0 g     F .text	00000014 RCC_HCLKConfig
+080015c0  w    F .text	00000004 DMA1_Stream3_IRQHandler
+
+
+
+Disassembly of section .text:
+
+08000188 <init_leds>:
+init_leds():
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/discovery.h:17
+#define ClrPin(port, pin) ( port ->BSRRL = pin )
+
+#define LedOn(led) (LED_PORT->BSRRL = led )
+#define LedOff(led) (LED_PORT->BSRRL = led )
+
+void init_leds() {
+ 8000188:	b500      	push	{lr}
+ 800018a:	b083      	sub	sp, #12
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/discovery.h:18
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+ 800018c:	2008      	movs	r0, #8
+ 800018e:	2101      	movs	r1, #1
+ 8000190:	f001 f8ca 	bl	8001328 <RCC_AHB1PeriphClockCmd>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/discovery.h:22
+
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+	GPIO_InitStructure.GPIO_Pin = LED_R | LED_G | LED_B | LED_O;
+ 8000194:	f44f 4370 	mov.w	r3, #61440	; 0xf000
+ 8000198:	9300      	str	r3, [sp, #0]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/discovery.h:23
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+ 800019a:	2301      	movs	r3, #1
+ 800019c:	f88d 3004 	strb.w	r3, [sp, #4]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/discovery.h:24
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+ 80001a0:	2300      	movs	r3, #0
+ 80001a2:	f88d 3006 	strb.w	r3, [sp, #6]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/discovery.h:25
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+ 80001a6:	f88d 3007 	strb.w	r3, [sp, #7]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/discovery.h:26
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+ 80001aa:	2303      	movs	r3, #3
+ 80001ac:	f88d 3005 	strb.w	r3, [sp, #5]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/discovery.h:28
+
+	GPIO_Init(GPIOD, &GPIO_InitStructure);
+ 80001b0:	4803      	ldr	r0, [pc, #12]	; (80001c0 <init_leds+0x38>)
+ 80001b2:	4669      	mov	r1, sp
+ 80001b4:	f000 fede 	bl	8000f74 <GPIO_Init>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/discovery.h:29
+}
+ 80001b8:	b003      	add	sp, #12
+ 80001ba:	f85d fb04 	ldr.w	pc, [sp], #4
+ 80001be:	bf00      	nop
+ 80001c0:	40020c00 	.word	0x40020c00
+
+080001c4 <Can_Init>:
+Can_Init():
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:19
+
+	while (1) {
+	}
+}
+
+void Can_Init() {
+ 80001c4:	b530      	push	{r4, r5, lr}
+ 80001c6:	b08b      	sub	sp, #44	; 0x2c
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:20
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN2, ENABLE);
+ 80001c8:	f04f 6080 	mov.w	r0, #67108864	; 0x4000000
+ 80001cc:	2101      	movs	r1, #1
+ 80001ce:	f001 f8d5 	bl	800137c <RCC_APB1PeriphClockCmd>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:22
+
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+ 80001d2:	2002      	movs	r0, #2
+ 80001d4:	2101      	movs	r1, #1
+ 80001d6:	f001 f8a7 	bl	8001328 <RCC_AHB1PeriphClockCmd>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:24
+
+	GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_CAN2);
+ 80001da:	4d29      	ldr	r5, [pc, #164]	; (8000280 <Can_Init+0xbc>)
+ 80001dc:	4628      	mov	r0, r5
+ 80001de:	2105      	movs	r1, #5
+ 80001e0:	2209      	movs	r2, #9
+ 80001e2:	f000 ff4f 	bl	8001084 <GPIO_PinAFConfig>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:25
+	GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_CAN2);
+ 80001e6:	4628      	mov	r0, r5
+ 80001e8:	2106      	movs	r1, #6
+ 80001ea:	2209      	movs	r2, #9
+ 80001ec:	f000 ff4a 	bl	8001084 <GPIO_PinAFConfig>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:29
+
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6;
+ 80001f0:	2360      	movs	r3, #96	; 0x60
+ 80001f2:	9308      	str	r3, [sp, #32]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:30
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+ 80001f4:	2302      	movs	r3, #2
+ 80001f6:	f88d 3024 	strb.w	r3, [sp, #36]	; 0x24
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:31
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+ 80001fa:	2400      	movs	r4, #0
+ 80001fc:	f88d 4026 	strb.w	r4, [sp, #38]	; 0x26
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:32
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+ 8000200:	f88d 4027 	strb.w	r4, [sp, #39]	; 0x27
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:33
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+ 8000204:	2303      	movs	r3, #3
+ 8000206:	f88d 3025 	strb.w	r3, [sp, #37]	; 0x25
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:35
+
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+ 800020a:	4628      	mov	r0, r5
+ 800020c:	a908      	add	r1, sp, #32
+ 800020e:	f000 feb1 	bl	8000f74 <GPIO_Init>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:38
+
+	CAN_InitTypeDef CAN_InitStructure;
+	CAN_InitStructure.CAN_ABOM = DISABLE;
+ 8000212:	f88d 401b 	strb.w	r4, [sp, #27]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:39
+	CAN_InitStructure.CAN_AWUM = DISABLE;
+ 8000216:	f88d 401c 	strb.w	r4, [sp, #28]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:40
+	CAN_InitStructure.CAN_BS1 = CAN_BS1_6tq;
+ 800021a:	2305      	movs	r3, #5
+ 800021c:	f88d 3018 	strb.w	r3, [sp, #24]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:41
+	CAN_InitStructure.CAN_BS2 = CAN_BS1_8tq;
+ 8000220:	2307      	movs	r3, #7
+ 8000222:	f88d 3019 	strb.w	r3, [sp, #25]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:42
+	CAN_InitStructure.CAN_Mode = CAN_Mode_LoopBack;
+ 8000226:	2301      	movs	r3, #1
+ 8000228:	f88d 3016 	strb.w	r3, [sp, #22]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:43
+	CAN_InitStructure.CAN_NART = DISABLE;
+ 800022c:	f88d 401d 	strb.w	r4, [sp, #29]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:44
+	CAN_InitStructure.CAN_Prescaler = 16;
+ 8000230:	2210      	movs	r2, #16
+ 8000232:	f8ad 2014 	strh.w	r2, [sp, #20]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:45
+	CAN_InitStructure.CAN_RFLM = DISABLE;
+ 8000236:	f88d 401e 	strb.w	r4, [sp, #30]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:46
+	CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
+ 800023a:	f88d 4017 	strb.w	r4, [sp, #23]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:47
+	CAN_InitStructure.CAN_TTCM = DISABLE;
+ 800023e:	f88d 401a 	strb.w	r4, [sp, #26]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:48
+	CAN_InitStructure.CAN_TXFP = DISABLE;
+ 8000242:	f88d 401f 	strb.w	r4, [sp, #31]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:51
+
+	CAN_FilterInitTypeDef CAN_FilterInitStructure;
+	CAN_FilterInitStructure.CAN_FilterNumber = 14;
+ 8000246:	220e      	movs	r2, #14
+ 8000248:	f88d 200e 	strb.w	r2, [sp, #14]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:52
+	CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;
+ 800024c:	f88d 400f 	strb.w	r4, [sp, #15]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:53
+	CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_32bit;
+ 8000250:	f88d 3010 	strb.w	r3, [sp, #16]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:54
+	CAN_FilterInitStructure.CAN_FilterIdHigh = 0x0000;
+ 8000254:	f8ad 4004 	strh.w	r4, [sp, #4]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:55
+	CAN_FilterInitStructure.CAN_FilterIdLow = 0x0000;
+ 8000258:	f8ad 4006 	strh.w	r4, [sp, #6]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:56
+	CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0x0000;
+ 800025c:	f8ad 4008 	strh.w	r4, [sp, #8]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:57
+	CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;
+ 8000260:	f8ad 400a 	strh.w	r4, [sp, #10]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:58
+	CAN_FilterInitStructure.CAN_FilterFIFOAssignment = 0;
+ 8000264:	f8ad 400c 	strh.w	r4, [sp, #12]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:59
+	CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
+ 8000268:	f88d 3011 	strb.w	r3, [sp, #17]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:61
+
+	CAN_FilterInit(&CAN_FilterInitStructure);
+ 800026c:	a801      	add	r0, sp, #4
+ 800026e:	f000 f9d5 	bl	800061c <CAN_FilterInit>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:62
+	CAN_Init(CAN2, &CAN_InitStructure);
+ 8000272:	4804      	ldr	r0, [pc, #16]	; (8000284 <Can_Init+0xc0>)
+ 8000274:	a905      	add	r1, sp, #20
+ 8000276:	f000 f95b 	bl	8000530 <CAN_Init>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:63
+}
+ 800027a:	b00b      	add	sp, #44	; 0x2c
+ 800027c:	bd30      	pop	{r4, r5, pc}
+ 800027e:	bf00      	nop
+ 8000280:	40020400 	.word	0x40020400
+ 8000284:	40006800 	.word	0x40006800
+
+08000288 <main>:
+main():
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:8
+
+//extern volatile uint32_t Time;
+
+void Can_Init();
+
+int main(void) {
+ 8000288:	b508      	push	{r3, lr}
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:9
+	SysTick_Config(SystemCoreClock / 1000);
+ 800028a:	4b0d      	ldr	r3, [pc, #52]	; (80002c0 <main+0x38>)
+ 800028c:	681a      	ldr	r2, [r3, #0]
+ 800028e:	4b0d      	ldr	r3, [pc, #52]	; (80002c4 <main+0x3c>)
+ 8000290:	fba3 1202 	umull	r1, r2, r3, r2
+SysTick_Config():
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\CMSIS\Include/core_cm4.h:1285
+ */
+static __INLINE uint32_t SysTick_Config(uint32_t ticks)
+{
+  if (ticks > SysTick_LOAD_RELOAD_Msk)  return (1);            /* Reload value impossible */
+
+  SysTick->LOAD  = (ticks & SysTick_LOAD_RELOAD_Msk) - 1;      /* set reload register */
+ 8000294:	0992      	lsrs	r2, r2, #6
+ 8000296:	3a01      	subs	r2, #1
+ 8000298:	4b0b      	ldr	r3, [pc, #44]	; (80002c8 <main+0x40>)
+ 800029a:	605a      	str	r2, [r3, #4]
+NVIC_SetPriority():
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\CMSIS\Include/core_cm4.h:1159
+    \param [in]  priority  Priority to set
+ */
+static __INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
+{
+  if(IRQn < 0) {
+    SCB->SHP[((uint32_t)(IRQn) & 0xF)-4] = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff); } /* set Priority for Cortex-M  System Interrupts */
+ 800029c:	21f0      	movs	r1, #240	; 0xf0
+ 800029e:	4a0b      	ldr	r2, [pc, #44]	; (80002cc <main+0x44>)
+ 80002a0:	f882 1023 	strb.w	r1, [r2, #35]	; 0x23
+SysTick_Config():
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\CMSIS\Include/core_cm4.h:1287
+{
+  if (ticks > SysTick_LOAD_RELOAD_Msk)  return (1);            /* Reload value impossible */
+
+  SysTick->LOAD  = (ticks & SysTick_LOAD_RELOAD_Msk) - 1;      /* set reload register */
+  NVIC_SetPriority (SysTick_IRQn, (1<<__NVIC_PRIO_BITS) - 1);  /* set Priority for Cortex-M0 System Interrupts */
+  SysTick->VAL   = 0;                                          /* Load the SysTick Counter Value */
+ 80002a4:	2200      	movs	r2, #0
+ 80002a6:	609a      	str	r2, [r3, #8]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\CMSIS\Include/core_cm4.h:1288
+  SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+ 80002a8:	2207      	movs	r2, #7
+ 80002aa:	601a      	str	r2, [r3, #0]
+main():
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:10
+	init_leds();
+ 80002ac:	f7ff ff6c 	bl	8000188 <init_leds>
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:12
+
+	LedOn(LED_G);
+ 80002b0:	f44f 5280 	mov.w	r2, #4096	; 0x1000
+ 80002b4:	4b06      	ldr	r3, [pc, #24]	; (80002d0 <main+0x48>)
+ 80002b6:	831a      	strh	r2, [r3, #24]
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:13
+	Can_Init();
+ 80002b8:	f7ff ff84 	bl	80001c4 <Can_Init>
+ 80002bc:	e7fe      	b.n	80002bc <main+0x34>
+ 80002be:	bf00      	nop
+ 80002c0:	20000000 	.word	0x20000000
+ 80002c4:	10624dd3 	.word	0x10624dd3
+ 80002c8:	e000e010 	.word	0xe000e010
+ 80002cc:	e000ed00 	.word	0xe000ed00
+ 80002d0:	40020c00 	.word	0x40020c00
+
+080002d4 <CAN_Tx>:
+CAN_Tx():
+C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Debug/../src/main.c:65
+
+	CAN_FilterInit(&CAN_FilterInitStructure);
+	CAN_Init(CAN2, &CAN_InitStructure);
+}
+
+void CAN_Tx() {
+ 80002d4:	4770      	bx	lr
+ 80002d6:	bf00      	nop
+
+080002d8 <NMI_Handler>:
+NMI_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:19
+ 80002d8:	4770      	bx	lr
+ 80002da:	bf00      	nop
+
+080002dc <HardFault_Handler>:
+HardFault_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:29
+ 80002dc:	e7fe      	b.n	80002dc <HardFault_Handler>
+ 80002de:	bf00      	nop
+
+080002e0 <MemManage_Handler>:
+MemManage_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:43
+ 80002e0:	e7fe      	b.n	80002e0 <MemManage_Handler>
+ 80002e2:	bf00      	nop
+
+080002e4 <BusFault_Handler>:
+BusFault_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:57
+ 80002e4:	e7fe      	b.n	80002e4 <BusFault_Handler>
+ 80002e6:	bf00      	nop
+
+080002e8 <UsageFault_Handler>:
+UsageFault_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:71
+ 80002e8:	e7fe      	b.n	80002e8 <UsageFault_Handler>
+ 80002ea:	bf00      	nop
+
+080002ec <SVC_Handler>:
+SVC_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:85
+ 80002ec:	4770      	bx	lr
+ 80002ee:	bf00      	nop
+
+080002f0 <DebugMon_Handler>:
+DebugMon_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:95
+ 80002f0:	4770      	bx	lr
+ 80002f2:	bf00      	nop
+
+080002f4 <PendSV_Handler>:
+PendSV_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:105
+ 80002f4:	4770      	bx	lr
+ 80002f6:	bf00      	nop
+
+080002f8 <EXTI0_IRQHandler>:
+EXTI0_IRQHandler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:131
+ 80002f8:	b508      	push	{r3, lr}
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:133
+ 80002fa:	2001      	movs	r0, #1
+ 80002fc:	f000 fda4 	bl	8000e48 <EXTI_GetITStatus>
+ 8000300:	b110      	cbz	r0, 8000308 <EXTI0_IRQHandler+0x10>
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:135
+ 8000302:	2001      	movs	r0, #1
+ 8000304:	f000 fdae 	bl	8000e64 <EXTI_ClearITPendingBit>
+ 8000308:	bd08      	pop	{r3, pc}
+ 800030a:	bf00      	nop
+
+0800030c <Delay>:
+Delay():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:143
+ 800030c:	b082      	sub	sp, #8
+ 800030e:	9001      	str	r0, [sp, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:144
+ 8000310:	9a01      	ldr	r2, [sp, #4]
+ 8000312:	4b04      	ldr	r3, [pc, #16]	; (8000324 <Delay+0x18>)
+ 8000314:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:146
+ 8000316:	461a      	mov	r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:146 (discriminator 1)
+ 8000318:	6813      	ldr	r3, [r2, #0]
+ 800031a:	2b00      	cmp	r3, #0
+ 800031c:	d1fc      	bne.n	8000318 <Delay+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:147
+ 800031e:	b002      	add	sp, #8
+ 8000320:	4770      	bx	lr
+ 8000322:	bf00      	nop
+ 8000324:	20000024 	.word	0x20000024
+
+08000328 <TimingDelay_Decrement>:
+TimingDelay_Decrement():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:151
+ 8000328:	4b03      	ldr	r3, [pc, #12]	; (8000338 <TimingDelay_Decrement+0x10>)
+ 800032a:	681b      	ldr	r3, [r3, #0]
+ 800032c:	b11b      	cbz	r3, 8000336 <TimingDelay_Decrement+0xe>
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:153
+ 800032e:	4b02      	ldr	r3, [pc, #8]	; (8000338 <TimingDelay_Decrement+0x10>)
+ 8000330:	681a      	ldr	r2, [r3, #0]
+ 8000332:	3a01      	subs	r2, #1
+ 8000334:	601a      	str	r2, [r3, #0]
+ 8000336:	4770      	bx	lr
+ 8000338:	20000024 	.word	0x20000024
+
+0800033c <SysTick_Handler>:
+SysTick_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:115
+ 800033c:	b508      	push	{r3, lr}
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:116
+ 800033e:	4b05      	ldr	r3, [pc, #20]	; (8000354 <SysTick_Handler+0x18>)
+ 8000340:	681b      	ldr	r3, [r3, #0]
+ 8000342:	b10b      	cbz	r3, 8000348 <SysTick_Handler+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:118
+ 8000344:	f7ff fff0 	bl	8000328 <TimingDelay_Decrement>
+C:\Users\Filip\Eclipse\Template\Debug/../src/stm32f4xx_it.c:120
+ 8000348:	4b03      	ldr	r3, [pc, #12]	; (8000358 <SysTick_Handler+0x1c>)
+ 800034a:	681a      	ldr	r2, [r3, #0]
+ 800034c:	3201      	adds	r2, #1
+ 800034e:	601a      	str	r2, [r3, #0]
+ 8000350:	bd08      	pop	{r3, pc}
+ 8000352:	bf00      	nop
+ 8000354:	20000024 	.word	0x20000024
+ 8000358:	20000028 	.word	0x20000028
+
+0800035c <SetSysClock>:
+SetSysClock():
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:334
+ 800035c:	b082      	sub	sp, #8
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:338
+ 800035e:	2300      	movs	r3, #0
+ 8000360:	9301      	str	r3, [sp, #4]
+ 8000362:	9300      	str	r3, [sp, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:341
+ 8000364:	4b29      	ldr	r3, [pc, #164]	; (800040c <SetSysClock+0xb0>)
+ 8000366:	681a      	ldr	r2, [r3, #0]
+ 8000368:	f442 3280 	orr.w	r2, r2, #65536	; 0x10000
+ 800036c:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:346
+ 800036e:	461a      	mov	r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:346 (discriminator 1)
+ 8000370:	6813      	ldr	r3, [r2, #0]
+ 8000372:	f403 3300 	and.w	r3, r3, #131072	; 0x20000
+ 8000376:	9300      	str	r3, [sp, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:347 (discriminator 1)
+ 8000378:	9b01      	ldr	r3, [sp, #4]
+ 800037a:	3301      	adds	r3, #1
+ 800037c:	9301      	str	r3, [sp, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:348 (discriminator 1)
+ 800037e:	9b00      	ldr	r3, [sp, #0]
+ 8000380:	b91b      	cbnz	r3, 800038a <SetSysClock+0x2e>
+ 8000382:	9b01      	ldr	r3, [sp, #4]
+ 8000384:	f5b3 6fa0 	cmp.w	r3, #1280	; 0x500
+ 8000388:	d1f2      	bne.n	8000370 <SetSysClock+0x14>
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:350
+ 800038a:	4b20      	ldr	r3, [pc, #128]	; (800040c <SetSysClock+0xb0>)
+ 800038c:	681b      	ldr	r3, [r3, #0]
+ 800038e:	f413 3f00 	tst.w	r3, #131072	; 0x20000
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:352
+ 8000392:	bf14      	ite	ne
+ 8000394:	2301      	movne	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:356
+ 8000396:	2300      	moveq	r3, #0
+ 8000398:	9300      	str	r3, [sp, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:359
+ 800039a:	9b00      	ldr	r3, [sp, #0]
+ 800039c:	2b01      	cmp	r3, #1
+ 800039e:	d132      	bne.n	8000406 <SetSysClock+0xaa>
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:362
+ 80003a0:	4b1a      	ldr	r3, [pc, #104]	; (800040c <SetSysClock+0xb0>)
+ 80003a2:	6c1a      	ldr	r2, [r3, #64]	; 0x40
+ 80003a4:	f042 5280 	orr.w	r2, r2, #268435456	; 0x10000000
+ 80003a8:	641a      	str	r2, [r3, #64]	; 0x40
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:363
+ 80003aa:	4a19      	ldr	r2, [pc, #100]	; (8000410 <SetSysClock+0xb4>)
+ 80003ac:	6811      	ldr	r1, [r2, #0]
+ 80003ae:	f441 4180 	orr.w	r1, r1, #16384	; 0x4000
+ 80003b2:	6011      	str	r1, [r2, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:366
+ 80003b4:	689a      	ldr	r2, [r3, #8]
+ 80003b6:	609a      	str	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:369
+ 80003b8:	689a      	ldr	r2, [r3, #8]
+ 80003ba:	f442 4200 	orr.w	r2, r2, #32768	; 0x8000
+ 80003be:	609a      	str	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:372
+ 80003c0:	689a      	ldr	r2, [r3, #8]
+ 80003c2:	f442 52a0 	orr.w	r2, r2, #5120	; 0x1400
+ 80003c6:	609a      	str	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:375
+ 80003c8:	4a12      	ldr	r2, [pc, #72]	; (8000414 <SetSysClock+0xb8>)
+ 80003ca:	605a      	str	r2, [r3, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:379
+ 80003cc:	681a      	ldr	r2, [r3, #0]
+ 80003ce:	f042 7280 	orr.w	r2, r2, #16777216	; 0x1000000
+ 80003d2:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:382
+ 80003d4:	461a      	mov	r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:382 (discriminator 1)
+ 80003d6:	6813      	ldr	r3, [r2, #0]
+ 80003d8:	f013 7f00 	tst.w	r3, #33554432	; 0x2000000
+ 80003dc:	d0fb      	beq.n	80003d6 <SetSysClock+0x7a>
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:387
+ 80003de:	f240 6205 	movw	r2, #1541	; 0x605
+ 80003e2:	4b0d      	ldr	r3, [pc, #52]	; (8000418 <SetSysClock+0xbc>)
+ 80003e4:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:390
+ 80003e6:	f5a3 6380 	sub.w	r3, r3, #1024	; 0x400
+ 80003ea:	689a      	ldr	r2, [r3, #8]
+ 80003ec:	f022 0203 	bic.w	r2, r2, #3
+ 80003f0:	609a      	str	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:391
+ 80003f2:	689a      	ldr	r2, [r3, #8]
+ 80003f4:	f042 0202 	orr.w	r2, r2, #2
+ 80003f8:	609a      	str	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:394
+ 80003fa:	461a      	mov	r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:394 (discriminator 1)
+ 80003fc:	6893      	ldr	r3, [r2, #8]
+ 80003fe:	f003 030c 	and.w	r3, r3, #12
+ 8000402:	2b08      	cmp	r3, #8
+ 8000404:	d1fa      	bne.n	80003fc <SetSysClock+0xa0>
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:403
+ 8000406:	b002      	add	sp, #8
+ 8000408:	4770      	bx	lr
+ 800040a:	bf00      	nop
+ 800040c:	40023800 	.word	0x40023800
+ 8000410:	40007000 	.word	0x40007000
+ 8000414:	07405408 	.word	0x07405408
+ 8000418:	40023c00 	.word	0x40023c00
+
+0800041c <SystemInit>:
+SystemInit():
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:205
+ 800041c:	b508      	push	{r3, lr}
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:208
+ 800041e:	4b0d      	ldr	r3, [pc, #52]	; (8000454 <SystemInit+0x38>)
+ 8000420:	681a      	ldr	r2, [r3, #0]
+ 8000422:	f042 0201 	orr.w	r2, r2, #1
+ 8000426:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:211
+ 8000428:	2100      	movs	r1, #0
+ 800042a:	6099      	str	r1, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:214
+ 800042c:	681a      	ldr	r2, [r3, #0]
+ 800042e:	f022 7284 	bic.w	r2, r2, #17301504	; 0x1080000
+ 8000432:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
+ 8000436:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:217
+ 8000438:	4a07      	ldr	r2, [pc, #28]	; (8000458 <SystemInit+0x3c>)
+ 800043a:	605a      	str	r2, [r3, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:220
+ 800043c:	681a      	ldr	r2, [r3, #0]
+ 800043e:	f422 2280 	bic.w	r2, r2, #262144	; 0x40000
+ 8000442:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:223
+ 8000444:	60d9      	str	r1, [r3, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:231
+ 8000446:	f7ff ff89 	bl	800035c <SetSysClock>
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:237
+ 800044a:	f04f 6200 	mov.w	r2, #134217728	; 0x8000000
+ 800044e:	4b03      	ldr	r3, [pc, #12]	; (800045c <SystemInit+0x40>)
+ 8000450:	609a      	str	r2, [r3, #8]
+ 8000452:	bd08      	pop	{r3, pc}
+ 8000454:	40023800 	.word	0x40023800
+ 8000458:	24003010 	.word	0x24003010
+ 800045c:	e000ed00 	.word	0xe000ed00
+
+08000460 <SystemCoreClockUpdate>:
+SystemCoreClockUpdate():
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:282
+ 8000460:	4b1e      	ldr	r3, [pc, #120]	; (80004dc <SystemCoreClockUpdate+0x7c>)
+ 8000462:	689b      	ldr	r3, [r3, #8]
+ 8000464:	f003 030c 	and.w	r3, r3, #12
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:284
+ 8000468:	2b04      	cmp	r3, #4
+ 800046a:	d006      	beq.n	800047a <SystemCoreClockUpdate+0x1a>
+ 800046c:	2b08      	cmp	r3, #8
+ 800046e:	d008      	beq.n	8000482 <SystemCoreClockUpdate+0x22>
+ 8000470:	bb23      	cbnz	r3, 80004bc <SystemCoreClockUpdate+0x5c>
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:287
+ 8000472:	4a1b      	ldr	r2, [pc, #108]	; (80004e0 <SystemCoreClockUpdate+0x80>)
+ 8000474:	4b1b      	ldr	r3, [pc, #108]	; (80004e4 <SystemCoreClockUpdate+0x84>)
+ 8000476:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:288
+ 8000478:	e023      	b.n	80004c2 <SystemCoreClockUpdate+0x62>
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:290
+ 800047a:	4a1b      	ldr	r2, [pc, #108]	; (80004e8 <SystemCoreClockUpdate+0x88>)
+ 800047c:	4b19      	ldr	r3, [pc, #100]	; (80004e4 <SystemCoreClockUpdate+0x84>)
+ 800047e:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:291
+ 8000480:	e01f      	b.n	80004c2 <SystemCoreClockUpdate+0x62>
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:297
+ 8000482:	4b16      	ldr	r3, [pc, #88]	; (80004dc <SystemCoreClockUpdate+0x7c>)
+ 8000484:	6859      	ldr	r1, [r3, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:298
+ 8000486:	685b      	ldr	r3, [r3, #4]
+ 8000488:	f003 033f 	and.w	r3, r3, #63	; 0x3f
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:300
+ 800048c:	f411 0f80 	tst.w	r1, #4194304	; 0x400000
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:303
+ 8000490:	bf14      	ite	ne
+ 8000492:	4a15      	ldrne	r2, [pc, #84]	; (80004e8 <SystemCoreClockUpdate+0x88>)
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:308
+ 8000494:	4a12      	ldreq	r2, [pc, #72]	; (80004e0 <SystemCoreClockUpdate+0x80>)
+ 8000496:	fbb2 f3f3 	udiv	r3, r2, r3
+ 800049a:	4a10      	ldr	r2, [pc, #64]	; (80004dc <SystemCoreClockUpdate+0x7c>)
+ 800049c:	6852      	ldr	r2, [r2, #4]
+ 800049e:	f3c2 1288 	ubfx	r2, r2, #6, #9
+ 80004a2:	fb02 f203 	mul.w	r2, r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:311
+ 80004a6:	4b0d      	ldr	r3, [pc, #52]	; (80004dc <SystemCoreClockUpdate+0x7c>)
+ 80004a8:	685b      	ldr	r3, [r3, #4]
+ 80004aa:	f3c3 4301 	ubfx	r3, r3, #16, #2
+ 80004ae:	3301      	adds	r3, #1
+ 80004b0:	005b      	lsls	r3, r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:312
+ 80004b2:	fbb2 f2f3 	udiv	r2, r2, r3
+ 80004b6:	4b0b      	ldr	r3, [pc, #44]	; (80004e4 <SystemCoreClockUpdate+0x84>)
+ 80004b8:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:313
+ 80004ba:	e002      	b.n	80004c2 <SystemCoreClockUpdate+0x62>
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:315
+ 80004bc:	4a08      	ldr	r2, [pc, #32]	; (80004e0 <SystemCoreClockUpdate+0x80>)
+ 80004be:	4b09      	ldr	r3, [pc, #36]	; (80004e4 <SystemCoreClockUpdate+0x84>)
+ 80004c0:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:320
+ 80004c2:	4b06      	ldr	r3, [pc, #24]	; (80004dc <SystemCoreClockUpdate+0x7c>)
+ 80004c4:	689a      	ldr	r2, [r3, #8]
+ 80004c6:	f3c2 1203 	ubfx	r2, r2, #4, #4
+ 80004ca:	4b06      	ldr	r3, [pc, #24]	; (80004e4 <SystemCoreClockUpdate+0x84>)
+ 80004cc:	441a      	add	r2, r3
+ 80004ce:	7911      	ldrb	r1, [r2, #4]
+ 80004d0:	b2c9      	uxtb	r1, r1
+C:\Users\Filip\Eclipse\Template\Debug/../src/system_stm32f4xx.c:322
+ 80004d2:	681a      	ldr	r2, [r3, #0]
+ 80004d4:	40ca      	lsrs	r2, r1
+ 80004d6:	601a      	str	r2, [r3, #0]
+ 80004d8:	4770      	bx	lr
+ 80004da:	bf00      	nop
+ 80004dc:	40023800 	.word	0x40023800
+ 80004e0:	00f42400 	.word	0x00f42400
+ 80004e4:	20000000 	.word	0x20000000
+ 80004e8:	007a1200 	.word	0x007a1200
+
+080004ec <CheckITStatus>:
+CheckITStatus():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1673
+ 80004ec:	4008      	ands	r0, r1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1684
+ 80004ee:	3000      	adds	r0, #0
+ 80004f0:	bf18      	it	ne
+ 80004f2:	2001      	movne	r0, #1
+ 80004f4:	4770      	bx	lr
+ 80004f6:	bf00      	nop
+
+080004f8 <CAN_DeInit>:
+CAN_DeInit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:163
+ 80004f8:	b508      	push	{r3, lr}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:167
+ 80004fa:	4b0c      	ldr	r3, [pc, #48]	; (800052c <CAN_DeInit+0x34>)
+ 80004fc:	4298      	cmp	r0, r3
+ 80004fe:	d10a      	bne.n	8000516 <CAN_DeInit+0x1e>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:170
+ 8000500:	f04f 7000 	mov.w	r0, #33554432	; 0x2000000
+ 8000504:	2101      	movs	r1, #1
+ 8000506:	f000 ff7f 	bl	8001408 <RCC_APB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:172
+ 800050a:	f04f 7000 	mov.w	r0, #33554432	; 0x2000000
+ 800050e:	2100      	movs	r1, #0
+ 8000510:	f000 ff7a 	bl	8001408 <RCC_APB1PeriphResetCmd>
+ 8000514:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:177
+ 8000516:	f04f 6080 	mov.w	r0, #67108864	; 0x4000000
+ 800051a:	2101      	movs	r1, #1
+ 800051c:	f000 ff74 	bl	8001408 <RCC_APB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:179
+ 8000520:	f04f 6080 	mov.w	r0, #67108864	; 0x4000000
+ 8000524:	2100      	movs	r1, #0
+ 8000526:	f000 ff6f 	bl	8001408 <RCC_APB1PeriphResetCmd>
+ 800052a:	bd08      	pop	{r3, pc}
+ 800052c:	40006400 	.word	0x40006400
+
+08000530 <CAN_Init>:
+CAN_Init():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:193
+ 8000530:	b410      	push	{r4}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:211
+ 8000532:	6803      	ldr	r3, [r0, #0]
+ 8000534:	f023 0302 	bic.w	r3, r3, #2
+ 8000538:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:214
+ 800053a:	6803      	ldr	r3, [r0, #0]
+ 800053c:	f043 0301 	orr.w	r3, r3, #1
+ 8000540:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:195
+ 8000542:	2300      	movs	r3, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:217
+ 8000544:	f64f 74ff 	movw	r4, #65535	; 0xffff
+ 8000548:	e000      	b.n	800054c <CAN_Init+0x1c>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:219
+ 800054a:	3301      	adds	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:217 (discriminator 1)
+ 800054c:	6842      	ldr	r2, [r0, #4]
+ 800054e:	f012 0f01 	tst.w	r2, #1
+ 8000552:	d101      	bne.n	8000558 <CAN_Init+0x28>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:217 (discriminator 2)
+ 8000554:	42a3      	cmp	r3, r4
+ 8000556:	d1f8      	bne.n	800054a <CAN_Init+0x1a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:223
+ 8000558:	6843      	ldr	r3, [r0, #4]
+ 800055a:	f013 0f01 	tst.w	r3, #1
+ 800055e:	d059      	beq.n	8000614 <CAN_Init+0xe4>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:230
+ 8000560:	798b      	ldrb	r3, [r1, #6]
+ 8000562:	2b01      	cmp	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:232
+ 8000564:	6803      	ldr	r3, [r0, #0]
+ 8000566:	bf0c      	ite	eq
+ 8000568:	f043 0380 	orreq.w	r3, r3, #128	; 0x80
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:236
+ 800056c:	f023 0380 	bicne.w	r3, r3, #128	; 0x80
+ 8000570:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:240
+ 8000572:	79cb      	ldrb	r3, [r1, #7]
+ 8000574:	2b01      	cmp	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:242
+ 8000576:	6803      	ldr	r3, [r0, #0]
+ 8000578:	bf0c      	ite	eq
+ 800057a:	f043 0340 	orreq.w	r3, r3, #64	; 0x40
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:246
+ 800057e:	f023 0340 	bicne.w	r3, r3, #64	; 0x40
+ 8000582:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:250
+ 8000584:	7a0b      	ldrb	r3, [r1, #8]
+ 8000586:	2b01      	cmp	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:252
+ 8000588:	6803      	ldr	r3, [r0, #0]
+ 800058a:	bf0c      	ite	eq
+ 800058c:	f043 0320 	orreq.w	r3, r3, #32
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:256
+ 8000590:	f023 0320 	bicne.w	r3, r3, #32
+ 8000594:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:260
+ 8000596:	7a4b      	ldrb	r3, [r1, #9]
+ 8000598:	2b01      	cmp	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:262
+ 800059a:	6803      	ldr	r3, [r0, #0]
+ 800059c:	bf0c      	ite	eq
+ 800059e:	f043 0310 	orreq.w	r3, r3, #16
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:266
+ 80005a2:	f023 0310 	bicne.w	r3, r3, #16
+ 80005a6:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:270
+ 80005a8:	7a8b      	ldrb	r3, [r1, #10]
+ 80005aa:	2b01      	cmp	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:272
+ 80005ac:	6803      	ldr	r3, [r0, #0]
+ 80005ae:	bf0c      	ite	eq
+ 80005b0:	f043 0308 	orreq.w	r3, r3, #8
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:276
+ 80005b4:	f023 0308 	bicne.w	r3, r3, #8
+ 80005b8:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:280
+ 80005ba:	7acb      	ldrb	r3, [r1, #11]
+ 80005bc:	2b01      	cmp	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:282
+ 80005be:	6803      	ldr	r3, [r0, #0]
+ 80005c0:	bf0c      	ite	eq
+ 80005c2:	f043 0304 	orreq.w	r3, r3, #4
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:286
+ 80005c6:	f023 0304 	bicne.w	r3, r3, #4
+ 80005ca:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:290
+ 80005cc:	788a      	ldrb	r2, [r1, #2]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:291
+ 80005ce:	78cb      	ldrb	r3, [r1, #3]
+ 80005d0:	061b      	lsls	r3, r3, #24
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:290
+ 80005d2:	ea43 7382 	orr.w	r3, r3, r2, lsl #30
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:292
+ 80005d6:	790a      	ldrb	r2, [r1, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:291
+ 80005d8:	ea43 4302 	orr.w	r3, r3, r2, lsl #16
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:293
+ 80005dc:	794a      	ldrb	r2, [r1, #5]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:292
+ 80005de:	ea43 5202 	orr.w	r2, r3, r2, lsl #20
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:294
+ 80005e2:	880b      	ldrh	r3, [r1, #0]
+ 80005e4:	3b01      	subs	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:293
+ 80005e6:	4313      	orrs	r3, r2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:290
+ 80005e8:	61c3      	str	r3, [r0, #28]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:297
+ 80005ea:	6803      	ldr	r3, [r0, #0]
+ 80005ec:	f023 0301 	bic.w	r3, r3, #1
+ 80005f0:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:300
+ 80005f2:	2300      	movs	r3, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:302
+ 80005f4:	f64f 71ff 	movw	r1, #65535	; 0xffff
+ 80005f8:	e000      	b.n	80005fc <CAN_Init+0xcc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:304
+ 80005fa:	3301      	adds	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:302 (discriminator 1)
+ 80005fc:	6842      	ldr	r2, [r0, #4]
+ 80005fe:	f012 0f01 	tst.w	r2, #1
+ 8000602:	d001      	beq.n	8000608 <CAN_Init+0xd8>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:302 (discriminator 2)
+ 8000604:	428b      	cmp	r3, r1
+ 8000606:	d1f8      	bne.n	80005fa <CAN_Init+0xca>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:308
+ 8000608:	6840      	ldr	r0, [r0, #4]
+ 800060a:	f000 0001 	and.w	r0, r0, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:310
+ 800060e:	f080 0001 	eor.w	r0, r0, #1
+ 8000612:	e000      	b.n	8000616 <CAN_Init+0xe6>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:225
+ 8000614:	2000      	movs	r0, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:320
+ 8000616:	f85d 4b04 	ldr.w	r4, [sp], #4
+ 800061a:	4770      	bx	lr
+
+0800061c <CAN_FilterInit>:
+CAN_FilterInit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:330
+ 800061c:	b470      	push	{r4, r5, r6}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:339
+ 800061e:	7a83      	ldrb	r3, [r0, #10]
+ 8000620:	2101      	movs	r1, #1
+ 8000622:	4099      	lsls	r1, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:342
+ 8000624:	4b38      	ldr	r3, [pc, #224]	; (8000708 <CAN_FilterInit+0xec>)
+ 8000626:	f8d3 2200 	ldr.w	r2, [r3, #512]	; 0x200
+ 800062a:	f042 0201 	orr.w	r2, r2, #1
+ 800062e:	f8c3 2200 	str.w	r2, [r3, #512]	; 0x200
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:345
+ 8000632:	f8d3 421c 	ldr.w	r4, [r3, #540]	; 0x21c
+ 8000636:	43ca      	mvns	r2, r1
+ 8000638:	4014      	ands	r4, r2
+ 800063a:	f8c3 421c 	str.w	r4, [r3, #540]	; 0x21c
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:348
+ 800063e:	7b03      	ldrb	r3, [r0, #12]
+ 8000640:	b9b3      	cbnz	r3, 8000670 <CAN_FilterInit+0x54>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:351
+ 8000642:	4b31      	ldr	r3, [pc, #196]	; (8000708 <CAN_FilterInit+0xec>)
+ 8000644:	f8d3 420c 	ldr.w	r4, [r3, #524]	; 0x20c
+ 8000648:	4014      	ands	r4, r2
+ 800064a:	f8c3 420c 	str.w	r4, [r3, #524]	; 0x20c
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:355
+ 800064e:	7a84      	ldrb	r4, [r0, #10]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:356
+ 8000650:	88c6      	ldrh	r6, [r0, #6]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:357
+ 8000652:	8845      	ldrh	r5, [r0, #2]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:356
+ 8000654:	ea45 4506 	orr.w	r5, r5, r6, lsl #16
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:355
+ 8000658:	3448      	adds	r4, #72	; 0x48
+ 800065a:	f843 5034 	str.w	r5, [r3, r4, lsl #3]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:361
+ 800065e:	7a85      	ldrb	r5, [r0, #10]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:362
+ 8000660:	8886      	ldrh	r6, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:363
+ 8000662:	8804      	ldrh	r4, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:362
+ 8000664:	ea44 4406 	orr.w	r4, r4, r6, lsl #16
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:361
+ 8000668:	3548      	adds	r5, #72	; 0x48
+ 800066a:	eb03 03c5 	add.w	r3, r3, r5, lsl #3
+ 800066e:	605c      	str	r4, [r3, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:366
+ 8000670:	7b03      	ldrb	r3, [r0, #12]
+ 8000672:	2b01      	cmp	r3, #1
+ 8000674:	d116      	bne.n	80006a4 <CAN_FilterInit+0x88>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:369
+ 8000676:	4b24      	ldr	r3, [pc, #144]	; (8000708 <CAN_FilterInit+0xec>)
+ 8000678:	f8d3 420c 	ldr.w	r4, [r3, #524]	; 0x20c
+ 800067c:	430c      	orrs	r4, r1
+ 800067e:	f8c3 420c 	str.w	r4, [r3, #524]	; 0x20c
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:371
+ 8000682:	7a84      	ldrb	r4, [r0, #10]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:372
+ 8000684:	8806      	ldrh	r6, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:373
+ 8000686:	8845      	ldrh	r5, [r0, #2]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:372
+ 8000688:	ea45 4506 	orr.w	r5, r5, r6, lsl #16
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:371
+ 800068c:	3448      	adds	r4, #72	; 0x48
+ 800068e:	f843 5034 	str.w	r5, [r3, r4, lsl #3]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:375
+ 8000692:	7a85      	ldrb	r5, [r0, #10]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:376
+ 8000694:	8886      	ldrh	r6, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:377
+ 8000696:	88c4      	ldrh	r4, [r0, #6]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:376
+ 8000698:	ea44 4406 	orr.w	r4, r4, r6, lsl #16
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:375
+ 800069c:	3548      	adds	r5, #72	; 0x48
+ 800069e:	eb03 03c5 	add.w	r3, r3, r5, lsl #3
+ 80006a2:	605c      	str	r4, [r3, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:381
+ 80006a4:	7ac3      	ldrb	r3, [r0, #11]
+ 80006a6:	b933      	cbnz	r3, 80006b6 <CAN_FilterInit+0x9a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:384
+ 80006a8:	4b17      	ldr	r3, [pc, #92]	; (8000708 <CAN_FilterInit+0xec>)
+ 80006aa:	f8d3 4204 	ldr.w	r4, [r3, #516]	; 0x204
+ 80006ae:	4014      	ands	r4, r2
+ 80006b0:	f8c3 4204 	str.w	r4, [r3, #516]	; 0x204
+ 80006b4:	e005      	b.n	80006c2 <CAN_FilterInit+0xa6>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:389
+ 80006b6:	4b14      	ldr	r3, [pc, #80]	; (8000708 <CAN_FilterInit+0xec>)
+ 80006b8:	f8d3 4204 	ldr.w	r4, [r3, #516]	; 0x204
+ 80006bc:	430c      	orrs	r4, r1
+ 80006be:	f8c3 4204 	str.w	r4, [r3, #516]	; 0x204
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:393
+ 80006c2:	8903      	ldrh	r3, [r0, #8]
+ 80006c4:	b92b      	cbnz	r3, 80006d2 <CAN_FilterInit+0xb6>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:396
+ 80006c6:	4b10      	ldr	r3, [pc, #64]	; (8000708 <CAN_FilterInit+0xec>)
+ 80006c8:	f8d3 4214 	ldr.w	r4, [r3, #532]	; 0x214
+ 80006cc:	4022      	ands	r2, r4
+ 80006ce:	f8c3 2214 	str.w	r2, [r3, #532]	; 0x214
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:399
+ 80006d2:	8903      	ldrh	r3, [r0, #8]
+ 80006d4:	2b01      	cmp	r3, #1
+ 80006d6:	d105      	bne.n	80006e4 <CAN_FilterInit+0xc8>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:402
+ 80006d8:	4b0b      	ldr	r3, [pc, #44]	; (8000708 <CAN_FilterInit+0xec>)
+ 80006da:	f8d3 2214 	ldr.w	r2, [r3, #532]	; 0x214
+ 80006de:	430a      	orrs	r2, r1
+ 80006e0:	f8c3 2214 	str.w	r2, [r3, #532]	; 0x214
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:406
+ 80006e4:	7b43      	ldrb	r3, [r0, #13]
+ 80006e6:	2b01      	cmp	r3, #1
+ 80006e8:	d105      	bne.n	80006f6 <CAN_FilterInit+0xda>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:408
+ 80006ea:	4b07      	ldr	r3, [pc, #28]	; (8000708 <CAN_FilterInit+0xec>)
+ 80006ec:	f8d3 221c 	ldr.w	r2, [r3, #540]	; 0x21c
+ 80006f0:	4311      	orrs	r1, r2
+ 80006f2:	f8c3 121c 	str.w	r1, [r3, #540]	; 0x21c
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:412
+ 80006f6:	4b04      	ldr	r3, [pc, #16]	; (8000708 <CAN_FilterInit+0xec>)
+ 80006f8:	f8d3 2200 	ldr.w	r2, [r3, #512]	; 0x200
+ 80006fc:	f022 0201 	bic.w	r2, r2, #1
+ 8000700:	f8c3 2200 	str.w	r2, [r3, #512]	; 0x200
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:413
+ 8000704:	bc70      	pop	{r4, r5, r6}
+ 8000706:	4770      	bx	lr
+ 8000708:	40006400 	.word	0x40006400
+
+0800070c <CAN_StructInit>:
+CAN_StructInit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:425
+ 800070c:	2300      	movs	r3, #0
+ 800070e:	7183      	strb	r3, [r0, #6]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:428
+ 8000710:	71c3      	strb	r3, [r0, #7]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:431
+ 8000712:	7203      	strb	r3, [r0, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:434
+ 8000714:	7243      	strb	r3, [r0, #9]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:437
+ 8000716:	7283      	strb	r3, [r0, #10]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:440
+ 8000718:	72c3      	strb	r3, [r0, #11]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:443
+ 800071a:	7083      	strb	r3, [r0, #2]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:446
+ 800071c:	70c3      	strb	r3, [r0, #3]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:449
+ 800071e:	2303      	movs	r3, #3
+ 8000720:	7103      	strb	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:452
+ 8000722:	2302      	movs	r3, #2
+ 8000724:	7143      	strb	r3, [r0, #5]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:455
+ 8000726:	2301      	movs	r3, #1
+ 8000728:	8003      	strh	r3, [r0, #0]
+ 800072a:	4770      	bx	lr
+
+0800072c <CAN_SlaveStartBank>:
+CAN_SlaveStartBank():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:469
+ 800072c:	4b0d      	ldr	r3, [pc, #52]	; (8000764 <CAN_SlaveStartBank+0x38>)
+ 800072e:	f8d3 2200 	ldr.w	r2, [r3, #512]	; 0x200
+ 8000732:	f042 0201 	orr.w	r2, r2, #1
+ 8000736:	f8c3 2200 	str.w	r2, [r3, #512]	; 0x200
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:472
+ 800073a:	f8d3 2200 	ldr.w	r2, [r3, #512]	; 0x200
+ 800073e:	f422 527c 	bic.w	r2, r2, #16128	; 0x3f00
+ 8000742:	f022 020e 	bic.w	r2, r2, #14
+ 8000746:	f8c3 2200 	str.w	r2, [r3, #512]	; 0x200
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:473
+ 800074a:	f8d3 2200 	ldr.w	r2, [r3, #512]	; 0x200
+ 800074e:	ea42 2000 	orr.w	r0, r2, r0, lsl #8
+ 8000752:	f8c3 0200 	str.w	r0, [r3, #512]	; 0x200
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:476
+ 8000756:	f8d3 2200 	ldr.w	r2, [r3, #512]	; 0x200
+ 800075a:	f022 0201 	bic.w	r2, r2, #1
+ 800075e:	f8c3 2200 	str.w	r2, [r3, #512]	; 0x200
+ 8000762:	4770      	bx	lr
+ 8000764:	40006400 	.word	0x40006400
+
+08000768 <CAN_DBGFreeze>:
+CAN_DBGFreeze():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:494
+ 8000768:	b121      	cbz	r1, 8000774 <CAN_DBGFreeze+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:497
+ 800076a:	6803      	ldr	r3, [r0, #0]
+ 800076c:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
+ 8000770:	6003      	str	r3, [r0, #0]
+ 8000772:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:502
+ 8000774:	6803      	ldr	r3, [r0, #0]
+ 8000776:	f423 3380 	bic.w	r3, r3, #65536	; 0x10000
+ 800077a:	6003      	str	r3, [r0, #0]
+ 800077c:	4770      	bx	lr
+ 800077e:	bf00      	nop
+
+08000780 <CAN_TTComModeCmd>:
+CAN_TTComModeCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:523
+ 8000780:	b1b1      	cbz	r1, 80007b0 <CAN_TTComModeCmd+0x30>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:526
+ 8000782:	6803      	ldr	r3, [r0, #0]
+ 8000784:	f043 0380 	orr.w	r3, r3, #128	; 0x80
+ 8000788:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:529
+ 800078a:	f8d0 3184 	ldr.w	r3, [r0, #388]	; 0x184
+ 800078e:	f443 7380 	orr.w	r3, r3, #256	; 0x100
+ 8000792:	f8c0 3184 	str.w	r3, [r0, #388]	; 0x184
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:530
+ 8000796:	f8d0 3194 	ldr.w	r3, [r0, #404]	; 0x194
+ 800079a:	f443 7380 	orr.w	r3, r3, #256	; 0x100
+ 800079e:	f8c0 3194 	str.w	r3, [r0, #404]	; 0x194
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:531
+ 80007a2:	f8d0 31a4 	ldr.w	r3, [r0, #420]	; 0x1a4
+ 80007a6:	f443 7380 	orr.w	r3, r3, #256	; 0x100
+ 80007aa:	f8c0 31a4 	str.w	r3, [r0, #420]	; 0x1a4
+ 80007ae:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:536
+ 80007b0:	6803      	ldr	r3, [r0, #0]
+ 80007b2:	f023 0380 	bic.w	r3, r3, #128	; 0x80
+ 80007b6:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:539
+ 80007b8:	f8d0 3184 	ldr.w	r3, [r0, #388]	; 0x184
+ 80007bc:	f423 7380 	bic.w	r3, r3, #256	; 0x100
+ 80007c0:	f8c0 3184 	str.w	r3, [r0, #388]	; 0x184
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:540
+ 80007c4:	f8d0 3194 	ldr.w	r3, [r0, #404]	; 0x194
+ 80007c8:	f423 7380 	bic.w	r3, r3, #256	; 0x100
+ 80007cc:	f8c0 3194 	str.w	r3, [r0, #404]	; 0x194
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:541
+ 80007d0:	f8d0 31a4 	ldr.w	r3, [r0, #420]	; 0x1a4
+ 80007d4:	f423 7380 	bic.w	r3, r3, #256	; 0x100
+ 80007d8:	f8c0 31a4 	str.w	r3, [r0, #420]	; 0x1a4
+ 80007dc:	4770      	bx	lr
+ 80007de:	bf00      	nop
+
+080007e0 <CAN_Transmit>:
+CAN_Transmit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:573
+ 80007e0:	b4f0      	push	{r4, r5, r6, r7}
+ 80007e2:	4603      	mov	r3, r0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:582
+ 80007e4:	6882      	ldr	r2, [r0, #8]
+ 80007e6:	f012 6f80 	tst.w	r2, #67108864	; 0x4000000
+ 80007ea:	d10b      	bne.n	8000804 <CAN_Transmit+0x24>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:586
+ 80007ec:	6882      	ldr	r2, [r0, #8]
+ 80007ee:	f012 6f00 	tst.w	r2, #134217728	; 0x8000000
+ 80007f2:	d109      	bne.n	8000808 <CAN_Transmit+0x28>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:590
+ 80007f4:	6882      	ldr	r2, [r0, #8]
+ 80007f6:	f002 5280 	and.w	r2, r2, #268435456	; 0x10000000
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:592
+ 80007fa:	2a00      	cmp	r2, #0
+ 80007fc:	bf0c      	ite	eq
+ 80007fe:	2004      	moveq	r0, #4
+ 8000800:	2002      	movne	r0, #2
+ 8000802:	e002      	b.n	800080a <CAN_Transmit+0x2a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:584
+ 8000804:	2000      	movs	r0, #0
+ 8000806:	e000      	b.n	800080a <CAN_Transmit+0x2a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:588
+ 8000808:	2001      	movs	r0, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:599
+ 800080a:	2804      	cmp	r0, #4
+ 800080c:	d050      	beq.n	80008b0 <CAN_Transmit+0xd0>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:602
+ 800080e:	4605      	mov	r5, r0
+ 8000810:	f100 0218 	add.w	r2, r0, #24
+ 8000814:	0112      	lsls	r2, r2, #4
+ 8000816:	589c      	ldr	r4, [r3, r2]
+ 8000818:	f004 0401 	and.w	r4, r4, #1
+ 800081c:	509c      	str	r4, [r3, r2]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:603
+ 800081e:	7a0a      	ldrb	r2, [r1, #8]
+ 8000820:	b952      	cbnz	r2, 8000838 <CAN_Transmit+0x58>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:606
+ 8000822:	f100 0218 	add.w	r2, r0, #24
+ 8000826:	0112      	lsls	r2, r2, #4
+ 8000828:	589e      	ldr	r6, [r3, r2]
+ 800082a:	680c      	ldr	r4, [r1, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:607
+ 800082c:	7a4f      	ldrb	r7, [r1, #9]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:606
+ 800082e:	ea47 5444 	orr.w	r4, r7, r4, lsl #21
+ 8000832:	4334      	orrs	r4, r6
+ 8000834:	509c      	str	r4, [r3, r2]
+ 8000836:	e00c      	b.n	8000852 <CAN_Transmit+0x72>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:612
+ 8000838:	f100 0418 	add.w	r4, r0, #24
+ 800083c:	0124      	lsls	r4, r4, #4
+ 800083e:	591f      	ldr	r7, [r3, r4]
+ 8000840:	684e      	ldr	r6, [r1, #4]
+ 8000842:	ea42 02c6 	orr.w	r2, r2, r6, lsl #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:614
+ 8000846:	f891 c009 	ldrb.w	ip, [r1, #9]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:613
+ 800084a:	ea42 020c 	orr.w	r2, r2, ip
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:612
+ 800084e:	433a      	orrs	r2, r7
+ 8000850:	511a      	str	r2, [r3, r4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:618
+ 8000852:	7a8a      	ldrb	r2, [r1, #10]
+ 8000854:	f002 020f 	and.w	r2, r2, #15
+ 8000858:	728a      	strb	r2, [r1, #10]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:619
+ 800085a:	f105 0418 	add.w	r4, r5, #24
+ 800085e:	0124      	lsls	r4, r4, #4
+ 8000860:	191a      	adds	r2, r3, r4
+ 8000862:	6856      	ldr	r6, [r2, #4]
+ 8000864:	f026 060f 	bic.w	r6, r6, #15
+ 8000868:	6056      	str	r6, [r2, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:620
+ 800086a:	6857      	ldr	r7, [r2, #4]
+ 800086c:	7a8e      	ldrb	r6, [r1, #10]
+ 800086e:	433e      	orrs	r6, r7
+ 8000870:	6056      	str	r6, [r2, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:623
+ 8000872:	7b8a      	ldrb	r2, [r1, #14]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:624
+ 8000874:	7b4e      	ldrb	r6, [r1, #13]
+ 8000876:	0436      	lsls	r6, r6, #16
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:623
+ 8000878:	ea46 6602 	orr.w	r6, r6, r2, lsl #24
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:625
+ 800087c:	7b0a      	ldrb	r2, [r1, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:624
+ 800087e:	ea46 2602 	orr.w	r6, r6, r2, lsl #8
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:626
+ 8000882:	7aca      	ldrb	r2, [r1, #11]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:625
+ 8000884:	4316      	orrs	r6, r2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:623
+ 8000886:	eb03 1205 	add.w	r2, r3, r5, lsl #4
+ 800088a:	f502 75c4 	add.w	r5, r2, #392	; 0x188
+ 800088e:	f8c2 6188 	str.w	r6, [r2, #392]	; 0x188
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:627
+ 8000892:	7c8e      	ldrb	r6, [r1, #18]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:628
+ 8000894:	7c4a      	ldrb	r2, [r1, #17]
+ 8000896:	0412      	lsls	r2, r2, #16
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:627
+ 8000898:	ea42 6206 	orr.w	r2, r2, r6, lsl #24
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:629
+ 800089c:	7c0e      	ldrb	r6, [r1, #16]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:628
+ 800089e:	ea42 2206 	orr.w	r2, r2, r6, lsl #8
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:630
+ 80008a2:	7bc9      	ldrb	r1, [r1, #15]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:629
+ 80008a4:	430a      	orrs	r2, r1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:627
+ 80008a6:	606a      	str	r2, [r5, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:632
+ 80008a8:	591a      	ldr	r2, [r3, r4]
+ 80008aa:	f042 0201 	orr.w	r2, r2, #1
+ 80008ae:	511a      	str	r2, [r3, r4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:635
+ 80008b0:	bcf0      	pop	{r4, r5, r6, r7}
+ 80008b2:	4770      	bx	lr
+
+080008b4 <CAN_TransmitStatus>:
+CAN_TransmitStatus():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:652
+ 80008b4:	2901      	cmp	r1, #1
+ 80008b6:	d00d      	beq.n	80008d4 <CAN_TransmitStatus+0x20>
+ 80008b8:	b111      	cbz	r1, 80008c0 <CAN_TransmitStatus+0xc>
+ 80008ba:	2902      	cmp	r1, #2
+ 80008bc:	d00e      	beq.n	80008dc <CAN_TransmitStatus+0x28>
+ 80008be:	e015      	b.n	80008ec <CAN_TransmitStatus+0x38>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:655
+ 80008c0:	6883      	ldr	r3, [r0, #8]
+ 80008c2:	f023 437b 	bic.w	r3, r3, #4211081216	; 0xfb000000
+ 80008c6:	f423 037f 	bic.w	r3, r3, #16711680	; 0xff0000
+ 80008ca:	f423 437f 	bic.w	r3, r3, #65280	; 0xff00
+ 80008ce:	f023 03fc 	bic.w	r3, r3, #252	; 0xfc
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:656
+ 80008d2:	e00c      	b.n	80008ee <CAN_TransmitStatus+0x3a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:658
+ 80008d4:	6882      	ldr	r2, [r0, #8]
+ 80008d6:	4b11      	ldr	r3, [pc, #68]	; (800091c <CAN_TransmitStatus+0x68>)
+ 80008d8:	4013      	ands	r3, r2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:659
+ 80008da:	e008      	b.n	80008ee <CAN_TransmitStatus+0x3a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:661
+ 80008dc:	6883      	ldr	r3, [r0, #8]
+ 80008de:	f023 436f 	bic.w	r3, r3, #4009754624	; 0xef000000
+ 80008e2:	f423 037c 	bic.w	r3, r3, #16515072	; 0xfc0000
+ 80008e6:	0c1b      	lsrs	r3, r3, #16
+ 80008e8:	041b      	lsls	r3, r3, #16
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:662
+ 80008ea:	e000      	b.n	80008ee <CAN_TransmitStatus+0x3a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:664
+ 80008ec:	2300      	movs	r3, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:667
+ 80008ee:	4a0c      	ldr	r2, [pc, #48]	; (8000920 <CAN_TransmitStatus+0x6c>)
+ 80008f0:	4293      	cmp	r3, r2
+ 80008f2:	d00b      	beq.n	800090c <CAN_TransmitStatus+0x58>
+ 80008f4:	d801      	bhi.n	80008fa <CAN_TransmitStatus+0x46>
+ 80008f6:	b13b      	cbz	r3, 8000908 <CAN_TransmitStatus+0x54>
+ 80008f8:	e00e      	b.n	8000918 <CAN_TransmitStatus+0x64>
+ 80008fa:	4a08      	ldr	r2, [pc, #32]	; (800091c <CAN_TransmitStatus+0x68>)
+ 80008fc:	4293      	cmp	r3, r2
+ 80008fe:	d007      	beq.n	8000910 <CAN_TransmitStatus+0x5c>
+ 8000900:	4a08      	ldr	r2, [pc, #32]	; (8000924 <CAN_TransmitStatus+0x70>)
+ 8000902:	4293      	cmp	r3, r2
+ 8000904:	d006      	beq.n	8000914 <CAN_TransmitStatus+0x60>
+ 8000906:	e007      	b.n	8000918 <CAN_TransmitStatus+0x64>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:670
+ 8000908:	2002      	movs	r0, #2
+ 800090a:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:680
+ 800090c:	2001      	movs	r0, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:681
+ 800090e:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:682
+ 8000910:	2001      	movs	r0, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:683
+ 8000912:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:684
+ 8000914:	2001      	movs	r0, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:685
+ 8000916:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:673
+ 8000918:	2000      	movs	r0, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:690
+ 800091a:	4770      	bx	lr
+ 800091c:	08000300 	.word	0x08000300
+ 8000920:	04000003 	.word	0x04000003
+ 8000924:	10030000 	.word	0x10030000
+
+08000928 <CAN_CancelTransmit>:
+CAN_CancelTransmit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:704
+ 8000928:	2901      	cmp	r1, #1
+ 800092a:	d008      	beq.n	800093e <CAN_CancelTransmit+0x16>
+ 800092c:	b111      	cbz	r1, 8000934 <CAN_CancelTransmit+0xc>
+ 800092e:	2902      	cmp	r1, #2
+ 8000930:	d00a      	beq.n	8000948 <CAN_CancelTransmit+0x20>
+ 8000932:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:706
+ 8000934:	6883      	ldr	r3, [r0, #8]
+ 8000936:	f043 0380 	orr.w	r3, r3, #128	; 0x80
+ 800093a:	6083      	str	r3, [r0, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:707
+ 800093c:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:708
+ 800093e:	6883      	ldr	r3, [r0, #8]
+ 8000940:	f443 4300 	orr.w	r3, r3, #32768	; 0x8000
+ 8000944:	6083      	str	r3, [r0, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:709
+ 8000946:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:710
+ 8000948:	6883      	ldr	r3, [r0, #8]
+ 800094a:	f443 0300 	orr.w	r3, r3, #8388608	; 0x800000
+ 800094e:	6083      	str	r3, [r0, #8]
+ 8000950:	4770      	bx	lr
+ 8000952:	bf00      	nop
+
+08000954 <CAN_Receive>:
+CAN_Receive():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:746
+ 8000954:	b430      	push	{r4, r5}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:751
+ 8000956:	f101 031b 	add.w	r3, r1, #27
+ 800095a:	011b      	lsls	r3, r3, #4
+ 800095c:	58c3      	ldr	r3, [r0, r3]
+ 800095e:	f003 0304 	and.w	r3, r3, #4
+ 8000962:	b2db      	uxtb	r3, r3
+ 8000964:	7213      	strb	r3, [r2, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:752
+ 8000966:	b933      	cbnz	r3, 8000976 <CAN_Receive+0x22>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:754
+ 8000968:	f101 031b 	add.w	r3, r1, #27
+ 800096c:	011b      	lsls	r3, r3, #4
+ 800096e:	58c3      	ldr	r3, [r0, r3]
+ 8000970:	0d5b      	lsrs	r3, r3, #21
+ 8000972:	6013      	str	r3, [r2, #0]
+ 8000974:	e005      	b.n	8000982 <CAN_Receive+0x2e>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:758
+ 8000976:	f101 031b 	add.w	r3, r1, #27
+ 800097a:	011b      	lsls	r3, r3, #4
+ 800097c:	58c3      	ldr	r3, [r0, r3]
+ 800097e:	08db      	lsrs	r3, r3, #3
+ 8000980:	6053      	str	r3, [r2, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:761
+ 8000982:	f101 041b 	add.w	r4, r1, #27
+ 8000986:	0124      	lsls	r4, r4, #4
+ 8000988:	1903      	adds	r3, r0, r4
+ 800098a:	5904      	ldr	r4, [r0, r4]
+ 800098c:	f004 0402 	and.w	r4, r4, #2
+ 8000990:	7254      	strb	r4, [r2, #9]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:763
+ 8000992:	685c      	ldr	r4, [r3, #4]
+ 8000994:	f004 040f 	and.w	r4, r4, #15
+ 8000998:	7294      	strb	r4, [r2, #10]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:765
+ 800099a:	685b      	ldr	r3, [r3, #4]
+ 800099c:	0a1b      	lsrs	r3, r3, #8
+ 800099e:	74d3      	strb	r3, [r2, #19]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:767
+ 80009a0:	eb00 1301 	add.w	r3, r0, r1, lsl #4
+ 80009a4:	f503 74dc 	add.w	r4, r3, #440	; 0x1b8
+ 80009a8:	f8d3 51b8 	ldr.w	r5, [r3, #440]	; 0x1b8
+ 80009ac:	72d5      	strb	r5, [r2, #11]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:768
+ 80009ae:	f8d3 51b8 	ldr.w	r5, [r3, #440]	; 0x1b8
+ 80009b2:	0a2d      	lsrs	r5, r5, #8
+ 80009b4:	7315      	strb	r5, [r2, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:769
+ 80009b6:	f8d3 51b8 	ldr.w	r5, [r3, #440]	; 0x1b8
+ 80009ba:	0c2d      	lsrs	r5, r5, #16
+ 80009bc:	7355      	strb	r5, [r2, #13]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:770
+ 80009be:	f8d3 31b8 	ldr.w	r3, [r3, #440]	; 0x1b8
+ 80009c2:	0e1b      	lsrs	r3, r3, #24
+ 80009c4:	7393      	strb	r3, [r2, #14]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:771
+ 80009c6:	6863      	ldr	r3, [r4, #4]
+ 80009c8:	73d3      	strb	r3, [r2, #15]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:772
+ 80009ca:	6863      	ldr	r3, [r4, #4]
+ 80009cc:	0a1b      	lsrs	r3, r3, #8
+ 80009ce:	7413      	strb	r3, [r2, #16]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:773
+ 80009d0:	6863      	ldr	r3, [r4, #4]
+ 80009d2:	0c1b      	lsrs	r3, r3, #16
+ 80009d4:	7453      	strb	r3, [r2, #17]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:774
+ 80009d6:	6863      	ldr	r3, [r4, #4]
+ 80009d8:	0e1b      	lsrs	r3, r3, #24
+ 80009da:	7493      	strb	r3, [r2, #18]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:777
+ 80009dc:	b921      	cbnz	r1, 80009e8 <CAN_Receive+0x94>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:779
+ 80009de:	68c3      	ldr	r3, [r0, #12]
+ 80009e0:	f043 0320 	orr.w	r3, r3, #32
+ 80009e4:	60c3      	str	r3, [r0, #12]
+ 80009e6:	e003      	b.n	80009f0 <CAN_Receive+0x9c>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:784
+ 80009e8:	6903      	ldr	r3, [r0, #16]
+ 80009ea:	f043 0320 	orr.w	r3, r3, #32
+ 80009ee:	6103      	str	r3, [r0, #16]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:786
+ 80009f0:	bc30      	pop	{r4, r5}
+ 80009f2:	4770      	bx	lr
+
+080009f4 <CAN_FIFORelease>:
+CAN_FIFORelease():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:800
+ 80009f4:	b921      	cbnz	r1, 8000a00 <CAN_FIFORelease+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:802
+ 80009f6:	68c3      	ldr	r3, [r0, #12]
+ 80009f8:	f043 0320 	orr.w	r3, r3, #32
+ 80009fc:	60c3      	str	r3, [r0, #12]
+ 80009fe:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:807
+ 8000a00:	6903      	ldr	r3, [r0, #16]
+ 8000a02:	f043 0320 	orr.w	r3, r3, #32
+ 8000a06:	6103      	str	r3, [r0, #16]
+ 8000a08:	4770      	bx	lr
+ 8000a0a:	bf00      	nop
+
+08000a0c <CAN_MessagePending>:
+CAN_MessagePending():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:823
+ 8000a0c:	b919      	cbnz	r1, 8000a16 <CAN_MessagePending+0xa>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:825
+ 8000a0e:	68c0      	ldr	r0, [r0, #12]
+ 8000a10:	f000 0003 	and.w	r0, r0, #3
+ 8000a14:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:827
+ 8000a16:	2901      	cmp	r1, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:829
+ 8000a18:	bf06      	itte	eq
+ 8000a1a:	6900      	ldreq	r0, [r0, #16]
+ 8000a1c:	f000 0003 	andeq.w	r0, r0, #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:833
+ 8000a20:	2000      	movne	r0, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:836
+ 8000a22:	4770      	bx	lr
+
+08000a24 <CAN_OperatingModeRequest>:
+CAN_OperatingModeRequest():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:878
+ 8000a24:	b9c1      	cbnz	r1, 8000a58 <CAN_OperatingModeRequest+0x34>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:881
+ 8000a26:	6803      	ldr	r3, [r0, #0]
+ 8000a28:	f023 0303 	bic.w	r3, r3, #3
+ 8000a2c:	f043 0301 	orr.w	r3, r3, #1
+ 8000a30:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:872
+ 8000a32:	f64f 73ff 	movw	r3, #65535	; 0xffff
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:884
+ 8000a36:	e000      	b.n	8000a3a <CAN_OperatingModeRequest+0x16>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:886
+ 8000a38:	3b01      	subs	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:884 (discriminator 1)
+ 8000a3a:	6842      	ldr	r2, [r0, #4]
+ 8000a3c:	f002 0203 	and.w	r2, r2, #3
+ 8000a40:	2a01      	cmp	r2, #1
+ 8000a42:	d001      	beq.n	8000a48 <CAN_OperatingModeRequest+0x24>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:884 (discriminator 2)
+ 8000a44:	2b00      	cmp	r3, #0
+ 8000a46:	d1f7      	bne.n	8000a38 <CAN_OperatingModeRequest+0x14>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:888
+ 8000a48:	6840      	ldr	r0, [r0, #4]
+ 8000a4a:	f000 0003 	and.w	r0, r0, #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:890
+ 8000a4e:	2801      	cmp	r0, #1
+ 8000a50:	bf14      	ite	ne
+ 8000a52:	2000      	movne	r0, #0
+ 8000a54:	2001      	moveq	r0, #1
+ 8000a56:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:897
+ 8000a58:	2901      	cmp	r1, #1
+ 8000a5a:	d115      	bne.n	8000a88 <CAN_OperatingModeRequest+0x64>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:900
+ 8000a5c:	6803      	ldr	r3, [r0, #0]
+ 8000a5e:	f023 0303 	bic.w	r3, r3, #3
+ 8000a62:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:872
+ 8000a64:	f64f 73ff 	movw	r3, #65535	; 0xffff
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:903
+ 8000a68:	e000      	b.n	8000a6c <CAN_OperatingModeRequest+0x48>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:905
+ 8000a6a:	3b01      	subs	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:903 (discriminator 1)
+ 8000a6c:	6842      	ldr	r2, [r0, #4]
+ 8000a6e:	f012 0f03 	tst.w	r2, #3
+ 8000a72:	d001      	beq.n	8000a78 <CAN_OperatingModeRequest+0x54>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:903 (discriminator 2)
+ 8000a74:	2b00      	cmp	r3, #0
+ 8000a76:	d1f8      	bne.n	8000a6a <CAN_OperatingModeRequest+0x46>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:907
+ 8000a78:	6840      	ldr	r0, [r0, #4]
+ 8000a7a:	f000 0003 	and.w	r0, r0, #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:909
+ 8000a7e:	f1d0 0001 	rsbs	r0, r0, #1
+ 8000a82:	bf38      	it	cc
+ 8000a84:	2000      	movcc	r0, #0
+ 8000a86:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:916
+ 8000a88:	2902      	cmp	r1, #2
+ 8000a8a:	d118      	bne.n	8000abe <CAN_OperatingModeRequest+0x9a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:919
+ 8000a8c:	6803      	ldr	r3, [r0, #0]
+ 8000a8e:	f023 0303 	bic.w	r3, r3, #3
+ 8000a92:	f043 0302 	orr.w	r3, r3, #2
+ 8000a96:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:872
+ 8000a98:	f64f 73ff 	movw	r3, #65535	; 0xffff
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:922
+ 8000a9c:	e000      	b.n	8000aa0 <CAN_OperatingModeRequest+0x7c>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:924
+ 8000a9e:	3b01      	subs	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:922 (discriminator 1)
+ 8000aa0:	6842      	ldr	r2, [r0, #4]
+ 8000aa2:	f002 0203 	and.w	r2, r2, #3
+ 8000aa6:	2a02      	cmp	r2, #2
+ 8000aa8:	d001      	beq.n	8000aae <CAN_OperatingModeRequest+0x8a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:922 (discriminator 2)
+ 8000aaa:	2b00      	cmp	r3, #0
+ 8000aac:	d1f7      	bne.n	8000a9e <CAN_OperatingModeRequest+0x7a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:926
+ 8000aae:	6840      	ldr	r0, [r0, #4]
+ 8000ab0:	f000 0003 	and.w	r0, r0, #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:928
+ 8000ab4:	2802      	cmp	r0, #2
+ 8000ab6:	bf14      	ite	ne
+ 8000ab8:	2000      	movne	r0, #0
+ 8000aba:	2001      	moveq	r0, #1
+ 8000abc:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:937
+ 8000abe:	2000      	movs	r0, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:941
+ 8000ac0:	4770      	bx	lr
+ 8000ac2:	bf00      	nop
+
+08000ac4 <CAN_Sleep>:
+CAN_Sleep():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:956
+ 8000ac4:	6803      	ldr	r3, [r0, #0]
+ 8000ac6:	f023 0303 	bic.w	r3, r3, #3
+ 8000aca:	f043 0302 	orr.w	r3, r3, #2
+ 8000ace:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:959
+ 8000ad0:	6840      	ldr	r0, [r0, #4]
+ 8000ad2:	f000 0003 	and.w	r0, r0, #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:966
+ 8000ad6:	2802      	cmp	r0, #2
+ 8000ad8:	bf14      	ite	ne
+ 8000ada:	2000      	movne	r0, #0
+ 8000adc:	2001      	moveq	r0, #1
+ 8000ade:	4770      	bx	lr
+
+08000ae0 <CAN_WakeUp>:
+CAN_WakeUp():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:982
+ 8000ae0:	6803      	ldr	r3, [r0, #0]
+ 8000ae2:	f023 0302 	bic.w	r3, r3, #2
+ 8000ae6:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:975
+ 8000ae8:	f64f 73ff 	movw	r3, #65535	; 0xffff
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:985
+ 8000aec:	e000      	b.n	8000af0 <CAN_WakeUp+0x10>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:987
+ 8000aee:	3b01      	subs	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:985 (discriminator 1)
+ 8000af0:	6842      	ldr	r2, [r0, #4]
+ 8000af2:	f012 0f02 	tst.w	r2, #2
+ 8000af6:	d001      	beq.n	8000afc <CAN_WakeUp+0x1c>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:985 (discriminator 2)
+ 8000af8:	2b00      	cmp	r3, #0
+ 8000afa:	d1f8      	bne.n	8000aee <CAN_WakeUp+0xe>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:989
+ 8000afc:	6840      	ldr	r0, [r0, #4]
+ 8000afe:	f000 0002 	and.w	r0, r0, #2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:996
+ 8000b02:	f1d0 0001 	rsbs	r0, r0, #1
+ 8000b06:	bf38      	it	cc
+ 8000b08:	2000      	movcc	r0, #0
+ 8000b0a:	4770      	bx	lr
+
+08000b0c <CAN_GetLastErrorCode>:
+CAN_GetLastErrorCode():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1043
+ 8000b0c:	6980      	ldr	r0, [r0, #24]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1047
+ 8000b0e:	f000 0070 	and.w	r0, r0, #112	; 0x70
+ 8000b12:	4770      	bx	lr
+
+08000b14 <CAN_GetReceiveErrorCounter>:
+CAN_GetReceiveErrorCounter():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1068
+ 8000b14:	6980      	ldr	r0, [r0, #24]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1072
+ 8000b16:	0e00      	lsrs	r0, r0, #24
+ 8000b18:	4770      	bx	lr
+ 8000b1a:	bf00      	nop
+
+08000b1c <CAN_GetLSBTransmitErrorCounter>:
+CAN_GetLSBTransmitErrorCounter():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1088
+ 8000b1c:	6980      	ldr	r0, [r0, #24]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1092
+ 8000b1e:	f3c0 4007 	ubfx	r0, r0, #16, #8
+ 8000b22:	4770      	bx	lr
+
+08000b24 <CAN_ITConfig>:
+CAN_ITConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1294
+ 8000b24:	b11a      	cbz	r2, 8000b2e <CAN_ITConfig+0xa>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1297
+ 8000b26:	6943      	ldr	r3, [r0, #20]
+ 8000b28:	4319      	orrs	r1, r3
+ 8000b2a:	6141      	str	r1, [r0, #20]
+ 8000b2c:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1302
+ 8000b2e:	6943      	ldr	r3, [r0, #20]
+ 8000b30:	ea23 0101 	bic.w	r1, r3, r1
+ 8000b34:	6141      	str	r1, [r0, #20]
+ 8000b36:	4770      	bx	lr
+
+08000b38 <CAN_GetFlagStatus>:
+CAN_GetFlagStatus():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1336
+ 8000b38:	f411 0f70 	tst.w	r1, #15728640	; 0xf00000
+ 8000b3c:	d007      	beq.n	8000b4e <CAN_GetFlagStatus+0x16>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1339
+ 8000b3e:	6983      	ldr	r3, [r0, #24]
+ 8000b40:	4019      	ands	r1, r3
+ 8000b42:	f3c1 0113 	ubfx	r1, r1, #0, #20
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1342
+ 8000b46:	1c08      	adds	r0, r1, #0
+ 8000b48:	bf18      	it	ne
+ 8000b4a:	2001      	movne	r0, #1
+ 8000b4c:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1350
+ 8000b4e:	f011 7f80 	tst.w	r1, #16777216	; 0x1000000
+ 8000b52:	d007      	beq.n	8000b64 <CAN_GetFlagStatus+0x2c>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1353
+ 8000b54:	6840      	ldr	r0, [r0, #4]
+ 8000b56:	4001      	ands	r1, r0
+ 8000b58:	f3c1 0113 	ubfx	r1, r1, #0, #20
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1356
+ 8000b5c:	1c08      	adds	r0, r1, #0
+ 8000b5e:	bf18      	it	ne
+ 8000b60:	2001      	movne	r0, #1
+ 8000b62:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1364
+ 8000b64:	f011 6f00 	tst.w	r1, #134217728	; 0x8000000
+ 8000b68:	d007      	beq.n	8000b7a <CAN_GetFlagStatus+0x42>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1367
+ 8000b6a:	6880      	ldr	r0, [r0, #8]
+ 8000b6c:	4001      	ands	r1, r0
+ 8000b6e:	f3c1 0113 	ubfx	r1, r1, #0, #20
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1370
+ 8000b72:	1c08      	adds	r0, r1, #0
+ 8000b74:	bf18      	it	ne
+ 8000b76:	2001      	movne	r0, #1
+ 8000b78:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1378
+ 8000b7a:	f011 7f00 	tst.w	r1, #33554432	; 0x2000000
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1381
+ 8000b7e:	bf14      	ite	ne
+ 8000b80:	68c0      	ldrne	r0, [r0, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1395
+ 8000b82:	6900      	ldreq	r0, [r0, #16]
+ 8000b84:	4001      	ands	r1, r0
+ 8000b86:	f3c1 0113 	ubfx	r1, r1, #0, #20
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1398
+ 8000b8a:	1c08      	adds	r0, r1, #0
+ 8000b8c:	bf18      	it	ne
+ 8000b8e:	2001      	movne	r0, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1408
+ 8000b90:	4770      	bx	lr
+ 8000b92:	bf00      	nop
+
+08000b94 <CAN_ClearFlag>:
+CAN_ClearFlag():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1434
+ 8000b94:	4b0b      	ldr	r3, [pc, #44]	; (8000bc4 <CAN_ClearFlag+0x30>)
+ 8000b96:	4299      	cmp	r1, r3
+ 8000b98:	d102      	bne.n	8000ba0 <CAN_ClearFlag+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1437
+ 8000b9a:	2300      	movs	r3, #0
+ 8000b9c:	6183      	str	r3, [r0, #24]
+ 8000b9e:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1441
+ 8000ba0:	f3c1 0313 	ubfx	r3, r1, #0, #20
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1443
+ 8000ba4:	f011 7f00 	tst.w	r1, #33554432	; 0x2000000
+ 8000ba8:	d001      	beq.n	8000bae <CAN_ClearFlag+0x1a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1446
+ 8000baa:	60c3      	str	r3, [r0, #12]
+ 8000bac:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1448
+ 8000bae:	f011 6f80 	tst.w	r1, #67108864	; 0x4000000
+ 8000bb2:	d001      	beq.n	8000bb8 <CAN_ClearFlag+0x24>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1451
+ 8000bb4:	6103      	str	r3, [r0, #16]
+ 8000bb6:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1453
+ 8000bb8:	f011 6f00 	tst.w	r1, #134217728	; 0x8000000
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1456
+ 8000bbc:	bf14      	ite	ne
+ 8000bbe:	6083      	strne	r3, [r0, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1461
+ 8000bc0:	6043      	streq	r3, [r0, #4]
+ 8000bc2:	4770      	bx	lr
+ 8000bc4:	30f00070 	.word	0x30f00070
+
+08000bc8 <CAN_GetITStatus>:
+CAN_GetITStatus():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1488
+ 8000bc8:	b508      	push	{r3, lr}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1495
+ 8000bca:	6943      	ldr	r3, [r0, #20]
+ 8000bcc:	420b      	tst	r3, r1
+ 8000bce:	d06f      	beq.n	8000cb0 <CAN_GetITStatus+0xe8>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1498
+ 8000bd0:	2940      	cmp	r1, #64	; 0x40
+ 8000bd2:	d045      	beq.n	8000c60 <CAN_GetITStatus+0x98>
+ 8000bd4:	d80e      	bhi.n	8000bf4 <CAN_GetITStatus+0x2c>
+ 8000bd6:	2904      	cmp	r1, #4
+ 8000bd8:	d02e      	beq.n	8000c38 <CAN_GetITStatus+0x70>
+ 8000bda:	d804      	bhi.n	8000be6 <CAN_GetITStatus+0x1e>
+ 8000bdc:	2901      	cmp	r1, #1
+ 8000bde:	d021      	beq.n	8000c24 <CAN_GetITStatus+0x5c>
+ 8000be0:	2902      	cmp	r1, #2
+ 8000be2:	d024      	beq.n	8000c2e <CAN_GetITStatus+0x66>
+ 8000be4:	e066      	b.n	8000cb4 <CAN_GetITStatus+0xec>
+ 8000be6:	2910      	cmp	r1, #16
+ 8000be8:	d030      	beq.n	8000c4c <CAN_GetITStatus+0x84>
+ 8000bea:	2920      	cmp	r1, #32
+ 8000bec:	d033      	beq.n	8000c56 <CAN_GetITStatus+0x8e>
+ 8000bee:	2908      	cmp	r1, #8
+ 8000bf0:	d160      	bne.n	8000cb4 <CAN_GetITStatus+0xec>
+ 8000bf2:	e026      	b.n	8000c42 <CAN_GetITStatus+0x7a>
+ 8000bf4:	f5b1 6f00 	cmp.w	r1, #2048	; 0x800
+ 8000bf8:	d050      	beq.n	8000c9c <CAN_GetITStatus+0xd4>
+ 8000bfa:	d809      	bhi.n	8000c10 <CAN_GetITStatus+0x48>
+ 8000bfc:	f5b1 7f00 	cmp.w	r1, #512	; 0x200
+ 8000c00:	d042      	beq.n	8000c88 <CAN_GetITStatus+0xc0>
+ 8000c02:	f5b1 6f80 	cmp.w	r1, #1024	; 0x400
+ 8000c06:	d044      	beq.n	8000c92 <CAN_GetITStatus+0xca>
+ 8000c08:	f5b1 7f80 	cmp.w	r1, #256	; 0x100
+ 8000c0c:	d152      	bne.n	8000cb4 <CAN_GetITStatus+0xec>
+ 8000c0e:	e036      	b.n	8000c7e <CAN_GetITStatus+0xb6>
+ 8000c10:	f5b1 3f80 	cmp.w	r1, #65536	; 0x10000
+ 8000c14:	d029      	beq.n	8000c6a <CAN_GetITStatus+0xa2>
+ 8000c16:	f5b1 3f00 	cmp.w	r1, #131072	; 0x20000
+ 8000c1a:	d02b      	beq.n	8000c74 <CAN_GetITStatus+0xac>
+ 8000c1c:	f5b1 4f00 	cmp.w	r1, #32768	; 0x8000
+ 8000c20:	d148      	bne.n	8000cb4 <CAN_GetITStatus+0xec>
+ 8000c22:	e040      	b.n	8000ca6 <CAN_GetITStatus+0xde>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1502
+ 8000c24:	6880      	ldr	r0, [r0, #8]
+ 8000c26:	4924      	ldr	r1, [pc, #144]	; (8000cb8 <CAN_GetITStatus+0xf0>)
+ 8000c28:	f7ff fc60 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1503
+ 8000c2c:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1506
+ 8000c2e:	68c0      	ldr	r0, [r0, #12]
+ 8000c30:	2103      	movs	r1, #3
+ 8000c32:	f7ff fc5b 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1507
+ 8000c36:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1510
+ 8000c38:	68c0      	ldr	r0, [r0, #12]
+ 8000c3a:	2108      	movs	r1, #8
+ 8000c3c:	f7ff fc56 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1511
+ 8000c40:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1514
+ 8000c42:	68c0      	ldr	r0, [r0, #12]
+ 8000c44:	2110      	movs	r1, #16
+ 8000c46:	f7ff fc51 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1515
+ 8000c4a:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1518
+ 8000c4c:	6900      	ldr	r0, [r0, #16]
+ 8000c4e:	2103      	movs	r1, #3
+ 8000c50:	f7ff fc4c 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1519
+ 8000c54:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1522
+ 8000c56:	6900      	ldr	r0, [r0, #16]
+ 8000c58:	2108      	movs	r1, #8
+ 8000c5a:	f7ff fc47 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1523
+ 8000c5e:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1526
+ 8000c60:	6900      	ldr	r0, [r0, #16]
+ 8000c62:	2110      	movs	r1, #16
+ 8000c64:	f7ff fc42 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1527
+ 8000c68:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1530
+ 8000c6a:	6840      	ldr	r0, [r0, #4]
+ 8000c6c:	2108      	movs	r1, #8
+ 8000c6e:	f7ff fc3d 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1531
+ 8000c72:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1534
+ 8000c74:	6840      	ldr	r0, [r0, #4]
+ 8000c76:	2110      	movs	r1, #16
+ 8000c78:	f7ff fc38 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1535
+ 8000c7c:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1538
+ 8000c7e:	6980      	ldr	r0, [r0, #24]
+ 8000c80:	2101      	movs	r1, #1
+ 8000c82:	f7ff fc33 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1539
+ 8000c86:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1542
+ 8000c88:	6980      	ldr	r0, [r0, #24]
+ 8000c8a:	2102      	movs	r1, #2
+ 8000c8c:	f7ff fc2e 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1543
+ 8000c90:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1546
+ 8000c92:	6980      	ldr	r0, [r0, #24]
+ 8000c94:	2104      	movs	r1, #4
+ 8000c96:	f7ff fc29 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1547
+ 8000c9a:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1550
+ 8000c9c:	6980      	ldr	r0, [r0, #24]
+ 8000c9e:	2170      	movs	r1, #112	; 0x70
+ 8000ca0:	f7ff fc24 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1551
+ 8000ca4:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1554
+ 8000ca6:	6840      	ldr	r0, [r0, #4]
+ 8000ca8:	2104      	movs	r1, #4
+ 8000caa:	f7ff fc1f 	bl	80004ec <CheckITStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1555
+ 8000cae:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1565
+ 8000cb0:	2000      	movs	r0, #0
+ 8000cb2:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1558
+ 8000cb4:	2000      	movs	r0, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1570
+ 8000cb6:	bd08      	pop	{r3, pc}
+ 8000cb8:	00010101 	.word	0x00010101
+
+08000cbc <CAN_ClearITPendingBit>:
+CAN_ClearITPendingBit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1597
+ 8000cbc:	f5b1 7f80 	cmp.w	r1, #256	; 0x100
+ 8000cc0:	d037      	beq.n	8000d32 <CAN_ClearITPendingBit+0x76>
+ 8000cc2:	d80c      	bhi.n	8000cde <CAN_ClearITPendingBit+0x22>
+ 8000cc4:	2908      	cmp	r1, #8
+ 8000cc6:	d025      	beq.n	8000d14 <CAN_ClearITPendingBit+0x58>
+ 8000cc8:	d804      	bhi.n	8000cd4 <CAN_ClearITPendingBit+0x18>
+ 8000cca:	2901      	cmp	r1, #1
+ 8000ccc:	d01c      	beq.n	8000d08 <CAN_ClearITPendingBit+0x4c>
+ 8000cce:	2904      	cmp	r1, #4
+ 8000cd0:	d01d      	beq.n	8000d0e <CAN_ClearITPendingBit+0x52>
+ 8000cd2:	4770      	bx	lr
+ 8000cd4:	2920      	cmp	r1, #32
+ 8000cd6:	d020      	beq.n	8000d1a <CAN_ClearITPendingBit+0x5e>
+ 8000cd8:	2940      	cmp	r1, #64	; 0x40
+ 8000cda:	d021      	beq.n	8000d20 <CAN_ClearITPendingBit+0x64>
+ 8000cdc:	4770      	bx	lr
+ 8000cde:	f5b1 6f00 	cmp.w	r1, #2048	; 0x800
+ 8000ce2:	d02f      	beq.n	8000d44 <CAN_ClearITPendingBit+0x88>
+ 8000ce4:	d806      	bhi.n	8000cf4 <CAN_ClearITPendingBit+0x38>
+ 8000ce6:	f5b1 7f00 	cmp.w	r1, #512	; 0x200
+ 8000cea:	d025      	beq.n	8000d38 <CAN_ClearITPendingBit+0x7c>
+ 8000cec:	f5b1 6f80 	cmp.w	r1, #1024	; 0x400
+ 8000cf0:	d025      	beq.n	8000d3e <CAN_ClearITPendingBit+0x82>
+ 8000cf2:	4770      	bx	lr
+ 8000cf4:	f5b1 3f80 	cmp.w	r1, #65536	; 0x10000
+ 8000cf8:	d015      	beq.n	8000d26 <CAN_ClearITPendingBit+0x6a>
+ 8000cfa:	f5b1 3f00 	cmp.w	r1, #131072	; 0x20000
+ 8000cfe:	d015      	beq.n	8000d2c <CAN_ClearITPendingBit+0x70>
+ 8000d00:	f5b1 4f00 	cmp.w	r1, #32768	; 0x8000
+ 8000d04:	d127      	bne.n	8000d56 <CAN_ClearITPendingBit+0x9a>
+ 8000d06:	e022      	b.n	8000d4e <CAN_ClearITPendingBit+0x92>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1601
+ 8000d08:	4b13      	ldr	r3, [pc, #76]	; (8000d58 <CAN_ClearITPendingBit+0x9c>)
+ 8000d0a:	6083      	str	r3, [r0, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1602
+ 8000d0c:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1605
+ 8000d0e:	2308      	movs	r3, #8
+ 8000d10:	60c3      	str	r3, [r0, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1606
+ 8000d12:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1609
+ 8000d14:	2310      	movs	r3, #16
+ 8000d16:	60c3      	str	r3, [r0, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1610
+ 8000d18:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1613
+ 8000d1a:	2308      	movs	r3, #8
+ 8000d1c:	6103      	str	r3, [r0, #16]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1614
+ 8000d1e:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1617
+ 8000d20:	2310      	movs	r3, #16
+ 8000d22:	6103      	str	r3, [r0, #16]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1618
+ 8000d24:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1621
+ 8000d26:	2308      	movs	r3, #8
+ 8000d28:	6043      	str	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1622
+ 8000d2a:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1625
+ 8000d2c:	2310      	movs	r3, #16
+ 8000d2e:	6043      	str	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1626
+ 8000d30:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1629
+ 8000d32:	2304      	movs	r3, #4
+ 8000d34:	6043      	str	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1631
+ 8000d36:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1634
+ 8000d38:	2304      	movs	r3, #4
+ 8000d3a:	6043      	str	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1636
+ 8000d3c:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1639
+ 8000d3e:	2304      	movs	r3, #4
+ 8000d40:	6043      	str	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1641
+ 8000d42:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1644
+ 8000d44:	2300      	movs	r3, #0
+ 8000d46:	6183      	str	r3, [r0, #24]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1646
+ 8000d48:	2304      	movs	r3, #4
+ 8000d4a:	6043      	str	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1647
+ 8000d4c:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1650
+ 8000d4e:	2300      	movs	r3, #0
+ 8000d50:	6183      	str	r3, [r0, #24]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c:1652
+ 8000d52:	2304      	movs	r3, #4
+ 8000d54:	6043      	str	r3, [r0, #4]
+ 8000d56:	4770      	bx	lr
+ 8000d58:	00010101 	.word	0x00010101
+
+08000d5c <EXTI_DeInit>:
+EXTI_DeInit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:105
+ 8000d5c:	4b04      	ldr	r3, [pc, #16]	; (8000d70 <EXTI_DeInit+0x14>)
+ 8000d5e:	2200      	movs	r2, #0
+ 8000d60:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:106
+ 8000d62:	605a      	str	r2, [r3, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:107
+ 8000d64:	609a      	str	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:108
+ 8000d66:	60da      	str	r2, [r3, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:109
+ 8000d68:	4a02      	ldr	r2, [pc, #8]	; (8000d74 <EXTI_DeInit+0x18>)
+ 8000d6a:	615a      	str	r2, [r3, #20]
+ 8000d6c:	4770      	bx	lr
+ 8000d6e:	bf00      	nop
+ 8000d70:	40013c00 	.word	0x40013c00
+ 8000d74:	007fffff 	.word	0x007fffff
+
+08000d78 <EXTI_Init>:
+EXTI_Init():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:120
+ 8000d78:	b410      	push	{r4}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:131
+ 8000d7a:	7983      	ldrb	r3, [r0, #6]
+ 8000d7c:	2b00      	cmp	r3, #0
+ 8000d7e:	d033      	beq.n	8000de8 <EXTI_Init+0x70>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:134
+ 8000d80:	4b20      	ldr	r3, [pc, #128]	; (8000e04 <EXTI_Init+0x8c>)
+ 8000d82:	6819      	ldr	r1, [r3, #0]
+ 8000d84:	6802      	ldr	r2, [r0, #0]
+ 8000d86:	ea21 0202 	bic.w	r2, r1, r2
+ 8000d8a:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:135
+ 8000d8c:	6859      	ldr	r1, [r3, #4]
+ 8000d8e:	6802      	ldr	r2, [r0, #0]
+ 8000d90:	ea21 0202 	bic.w	r2, r1, r2
+ 8000d94:	605a      	str	r2, [r3, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:137
+ 8000d96:	7902      	ldrb	r2, [r0, #4]
+ 8000d98:	f102 4280 	add.w	r2, r2, #1073741824	; 0x40000000
+ 8000d9c:	f502 329e 	add.w	r2, r2, #80896	; 0x13c00
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:139
+ 8000da0:	6814      	ldr	r4, [r2, #0]
+ 8000da2:	6801      	ldr	r1, [r0, #0]
+ 8000da4:	4321      	orrs	r1, r4
+ 8000da6:	6011      	str	r1, [r2, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:142
+ 8000da8:	6899      	ldr	r1, [r3, #8]
+ 8000daa:	6802      	ldr	r2, [r0, #0]
+ 8000dac:	ea21 0202 	bic.w	r2, r1, r2
+ 8000db0:	609a      	str	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:143
+ 8000db2:	68d9      	ldr	r1, [r3, #12]
+ 8000db4:	6802      	ldr	r2, [r0, #0]
+ 8000db6:	ea21 0202 	bic.w	r2, r1, r2
+ 8000dba:	60da      	str	r2, [r3, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:146
+ 8000dbc:	7943      	ldrb	r3, [r0, #5]
+ 8000dbe:	2b10      	cmp	r3, #16
+ 8000dc0:	d109      	bne.n	8000dd6 <EXTI_Init+0x5e>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:149
+ 8000dc2:	4b10      	ldr	r3, [pc, #64]	; (8000e04 <EXTI_Init+0x8c>)
+ 8000dc4:	6899      	ldr	r1, [r3, #8]
+ 8000dc6:	6802      	ldr	r2, [r0, #0]
+ 8000dc8:	430a      	orrs	r2, r1
+ 8000dca:	609a      	str	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:150
+ 8000dcc:	68d9      	ldr	r1, [r3, #12]
+ 8000dce:	6802      	ldr	r2, [r0, #0]
+ 8000dd0:	430a      	orrs	r2, r1
+ 8000dd2:	60da      	str	r2, [r3, #12]
+ 8000dd4:	e012      	b.n	8000dfc <EXTI_Init+0x84>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:155
+ 8000dd6:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
+ 8000dda:	f503 339e 	add.w	r3, r3, #80896	; 0x13c00
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:157
+ 8000dde:	6819      	ldr	r1, [r3, #0]
+ 8000de0:	6802      	ldr	r2, [r0, #0]
+ 8000de2:	430a      	orrs	r2, r1
+ 8000de4:	601a      	str	r2, [r3, #0]
+ 8000de6:	e009      	b.n	8000dfc <EXTI_Init+0x84>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:162
+ 8000de8:	7903      	ldrb	r3, [r0, #4]
+ 8000dea:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
+ 8000dee:	f503 339e 	add.w	r3, r3, #80896	; 0x13c00
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:165
+ 8000df2:	681a      	ldr	r2, [r3, #0]
+ 8000df4:	6801      	ldr	r1, [r0, #0]
+ 8000df6:	ea22 0201 	bic.w	r2, r2, r1
+ 8000dfa:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:167
+ 8000dfc:	f85d 4b04 	ldr.w	r4, [sp], #4
+ 8000e00:	4770      	bx	lr
+ 8000e02:	bf00      	nop
+ 8000e04:	40013c00 	.word	0x40013c00
+
+08000e08 <EXTI_StructInit>:
+EXTI_StructInit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:177
+ 8000e08:	2300      	movs	r3, #0
+ 8000e0a:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:178
+ 8000e0c:	7103      	strb	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:179
+ 8000e0e:	220c      	movs	r2, #12
+ 8000e10:	7142      	strb	r2, [r0, #5]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:180
+ 8000e12:	7183      	strb	r3, [r0, #6]
+ 8000e14:	4770      	bx	lr
+ 8000e16:	bf00      	nop
+
+08000e18 <EXTI_GenerateSWInterrupt>:
+EXTI_GenerateSWInterrupt():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:195
+ 8000e18:	4b02      	ldr	r3, [pc, #8]	; (8000e24 <EXTI_GenerateSWInterrupt+0xc>)
+ 8000e1a:	691a      	ldr	r2, [r3, #16]
+ 8000e1c:	4310      	orrs	r0, r2
+ 8000e1e:	6118      	str	r0, [r3, #16]
+ 8000e20:	4770      	bx	lr
+ 8000e22:	bf00      	nop
+ 8000e24:	40013c00 	.word	0x40013c00
+
+08000e28 <EXTI_GetFlagStatus>:
+EXTI_GetFlagStatus():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:226
+ 8000e28:	4b03      	ldr	r3, [pc, #12]	; (8000e38 <EXTI_GetFlagStatus+0x10>)
+ 8000e2a:	695b      	ldr	r3, [r3, #20]
+ 8000e2c:	4018      	ands	r0, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:235
+ 8000e2e:	3000      	adds	r0, #0
+ 8000e30:	bf18      	it	ne
+ 8000e32:	2001      	movne	r0, #1
+ 8000e34:	4770      	bx	lr
+ 8000e36:	bf00      	nop
+ 8000e38:	40013c00 	.word	0x40013c00
+
+08000e3c <EXTI_ClearFlag>:
+EXTI_ClearFlag():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:248
+ 8000e3c:	4b01      	ldr	r3, [pc, #4]	; (8000e44 <EXTI_ClearFlag+0x8>)
+ 8000e3e:	6158      	str	r0, [r3, #20]
+ 8000e40:	4770      	bx	lr
+ 8000e42:	bf00      	nop
+ 8000e44:	40013c00 	.word	0x40013c00
+
+08000e48 <EXTI_GetITStatus>:
+EXTI_GetITStatus():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:264
+ 8000e48:	4b05      	ldr	r3, [pc, #20]	; (8000e60 <EXTI_GetITStatus+0x18>)
+ 8000e4a:	681a      	ldr	r2, [r3, #0]
+ 8000e4c:	4002      	ands	r2, r0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:265
+ 8000e4e:	695b      	ldr	r3, [r3, #20]
+ 8000e50:	4203      	tst	r3, r0
+ 8000e52:	d003      	beq.n	8000e5c <EXTI_GetITStatus+0x14>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:271 (discriminator 1)
+ 8000e54:	1c10      	adds	r0, r2, #0
+ 8000e56:	bf18      	it	ne
+ 8000e58:	2001      	movne	r0, #1
+ 8000e5a:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:271
+ 8000e5c:	2000      	movs	r0, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:274
+ 8000e5e:	4770      	bx	lr
+ 8000e60:	40013c00 	.word	0x40013c00
+
+08000e64 <EXTI_ClearITPendingBit>:
+EXTI_ClearITPendingBit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:287
+ 8000e64:	4b01      	ldr	r3, [pc, #4]	; (8000e6c <EXTI_ClearITPendingBit+0x8>)
+ 8000e66:	6158      	str	r0, [r3, #20]
+ 8000e68:	4770      	bx	lr
+ 8000e6a:	bf00      	nop
+ 8000e6c:	40013c00 	.word	0x40013c00
+
+08000e70 <GPIO_DeInit>:
+GPIO_DeInit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:121
+ 8000e70:	b508      	push	{r3, lr}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:125
+ 8000e72:	4b37      	ldr	r3, [pc, #220]	; (8000f50 <GPIO_DeInit+0xe0>)
+ 8000e74:	4298      	cmp	r0, r3
+ 8000e76:	d108      	bne.n	8000e8a <GPIO_DeInit+0x1a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:127
+ 8000e78:	2001      	movs	r0, #1
+ 8000e7a:	4601      	mov	r1, r0
+ 8000e7c:	f000 fa9a 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:128
+ 8000e80:	2001      	movs	r0, #1
+ 8000e82:	2100      	movs	r1, #0
+ 8000e84:	f000 fa96 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+ 8000e88:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:130
+ 8000e8a:	4b32      	ldr	r3, [pc, #200]	; (8000f54 <GPIO_DeInit+0xe4>)
+ 8000e8c:	4298      	cmp	r0, r3
+ 8000e8e:	d108      	bne.n	8000ea2 <GPIO_DeInit+0x32>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:132
+ 8000e90:	2002      	movs	r0, #2
+ 8000e92:	2101      	movs	r1, #1
+ 8000e94:	f000 fa8e 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:133
+ 8000e98:	2002      	movs	r0, #2
+ 8000e9a:	2100      	movs	r1, #0
+ 8000e9c:	f000 fa8a 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+ 8000ea0:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:135
+ 8000ea2:	4b2d      	ldr	r3, [pc, #180]	; (8000f58 <GPIO_DeInit+0xe8>)
+ 8000ea4:	4298      	cmp	r0, r3
+ 8000ea6:	d108      	bne.n	8000eba <GPIO_DeInit+0x4a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:137
+ 8000ea8:	2004      	movs	r0, #4
+ 8000eaa:	2101      	movs	r1, #1
+ 8000eac:	f000 fa82 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:138
+ 8000eb0:	2004      	movs	r0, #4
+ 8000eb2:	2100      	movs	r1, #0
+ 8000eb4:	f000 fa7e 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+ 8000eb8:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:140
+ 8000eba:	4b28      	ldr	r3, [pc, #160]	; (8000f5c <GPIO_DeInit+0xec>)
+ 8000ebc:	4298      	cmp	r0, r3
+ 8000ebe:	d108      	bne.n	8000ed2 <GPIO_DeInit+0x62>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:142
+ 8000ec0:	2008      	movs	r0, #8
+ 8000ec2:	2101      	movs	r1, #1
+ 8000ec4:	f000 fa76 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:143
+ 8000ec8:	2008      	movs	r0, #8
+ 8000eca:	2100      	movs	r1, #0
+ 8000ecc:	f000 fa72 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+ 8000ed0:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:145
+ 8000ed2:	4b23      	ldr	r3, [pc, #140]	; (8000f60 <GPIO_DeInit+0xf0>)
+ 8000ed4:	4298      	cmp	r0, r3
+ 8000ed6:	d108      	bne.n	8000eea <GPIO_DeInit+0x7a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:147
+ 8000ed8:	2010      	movs	r0, #16
+ 8000eda:	2101      	movs	r1, #1
+ 8000edc:	f000 fa6a 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:148
+ 8000ee0:	2010      	movs	r0, #16
+ 8000ee2:	2100      	movs	r1, #0
+ 8000ee4:	f000 fa66 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+ 8000ee8:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:150
+ 8000eea:	4b1e      	ldr	r3, [pc, #120]	; (8000f64 <GPIO_DeInit+0xf4>)
+ 8000eec:	4298      	cmp	r0, r3
+ 8000eee:	d108      	bne.n	8000f02 <GPIO_DeInit+0x92>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:152
+ 8000ef0:	2020      	movs	r0, #32
+ 8000ef2:	2101      	movs	r1, #1
+ 8000ef4:	f000 fa5e 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:153
+ 8000ef8:	2020      	movs	r0, #32
+ 8000efa:	2100      	movs	r1, #0
+ 8000efc:	f000 fa5a 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+ 8000f00:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:155
+ 8000f02:	4b19      	ldr	r3, [pc, #100]	; (8000f68 <GPIO_DeInit+0xf8>)
+ 8000f04:	4298      	cmp	r0, r3
+ 8000f06:	d108      	bne.n	8000f1a <GPIO_DeInit+0xaa>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:157
+ 8000f08:	2040      	movs	r0, #64	; 0x40
+ 8000f0a:	2101      	movs	r1, #1
+ 8000f0c:	f000 fa52 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:158
+ 8000f10:	2040      	movs	r0, #64	; 0x40
+ 8000f12:	2100      	movs	r1, #0
+ 8000f14:	f000 fa4e 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+ 8000f18:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:160
+ 8000f1a:	4b14      	ldr	r3, [pc, #80]	; (8000f6c <GPIO_DeInit+0xfc>)
+ 8000f1c:	4298      	cmp	r0, r3
+ 8000f1e:	d108      	bne.n	8000f32 <GPIO_DeInit+0xc2>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:162
+ 8000f20:	2080      	movs	r0, #128	; 0x80
+ 8000f22:	2101      	movs	r1, #1
+ 8000f24:	f000 fa46 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:163
+ 8000f28:	2080      	movs	r0, #128	; 0x80
+ 8000f2a:	2100      	movs	r1, #0
+ 8000f2c:	f000 fa42 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+ 8000f30:	bd08      	pop	{r3, pc}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:167
+ 8000f32:	4b0f      	ldr	r3, [pc, #60]	; (8000f70 <GPIO_DeInit+0x100>)
+ 8000f34:	4298      	cmp	r0, r3
+ 8000f36:	d109      	bne.n	8000f4c <GPIO_DeInit+0xdc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:169
+ 8000f38:	f44f 7080 	mov.w	r0, #256	; 0x100
+ 8000f3c:	2101      	movs	r1, #1
+ 8000f3e:	f000 fa39 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:170
+ 8000f42:	f44f 7080 	mov.w	r0, #256	; 0x100
+ 8000f46:	2100      	movs	r1, #0
+ 8000f48:	f000 fa34 	bl	80013b4 <RCC_AHB1PeriphResetCmd>
+ 8000f4c:	bd08      	pop	{r3, pc}
+ 8000f4e:	bf00      	nop
+ 8000f50:	40020000 	.word	0x40020000
+ 8000f54:	40020400 	.word	0x40020400
+ 8000f58:	40020800 	.word	0x40020800
+ 8000f5c:	40020c00 	.word	0x40020c00
+ 8000f60:	40021000 	.word	0x40021000
+ 8000f64:	40021400 	.word	0x40021400
+ 8000f68:	40021800 	.word	0x40021800
+ 8000f6c:	40021c00 	.word	0x40021c00
+ 8000f70:	40022000 	.word	0x40022000
+
+08000f74 <GPIO_Init>:
+GPIO_Init():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:183
+ 8000f74:	b4f0      	push	{r4, r5, r6, r7}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:194
+ 8000f76:	2300      	movs	r3, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:196
+ 8000f78:	2501      	movs	r5, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:202
+ 8000f7a:	2603      	movs	r6, #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:194
+ 8000f7c:	e03e      	b.n	8000ffc <GPIO_Init+0x88>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:196
+ 8000f7e:	fa05 f203 	lsl.w	r2, r5, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:198
+ 8000f82:	680c      	ldr	r4, [r1, #0]
+ 8000f84:	4014      	ands	r4, r2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:200
+ 8000f86:	4294      	cmp	r4, r2
+ 8000f88:	d137      	bne.n	8000ffa <GPIO_Init+0x86>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:202
+ 8000f8a:	6807      	ldr	r7, [r0, #0]
+ 8000f8c:	005a      	lsls	r2, r3, #1
+ 8000f8e:	fa06 f402 	lsl.w	r4, r6, r2
+ 8000f92:	43e4      	mvns	r4, r4
+ 8000f94:	4027      	ands	r7, r4
+ 8000f96:	6007      	str	r7, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:203
+ 8000f98:	f8d0 c000 	ldr.w	ip, [r0]
+ 8000f9c:	790f      	ldrb	r7, [r1, #4]
+ 8000f9e:	4097      	lsls	r7, r2
+ 8000fa0:	ea4c 0707 	orr.w	r7, ip, r7
+ 8000fa4:	6007      	str	r7, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:205
+ 8000fa6:	790f      	ldrb	r7, [r1, #4]
+ 8000fa8:	3f01      	subs	r7, #1
+ 8000faa:	b2ff      	uxtb	r7, r7
+ 8000fac:	2f01      	cmp	r7, #1
+ 8000fae:	d816      	bhi.n	8000fde <GPIO_Init+0x6a>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:211
+ 8000fb0:	6887      	ldr	r7, [r0, #8]
+ 8000fb2:	403c      	ands	r4, r7
+ 8000fb4:	6084      	str	r4, [r0, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:212
+ 8000fb6:	6887      	ldr	r7, [r0, #8]
+ 8000fb8:	794c      	ldrb	r4, [r1, #5]
+ 8000fba:	4094      	lsls	r4, r2
+ 8000fbc:	433c      	orrs	r4, r7
+ 8000fbe:	6084      	str	r4, [r0, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:218
+ 8000fc0:	6847      	ldr	r7, [r0, #4]
+ 8000fc2:	b29c      	uxth	r4, r3
+ 8000fc4:	fa05 fc04 	lsl.w	ip, r5, r4
+ 8000fc8:	ea27 070c 	bic.w	r7, r7, ip
+ 8000fcc:	6047      	str	r7, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:219
+ 8000fce:	6847      	ldr	r7, [r0, #4]
+ 8000fd0:	f891 c006 	ldrb.w	ip, [r1, #6]
+ 8000fd4:	fa0c f404 	lsl.w	r4, ip, r4
+ 8000fd8:	b2a4      	uxth	r4, r4
+ 8000fda:	433c      	orrs	r4, r7
+ 8000fdc:	6044      	str	r4, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:223
+ 8000fde:	68c7      	ldr	r7, [r0, #12]
+ 8000fe0:	b29c      	uxth	r4, r3
+ 8000fe2:	0064      	lsls	r4, r4, #1
+ 8000fe4:	fa06 f404 	lsl.w	r4, r6, r4
+ 8000fe8:	ea27 0404 	bic.w	r4, r7, r4
+ 8000fec:	60c4      	str	r4, [r0, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:224
+ 8000fee:	68c4      	ldr	r4, [r0, #12]
+ 8000ff0:	79cf      	ldrb	r7, [r1, #7]
+ 8000ff2:	fa07 f202 	lsl.w	r2, r7, r2
+ 8000ff6:	4322      	orrs	r2, r4
+ 8000ff8:	60c2      	str	r2, [r0, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:194
+ 8000ffa:	3301      	adds	r3, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:194 (discriminator 1)
+ 8000ffc:	2b0f      	cmp	r3, #15
+ 8000ffe:	d9be      	bls.n	8000f7e <GPIO_Init+0xa>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:227
+ 8001000:	bcf0      	pop	{r4, r5, r6, r7}
+ 8001002:	4770      	bx	lr
+
+08001004 <GPIO_StructInit>:
+GPIO_StructInit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:237
+ 8001004:	f64f 73ff 	movw	r3, #65535	; 0xffff
+ 8001008:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:238
+ 800100a:	2300      	movs	r3, #0
+ 800100c:	7103      	strb	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:239
+ 800100e:	7143      	strb	r3, [r0, #5]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:240
+ 8001010:	7183      	strb	r3, [r0, #6]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:241
+ 8001012:	71c3      	strb	r3, [r0, #7]
+ 8001014:	4770      	bx	lr
+ 8001016:	bf00      	nop
+
+08001018 <GPIO_PinLockConfig>:
+GPIO_PinLockConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:256
+ 8001018:	b082      	sub	sp, #8
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:257
+ 800101a:	f44f 3380 	mov.w	r3, #65536	; 0x10000
+ 800101e:	9301      	str	r3, [sp, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:263
+ 8001020:	9b01      	ldr	r3, [sp, #4]
+ 8001022:	430b      	orrs	r3, r1
+ 8001024:	9301      	str	r3, [sp, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:265
+ 8001026:	9b01      	ldr	r3, [sp, #4]
+ 8001028:	61c3      	str	r3, [r0, #28]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:267
+ 800102a:	61c1      	str	r1, [r0, #28]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:269
+ 800102c:	9b01      	ldr	r3, [sp, #4]
+ 800102e:	61c3      	str	r3, [r0, #28]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:271
+ 8001030:	69c3      	ldr	r3, [r0, #28]
+ 8001032:	9301      	str	r3, [sp, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:273
+ 8001034:	69c3      	ldr	r3, [r0, #28]
+ 8001036:	9301      	str	r3, [sp, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:274
+ 8001038:	b002      	add	sp, #8
+ 800103a:	4770      	bx	lr
+
+0800103c <GPIO_ReadInputDataBit>:
+GPIO_ReadInputDataBit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:307
+ 800103c:	6900      	ldr	r0, [r0, #16]
+ 800103e:	4008      	ands	r0, r1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:316
+ 8001040:	3000      	adds	r0, #0
+ 8001042:	bf18      	it	ne
+ 8001044:	2001      	movne	r0, #1
+ 8001046:	4770      	bx	lr
+
+08001048 <GPIO_ReadInputData>:
+GPIO_ReadInputData():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:328
+ 8001048:	6900      	ldr	r0, [r0, #16]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:329
+ 800104a:	b280      	uxth	r0, r0
+ 800104c:	4770      	bx	lr
+ 800104e:	bf00      	nop
+
+08001050 <GPIO_ReadOutputDataBit>:
+GPIO_ReadOutputDataBit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:346
+ 8001050:	6940      	ldr	r0, [r0, #20]
+ 8001052:	4008      	ands	r0, r1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:355
+ 8001054:	3000      	adds	r0, #0
+ 8001056:	bf18      	it	ne
+ 8001058:	2001      	movne	r0, #1
+ 800105a:	4770      	bx	lr
+
+0800105c <GPIO_ReadOutputData>:
+GPIO_ReadOutputData():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:367
+ 800105c:	6940      	ldr	r0, [r0, #20]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:368
+ 800105e:	b280      	uxth	r0, r0
+ 8001060:	4770      	bx	lr
+ 8001062:	bf00      	nop
+
+08001064 <GPIO_SetBits>:
+GPIO_SetBits():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:386
+ 8001064:	8301      	strh	r1, [r0, #24]
+ 8001066:	4770      	bx	lr
+
+08001068 <GPIO_ResetBits>:
+GPIO_ResetBits():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:405
+ 8001068:	8341      	strh	r1, [r0, #26]
+ 800106a:	4770      	bx	lr
+
+0800106c <GPIO_WriteBit>:
+GPIO_WriteBit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:426
+ 800106c:	b10a      	cbz	r2, 8001072 <GPIO_WriteBit+0x6>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:428
+ 800106e:	8301      	strh	r1, [r0, #24]
+ 8001070:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:432
+ 8001072:	8341      	strh	r1, [r0, #26]
+ 8001074:	4770      	bx	lr
+ 8001076:	bf00      	nop
+
+08001078 <GPIO_Write>:
+GPIO_Write():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:447
+ 8001078:	6141      	str	r1, [r0, #20]
+ 800107a:	4770      	bx	lr
+
+0800107c <GPIO_ToggleBits>:
+GPIO_ToggleBits():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:461
+ 800107c:	6943      	ldr	r3, [r0, #20]
+ 800107e:	4059      	eors	r1, r3
+ 8001080:	6141      	str	r1, [r0, #20]
+ 8001082:	4770      	bx	lr
+
+08001084 <GPIO_PinAFConfig>:
+GPIO_PinAFConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:530
+ 8001084:	b430      	push	{r4, r5}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:539
+ 8001086:	f001 0307 	and.w	r3, r1, #7
+ 800108a:	009b      	lsls	r3, r3, #2
+ 800108c:	409a      	lsls	r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:540
+ 800108e:	08c9      	lsrs	r1, r1, #3
+ 8001090:	3108      	adds	r1, #8
+ 8001092:	f850 4021 	ldr.w	r4, [r0, r1, lsl #2]
+ 8001096:	250f      	movs	r5, #15
+ 8001098:	fa05 f303 	lsl.w	r3, r5, r3
+ 800109c:	ea24 0303 	bic.w	r3, r4, r3
+ 80010a0:	f840 3021 	str.w	r3, [r0, r1, lsl #2]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:541
+ 80010a4:	f850 3021 	ldr.w	r3, [r0, r1, lsl #2]
+ 80010a8:	431a      	orrs	r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:542
+ 80010aa:	f840 2021 	str.w	r2, [r0, r1, lsl #2]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:543
+ 80010ae:	bc30      	pop	{r4, r5}
+ 80010b0:	4770      	bx	lr
+ 80010b2:	bf00      	nop
+
+080010b4 <RCC_DeInit>:
+RCC_DeInit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:199
+ 80010b4:	4b0a      	ldr	r3, [pc, #40]	; (80010e0 <RCC_DeInit+0x2c>)
+ 80010b6:	681a      	ldr	r2, [r3, #0]
+ 80010b8:	f042 0201 	orr.w	r2, r2, #1
+ 80010bc:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:202
+ 80010be:	2100      	movs	r1, #0
+ 80010c0:	6099      	str	r1, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:205
+ 80010c2:	681a      	ldr	r2, [r3, #0]
+ 80010c4:	f022 7284 	bic.w	r2, r2, #17301504	; 0x1080000
+ 80010c8:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
+ 80010cc:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:208
+ 80010ce:	4a05      	ldr	r2, [pc, #20]	; (80010e4 <RCC_DeInit+0x30>)
+ 80010d0:	605a      	str	r2, [r3, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:211
+ 80010d2:	681a      	ldr	r2, [r3, #0]
+ 80010d4:	f422 2280 	bic.w	r2, r2, #262144	; 0x40000
+ 80010d8:	601a      	str	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:214
+ 80010da:	60d9      	str	r1, [r3, #12]
+ 80010dc:	4770      	bx	lr
+ 80010de:	bf00      	nop
+ 80010e0:	40023800 	.word	0x40023800
+ 80010e4:	24003010 	.word	0x24003010
+
+080010e8 <RCC_HSEConfig>:
+RCC_HSEConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:243
+ 80010e8:	4b02      	ldr	r3, [pc, #8]	; (80010f4 <RCC_HSEConfig+0xc>)
+ 80010ea:	2200      	movs	r2, #0
+ 80010ec:	701a      	strb	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:246
+ 80010ee:	7018      	strb	r0, [r3, #0]
+ 80010f0:	4770      	bx	lr
+ 80010f2:	bf00      	nop
+ 80010f4:	40023802 	.word	0x40023802
+
+080010f8 <RCC_AdjustHSICalibrationValue>:
+RCC_AdjustHSICalibrationValue():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:298
+ 80010f8:	4b03      	ldr	r3, [pc, #12]	; (8001108 <RCC_AdjustHSICalibrationValue+0x10>)
+ 80010fa:	681a      	ldr	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:301
+ 80010fc:	f022 02f8 	bic.w	r2, r2, #248	; 0xf8
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:304
+ 8001100:	ea42 00c0 	orr.w	r0, r2, r0, lsl #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:307
+ 8001104:	6018      	str	r0, [r3, #0]
+ 8001106:	4770      	bx	lr
+ 8001108:	40023800 	.word	0x40023800
+
+0800110c <RCC_HSICmd>:
+RCC_HSICmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:333
+ 800110c:	4b01      	ldr	r3, [pc, #4]	; (8001114 <RCC_HSICmd+0x8>)
+ 800110e:	6018      	str	r0, [r3, #0]
+ 8001110:	4770      	bx	lr
+ 8001112:	bf00      	nop
+ 8001114:	42470000 	.word	0x42470000
+
+08001118 <RCC_LSEConfig>:
+RCC_LSEConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:360
+ 8001118:	4b08      	ldr	r3, [pc, #32]	; (800113c <RCC_LSEConfig+0x24>)
+ 800111a:	2200      	movs	r2, #0
+ 800111c:	701a      	strb	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:363
+ 800111e:	701a      	strb	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:366
+ 8001120:	2801      	cmp	r0, #1
+ 8001122:	d002      	beq.n	800112a <RCC_LSEConfig+0x12>
+ 8001124:	2804      	cmp	r0, #4
+ 8001126:	d004      	beq.n	8001132 <RCC_LSEConfig+0x1a>
+ 8001128:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:370
+ 800112a:	2201      	movs	r2, #1
+ 800112c:	4b03      	ldr	r3, [pc, #12]	; (800113c <RCC_LSEConfig+0x24>)
+ 800112e:	701a      	strb	r2, [r3, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:371
+ 8001130:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:374
+ 8001132:	2205      	movs	r2, #5
+ 8001134:	4b01      	ldr	r3, [pc, #4]	; (800113c <RCC_LSEConfig+0x24>)
+ 8001136:	701a      	strb	r2, [r3, #0]
+ 8001138:	4770      	bx	lr
+ 800113a:	bf00      	nop
+ 800113c:	40023870 	.word	0x40023870
+
+08001140 <RCC_LSICmd>:
+RCC_LSICmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:398
+ 8001140:	4b01      	ldr	r3, [pc, #4]	; (8001148 <RCC_LSICmd+0x8>)
+ 8001142:	6018      	str	r0, [r3, #0]
+ 8001144:	4770      	bx	lr
+ 8001146:	bf00      	nop
+ 8001148:	42470e80 	.word	0x42470e80
+
+0800114c <RCC_PLLConfig>:
+RCC_PLLConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:445
+ 800114c:	ea41 1282 	orr.w	r2, r1, r2, lsl #6
+ 8001150:	085b      	lsrs	r3, r3, #1
+ 8001152:	3b01      	subs	r3, #1
+ 8001154:	ea42 4203 	orr.w	r2, r2, r3, lsl #16
+ 8001158:	4310      	orrs	r0, r2
+ 800115a:	9b00      	ldr	r3, [sp, #0]
+ 800115c:	ea40 6303 	orr.w	r3, r0, r3, lsl #24
+ 8001160:	4901      	ldr	r1, [pc, #4]	; (8001168 <RCC_PLLConfig+0x1c>)
+ 8001162:	604b      	str	r3, [r1, #4]
+ 8001164:	4770      	bx	lr
+ 8001166:	bf00      	nop
+ 8001168:	40023800 	.word	0x40023800
+
+0800116c <RCC_PLLCmd>:
+RCC_PLLCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:463
+ 800116c:	4b01      	ldr	r3, [pc, #4]	; (8001174 <RCC_PLLCmd+0x8>)
+ 800116e:	6018      	str	r0, [r3, #0]
+ 8001170:	4770      	bx	lr
+ 8001172:	bf00      	nop
+ 8001174:	42470060 	.word	0x42470060
+
+08001178 <RCC_PLLI2SConfig>:
+RCC_PLLI2SConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:491
+ 8001178:	0709      	lsls	r1, r1, #28
+ 800117a:	ea41 1080 	orr.w	r0, r1, r0, lsl #6
+ 800117e:	4b02      	ldr	r3, [pc, #8]	; (8001188 <RCC_PLLI2SConfig+0x10>)
+ 8001180:	f8c3 0084 	str.w	r0, [r3, #132]	; 0x84
+ 8001184:	4770      	bx	lr
+ 8001186:	bf00      	nop
+ 8001188:	40023800 	.word	0x40023800
+
+0800118c <RCC_PLLI2SCmd>:
+RCC_PLLI2SCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:504
+ 800118c:	4b01      	ldr	r3, [pc, #4]	; (8001194 <RCC_PLLI2SCmd+0x8>)
+ 800118e:	6018      	str	r0, [r3, #0]
+ 8001190:	4770      	bx	lr
+ 8001192:	bf00      	nop
+ 8001194:	42470068 	.word	0x42470068
+
+08001198 <RCC_ClockSecuritySystemCmd>:
+RCC_ClockSecuritySystemCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:522
+ 8001198:	4b01      	ldr	r3, [pc, #4]	; (80011a0 <RCC_ClockSecuritySystemCmd+0x8>)
+ 800119a:	6018      	str	r0, [r3, #0]
+ 800119c:	4770      	bx	lr
+ 800119e:	bf00      	nop
+ 80011a0:	4247004c 	.word	0x4247004c
+
+080011a4 <RCC_MCO1Config>:
+RCC_MCO1Config():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:551
+ 80011a4:	4b03      	ldr	r3, [pc, #12]	; (80011b4 <RCC_MCO1Config+0x10>)
+ 80011a6:	689a      	ldr	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:554
+ 80011a8:	f022 62ec 	bic.w	r2, r2, #123731968	; 0x7600000
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:557
+ 80011ac:	4301      	orrs	r1, r0
+ 80011ae:	430a      	orrs	r2, r1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:560
+ 80011b0:	609a      	str	r2, [r3, #8]
+ 80011b2:	4770      	bx	lr
+ 80011b4:	40023800 	.word	0x40023800
+
+080011b8 <RCC_MCO2Config>:
+RCC_MCO2Config():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:589
+ 80011b8:	4b03      	ldr	r3, [pc, #12]	; (80011c8 <RCC_MCO2Config+0x10>)
+ 80011ba:	689a      	ldr	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:592
+ 80011bc:	f022 4278 	bic.w	r2, r2, #4160749568	; 0xf8000000
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:595
+ 80011c0:	4301      	orrs	r1, r0
+ 80011c2:	430a      	orrs	r2, r1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:598
+ 80011c4:	609a      	str	r2, [r3, #8]
+ 80011c6:	4770      	bx	lr
+ 80011c8:	40023800 	.word	0x40023800
+
+080011cc <RCC_SYSCLKConfig>:
+RCC_SYSCLKConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:694
+ 80011cc:	4b03      	ldr	r3, [pc, #12]	; (80011dc <RCC_SYSCLKConfig+0x10>)
+ 80011ce:	689a      	ldr	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:697
+ 80011d0:	f022 0203 	bic.w	r2, r2, #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:700
+ 80011d4:	4310      	orrs	r0, r2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:703
+ 80011d6:	6098      	str	r0, [r3, #8]
+ 80011d8:	4770      	bx	lr
+ 80011da:	bf00      	nop
+ 80011dc:	40023800 	.word	0x40023800
+
+080011e0 <RCC_GetSYSCLKSource>:
+RCC_GetSYSCLKSource():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:717
+ 80011e0:	4b02      	ldr	r3, [pc, #8]	; (80011ec <RCC_GetSYSCLKSource+0xc>)
+ 80011e2:	6898      	ldr	r0, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:718
+ 80011e4:	f000 000c 	and.w	r0, r0, #12
+ 80011e8:	4770      	bx	lr
+ 80011ea:	bf00      	nop
+ 80011ec:	40023800 	.word	0x40023800
+
+080011f0 <RCC_HCLKConfig>:
+RCC_HCLKConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:747
+ 80011f0:	4b03      	ldr	r3, [pc, #12]	; (8001200 <RCC_HCLKConfig+0x10>)
+ 80011f2:	689a      	ldr	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:750
+ 80011f4:	f022 02f0 	bic.w	r2, r2, #240	; 0xf0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:753
+ 80011f8:	4310      	orrs	r0, r2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:756
+ 80011fa:	6098      	str	r0, [r3, #8]
+ 80011fc:	4770      	bx	lr
+ 80011fe:	bf00      	nop
+ 8001200:	40023800 	.word	0x40023800
+
+08001204 <RCC_PCLK1Config>:
+RCC_PCLK1Config():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:779
+ 8001204:	4b03      	ldr	r3, [pc, #12]	; (8001214 <RCC_PCLK1Config+0x10>)
+ 8001206:	689a      	ldr	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:782
+ 8001208:	f422 52e0 	bic.w	r2, r2, #7168	; 0x1c00
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:785
+ 800120c:	4310      	orrs	r0, r2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:788
+ 800120e:	6098      	str	r0, [r3, #8]
+ 8001210:	4770      	bx	lr
+ 8001212:	bf00      	nop
+ 8001214:	40023800 	.word	0x40023800
+
+08001218 <RCC_PCLK2Config>:
+RCC_PCLK2Config():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:810
+ 8001218:	4b03      	ldr	r3, [pc, #12]	; (8001228 <RCC_PCLK2Config+0x10>)
+ 800121a:	689a      	ldr	r2, [r3, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:813
+ 800121c:	f422 4260 	bic.w	r2, r2, #57344	; 0xe000
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:816
+ 8001220:	ea42 00c0 	orr.w	r0, r2, r0, lsl #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:819
+ 8001224:	6098      	str	r0, [r3, #8]
+ 8001226:	4770      	bx	lr
+ 8001228:	40023800 	.word	0x40023800
+
+0800122c <RCC_GetClocksFreq>:
+RCC_GetClocksFreq():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:856
+ 800122c:	b410      	push	{r4}
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:860
+ 800122e:	4b25      	ldr	r3, [pc, #148]	; (80012c4 <RCC_GetClocksFreq+0x98>)
+ 8001230:	689b      	ldr	r3, [r3, #8]
+ 8001232:	f003 030c 	and.w	r3, r3, #12
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:862
+ 8001236:	2b04      	cmp	r3, #4
+ 8001238:	d005      	beq.n	8001246 <RCC_GetClocksFreq+0x1a>
+ 800123a:	2b08      	cmp	r3, #8
+ 800123c:	d006      	beq.n	800124c <RCC_GetClocksFreq+0x20>
+ 800123e:	bb0b      	cbnz	r3, 8001284 <RCC_GetClocksFreq+0x58>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:865
+ 8001240:	4b21      	ldr	r3, [pc, #132]	; (80012c8 <RCC_GetClocksFreq+0x9c>)
+ 8001242:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:866
+ 8001244:	e020      	b.n	8001288 <RCC_GetClocksFreq+0x5c>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:868
+ 8001246:	4b21      	ldr	r3, [pc, #132]	; (80012cc <RCC_GetClocksFreq+0xa0>)
+ 8001248:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:869
+ 800124a:	e01d      	b.n	8001288 <RCC_GetClocksFreq+0x5c>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:875
+ 800124c:	4b1d      	ldr	r3, [pc, #116]	; (80012c4 <RCC_GetClocksFreq+0x98>)
+ 800124e:	685a      	ldr	r2, [r3, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:876
+ 8001250:	685b      	ldr	r3, [r3, #4]
+ 8001252:	f003 033f 	and.w	r3, r3, #63	; 0x3f
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:878
+ 8001256:	f412 0f80 	tst.w	r2, #4194304	; 0x400000
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:881
+ 800125a:	bf14      	ite	ne
+ 800125c:	4a1b      	ldrne	r2, [pc, #108]	; (80012cc <RCC_GetClocksFreq+0xa0>)
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:886
+ 800125e:	4a1a      	ldreq	r2, [pc, #104]	; (80012c8 <RCC_GetClocksFreq+0x9c>)
+ 8001260:	fbb2 f3f3 	udiv	r3, r2, r3
+ 8001264:	4a17      	ldr	r2, [pc, #92]	; (80012c4 <RCC_GetClocksFreq+0x98>)
+ 8001266:	6852      	ldr	r2, [r2, #4]
+ 8001268:	f3c2 1288 	ubfx	r2, r2, #6, #9
+ 800126c:	fb02 f303 	mul.w	r3, r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:889
+ 8001270:	4a14      	ldr	r2, [pc, #80]	; (80012c4 <RCC_GetClocksFreq+0x98>)
+ 8001272:	6852      	ldr	r2, [r2, #4]
+ 8001274:	f3c2 4201 	ubfx	r2, r2, #16, #2
+ 8001278:	3201      	adds	r2, #1
+ 800127a:	0052      	lsls	r2, r2, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:890
+ 800127c:	fbb3 f3f2 	udiv	r3, r3, r2
+ 8001280:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:891
+ 8001282:	e001      	b.n	8001288 <RCC_GetClocksFreq+0x5c>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:893
+ 8001284:	4b10      	ldr	r3, [pc, #64]	; (80012c8 <RCC_GetClocksFreq+0x9c>)
+ 8001286:	6003      	str	r3, [r0, #0]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:899
+ 8001288:	490e      	ldr	r1, [pc, #56]	; (80012c4 <RCC_GetClocksFreq+0x98>)
+ 800128a:	688b      	ldr	r3, [r1, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:900
+ 800128c:	f3c3 1303 	ubfx	r3, r3, #4, #4
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:901
+ 8001290:	4a0f      	ldr	r2, [pc, #60]	; (80012d0 <RCC_GetClocksFreq+0xa4>)
+ 8001292:	5cd3      	ldrb	r3, [r2, r3]
+ 8001294:	b2db      	uxtb	r3, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:903
+ 8001296:	6804      	ldr	r4, [r0, #0]
+ 8001298:	fa24 f303 	lsr.w	r3, r4, r3
+ 800129c:	6043      	str	r3, [r0, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:906
+ 800129e:	688c      	ldr	r4, [r1, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:907
+ 80012a0:	f3c4 2482 	ubfx	r4, r4, #10, #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:908
+ 80012a4:	5d14      	ldrb	r4, [r2, r4]
+ 80012a6:	b2e4      	uxtb	r4, r4
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:910
+ 80012a8:	fa23 f404 	lsr.w	r4, r3, r4
+ 80012ac:	6084      	str	r4, [r0, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:913
+ 80012ae:	6889      	ldr	r1, [r1, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:914
+ 80012b0:	f3c1 3142 	ubfx	r1, r1, #13, #3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:915
+ 80012b4:	5c52      	ldrb	r2, [r2, r1]
+ 80012b6:	b2d2      	uxtb	r2, r2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:917
+ 80012b8:	40d3      	lsrs	r3, r2
+ 80012ba:	60c3      	str	r3, [r0, #12]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:918
+ 80012bc:	f85d 4b04 	ldr.w	r4, [sp], #4
+ 80012c0:	4770      	bx	lr
+ 80012c2:	bf00      	nop
+ 80012c4:	40023800 	.word	0x40023800
+ 80012c8:	00f42400 	.word	0x00f42400
+ 80012cc:	007a1200 	.word	0x007a1200
+ 80012d0:	20000014 	.word	0x20000014
+
+080012d4 <RCC_RTCCLKConfig>:
+RCC_RTCCLKConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:987
+ 80012d4:	f400 7340 	and.w	r3, r0, #768	; 0x300
+ 80012d8:	f5b3 7f40 	cmp.w	r3, #768	; 0x300
+ 80012dc:	d109      	bne.n	80012f2 <RCC_RTCCLKConfig+0x1e>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:989
+ 80012de:	4a08      	ldr	r2, [pc, #32]	; (8001300 <RCC_RTCCLKConfig+0x2c>)
+ 80012e0:	6891      	ldr	r1, [r2, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:992
+ 80012e2:	f421 11f8 	bic.w	r1, r1, #2031616	; 0x1f0000
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:995
+ 80012e6:	f020 4370 	bic.w	r3, r0, #4026531840	; 0xf0000000
+ 80012ea:	f423 7340 	bic.w	r3, r3, #768	; 0x300
+ 80012ee:	430b      	orrs	r3, r1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:998
+ 80012f0:	6093      	str	r3, [r2, #8]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1002
+ 80012f2:	4b03      	ldr	r3, [pc, #12]	; (8001300 <RCC_RTCCLKConfig+0x2c>)
+ 80012f4:	6f1a      	ldr	r2, [r3, #112]	; 0x70
+ 80012f6:	f3c0 000b 	ubfx	r0, r0, #0, #12
+ 80012fa:	4310      	orrs	r0, r2
+ 80012fc:	6718      	str	r0, [r3, #112]	; 0x70
+ 80012fe:	4770      	bx	lr
+ 8001300:	40023800 	.word	0x40023800
+
+08001304 <RCC_RTCCLKCmd>:
+RCC_RTCCLKCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1017
+ 8001304:	4b01      	ldr	r3, [pc, #4]	; (800130c <RCC_RTCCLKCmd+0x8>)
+ 8001306:	6018      	str	r0, [r3, #0]
+ 8001308:	4770      	bx	lr
+ 800130a:	bf00      	nop
+ 800130c:	42470e3c 	.word	0x42470e3c
+
+08001310 <RCC_BackupResetCmd>:
+RCC_BackupResetCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1033
+ 8001310:	4b01      	ldr	r3, [pc, #4]	; (8001318 <RCC_BackupResetCmd+0x8>)
+ 8001312:	6018      	str	r0, [r3, #0]
+ 8001314:	4770      	bx	lr
+ 8001316:	bf00      	nop
+ 8001318:	42470e40 	.word	0x42470e40
+
+0800131c <RCC_I2SCLKConfig>:
+RCC_I2SCLKConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1051
+ 800131c:	4b01      	ldr	r3, [pc, #4]	; (8001324 <RCC_I2SCLKConfig+0x8>)
+ 800131e:	6018      	str	r0, [r3, #0]
+ 8001320:	4770      	bx	lr
+ 8001322:	bf00      	nop
+ 8001324:	4247015c 	.word	0x4247015c
+
+08001328 <RCC_AHB1PeriphClockCmd>:
+RCC_AHB1PeriphClockCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1091
+ 8001328:	b121      	cbz	r1, 8001334 <RCC_AHB1PeriphClockCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1093
+ 800132a:	4b05      	ldr	r3, [pc, #20]	; (8001340 <RCC_AHB1PeriphClockCmd+0x18>)
+ 800132c:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 800132e:	4310      	orrs	r0, r2
+ 8001330:	6318      	str	r0, [r3, #48]	; 0x30
+ 8001332:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1097
+ 8001334:	4b02      	ldr	r3, [pc, #8]	; (8001340 <RCC_AHB1PeriphClockCmd+0x18>)
+ 8001336:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 8001338:	ea22 0000 	bic.w	r0, r2, r0
+ 800133c:	6318      	str	r0, [r3, #48]	; 0x30
+ 800133e:	4770      	bx	lr
+ 8001340:	40023800 	.word	0x40023800
+
+08001344 <RCC_AHB2PeriphClockCmd>:
+RCC_AHB2PeriphClockCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1123
+ 8001344:	b121      	cbz	r1, 8001350 <RCC_AHB2PeriphClockCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1125
+ 8001346:	4b05      	ldr	r3, [pc, #20]	; (800135c <RCC_AHB2PeriphClockCmd+0x18>)
+ 8001348:	6b5a      	ldr	r2, [r3, #52]	; 0x34
+ 800134a:	4310      	orrs	r0, r2
+ 800134c:	6358      	str	r0, [r3, #52]	; 0x34
+ 800134e:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1129
+ 8001350:	4b02      	ldr	r3, [pc, #8]	; (800135c <RCC_AHB2PeriphClockCmd+0x18>)
+ 8001352:	6b5a      	ldr	r2, [r3, #52]	; 0x34
+ 8001354:	ea22 0000 	bic.w	r0, r2, r0
+ 8001358:	6358      	str	r0, [r3, #52]	; 0x34
+ 800135a:	4770      	bx	lr
+ 800135c:	40023800 	.word	0x40023800
+
+08001360 <RCC_AHB3PeriphClockCmd>:
+RCC_AHB3PeriphClockCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1150
+ 8001360:	b121      	cbz	r1, 800136c <RCC_AHB3PeriphClockCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1152
+ 8001362:	4b05      	ldr	r3, [pc, #20]	; (8001378 <RCC_AHB3PeriphClockCmd+0x18>)
+ 8001364:	6b9a      	ldr	r2, [r3, #56]	; 0x38
+ 8001366:	4310      	orrs	r0, r2
+ 8001368:	6398      	str	r0, [r3, #56]	; 0x38
+ 800136a:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1156
+ 800136c:	4b02      	ldr	r3, [pc, #8]	; (8001378 <RCC_AHB3PeriphClockCmd+0x18>)
+ 800136e:	6b9a      	ldr	r2, [r3, #56]	; 0x38
+ 8001370:	ea22 0000 	bic.w	r0, r2, r0
+ 8001374:	6398      	str	r0, [r3, #56]	; 0x38
+ 8001376:	4770      	bx	lr
+ 8001378:	40023800 	.word	0x40023800
+
+0800137c <RCC_APB1PeriphClockCmd>:
+RCC_APB1PeriphClockCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1200
+ 800137c:	b121      	cbz	r1, 8001388 <RCC_APB1PeriphClockCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1202
+ 800137e:	4b05      	ldr	r3, [pc, #20]	; (8001394 <RCC_APB1PeriphClockCmd+0x18>)
+ 8001380:	6c1a      	ldr	r2, [r3, #64]	; 0x40
+ 8001382:	4310      	orrs	r0, r2
+ 8001384:	6418      	str	r0, [r3, #64]	; 0x40
+ 8001386:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1206
+ 8001388:	4b02      	ldr	r3, [pc, #8]	; (8001394 <RCC_APB1PeriphClockCmd+0x18>)
+ 800138a:	6c1a      	ldr	r2, [r3, #64]	; 0x40
+ 800138c:	ea22 0000 	bic.w	r0, r2, r0
+ 8001390:	6418      	str	r0, [r3, #64]	; 0x40
+ 8001392:	4770      	bx	lr
+ 8001394:	40023800 	.word	0x40023800
+
+08001398 <RCC_APB2PeriphClockCmd>:
+RCC_APB2PeriphClockCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1240
+ 8001398:	b121      	cbz	r1, 80013a4 <RCC_APB2PeriphClockCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1242
+ 800139a:	4b05      	ldr	r3, [pc, #20]	; (80013b0 <RCC_APB2PeriphClockCmd+0x18>)
+ 800139c:	6c5a      	ldr	r2, [r3, #68]	; 0x44
+ 800139e:	4310      	orrs	r0, r2
+ 80013a0:	6458      	str	r0, [r3, #68]	; 0x44
+ 80013a2:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1246
+ 80013a4:	4b02      	ldr	r3, [pc, #8]	; (80013b0 <RCC_APB2PeriphClockCmd+0x18>)
+ 80013a6:	6c5a      	ldr	r2, [r3, #68]	; 0x44
+ 80013a8:	ea22 0000 	bic.w	r0, r2, r0
+ 80013ac:	6458      	str	r0, [r3, #68]	; 0x44
+ 80013ae:	4770      	bx	lr
+ 80013b0:	40023800 	.word	0x40023800
+
+080013b4 <RCC_AHB1PeriphResetCmd>:
+RCC_AHB1PeriphResetCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1279
+ 80013b4:	b121      	cbz	r1, 80013c0 <RCC_AHB1PeriphResetCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1281
+ 80013b6:	4b05      	ldr	r3, [pc, #20]	; (80013cc <RCC_AHB1PeriphResetCmd+0x18>)
+ 80013b8:	691a      	ldr	r2, [r3, #16]
+ 80013ba:	4310      	orrs	r0, r2
+ 80013bc:	6118      	str	r0, [r3, #16]
+ 80013be:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1285
+ 80013c0:	4b02      	ldr	r3, [pc, #8]	; (80013cc <RCC_AHB1PeriphResetCmd+0x18>)
+ 80013c2:	691a      	ldr	r2, [r3, #16]
+ 80013c4:	ea22 0000 	bic.w	r0, r2, r0
+ 80013c8:	6118      	str	r0, [r3, #16]
+ 80013ca:	4770      	bx	lr
+ 80013cc:	40023800 	.word	0x40023800
+
+080013d0 <RCC_AHB2PeriphResetCmd>:
+RCC_AHB2PeriphResetCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1308
+ 80013d0:	b121      	cbz	r1, 80013dc <RCC_AHB2PeriphResetCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1310
+ 80013d2:	4b05      	ldr	r3, [pc, #20]	; (80013e8 <RCC_AHB2PeriphResetCmd+0x18>)
+ 80013d4:	695a      	ldr	r2, [r3, #20]
+ 80013d6:	4310      	orrs	r0, r2
+ 80013d8:	6158      	str	r0, [r3, #20]
+ 80013da:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1314
+ 80013dc:	4b02      	ldr	r3, [pc, #8]	; (80013e8 <RCC_AHB2PeriphResetCmd+0x18>)
+ 80013de:	695a      	ldr	r2, [r3, #20]
+ 80013e0:	ea22 0000 	bic.w	r0, r2, r0
+ 80013e4:	6158      	str	r0, [r3, #20]
+ 80013e6:	4770      	bx	lr
+ 80013e8:	40023800 	.word	0x40023800
+
+080013ec <RCC_AHB3PeriphResetCmd>:
+RCC_AHB3PeriphResetCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1332
+ 80013ec:	b121      	cbz	r1, 80013f8 <RCC_AHB3PeriphResetCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1334
+ 80013ee:	4b05      	ldr	r3, [pc, #20]	; (8001404 <RCC_AHB3PeriphResetCmd+0x18>)
+ 80013f0:	699a      	ldr	r2, [r3, #24]
+ 80013f2:	4310      	orrs	r0, r2
+ 80013f4:	6198      	str	r0, [r3, #24]
+ 80013f6:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1338
+ 80013f8:	4b02      	ldr	r3, [pc, #8]	; (8001404 <RCC_AHB3PeriphResetCmd+0x18>)
+ 80013fa:	699a      	ldr	r2, [r3, #24]
+ 80013fc:	ea22 0000 	bic.w	r0, r2, r0
+ 8001400:	6198      	str	r0, [r3, #24]
+ 8001402:	4770      	bx	lr
+ 8001404:	40023800 	.word	0x40023800
+
+08001408 <RCC_APB1PeriphResetCmd>:
+RCC_APB1PeriphResetCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1378
+ 8001408:	b121      	cbz	r1, 8001414 <RCC_APB1PeriphResetCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1380
+ 800140a:	4b05      	ldr	r3, [pc, #20]	; (8001420 <RCC_APB1PeriphResetCmd+0x18>)
+ 800140c:	6a1a      	ldr	r2, [r3, #32]
+ 800140e:	4310      	orrs	r0, r2
+ 8001410:	6218      	str	r0, [r3, #32]
+ 8001412:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1384
+ 8001414:	4b02      	ldr	r3, [pc, #8]	; (8001420 <RCC_APB1PeriphResetCmd+0x18>)
+ 8001416:	6a1a      	ldr	r2, [r3, #32]
+ 8001418:	ea22 0000 	bic.w	r0, r2, r0
+ 800141c:	6218      	str	r0, [r3, #32]
+ 800141e:	4770      	bx	lr
+ 8001420:	40023800 	.word	0x40023800
+
+08001424 <RCC_APB2PeriphResetCmd>:
+RCC_APB2PeriphResetCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1414
+ 8001424:	b121      	cbz	r1, 8001430 <RCC_APB2PeriphResetCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1416
+ 8001426:	4b05      	ldr	r3, [pc, #20]	; (800143c <RCC_APB2PeriphResetCmd+0x18>)
+ 8001428:	6a5a      	ldr	r2, [r3, #36]	; 0x24
+ 800142a:	4310      	orrs	r0, r2
+ 800142c:	6258      	str	r0, [r3, #36]	; 0x24
+ 800142e:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1420
+ 8001430:	4b02      	ldr	r3, [pc, #8]	; (800143c <RCC_APB2PeriphResetCmd+0x18>)
+ 8001432:	6a5a      	ldr	r2, [r3, #36]	; 0x24
+ 8001434:	ea22 0000 	bic.w	r0, r2, r0
+ 8001438:	6258      	str	r0, [r3, #36]	; 0x24
+ 800143a:	4770      	bx	lr
+ 800143c:	40023800 	.word	0x40023800
+
+08001440 <RCC_AHB1PeriphClockLPModeCmd>:
+RCC_AHB1PeriphClockLPModeCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1460
+ 8001440:	b121      	cbz	r1, 800144c <RCC_AHB1PeriphClockLPModeCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1462
+ 8001442:	4b05      	ldr	r3, [pc, #20]	; (8001458 <RCC_AHB1PeriphClockLPModeCmd+0x18>)
+ 8001444:	6d1a      	ldr	r2, [r3, #80]	; 0x50
+ 8001446:	4310      	orrs	r0, r2
+ 8001448:	6518      	str	r0, [r3, #80]	; 0x50
+ 800144a:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1466
+ 800144c:	4b02      	ldr	r3, [pc, #8]	; (8001458 <RCC_AHB1PeriphClockLPModeCmd+0x18>)
+ 800144e:	6d1a      	ldr	r2, [r3, #80]	; 0x50
+ 8001450:	ea22 0000 	bic.w	r0, r2, r0
+ 8001454:	6518      	str	r0, [r3, #80]	; 0x50
+ 8001456:	4770      	bx	lr
+ 8001458:	40023800 	.word	0x40023800
+
+0800145c <RCC_AHB2PeriphClockLPModeCmd>:
+RCC_AHB2PeriphClockLPModeCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1492
+ 800145c:	b121      	cbz	r1, 8001468 <RCC_AHB2PeriphClockLPModeCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1494
+ 800145e:	4b05      	ldr	r3, [pc, #20]	; (8001474 <RCC_AHB2PeriphClockLPModeCmd+0x18>)
+ 8001460:	6d5a      	ldr	r2, [r3, #84]	; 0x54
+ 8001462:	4310      	orrs	r0, r2
+ 8001464:	6558      	str	r0, [r3, #84]	; 0x54
+ 8001466:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1498
+ 8001468:	4b02      	ldr	r3, [pc, #8]	; (8001474 <RCC_AHB2PeriphClockLPModeCmd+0x18>)
+ 800146a:	6d5a      	ldr	r2, [r3, #84]	; 0x54
+ 800146c:	ea22 0000 	bic.w	r0, r2, r0
+ 8001470:	6558      	str	r0, [r3, #84]	; 0x54
+ 8001472:	4770      	bx	lr
+ 8001474:	40023800 	.word	0x40023800
+
+08001478 <RCC_AHB3PeriphClockLPModeCmd>:
+RCC_AHB3PeriphClockLPModeCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1519
+ 8001478:	b121      	cbz	r1, 8001484 <RCC_AHB3PeriphClockLPModeCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1521
+ 800147a:	4b05      	ldr	r3, [pc, #20]	; (8001490 <RCC_AHB3PeriphClockLPModeCmd+0x18>)
+ 800147c:	6d9a      	ldr	r2, [r3, #88]	; 0x58
+ 800147e:	4310      	orrs	r0, r2
+ 8001480:	6598      	str	r0, [r3, #88]	; 0x58
+ 8001482:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1525
+ 8001484:	4b02      	ldr	r3, [pc, #8]	; (8001490 <RCC_AHB3PeriphClockLPModeCmd+0x18>)
+ 8001486:	6d9a      	ldr	r2, [r3, #88]	; 0x58
+ 8001488:	ea22 0000 	bic.w	r0, r2, r0
+ 800148c:	6598      	str	r0, [r3, #88]	; 0x58
+ 800148e:	4770      	bx	lr
+ 8001490:	40023800 	.word	0x40023800
+
+08001494 <RCC_APB1PeriphClockLPModeCmd>:
+RCC_APB1PeriphClockLPModeCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1569
+ 8001494:	b121      	cbz	r1, 80014a0 <RCC_APB1PeriphClockLPModeCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1571
+ 8001496:	4b05      	ldr	r3, [pc, #20]	; (80014ac <RCC_APB1PeriphClockLPModeCmd+0x18>)
+ 8001498:	6e1a      	ldr	r2, [r3, #96]	; 0x60
+ 800149a:	4310      	orrs	r0, r2
+ 800149c:	6618      	str	r0, [r3, #96]	; 0x60
+ 800149e:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1575
+ 80014a0:	4b02      	ldr	r3, [pc, #8]	; (80014ac <RCC_APB1PeriphClockLPModeCmd+0x18>)
+ 80014a2:	6e1a      	ldr	r2, [r3, #96]	; 0x60
+ 80014a4:	ea22 0000 	bic.w	r0, r2, r0
+ 80014a8:	6618      	str	r0, [r3, #96]	; 0x60
+ 80014aa:	4770      	bx	lr
+ 80014ac:	40023800 	.word	0x40023800
+
+080014b0 <RCC_APB2PeriphClockLPModeCmd>:
+RCC_APB2PeriphClockLPModeCmd():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1609
+ 80014b0:	b121      	cbz	r1, 80014bc <RCC_APB2PeriphClockLPModeCmd+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1611
+ 80014b2:	4b05      	ldr	r3, [pc, #20]	; (80014c8 <RCC_APB2PeriphClockLPModeCmd+0x18>)
+ 80014b4:	6e5a      	ldr	r2, [r3, #100]	; 0x64
+ 80014b6:	4310      	orrs	r0, r2
+ 80014b8:	6658      	str	r0, [r3, #100]	; 0x64
+ 80014ba:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1615
+ 80014bc:	4b02      	ldr	r3, [pc, #8]	; (80014c8 <RCC_APB2PeriphClockLPModeCmd+0x18>)
+ 80014be:	6e5a      	ldr	r2, [r3, #100]	; 0x64
+ 80014c0:	ea22 0000 	bic.w	r0, r2, r0
+ 80014c4:	6658      	str	r0, [r3, #100]	; 0x64
+ 80014c6:	4770      	bx	lr
+ 80014c8:	40023800 	.word	0x40023800
+
+080014cc <RCC_ITConfig>:
+RCC_ITConfig():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1654
+ 80014cc:	b121      	cbz	r1, 80014d8 <RCC_ITConfig+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1657
+ 80014ce:	4b05      	ldr	r3, [pc, #20]	; (80014e4 <RCC_ITConfig+0x18>)
+ 80014d0:	781a      	ldrb	r2, [r3, #0]
+ 80014d2:	4310      	orrs	r0, r2
+ 80014d4:	7018      	strb	r0, [r3, #0]
+ 80014d6:	4770      	bx	lr
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1662
+ 80014d8:	4b02      	ldr	r3, [pc, #8]	; (80014e4 <RCC_ITConfig+0x18>)
+ 80014da:	781a      	ldrb	r2, [r3, #0]
+ 80014dc:	ea22 0000 	bic.w	r0, r2, r0
+ 80014e0:	7018      	strb	r0, [r3, #0]
+ 80014e2:	4770      	bx	lr
+ 80014e4:	4002380d 	.word	0x4002380d
+
+080014e8 <RCC_GetFlagStatus>:
+RCC_GetFlagStatus():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1695
+ 80014e8:	0943      	lsrs	r3, r0, #5
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1696
+ 80014ea:	2b01      	cmp	r3, #1
+ 80014ec:	d102      	bne.n	80014f4 <RCC_GetFlagStatus+0xc>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1698
+ 80014ee:	4b07      	ldr	r3, [pc, #28]	; (800150c <RCC_GetFlagStatus+0x24>)
+ 80014f0:	681b      	ldr	r3, [r3, #0]
+ 80014f2:	e004      	b.n	80014fe <RCC_GetFlagStatus+0x16>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1700
+ 80014f4:	2b02      	cmp	r3, #2
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1702
+ 80014f6:	4b05      	ldr	r3, [pc, #20]	; (800150c <RCC_GetFlagStatus+0x24>)
+ 80014f8:	bf0c      	ite	eq
+ 80014fa:	6f1b      	ldreq	r3, [r3, #112]	; 0x70
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1706
+ 80014fc:	6f5b      	ldrne	r3, [r3, #116]	; 0x74
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1710
+ 80014fe:	f000 001f 	and.w	r0, r0, #31
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1711
+ 8001502:	fa23 f000 	lsr.w	r0, r3, r0
+ 8001506:	f000 0001 	and.w	r0, r0, #1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1721
+ 800150a:	4770      	bx	lr
+ 800150c:	40023800 	.word	0x40023800
+
+08001510 <RCC_WaitForHSEStartUp>:
+RCC_WaitForHSEStartUp():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:262
+ 8001510:	b510      	push	{r4, lr}
+ 8001512:	b082      	sub	sp, #8
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:263
+ 8001514:	2300      	movs	r3, #0
+ 8001516:	9301      	str	r3, [sp, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:269
+ 8001518:	2431      	movs	r4, #49	; 0x31
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:269 (discriminator 1)
+ 800151a:	4620      	mov	r0, r4
+ 800151c:	f7ff ffe4 	bl	80014e8 <RCC_GetFlagStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:270 (discriminator 1)
+ 8001520:	9b01      	ldr	r3, [sp, #4]
+ 8001522:	3301      	adds	r3, #1
+ 8001524:	9301      	str	r3, [sp, #4]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:271 (discriminator 1)
+ 8001526:	9b01      	ldr	r3, [sp, #4]
+ 8001528:	f5b3 6fa0 	cmp.w	r3, #1280	; 0x500
+ 800152c:	d001      	beq.n	8001532 <RCC_WaitForHSEStartUp+0x22>
+ 800152e:	2800      	cmp	r0, #0
+ 8001530:	d0f3      	beq.n	800151a <RCC_WaitForHSEStartUp+0xa>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:273
+ 8001532:	2031      	movs	r0, #49	; 0x31
+ 8001534:	f7ff ffd8 	bl	80014e8 <RCC_GetFlagStatus>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:282
+ 8001538:	3000      	adds	r0, #0
+ 800153a:	bf18      	it	ne
+ 800153c:	2001      	movne	r0, #1
+ 800153e:	b002      	add	sp, #8
+ 8001540:	bd10      	pop	{r4, pc}
+ 8001542:	bf00      	nop
+
+08001544 <RCC_ClearFlag>:
+RCC_ClearFlag():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1733
+ 8001544:	4b02      	ldr	r3, [pc, #8]	; (8001550 <RCC_ClearFlag+0xc>)
+ 8001546:	6f5a      	ldr	r2, [r3, #116]	; 0x74
+ 8001548:	f042 7280 	orr.w	r2, r2, #16777216	; 0x1000000
+ 800154c:	675a      	str	r2, [r3, #116]	; 0x74
+ 800154e:	4770      	bx	lr
+ 8001550:	40023800 	.word	0x40023800
+
+08001554 <RCC_GetITStatus>:
+RCC_GetITStatus():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1757
+ 8001554:	4b03      	ldr	r3, [pc, #12]	; (8001564 <RCC_GetITStatus+0x10>)
+ 8001556:	68db      	ldr	r3, [r3, #12]
+ 8001558:	4018      	ands	r0, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1767
+ 800155a:	3000      	adds	r0, #0
+ 800155c:	bf18      	it	ne
+ 800155e:	2001      	movne	r0, #1
+ 8001560:	4770      	bx	lr
+ 8001562:	bf00      	nop
+ 8001564:	40023800 	.word	0x40023800
+
+08001568 <RCC_ClearITPendingBit>:
+RCC_ClearITPendingBit():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c:1789
+ 8001568:	4b01      	ldr	r3, [pc, #4]	; (8001570 <RCC_ClearITPendingBit+0x8>)
+ 800156a:	7018      	strb	r0, [r3, #0]
+ 800156c:	4770      	bx	lr
+ 800156e:	bf00      	nop
+ 8001570:	4002380e 	.word	0x4002380e
+
+08001574 <Reset_Handler>:
+Reset_Handler():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:69
+ 8001574:	2100      	movs	r1, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:70
+ 8001576:	f000 b804 	b.w	8001582 <LoopCopyDataInit>
+
+0800157a <CopyDataInit>:
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:73
+ 800157a:	4b0c      	ldr	r3, [pc, #48]	; (80015ac <LoopFillZerobss+0x12>)
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:74
+ 800157c:	585b      	ldr	r3, [r3, r1]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:75
+ 800157e:	5043      	str	r3, [r0, r1]
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:76
+ 8001580:	3104      	adds	r1, #4
+
+08001582 <LoopCopyDataInit>:
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:79
+ 8001582:	480b      	ldr	r0, [pc, #44]	; (80015b0 <LoopFillZerobss+0x16>)
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:80
+ 8001584:	4b0b      	ldr	r3, [pc, #44]	; (80015b4 <LoopFillZerobss+0x1a>)
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:81
+ 8001586:	1842      	adds	r2, r0, r1
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:82
+ 8001588:	429a      	cmp	r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:83
+ 800158a:	f4ff aff6 	bcc.w	800157a <CopyDataInit>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:84
+ 800158e:	4a0a      	ldr	r2, [pc, #40]	; (80015b8 <LoopFillZerobss+0x1e>)
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:85
+ 8001590:	f000 b803 	b.w	800159a <LoopFillZerobss>
+
+08001594 <FillZerobss>:
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:88
+ 8001594:	2300      	movs	r3, #0
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:89
+ 8001596:	f842 3b04 	str.w	r3, [r2], #4
+
+0800159a <LoopFillZerobss>:
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:92
+ 800159a:	4b08      	ldr	r3, [pc, #32]	; (80015bc <LoopFillZerobss+0x22>)
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:93
+ 800159c:	429a      	cmp	r2, r3
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:94
+ 800159e:	f4ff aff9 	bcc.w	8001594 <FillZerobss>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:97
+ 80015a2:	f7fe ff3b 	bl	800041c <SystemInit>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:99
+ 80015a6:	f7fe fe6f 	bl	8000288 <main>
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:100
+ 80015aa:	4770      	bx	lr
+$d():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:73
+ 80015ac:	080015c4 	.word	0x080015c4
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:79
+ 80015b0:	20000000 	.word	0x20000000
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:80
+ 80015b4:	20000024 	.word	0x20000024
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:84
+ 80015b8:	20000024 	.word	0x20000024
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:92
+ 80015bc:	2000002c 	.word	0x2000002c
+
+080015c0 <ADC_IRQHandler>:
+RTC_Alarm_IRQHandler():
+C:\Users\Filip\Eclipse\Template\Debug/../STM32F4xx/Source/startup_stm32f4xx.S:113
+ 80015c0:	f7ff bffe 	b.w	80015c0 <ADC_IRQHandler>

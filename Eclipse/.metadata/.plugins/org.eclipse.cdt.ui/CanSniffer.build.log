@@ -1,0 +1,29 @@
+15:39:20 **** Incremental Build of configuration Debug for project CanSniffer ****
+make all 
+Building file: ../src/main.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\STM32F4xx\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\STM32F4xx\Source" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\CMSIS\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\Discovery" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\src" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="src/main.o.lst" -MMD -MP -MF"src/main.d" -MT"src/main.o" -c -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building target: CanSniffer.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -T "C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"CanSniffer.map" -Xlinker --cref -o "CanSniffer.elf"  ./src/main.o ./src/stm32f4xx_it.o ./src/system_stm32f4xx.o  ./STM32F4xx_StdPeriph_Driver/src/misc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o  ./STM32F4xx/Source/startup_stm32f4xx.o  ./Discovery/stm32f4_discovery.o   
+Finished building target: CanSniffer.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O ihex "CanSniffer.elf"  "CanSniffer.hex"
+Finished building: CanSniffer.hex
+ 
+Invoking: Cross ARM GNU Create Listing
+arm-none-eabi-objdump --source --all-headers --demangle --line-numbers --wide "CanSniffer.elf" > "CanSniffer.lst"
+Finished building: CanSniffer.lst
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "CanSniffer.elf"
+   text	   data	    bss	    dec	    hex	filename
+   5572	     36	   1032	   6640	   19f0	CanSniffer.elf
+Finished building: CanSniffer.siz
+ 
+
+15:39:39 Build Finished (took 18s.899ms)
+

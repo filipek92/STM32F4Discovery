@@ -31,47 +31,47 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-Template.hex \
+CanSniffer.hex \
 
 SECONDARY_LIST += \
-Template.lst \
+CanSniffer.lst \
 
 SECONDARY_SIZE += \
-Template.siz \
+CanSniffer.siz \
 
 
 # All Target
-all: Template.elf secondary-outputs
+all: CanSniffer.elf secondary-outputs
 
 # Tool invocations
-Template.elf: $(OBJS) $(USER_OBJS)
+CanSniffer.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM C Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -T "C:\Users\Filip\Eclipse\Template\stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"Template.map" -Xlinker --cref -o "Template.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -T "C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\CanSniffer\stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"CanSniffer.map" -Xlinker --cref -o "CanSniffer.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-Template.hex: Template.elf
+CanSniffer.hex: CanSniffer.elf
 	@echo 'Invoking: Cross ARM GNU Create Flash Image'
-	arm-none-eabi-objcopy -O ihex "Template.elf"  "Template.hex"
+	arm-none-eabi-objcopy -O ihex "CanSniffer.elf"  "CanSniffer.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Template.lst: Template.elf
+CanSniffer.lst: CanSniffer.elf
 	@echo 'Invoking: Cross ARM GNU Create Listing'
-	arm-none-eabi-objdump --source --all-headers --demangle --line-numbers --wide "Template.elf" > "Template.lst"
+	arm-none-eabi-objdump --source --all-headers --demangle --line-numbers --wide "CanSniffer.elf" > "CanSniffer.lst"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Template.siz: Template.elf
+CanSniffer.siz: CanSniffer.elf
 	@echo 'Invoking: Cross ARM GNU Print Size'
-	arm-none-eabi-size --format=berkeley "Template.elf"
+	arm-none-eabi-size --format=berkeley "CanSniffer.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(SECONDARY_SIZE)$(OBJS)$(C_DEPS)$(ASM_DEPS)$(SECONDARY_FLASH)$(SECONDARY_LIST)$(S_UPPER_DEPS) Template.elf
+	-$(RM) $(SECONDARY_SIZE)$(OBJS)$(C_DEPS)$(ASM_DEPS)$(SECONDARY_FLASH)$(SECONDARY_LIST)$(S_UPPER_DEPS) CanSniffer.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_LIST) $(SECONDARY_SIZE)
