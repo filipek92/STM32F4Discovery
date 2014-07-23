@@ -321,7 +321,7 @@ void hd44780_print(const char* string) {
  * @param fmt	String format
  * @param ...	Variable arguments (see printf())
  */
-void hd44780_printf(const char *fmt, ...) {
+/*void hd44780_printf(const char *fmt, ...) {
 
 	u16 i;
 	u16 size;
@@ -340,7 +340,7 @@ void hd44780_printf(const char *fmt, ...) {
 		else
 			hd44780_put(character);
 	}
-}
+}*/
 
 /**
  * Initialise the LCD

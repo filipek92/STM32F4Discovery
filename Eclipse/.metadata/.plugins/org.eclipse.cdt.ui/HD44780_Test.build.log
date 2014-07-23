@@ -1,11 +1,11 @@
-09:05:08 **** Incremental Build of configuration Debug for project HD44780_Test ****
+21:50:40 **** Build of configuration Debug for project HD44780_Test ****
 make all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "HD44780_Test.elf"
    text	   data	    bss	    dec	    hex	filename
-   1332	     20	   1032	   2384	    950	HD44780_Test.elf
+   8260	     36	   4072	  12368	   3050	HD44780_Test.elf
 Finished building: HD44780_Test.siz
  
 
-09:05:10 Build Finished (took 1s.990ms)
+21:50:49 Build Finished (took 8s.991ms)
 

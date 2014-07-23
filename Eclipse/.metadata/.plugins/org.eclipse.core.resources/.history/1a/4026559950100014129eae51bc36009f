@@ -1,0 +1,257 @@
+#include "main.h"
+#include "discovery.h"
+#include "hd44780.h"
+
+//extern volatile uint32_t Time;
+
+uint32_t Actual_U=0;
+uint32_t Actual_I=0;
+uint32_t Actual_P=0;
+float Energy=0;
+
+int16_t offset_u=0;
+int16_t offset_i=0;
+uint16_t calib_u=19580;
+uint16_t calib_i=480;
+
+void proccess_rx(void);
+void timer_init(void);
+void switching(void);
+void displayValues();
+
+int main(void)
+{	
+	SysTick_Config(SystemCoreClock/1000);
+	InitLeds();
+	
+	LedOn(LED_G);
+	Init_Measure();
+	Init_Comunication();
+	timer_init();
+	
+	hd44780_init(GPIOE, GPIO_Pin_7, GPIO_Pin_8, GPIO_Pin_9, GPIO_Pin_10,
+					GPIO_Pin_11, GPIO_Pin_12, GPIO_Pin_13, HD44780_LINES_2,
+					HD44780_FONT_5x8);
+	hd44780_position(0, 0);
+	hd44780_print("Solar WattMetr  2014");
+	hd44780_position(1, 0);
+	hd44780_print("  0,000 V   0,000 A ");
+	hd44780_position(2, 0);
+	hd44780_print("  0,000 W    0,00 Wh");
+	hd44780_position(3, 0);
+	hd44780_print("                    ");
+
+	STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI);
+  while(1)
+  {
+	 LedOn(LED_O);
+	 Delay(50);
+	 LedOff(LED_O);
+	 Delay(100);
+	 LedOn(LED_O);
+	 Delay(50);
+	 LedOff(LED_O);
+	 Delay(200);
+	 LedOn(LED_B);
+	 Delay(50);
+	 LedOff(LED_B);
+	 Delay(200);
+
+  }
+}
+
+char rx_buffer[50];
+char rx_last=0;
+uint8_t rx_pointer=0;
+
+void USART6_IRQHandler(void){
+	char ch;	
+	ch = USART_ReceiveData(USART6);
+	
+	if(ch == '\r' || ch == '\n'){
+		if(rx_last != '\r'){
+			rx_buffer[rx_pointer]=0;
+			proccess_rx();
+			rx_pointer = 0;
+		}
+	}else if(ch == 8 && rx_pointer>0){
+		rx_pointer--;
+	}else{
+		rx_buffer[rx_pointer++] = ch;
+	}
+	rx_last = ch;
+}
+
+void proccess_rx(void){
+	uint32_t u, i;
+	
+	switch(rx_buffer[0]){
+		case 'g':
+			u = Actual_U;
+			i = Actual_I;
+			USART_SendString(USART6, "U:");
+			USART_SendNumber(USART6, u);
+			USART_SendString(USART6, ", I:");
+			USART_SendNumber(USART6, i);
+			USART_SendString(USART6, "\n");
+			break;
+		default:
+			USART_SendString(USART6, "Unknown command\n");
+			break;
+	}
+}
+
+void init_output(void){
+	GPIO_InitTypeDef  GPIO_InitStructure;
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_3 | GPIO_Pin_5;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+}
+
+void timer_init(void){
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+	NVIC_EnableIRQ(TIM4_IRQn);
+  
+  
+  //25Hz merení 200-1 50Hz 100-1 100Hz 50-1
+  TIM_TimeBaseStructure.TIM_Period = 168-1; //336
+  TIM_TimeBaseStructure.TIM_Prescaler = 500-1;
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+
+  TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
+  
+  TIM4->DIER = TIM_DIER_UIE;  // povolení prerušení
+  
+  TIM_Cmd(TIM4, ENABLE);
+}
+
+void switching(void){
+	static int cnt=0;
+	Actual_U = 3600;//(Voltage_ADC_Value * calib_u/0xFFF) - offset_u;//
+	Actual_I = 1000;//(Current_ADC_Value * calib_i/0xFFF) - offset_i;//19300;
+	Actual_P = (Actual_U * Actual_I)/1000;
+
+	Energy += ((float) Actual_P)/3600000;
+
+	if((cnt++)%100==0) displayValues();
+}
+
+void displayValues(){
+	char buff[21];
+	uint32_t tmp = Actual_U;
+
+	buff[6]=0;
+	buff[5] = '0' + tmp%10;
+	tmp /=10;
+	buff[4] = '0' + tmp%10;
+	tmp /=10;
+	buff[3] = '0' + tmp%10;
+	buff[2] = ',';
+	tmp /=10;
+	buff[1] = '0' + tmp%10;
+	tmp /=10;
+	if(tmp>0){
+		buff[0] = '0' + tmp%10;
+	}else{
+		buff[0] = ' ';
+	}
+	hd44780_position(1,1);
+	hd44780_print(buff);
+
+	tmp = Actual_I;
+
+	buff[6]=0;
+	buff[5] = '0' + tmp%10;
+	tmp /=10;
+	buff[4] = '0' + tmp%10;
+	tmp /=10;
+	buff[3] = '0' + tmp%10;
+	buff[2] = ',';
+	tmp /=10;
+	buff[1] = '0' + tmp%10;
+	tmp /=10;
+	if(tmp>0){
+		buff[0] = '0' + tmp%10;
+	}else{
+		buff[0] = ' ';
+	}
+	hd44780_position(1,11);
+	hd44780_print(buff);
+
+	tmp = Actual_P;
+
+	buff[6]=0;
+	buff[5] = '0' + tmp%10;
+	tmp /=10;
+	buff[4] = '0' + tmp%10;
+	tmp /=10;
+	buff[3] = '0' + tmp%10;
+	buff[2] = ',';
+	tmp /=10;
+	buff[1] = '0' + tmp%10;
+	tmp /=10;
+	if(tmp>0){
+		buff[0] = '0' + tmp%10;
+	}else{
+		buff[0] = ' ';
+	}
+	hd44780_position(2,1);
+	hd44780_print(buff);
+
+	tmp = Energy;
+
+	buff[7]=0;
+	buff[6] = '0' + tmp%10;
+	tmp /=10;
+	buff[5] = '0' + tmp%10;
+	tmp /=10;
+	buff[4] = '0' + tmp%10;
+	buff[3] = ',';
+	tmp /=10;
+	buff[2] = '0' + tmp%10;
+	tmp /=10;
+	if(tmp>0){
+		buff[1] = '0' + tmp%10;
+	}else{
+		buff[1] = ' ';
+	}
+	tmp /=10;
+	if(tmp>0){
+		buff[0] = '0' + tmp%10;
+	}else{
+		buff[0] = ' ';
+	}
+	hd44780_position(2,10);
+	hd44780_print(buff);
+}
+
+void TIM4_IRQHandler(void)     
+{
+if(TIM4->SR & TIM_SR_UIF) // if UIF flag is set
+  {
+    TIM4->SR &= ~TIM_SR_UIF; // clear UIF flag                                   
+    	GPIOC->ODR ^= GPIO_Pin_5;
+		switching();
+  }
+}
+
+#ifdef  USE_FULL_ASSERT
+
+void assert_failed(uint8_t* file, uint32_t line)
+{ 
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+
+  /* Infinite loop */
+  while (1)
+  {
+  }
+}
+#endif

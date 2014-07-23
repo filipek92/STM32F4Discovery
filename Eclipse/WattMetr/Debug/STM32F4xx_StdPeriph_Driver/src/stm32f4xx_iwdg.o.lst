@@ -1,0 +1,467 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"stm32f4xx_iwdg.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.align	2
+  19              		.global	IWDG_WriteAccessCmd
+  20              		.thumb
+  21              		.thumb_func
+  23              	IWDG_WriteAccessCmd:
+  24              	.LFB110:
+  25              		.file 1 "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c"
+   1:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /**
+   2:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   ******************************************************************************
+   3:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @file    stm32f4xx_iwdg.c
+   4:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @author  MCD Application Team
+   5:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @version V1.0.0
+   6:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @date    30-September-2011
+   7:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @brief   This file provides firmware functions to manage the following 
+   8:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          functionalities of the Independent watchdog (IWDG) peripheral:           
+   9:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *           - Prescaler and Counter configuration
+  10:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *           - IWDG activation
+  11:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *           - Flag management
+  12:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *
+  13:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *  @verbatim  
+  14:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *  
+  15:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          ===================================================================
+  16:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *                                     IWDG features
+  17:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          ===================================================================
+  18:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *    
+  19:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          The IWDG can be started by either software or hardware (configurable
+  20:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          through option byte).
+  21:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            
+  22:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          The IWDG is clocked by its own dedicated low-speed clock (LSI) and
+  23:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          thus stays active even if the main clock fails.
+  24:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          Once the IWDG is started, the LSI is forced ON and cannot be disabled
+  25:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          (LSI cannot be disabled too), and the counter starts counting down from 
+  26:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          the reset value of 0xFFF. When it reaches the end of count value (0x000)
+  27:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          a system reset is generated.
+  28:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          The IWDG counter should be reloaded at regular intervals to prevent
+  29:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          an MCU reset.
+  30:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *                           
+  31:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          The IWDG is implemented in the VDD voltage domain that is still functional
+  32:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          in STOP and STANDBY mode (IWDG reset can wake-up from STANDBY).          
+  33:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            
+  34:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          IWDGRST flag in RCC_CSR register can be used to inform when a IWDG
+  35:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          reset occurs.
+  36:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            
+  37:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          Min-max timeout value @32KHz (LSI): ~125us / ~32.7s
+  38:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          The IWDG timeout may vary due to LSI frequency dispersion. STM32F4xx
+  39:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          devices provide the capability to measure the LSI frequency (LSI clock
+  40:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          connected internally to TIM5 CH4 input capture). The measured value
+  41:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          can be used to have an IWDG timeout with an acceptable accuracy. 
+  42:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          For more information, please refer to the STM32F4xx Reference manual
+  43:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          
+  44:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *                            
+  45:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          ===================================================================
+  46:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *                                 How to use this driver
+  47:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          ===================================================================
+  48:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          1. Enable write access to IWDG_PR and IWDG_RLR registers using
+  49:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *             IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable) function
+  50:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *               
+  51:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          2. Configure the IWDG prescaler using IWDG_SetPrescaler() function
+  52:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            
+  53:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          3. Configure the IWDG counter value using IWDG_SetReload() function.
+  54:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *             This value will be loaded in the IWDG counter each time the counter
+  55:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *             is reloaded, then the IWDG will start counting down from this value.
+  56:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            
+  57:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          4. Start the IWDG using IWDG_Enable() function, when the IWDG is used
+  58:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *             in software mode (no need to enable the LSI, it will be enabled
+  59:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *             by hardware)
+  60:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *             
+  61:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          5. Then the application program must reload the IWDG counter at regular
+  62:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *             intervals during normal operation to prevent an MCU reset, using
+  63:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *             IWDG_ReloadCounter() function.      
+  64:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          
+  65:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *  @endverbatim
+  66:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *    
+  67:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   ******************************************************************************
+  68:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @attention
+  69:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *
+  70:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  71:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  72:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  73:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  74:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  75:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  76:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *
+  77:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  78:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   ******************************************************************************
+  79:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+  80:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+  81:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /* Includes ------------------------------------------------------------------*/
+  82:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** #include "stm32f4xx_iwdg.h"
+  83:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+  84:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /** @addtogroup STM32F4xx_StdPeriph_Driver
+  85:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @{
+  86:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+  87:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+  88:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /** @defgroup IWDG 
+  89:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @brief IWDG driver modules
+  90:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @{
+  91:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */ 
+  92:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+  93:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /* Private typedef -----------------------------------------------------------*/
+  94:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /* Private define ------------------------------------------------------------*/
+  95:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+  96:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /* KR register bit mask */
+  97:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** #define KR_KEY_RELOAD    ((uint16_t)0xAAAA)
+  98:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** #define KR_KEY_ENABLE    ((uint16_t)0xCCCC)
+  99:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 100:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /* Private macro -------------------------------------------------------------*/
+ 101:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /* Private variables ---------------------------------------------------------*/
+ 102:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /* Private function prototypes -----------------------------------------------*/
+ 103:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /* Private functions ---------------------------------------------------------*/
+ 104:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 105:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /** @defgroup IWDG_Private_Functions
+ 106:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @{
+ 107:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 108:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 109:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /** @defgroup IWDG_Group1 Prescaler and Counter configuration functions
+ 110:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  *  @brief   Prescaler and Counter configuration functions
+ 111:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  *
+ 112:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** @verbatim   
+ 113:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  ===============================================================================
+ 114:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****                   Prescaler and Counter configuration functions
+ 115:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  ===============================================================================  
+ 116:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 117:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** @endverbatim
+ 118:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @{
+ 119:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 120:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 121:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /**
+ 122:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @brief  Enables or disables write access to IWDG_PR and IWDG_RLR registers.
+ 123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @param  IWDG_WriteAccess: new state of write access to IWDG_PR and IWDG_RLR registers.
+ 124:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          This parameter can be one of the following values:
+ 125:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_WriteAccess_Enable: Enable write access to IWDG_PR and IWDG_RLR registers
+ 126:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_WriteAccess_Disable: Disable write access to IWDG_PR and IWDG_RLR register
+ 127:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @retval None
+ 128:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 129:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** void IWDG_WriteAccessCmd(uint16_t IWDG_WriteAccess)
+ 130:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** {
+  26              		.loc 1 130 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  31              	.LVL0:
+ 131:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   /* Check the parameters */
+ 132:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   assert_param(IS_IWDG_WRITE_ACCESS(IWDG_WriteAccess));
+ 133:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   IWDG->KR = IWDG_WriteAccess;
+  32              		.loc 1 133 0
+  33 0000 014B     		ldr	r3, .L2
+  34 0002 1860     		str	r0, [r3]
+  35 0004 7047     		bx	lr
+  36              	.L3:
+  37 0006 00BF     		.align	2
+  38              	.L2:
+  39 0008 00300040 		.word	1073754112
+  40              		.cfi_endproc
+  41              	.LFE110:
+  43              		.align	2
+  44              		.global	IWDG_SetPrescaler
+  45              		.thumb
+  46              		.thumb_func
+  48              	IWDG_SetPrescaler:
+  49              	.LFB111:
+ 134:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** }
+ 135:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 136:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /**
+ 137:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @brief  Sets IWDG Prescaler value.
+ 138:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @param  IWDG_Prescaler: specifies the IWDG Prescaler value.
+ 139:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          This parameter can be one of the following values:
+ 140:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_Prescaler_4: IWDG prescaler set to 4
+ 141:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_Prescaler_8: IWDG prescaler set to 8
+ 142:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_Prescaler_16: IWDG prescaler set to 16
+ 143:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_Prescaler_32: IWDG prescaler set to 32
+ 144:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_Prescaler_64: IWDG prescaler set to 64
+ 145:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_Prescaler_128: IWDG prescaler set to 128
+ 146:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_Prescaler_256: IWDG prescaler set to 256
+ 147:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @retval None
+ 148:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 149:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** void IWDG_SetPrescaler(uint8_t IWDG_Prescaler)
+ 150:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** {
+  50              		.loc 1 150 0
+  51              		.cfi_startproc
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54              		@ link register save eliminated.
+  55              	.LVL1:
+ 151:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   /* Check the parameters */
+ 152:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   assert_param(IS_IWDG_PRESCALER(IWDG_Prescaler));
+ 153:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   IWDG->PR = IWDG_Prescaler;
+  56              		.loc 1 153 0
+  57 000c 014B     		ldr	r3, .L5
+  58 000e 5860     		str	r0, [r3, #4]
+  59 0010 7047     		bx	lr
+  60              	.L6:
+  61 0012 00BF     		.align	2
+  62              	.L5:
+  63 0014 00300040 		.word	1073754112
+  64              		.cfi_endproc
+  65              	.LFE111:
+  67              		.align	2
+  68              		.global	IWDG_SetReload
+  69              		.thumb
+  70              		.thumb_func
+  72              	IWDG_SetReload:
+  73              	.LFB112:
+ 154:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** }
+ 155:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 156:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /**
+ 157:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @brief  Sets IWDG Reload value.
+ 158:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @param  Reload: specifies the IWDG Reload value.
+ 159:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          This parameter must be a number between 0 and 0x0FFF.
+ 160:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @retval None
+ 161:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 162:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** void IWDG_SetReload(uint16_t Reload)
+ 163:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** {
+  74              		.loc 1 163 0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78              		@ link register save eliminated.
+  79              	.LVL2:
+ 164:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   /* Check the parameters */
+ 165:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   assert_param(IS_IWDG_RELOAD(Reload));
+ 166:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   IWDG->RLR = Reload;
+  80              		.loc 1 166 0
+  81 0018 014B     		ldr	r3, .L8
+  82 001a 9860     		str	r0, [r3, #8]
+  83 001c 7047     		bx	lr
+  84              	.L9:
+  85 001e 00BF     		.align	2
+  86              	.L8:
+  87 0020 00300040 		.word	1073754112
+  88              		.cfi_endproc
+  89              	.LFE112:
+  91              		.align	2
+  92              		.global	IWDG_ReloadCounter
+  93              		.thumb
+  94              		.thumb_func
+  96              	IWDG_ReloadCounter:
+  97              	.LFB113:
+ 167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** }
+ 168:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 169:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /**
+ 170:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @brief  Reloads IWDG counter with value defined in the reload register
+ 171:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *         (write access to IWDG_PR and IWDG_RLR registers disabled).
+ 172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @param  None
+ 173:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @retval None
+ 174:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 175:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** void IWDG_ReloadCounter(void)
+ 176:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** {
+  98              		.loc 1 176 0
+  99              		.cfi_startproc
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 177:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   IWDG->KR = KR_KEY_RELOAD;
+ 103              		.loc 1 177 0
+ 104 0024 4AF6AA22 		movw	r2, #43690
+ 105 0028 014B     		ldr	r3, .L11
+ 106 002a 1A60     		str	r2, [r3]
+ 107 002c 7047     		bx	lr
+ 108              	.L12:
+ 109 002e 00BF     		.align	2
+ 110              	.L11:
+ 111 0030 00300040 		.word	1073754112
+ 112              		.cfi_endproc
+ 113              	.LFE113:
+ 115              		.align	2
+ 116              		.global	IWDG_Enable
+ 117              		.thumb
+ 118              		.thumb_func
+ 120              	IWDG_Enable:
+ 121              	.LFB114:
+ 178:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** }
+ 179:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 180:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /**
+ 181:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @}
+ 182:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 183:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 184:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /** @defgroup IWDG_Group2 IWDG activation function
+ 185:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  *  @brief   IWDG activation function 
+ 186:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  *
+ 187:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** @verbatim   
+ 188:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  ===============================================================================
+ 189:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****                           IWDG activation function
+ 190:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  ===============================================================================  
+ 191:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 192:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** @endverbatim
+ 193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @{
+ 194:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 196:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /**
+ 197:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @brief  Enables IWDG (write access to IWDG_PR and IWDG_RLR registers disabled).
+ 198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @param  None
+ 199:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @retval None
+ 200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** void IWDG_Enable(void)
+ 202:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** {
+ 122              		.loc 1 202 0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 203:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   IWDG->KR = KR_KEY_ENABLE;
+ 127              		.loc 1 203 0
+ 128 0034 4CF6CC42 		movw	r2, #52428
+ 129 0038 014B     		ldr	r3, .L14
+ 130 003a 1A60     		str	r2, [r3]
+ 131 003c 7047     		bx	lr
+ 132              	.L15:
+ 133 003e 00BF     		.align	2
+ 134              	.L14:
+ 135 0040 00300040 		.word	1073754112
+ 136              		.cfi_endproc
+ 137              	.LFE114:
+ 139              		.align	2
+ 140              		.global	IWDG_GetFlagStatus
+ 141              		.thumb
+ 142              		.thumb_func
+ 144              	IWDG_GetFlagStatus:
+ 145              	.LFB115:
+ 204:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** }
+ 205:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /**
+ 207:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @}
+ 208:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 209:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 210:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /** @defgroup IWDG_Group3 Flag management function 
+ 211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  *  @brief  Flag management function  
+ 212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  *
+ 213:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** @verbatim   
+ 214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  ===============================================================================
+ 215:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****                             Flag management function 
+ 216:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****  ===============================================================================  
+ 217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 218:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** @endverbatim
+ 219:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @{
+ 220:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 221:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** 
+ 222:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** /**
+ 223:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @brief  Checks whether the specified IWDG flag is set or not.
+ 224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @param  IWDG_FLAG: specifies the flag to check.
+ 225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *          This parameter can be one of the following values:
+ 226:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_FLAG_PVU: Prescaler Value Update on going
+ 227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   *            @arg IWDG_FLAG_RVU: Reload Value Update on going
+ 228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   * @retval The new state of IWDG_FLAG (SET or RESET).
+ 229:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   */
+ 230:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** FlagStatus IWDG_GetFlagStatus(uint16_t IWDG_FLAG)
+ 231:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** {
+ 146              		.loc 1 231 0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		@ link register save eliminated.
+ 151              	.LVL3:
+ 232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   FlagStatus bitstatus = RESET;
+ 233:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   /* Check the parameters */
+ 234:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   assert_param(IS_IWDG_FLAG(IWDG_FLAG));
+ 235:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   if ((IWDG->SR & IWDG_FLAG) != (uint32_t)RESET)
+ 152              		.loc 1 235 0
+ 153 0044 034B     		ldr	r3, .L19
+ 154 0046 DB68     		ldr	r3, [r3, #12]
+ 155 0048 1840     		ands	r0, r0, r3
+ 156              	.LVL4:
+ 236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   {
+ 237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****     bitstatus = SET;
+ 238:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   }
+ 239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   else
+ 240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   {
+ 241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****     bitstatus = RESET;
+ 242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   }
+ 243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   /* Return the flag status */
+ 244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c ****   return bitstatus;
+ 245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c **** }
+ 157              		.loc 1 245 0
+ 158 004a 0030     		adds	r0, r0, #0
+ 159 004c 18BF     		it	ne
+ 160 004e 0120     		movne	r0, #1
+ 161              	.LVL5:
+ 162 0050 7047     		bx	lr
+ 163              	.L20:
+ 164 0052 00BF     		.align	2
+ 165              	.L19:
+ 166 0054 00300040 		.word	1073754112
+ 167              		.cfi_endproc
+ 168              	.LFE115:
+ 170              	.Letext0:
+ 171              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
+ 172              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
+ 173              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
+ 174              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_iwdg.c
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:23     .text:00000000 IWDG_WriteAccessCmd
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:39     .text:00000008 $d
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:43     .text:0000000c $t
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:48     .text:0000000c IWDG_SetPrescaler
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:63     .text:00000014 $d
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:67     .text:00000018 $t
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:72     .text:00000018 IWDG_SetReload
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:87     .text:00000020 $d
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:91     .text:00000024 $t
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:96     .text:00000024 IWDG_ReloadCounter
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:111    .text:00000030 $d
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:115    .text:00000034 $t
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:120    .text:00000034 IWDG_Enable
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:135    .text:00000040 $d
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:139    .text:00000044 $t
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:144    .text:00000044 IWDG_GetFlagStatus
+C:\Users\Filip\AppData\Local\Temp\cc9w29au.s:166    .text:00000054 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
+                           .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
+                           .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7
+                           .group:00000000 wm4._default_types.h.15.8b2cb27e528498f8ff711db085d6e489
+                           .group:00000000 wm4.stdint.h.20.796e373797e732130a803d4c0338fa1b
+                           .group:00000000 wm4.core_cmInstr.h.25.f50f886f2edf670cf199b35fd96f5c91
+                           .group:00000000 wm4.core_cm4_simd.h.29.b4a3fdfb606cb3b26119424324d4b963
+                           .group:00000000 wm4.core_cm4.h.153.5393ef7e6cebf34dd51ca528f9218ab3
+                           .group:00000000 wm4.stm32f4xx.h.288.7f55b1a1f5e5bad6ffa2308f97f537d1
+                           .group:00000000 wm4.stm32f4xx_conf.h.24.a762e2483b8e31b68046e44b31e1d406
+                           .group:00000000 wm4.stm32f4xx_adc.h.102.2061aa73008746f3c2cc6ce8f635cad3
+                           .group:00000000 wm4.stm32f4xx_can.h.25.87f18ca48b2692d39f76e87b1f07c953
+                           .group:00000000 wm4.stm32f4xx_cryp.h.25.db1951c06ee684df97ea3a11aba6cb51
+                           .group:00000000 wm4.stm32f4xx_dac.h.25.c43557a6416ea4dfa986c1209c2558d6
+                           .group:00000000 wm4.stm32f4xx_dbgmcu.h.24.7aedfdcf091890b5cb96019bd29a2bfc
+                           .group:00000000 wm4.stm32f4xx_dcmi.h.24.64883d9be802a535b1d7770d14da73e0
+                           .group:00000000 wm4.stm32f4xx_dma.h.25.c1fa1d44ae0bc9c2b3a0d1d355d8c1e6
+                           .group:00000000 wm4.stm32f4xx_exti.h.25.620998268d5d3d9042a8297fbe07d507
+                           .group:00000000 wm4.stm32f4xx_flash.h.25.65d4f351b72ee41355279f70305f361a
+                           .group:00000000 wm4.stm32f4xx_fsmc.h.25.b907ac7bd9bec46e02d06b137d53cfd8
+                           .group:00000000 wm4.stm32f4xx_hash.h.25.633fb84f031cf2ab1bd834e536716dfa
+                           .group:00000000 wm4.stm32f4xx_gpio.h.25.5bd1d790d742a307b55aea5fa8fcdae8
+                           .group:00000000 wm4.stm32f4xx_i2c.h.25.8fcdb817a00a67d4624d79bab0d9275f
+                           .group:00000000 wm4.stm32f4xx_pwr.h.25.41ffcb5dc896ed2d26edf4d9bbbfbe6f
+                           .group:00000000 wm4.stm32f4xx_rcc.h.24.a10ec6e94989efb0f8f7f56448e9bb60
+                           .group:00000000 wm4.stm32f4xx_rng.h.25.cdb5c5c07de6a48aedfde608da3f447e
+                           .group:00000000 wm4.stm32f4xx_rtc.h.25.4809a79ad46ad97b4a01e735a96738eb
+                           .group:00000000 wm4.stm32f4xx_sdio.h.25.406302aabae34eada94e5f2cde635a3e
+                           .group:00000000 wm4.stm32f4xx_spi.h.25.980a9e96afe182c8b9cb91058a0693d6
+                           .group:00000000 wm4.stm32f4xx_syscfg.h.25.9d5caab5677661b69e959531364e23d7
+                           .group:00000000 wm4.stm32f4xx_tim.h.25.948f7fc943f34bd206e29758e77ee0a2
+                           .group:00000000 wm4.stm32f4xx_usart.h.25.32a7aeff79714f90f8c4da45bf79808c
+                           .group:00000000 wm4.stm32f4xx_wwdg.h.25.09d70b7849c6894ddf1e83c8e86b70e1
+                           .group:00000000 wm4.misc.h.25.a0cb758c1f091b46f201b19cec9e63a1
+                           .group:00000000 wm4.stm32f4xx.h.6972.f31ddedd83a17c461a3fab76f77123cb
+                           .group:00000000 wm4.stm32f4xx_iwdg.h.52.109944bd492fecd182cc3f1769b55be5
+
+NO UNDEFINED SYMBOLS
