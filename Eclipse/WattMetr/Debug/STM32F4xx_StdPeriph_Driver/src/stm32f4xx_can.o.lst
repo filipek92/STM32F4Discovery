@@ -1701,2248 +1701,2377 @@
 1672:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   
 1673:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if ((CAN_Reg & It_Bit) != (uint32_t)RESET)
   31              		.loc 1 1673 0
-  32 0000 0840     		ands	r0, r0, r1
-  33              	.LVL1:
+  32 0000 0842     		tst	r0, r1
+  33 0002 01D0     		beq	.L3
 1674:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   {
 1675:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     /* CAN_IT is set */
 1676:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     pendingbitstatus = SET;
+  34              		.loc 1 1676 0
+  35 0004 0120     		movs	r0, #1
+  36              	.LVL1:
+  37 0006 7047     		bx	lr
+  38              	.LVL2:
+  39              	.L3:
 1677:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   }
 1678:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else
 1679:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   {
 1680:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     /* CAN_IT is reset */
 1681:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     pendingbitstatus = RESET;
+  40              		.loc 1 1681 0
+  41 0008 0020     		movs	r0, #0
+  42              	.LVL3:
 1682:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   }
 1683:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   return pendingbitstatus;
 1684:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
-  34              		.loc 1 1684 0
-  35 0002 0030     		adds	r0, r0, #0
-  36 0004 18BF     		it	ne
-  37 0006 0120     		movne	r0, #1
-  38              	.LVL2:
-  39 0008 7047     		bx	lr
-  40              		.cfi_endproc
-  41              	.LFE134:
-  43 000a 00BF     		.align	2
-  44              		.global	CAN_DeInit
-  45              		.thumb
-  46              		.thumb_func
-  48              	CAN_DeInit:
-  49              	.LFB110:
+  43              		.loc 1 1684 0
+  44 000a 7047     		bx	lr
+  45              		.cfi_endproc
+  46              	.LFE134:
+  48              		.align	2
+  49              		.global	CAN_DeInit
+  50              		.thumb
+  51              		.thumb_func
+  53              	CAN_DeInit:
+  54              	.LFB110:
  163:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
-  50              		.loc 1 163 0
-  51              		.cfi_startproc
-  52              		@ args = 0, pretend = 0, frame = 0
-  53              		@ frame_needed = 0, uses_anonymous_args = 0
-  54              	.LVL3:
-  55 000c 08B5     		push	{r3, lr}
-  56              		.cfi_def_cfa_offset 8
-  57              		.cfi_offset 3, -8
-  58              		.cfi_offset 14, -4
+  55              		.loc 1 163 0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59              	.LVL4:
+  60 000c 08B5     		push	{r3, lr}
+  61              		.cfi_def_cfa_offset 8
+  62              		.cfi_offset 3, -8
+  63              		.cfi_offset 14, -4
  167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (CANx == CAN1)
-  59              		.loc 1 167 0
-  60 000e 0C4B     		ldr	r3, .L7
-  61 0010 9842     		cmp	r0, r3
-  62 0012 0AD1     		bne	.L5
+  64              		.loc 1 167 0
+  65 000e 0C4B     		ldr	r3, .L7
+  66 0010 9842     		cmp	r0, r3
+  67 0012 0AD1     		bne	.L5
  170:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_CAN1, ENABLE);
-  63              		.loc 1 170 0
-  64 0014 4FF00070 		mov	r0, #33554432
-  65              	.LVL4:
-  66 0018 0121     		movs	r1, #1
-  67 001a FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
-  68              	.LVL5:
- 172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_CAN1, DISABLE);
-  69              		.loc 1 172 0
-  70 001e 4FF00070 		mov	r0, #33554432
-  71 0022 0021     		movs	r1, #0
-  72 0024 FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
+  68              		.loc 1 170 0
+  69 0014 4FF00070 		mov	r0, #33554432
+  70              	.LVL5:
+  71 0018 0121     		movs	r1, #1
+  72 001a FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
   73              	.LVL6:
-  74 0028 08BD     		pop	{r3, pc}
-  75              	.LVL7:
-  76              	.L5:
+ 172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_CAN1, DISABLE);
+  74              		.loc 1 172 0
+  75 001e 4FF00070 		mov	r0, #33554432
+  76 0022 0021     		movs	r1, #0
+  77 0024 FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
+  78              	.LVL7:
+  79 0028 08BD     		pop	{r3, pc}
+  80              	.LVL8:
+  81              	.L5:
  177:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_CAN2, ENABLE);
-  77              		.loc 1 177 0
-  78 002a 4FF08060 		mov	r0, #67108864
-  79              	.LVL8:
-  80 002e 0121     		movs	r1, #1
-  81 0030 FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
-  82              	.LVL9:
- 179:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_CAN2, DISABLE);
-  83              		.loc 1 179 0
-  84 0034 4FF08060 		mov	r0, #67108864
-  85 0038 0021     		movs	r1, #0
-  86 003a FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
+  82              		.loc 1 177 0
+  83 002a 4FF08060 		mov	r0, #67108864
+  84              	.LVL9:
+  85 002e 0121     		movs	r1, #1
+  86 0030 FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
   87              	.LVL10:
-  88 003e 08BD     		pop	{r3, pc}
-  89              	.L8:
-  90              		.align	2
-  91              	.L7:
-  92 0040 00640040 		.word	1073767424
-  93              		.cfi_endproc
-  94              	.LFE110:
-  96              		.align	2
-  97              		.global	CAN_Init
-  98              		.thumb
-  99              		.thumb_func
- 101              	CAN_Init:
- 102              	.LFB111:
+ 179:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_CAN2, DISABLE);
+  88              		.loc 1 179 0
+  89 0034 4FF08060 		mov	r0, #67108864
+  90 0038 0021     		movs	r1, #0
+  91 003a FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
+  92              	.LVL11:
+  93 003e 08BD     		pop	{r3, pc}
+  94              	.L8:
+  95              		.align	2
+  96              	.L7:
+  97 0040 00640040 		.word	1073767424
+  98              		.cfi_endproc
+  99              	.LFE110:
+ 101              		.align	2
+ 102              		.global	CAN_Init
+ 103              		.thumb
+ 104              		.thumb_func
+ 106              	CAN_Init:
+ 107              	.LFB111:
  193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 103              		.loc 1 193 0
- 104              		.cfi_startproc
- 105              		@ args = 0, pretend = 0, frame = 0
- 106              		@ frame_needed = 0, uses_anonymous_args = 0
- 107              		@ link register save eliminated.
- 108              	.LVL11:
- 109 0044 10B4     		push	{r4}
- 110              		.cfi_def_cfa_offset 4
- 111              		.cfi_offset 4, -4
- 112              	.LVL12:
+ 108              		.loc 1 193 0
+ 109              		.cfi_startproc
+ 110              		@ args = 0, pretend = 0, frame = 0
+ 111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112              		@ link register save eliminated.
+ 113              	.LVL12:
+ 114 0044 10B4     		push	{r4}
+ 115              		.cfi_def_cfa_offset 4
+ 116              		.cfi_offset 4, -4
+ 117              	.LVL13:
  211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CANx->MCR &= (~(uint32_t)CAN_MCR_SLEEP);
- 113              		.loc 1 211 0
- 114 0046 0368     		ldr	r3, [r0]
- 115 0048 23F00203 		bic	r3, r3, #2
- 116 004c 0360     		str	r3, [r0]
+ 118              		.loc 1 211 0
+ 119 0046 0368     		ldr	r3, [r0]
+ 120 0048 23F00203 		bic	r3, r3, #2
+ 121 004c 0360     		str	r3, [r0]
  214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CANx->MCR |= CAN_MCR_INRQ ;
- 117              		.loc 1 214 0
- 118 004e 0368     		ldr	r3, [r0]
- 119 0050 43F00103 		orr	r3, r3, #1
- 120 0054 0360     		str	r3, [r0]
+ 122              		.loc 1 214 0
+ 123 004e 0368     		ldr	r3, [r0]
+ 124 0050 43F00103 		orr	r3, r3, #1
+ 125 0054 0360     		str	r3, [r0]
  195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   uint32_t wait_ack = 0x00000000;
- 121              		.loc 1 195 0
- 122 0056 0023     		movs	r3, #0
+ 126              		.loc 1 195 0
+ 127 0056 0023     		movs	r3, #0
  217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   while (((CANx->MSR & CAN_MSR_INAK) != CAN_MSR_INAK) && (wait_ack != INAK_TIMEOUT))
- 123              		.loc 1 217 0
- 124 0058 4FF6FF74 		movw	r4, #65535
- 125 005c 00E0     		b	.L10
- 126              	.LVL13:
- 127              	.L12:
+ 128              		.loc 1 217 0
+ 129 0058 4FF6FF74 		movw	r4, #65535
+ 130 005c 00E0     		b	.L10
+ 131              	.LVL14:
+ 132              	.L12:
  219:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     wait_ack++;
- 128              		.loc 1 219 0
- 129 005e 0133     		adds	r3, r3, #1
- 130              	.LVL14:
- 131              	.L10:
+ 133              		.loc 1 219 0
+ 134 005e 0133     		adds	r3, r3, #1
+ 135              	.LVL15:
+ 136              	.L10:
  217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   while (((CANx->MSR & CAN_MSR_INAK) != CAN_MSR_INAK) && (wait_ack != INAK_TIMEOUT))
- 132              		.loc 1 217 0 discriminator 1
- 133 0060 4268     		ldr	r2, [r0, #4]
- 134 0062 12F0010F 		tst	r2, #1
- 135 0066 01D1     		bne	.L11
+ 137              		.loc 1 217 0 discriminator 1
+ 138 0060 4268     		ldr	r2, [r0, #4]
+ 139 0062 12F0010F 		tst	r2, #1
+ 140 0066 01D1     		bne	.L11
  217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   while (((CANx->MSR & CAN_MSR_INAK) != CAN_MSR_INAK) && (wait_ack != INAK_TIMEOUT))
- 136              		.loc 1 217 0 is_stmt 0 discriminator 2
- 137 0068 A342     		cmp	r3, r4
- 138 006a F8D1     		bne	.L12
- 139              	.L11:
+ 141              		.loc 1 217 0 is_stmt 0 discriminator 2
+ 142 0068 A342     		cmp	r3, r4
+ 143 006a F8D1     		bne	.L12
+ 144              	.L11:
  223:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if ((CANx->MSR & CAN_MSR_INAK) != CAN_MSR_INAK)
- 140              		.loc 1 223 0 is_stmt 1
- 141 006c 4368     		ldr	r3, [r0, #4]
- 142              	.LVL15:
- 143 006e 13F0010F 		tst	r3, #1
- 144 0072 59D0     		beq	.L29
+ 145              		.loc 1 223 0 is_stmt 1
+ 146 006c 4368     		ldr	r3, [r0, #4]
+ 147              	.LVL16:
+ 148 006e 13F0010F 		tst	r3, #1
+ 149 0072 6BD0     		beq	.L29
  230:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if (CAN_InitStruct->CAN_TTCM == ENABLE)
- 145              		.loc 1 230 0
- 146 0074 8B79     		ldrb	r3, [r1, #6]	@ zero_extendqisi2
- 147 0076 012B     		cmp	r3, #1
+ 150              		.loc 1 230 0
+ 151 0074 8B79     		ldrb	r3, [r1, #6]	@ zero_extendqisi2
+ 152 0076 012B     		cmp	r3, #1
+ 153 0078 04D1     		bne	.L14
  232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR |= CAN_MCR_TTCM;
- 148              		.loc 1 232 0
- 149 0078 0368     		ldr	r3, [r0]
- 150 007a 0CBF     		ite	eq
- 151 007c 43F08003 		orreq	r3, r3, #128
+ 154              		.loc 1 232 0
+ 155 007a 0368     		ldr	r3, [r0]
+ 156 007c 43F08003 		orr	r3, r3, #128
+ 157 0080 0360     		str	r3, [r0]
+ 158 0082 03E0     		b	.L15
+ 159              	.L14:
  236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR &= ~(uint32_t)CAN_MCR_TTCM;
- 152              		.loc 1 236 0
- 153 0080 23F08003 		bicne	r3, r3, #128
- 154 0084 0360     		str	r3, [r0]
+ 160              		.loc 1 236 0
+ 161 0084 0368     		ldr	r3, [r0]
+ 162 0086 23F08003 		bic	r3, r3, #128
+ 163 008a 0360     		str	r3, [r0]
+ 164              	.L15:
  240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if (CAN_InitStruct->CAN_ABOM == ENABLE)
- 155              		.loc 1 240 0
- 156 0086 CB79     		ldrb	r3, [r1, #7]	@ zero_extendqisi2
- 157 0088 012B     		cmp	r3, #1
+ 165              		.loc 1 240 0
+ 166 008c CB79     		ldrb	r3, [r1, #7]	@ zero_extendqisi2
+ 167 008e 012B     		cmp	r3, #1
+ 168 0090 04D1     		bne	.L16
  242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR |= CAN_MCR_ABOM;
- 158              		.loc 1 242 0
- 159 008a 0368     		ldr	r3, [r0]
- 160 008c 0CBF     		ite	eq
- 161 008e 43F04003 		orreq	r3, r3, #64
+ 169              		.loc 1 242 0
+ 170 0092 0368     		ldr	r3, [r0]
+ 171 0094 43F04003 		orr	r3, r3, #64
+ 172 0098 0360     		str	r3, [r0]
+ 173 009a 03E0     		b	.L17
+ 174              	.L16:
  246:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR &= ~(uint32_t)CAN_MCR_ABOM;
- 162              		.loc 1 246 0
- 163 0092 23F04003 		bicne	r3, r3, #64
- 164 0096 0360     		str	r3, [r0]
+ 175              		.loc 1 246 0
+ 176 009c 0368     		ldr	r3, [r0]
+ 177 009e 23F04003 		bic	r3, r3, #64
+ 178 00a2 0360     		str	r3, [r0]
+ 179              	.L17:
  250:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if (CAN_InitStruct->CAN_AWUM == ENABLE)
- 165              		.loc 1 250 0
- 166 0098 0B7A     		ldrb	r3, [r1, #8]	@ zero_extendqisi2
- 167 009a 012B     		cmp	r3, #1
+ 180              		.loc 1 250 0
+ 181 00a4 0B7A     		ldrb	r3, [r1, #8]	@ zero_extendqisi2
+ 182 00a6 012B     		cmp	r3, #1
+ 183 00a8 04D1     		bne	.L18
  252:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR |= CAN_MCR_AWUM;
- 168              		.loc 1 252 0
- 169 009c 0368     		ldr	r3, [r0]
- 170 009e 0CBF     		ite	eq
- 171 00a0 43F02003 		orreq	r3, r3, #32
+ 184              		.loc 1 252 0
+ 185 00aa 0368     		ldr	r3, [r0]
+ 186 00ac 43F02003 		orr	r3, r3, #32
+ 187 00b0 0360     		str	r3, [r0]
+ 188 00b2 03E0     		b	.L19
+ 189              	.L18:
  256:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR &= ~(uint32_t)CAN_MCR_AWUM;
- 172              		.loc 1 256 0
- 173 00a4 23F02003 		bicne	r3, r3, #32
- 174 00a8 0360     		str	r3, [r0]
+ 190              		.loc 1 256 0
+ 191 00b4 0368     		ldr	r3, [r0]
+ 192 00b6 23F02003 		bic	r3, r3, #32
+ 193 00ba 0360     		str	r3, [r0]
+ 194              	.L19:
  260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if (CAN_InitStruct->CAN_NART == ENABLE)
- 175              		.loc 1 260 0
- 176 00aa 4B7A     		ldrb	r3, [r1, #9]	@ zero_extendqisi2
- 177 00ac 012B     		cmp	r3, #1
+ 195              		.loc 1 260 0
+ 196 00bc 4B7A     		ldrb	r3, [r1, #9]	@ zero_extendqisi2
+ 197 00be 012B     		cmp	r3, #1
+ 198 00c0 04D1     		bne	.L20
  262:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR |= CAN_MCR_NART;
- 178              		.loc 1 262 0
- 179 00ae 0368     		ldr	r3, [r0]
- 180 00b0 0CBF     		ite	eq
- 181 00b2 43F01003 		orreq	r3, r3, #16
+ 199              		.loc 1 262 0
+ 200 00c2 0368     		ldr	r3, [r0]
+ 201 00c4 43F01003 		orr	r3, r3, #16
+ 202 00c8 0360     		str	r3, [r0]
+ 203 00ca 03E0     		b	.L21
+ 204              	.L20:
  266:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR &= ~(uint32_t)CAN_MCR_NART;
- 182              		.loc 1 266 0
- 183 00b6 23F01003 		bicne	r3, r3, #16
- 184 00ba 0360     		str	r3, [r0]
+ 205              		.loc 1 266 0
+ 206 00cc 0368     		ldr	r3, [r0]
+ 207 00ce 23F01003 		bic	r3, r3, #16
+ 208 00d2 0360     		str	r3, [r0]
+ 209              	.L21:
  270:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if (CAN_InitStruct->CAN_RFLM == ENABLE)
- 185              		.loc 1 270 0
- 186 00bc 8B7A     		ldrb	r3, [r1, #10]	@ zero_extendqisi2
- 187 00be 012B     		cmp	r3, #1
+ 210              		.loc 1 270 0
+ 211 00d4 8B7A     		ldrb	r3, [r1, #10]	@ zero_extendqisi2
+ 212 00d6 012B     		cmp	r3, #1
+ 213 00d8 04D1     		bne	.L22
  272:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR |= CAN_MCR_RFLM;
- 188              		.loc 1 272 0
- 189 00c0 0368     		ldr	r3, [r0]
- 190 00c2 0CBF     		ite	eq
- 191 00c4 43F00803 		orreq	r3, r3, #8
+ 214              		.loc 1 272 0
+ 215 00da 0368     		ldr	r3, [r0]
+ 216 00dc 43F00803 		orr	r3, r3, #8
+ 217 00e0 0360     		str	r3, [r0]
+ 218 00e2 03E0     		b	.L23
+ 219              	.L22:
  276:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR &= ~(uint32_t)CAN_MCR_RFLM;
- 192              		.loc 1 276 0
- 193 00c8 23F00803 		bicne	r3, r3, #8
- 194 00cc 0360     		str	r3, [r0]
+ 220              		.loc 1 276 0
+ 221 00e4 0368     		ldr	r3, [r0]
+ 222 00e6 23F00803 		bic	r3, r3, #8
+ 223 00ea 0360     		str	r3, [r0]
+ 224              	.L23:
  280:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if (CAN_InitStruct->CAN_TXFP == ENABLE)
- 195              		.loc 1 280 0
- 196 00ce CB7A     		ldrb	r3, [r1, #11]	@ zero_extendqisi2
- 197 00d0 012B     		cmp	r3, #1
+ 225              		.loc 1 280 0
+ 226 00ec CB7A     		ldrb	r3, [r1, #11]	@ zero_extendqisi2
+ 227 00ee 012B     		cmp	r3, #1
+ 228 00f0 04D1     		bne	.L24
  282:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR |= CAN_MCR_TXFP;
- 198              		.loc 1 282 0
- 199 00d2 0368     		ldr	r3, [r0]
- 200 00d4 0CBF     		ite	eq
- 201 00d6 43F00403 		orreq	r3, r3, #4
+ 229              		.loc 1 282 0
+ 230 00f2 0368     		ldr	r3, [r0]
+ 231 00f4 43F00403 		orr	r3, r3, #4
+ 232 00f8 0360     		str	r3, [r0]
+ 233 00fa 03E0     		b	.L25
+ 234              	.L24:
  286:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MCR &= ~(uint32_t)CAN_MCR_TXFP;
- 202              		.loc 1 286 0
- 203 00da 23F00403 		bicne	r3, r3, #4
- 204 00de 0360     		str	r3, [r0]
+ 235              		.loc 1 286 0
+ 236 00fc 0368     		ldr	r3, [r0]
+ 237 00fe 23F00403 		bic	r3, r3, #4
+ 238 0102 0360     		str	r3, [r0]
+ 239              	.L25:
  290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->BTR = (uint32_t)((uint32_t)CAN_InitStruct->CAN_Mode << 30) | \
- 205              		.loc 1 290 0
- 206 00e0 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
+ 240              		.loc 1 290 0
+ 241 0104 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
  291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                 ((uint32_t)CAN_InitStruct->CAN_SJW << 24) | \
- 207              		.loc 1 291 0
- 208 00e2 CB78     		ldrb	r3, [r1, #3]	@ zero_extendqisi2
- 209 00e4 1B06     		lsls	r3, r3, #24
+ 242              		.loc 1 291 0
+ 243 0106 CB78     		ldrb	r3, [r1, #3]	@ zero_extendqisi2
+ 244 0108 1B06     		lsls	r3, r3, #24
  290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->BTR = (uint32_t)((uint32_t)CAN_InitStruct->CAN_Mode << 30) | \
- 210              		.loc 1 290 0
- 211 00e6 43EA8273 		orr	r3, r3, r2, lsl #30
+ 245              		.loc 1 290 0
+ 246 010a 43EA8273 		orr	r3, r3, r2, lsl #30
  292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                 ((uint32_t)CAN_InitStruct->CAN_BS1 << 16) | \
- 212              		.loc 1 292 0
- 213 00ea 0A79     		ldrb	r2, [r1, #4]	@ zero_extendqisi2
+ 247              		.loc 1 292 0
+ 248 010e 0A79     		ldrb	r2, [r1, #4]	@ zero_extendqisi2
  291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                 ((uint32_t)CAN_InitStruct->CAN_SJW << 24) | \
- 214              		.loc 1 291 0
- 215 00ec 43EA0243 		orr	r3, r3, r2, lsl #16
+ 249              		.loc 1 291 0
+ 250 0110 43EA0243 		orr	r3, r3, r2, lsl #16
  293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                 ((uint32_t)CAN_InitStruct->CAN_BS2 << 20) | \
- 216              		.loc 1 293 0
- 217 00f0 4A79     		ldrb	r2, [r1, #5]	@ zero_extendqisi2
+ 251              		.loc 1 293 0
+ 252 0114 4A79     		ldrb	r2, [r1, #5]	@ zero_extendqisi2
  292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                 ((uint32_t)CAN_InitStruct->CAN_BS1 << 16) | \
- 218              		.loc 1 292 0
- 219 00f2 43EA0252 		orr	r2, r3, r2, lsl #20
+ 253              		.loc 1 292 0
+ 254 0116 43EA0252 		orr	r2, r3, r2, lsl #20
  294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                ((uint32_t)CAN_InitStruct->CAN_Prescaler - 1);
- 220              		.loc 1 294 0
- 221 00f6 0B88     		ldrh	r3, [r1]
- 222 00f8 013B     		subs	r3, r3, #1
+ 255              		.loc 1 294 0
+ 256 011a 0B88     		ldrh	r3, [r1]
+ 257 011c 013B     		subs	r3, r3, #1
  293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                 ((uint32_t)CAN_InitStruct->CAN_BS2 << 20) | \
- 223              		.loc 1 293 0
- 224 00fa 1343     		orrs	r3, r3, r2
+ 258              		.loc 1 293 0
+ 259 011e 1343     		orrs	r3, r3, r2
  290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->BTR = (uint32_t)((uint32_t)CAN_InitStruct->CAN_Mode << 30) | \
- 225              		.loc 1 290 0
- 226 00fc C361     		str	r3, [r0, #28]
+ 260              		.loc 1 290 0
+ 261 0120 C361     		str	r3, [r0, #28]
  297:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->MCR &= ~(uint32_t)CAN_MCR_INRQ;
- 227              		.loc 1 297 0
- 228 00fe 0368     		ldr	r3, [r0]
- 229 0100 23F00103 		bic	r3, r3, #1
- 230 0104 0360     		str	r3, [r0]
- 231              	.LVL16:
+ 262              		.loc 1 297 0
+ 263 0122 0368     		ldr	r3, [r0]
+ 264 0124 23F00103 		bic	r3, r3, #1
+ 265 0128 0360     		str	r3, [r0]
+ 266              	.LVL17:
  300:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****    wait_ack = 0;
- 232              		.loc 1 300 0
- 233 0106 0023     		movs	r3, #0
+ 267              		.loc 1 300 0
+ 268 012a 0023     		movs	r3, #0
  302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****    while (((CANx->MSR & CAN_MSR_INAK) == CAN_MSR_INAK) && (wait_ack != INAK_TIMEOUT))
- 234              		.loc 1 302 0
- 235 0108 4FF6FF71 		movw	r1, #65535
- 236              	.LVL17:
- 237 010c 00E0     		b	.L26
- 238              	.LVL18:
- 239              	.L28:
+ 269              		.loc 1 302 0
+ 270 012c 4FF6FF71 		movw	r1, #65535
+ 271              	.LVL18:
+ 272 0130 00E0     		b	.L26
+ 273              	.LVL19:
+ 274              	.L28:
  304:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****      wait_ack++;
- 240              		.loc 1 304 0
- 241 010e 0133     		adds	r3, r3, #1
- 242              	.LVL19:
- 243              	.L26:
+ 275              		.loc 1 304 0
+ 276 0132 0133     		adds	r3, r3, #1
+ 277              	.LVL20:
+ 278              	.L26:
  302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****    while (((CANx->MSR & CAN_MSR_INAK) == CAN_MSR_INAK) && (wait_ack != INAK_TIMEOUT))
- 244              		.loc 1 302 0 discriminator 1
- 245 0110 4268     		ldr	r2, [r0, #4]
- 246 0112 12F0010F 		tst	r2, #1
- 247 0116 01D0     		beq	.L27
+ 279              		.loc 1 302 0 discriminator 1
+ 280 0134 4268     		ldr	r2, [r0, #4]
+ 281 0136 12F0010F 		tst	r2, #1
+ 282 013a 01D0     		beq	.L27
  302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****    while (((CANx->MSR & CAN_MSR_INAK) == CAN_MSR_INAK) && (wait_ack != INAK_TIMEOUT))
- 248              		.loc 1 302 0 is_stmt 0 discriminator 2
- 249 0118 8B42     		cmp	r3, r1
- 250 011a F8D1     		bne	.L28
- 251              	.L27:
+ 283              		.loc 1 302 0 is_stmt 0 discriminator 2
+ 284 013c 8B42     		cmp	r3, r1
+ 285 013e F8D1     		bne	.L28
+ 286              	.L27:
  308:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((CANx->MSR & CAN_MSR_INAK) == CAN_MSR_INAK)
- 252              		.loc 1 308 0 is_stmt 1
- 253 011c 4068     		ldr	r0, [r0, #4]
- 254              	.LVL20:
- 255 011e 00F00100 		and	r0, r0, #1
+ 287              		.loc 1 308 0 is_stmt 1
+ 288 0140 4368     		ldr	r3, [r0, #4]
+ 289              	.LVL21:
+ 290 0142 13F0010F 		tst	r3, #1
+ 291 0146 03D0     		beq	.L30
  310:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       InitStatus = CAN_InitStatus_Failed;
- 256              		.loc 1 310 0
- 257 0122 80F00100 		eor	r0, r0, #1
- 258 0126 00E0     		b	.L13
- 259              	.LVL21:
- 260              	.L29:
+ 292              		.loc 1 310 0
+ 293 0148 0020     		movs	r0, #0
+ 294              	.LVL22:
+ 295 014a 02E0     		b	.L13
+ 296              	.LVL23:
+ 297              	.L29:
  225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     InitStatus = CAN_InitStatus_Failed;
- 261              		.loc 1 225 0
- 262 0128 0020     		movs	r0, #0
- 263              	.LVL22:
- 264              	.L13:
+ 298              		.loc 1 225 0
+ 299 014c 0020     		movs	r0, #0
+ 300              	.LVL24:
+ 301 014e 00E0     		b	.L13
+ 302              	.LVL25:
+ 303              	.L30:
+ 314:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       InitStatus = CAN_InitStatus_Success ;
+ 304              		.loc 1 314 0
+ 305 0150 0120     		movs	r0, #1
+ 306              	.LVL26:
+ 307              	.L13:
  320:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 265              		.loc 1 320 0
- 266 012a 5DF8044B 		ldr	r4, [sp], #4
- 267 012e 7047     		bx	lr
- 268              		.cfi_endproc
- 269              	.LFE111:
- 271              		.align	2
- 272              		.global	CAN_FilterInit
- 273              		.thumb
- 274              		.thumb_func
- 276              	CAN_FilterInit:
- 277              	.LFB112:
+ 308              		.loc 1 320 0
+ 309 0152 5DF8044B 		ldr	r4, [sp], #4
+ 310 0156 7047     		bx	lr
+ 311              		.cfi_endproc
+ 312              	.LFE111:
+ 314              		.align	2
+ 315              		.global	CAN_FilterInit
+ 316              		.thumb
+ 317              		.thumb_func
+ 319              	CAN_FilterInit:
+ 320              	.LFB112:
  330:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 278              		.loc 1 330 0
- 279              		.cfi_startproc
- 280              		@ args = 0, pretend = 0, frame = 0
- 281              		@ frame_needed = 0, uses_anonymous_args = 0
- 282              		@ link register save eliminated.
- 283              	.LVL23:
- 284 0130 70B4     		push	{r4, r5, r6}
- 285              		.cfi_def_cfa_offset 12
- 286              		.cfi_offset 4, -12
- 287              		.cfi_offset 5, -8
- 288              		.cfi_offset 6, -4
- 289              	.LVL24:
+ 321              		.loc 1 330 0
+ 322              		.cfi_startproc
+ 323              		@ args = 0, pretend = 0, frame = 0
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 325              		@ link register save eliminated.
+ 326              	.LVL27:
+ 327 0158 70B4     		push	{r4, r5, r6}
+ 328              		.cfi_def_cfa_offset 12
+ 329              		.cfi_offset 4, -12
+ 330              		.cfi_offset 5, -8
+ 331              		.cfi_offset 6, -4
+ 332              	.LVL28:
  339:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   filter_number_bit_pos = ((uint32_t)1) << CAN_FilterInitStruct->CAN_FilterNumber;
- 290              		.loc 1 339 0
- 291 0132 837A     		ldrb	r3, [r0, #10]	@ zero_extendqisi2
- 292 0134 0121     		movs	r1, #1
- 293 0136 9940     		lsls	r1, r1, r3
- 294              	.LVL25:
+ 333              		.loc 1 339 0
+ 334 015a 837A     		ldrb	r3, [r0, #10]	@ zero_extendqisi2
+ 335 015c 0121     		movs	r1, #1
+ 336 015e 9940     		lsls	r1, r1, r3
+ 337              	.LVL29:
  342:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN1->FMR |= FMR_FINIT;
- 295              		.loc 1 342 0
- 296 0138 384B     		ldr	r3, .L39
- 297 013a D3F80022 		ldr	r2, [r3, #512]
- 298 013e 42F00102 		orr	r2, r2, #1
- 299 0142 C3F80022 		str	r2, [r3, #512]
+ 338              		.loc 1 342 0
+ 339 0160 384B     		ldr	r3, .L39
+ 340 0162 D3F80022 		ldr	r2, [r3, #512]
+ 341 0166 42F00102 		orr	r2, r2, #1
+ 342 016a C3F80022 		str	r2, [r3, #512]
  345:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN1->FA1R &= ~(uint32_t)filter_number_bit_pos;
- 300              		.loc 1 345 0
- 301 0146 D3F81C42 		ldr	r4, [r3, #540]
- 302 014a CA43     		mvns	r2, r1
- 303 014c 1440     		ands	r4, r4, r2
- 304 014e C3F81C42 		str	r4, [r3, #540]
+ 343              		.loc 1 345 0
+ 344 016e D3F81C42 		ldr	r4, [r3, #540]
+ 345 0172 CA43     		mvns	r2, r1
+ 346 0174 1440     		ands	r4, r4, r2
+ 347 0176 C3F81C42 		str	r4, [r3, #540]
  348:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (CAN_FilterInitStruct->CAN_FilterScale == CAN_FilterScale_16bit)
- 305              		.loc 1 348 0
- 306 0152 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
- 307 0154 B3B9     		cbnz	r3, .L32
+ 348              		.loc 1 348 0
+ 349 017a 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
+ 350 017c B3B9     		cbnz	r3, .L32
  351:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->FS1R &= ~(uint32_t)filter_number_bit_pos;
- 308              		.loc 1 351 0
- 309 0156 314B     		ldr	r3, .L39
- 310 0158 D3F80C42 		ldr	r4, [r3, #524]
- 311 015c 1440     		ands	r4, r4, r2
- 312 015e C3F80C42 		str	r4, [r3, #524]
+ 351              		.loc 1 351 0
+ 352 017e 314B     		ldr	r3, .L39
+ 353 0180 D3F80C42 		ldr	r4, [r3, #524]
+ 354 0184 1440     		ands	r4, r4, r2
+ 355 0186 C3F80C42 		str	r4, [r3, #524]
  355:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->sFilterRegister[CAN_FilterInitStruct->CAN_FilterNumber].FR1 = 
- 313              		.loc 1 355 0
- 314 0162 847A     		ldrb	r4, [r0, #10]	@ zero_extendqisi2
+ 356              		.loc 1 355 0
+ 357 018a 847A     		ldrb	r4, [r0, #10]	@ zero_extendqisi2
  356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterMaskIdLow) << 16) |
- 315              		.loc 1 356 0
- 316 0164 C688     		ldrh	r6, [r0, #6]
+ 358              		.loc 1 356 0
+ 359 018c C688     		ldrh	r6, [r0, #6]
  357:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         (0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterIdLow);
- 317              		.loc 1 357 0
- 318 0166 4588     		ldrh	r5, [r0, #2]
+ 360              		.loc 1 357 0
+ 361 018e 4588     		ldrh	r5, [r0, #2]
  356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterMaskIdLow) << 16) |
- 319              		.loc 1 356 0
- 320 0168 45EA0645 		orr	r5, r5, r6, lsl #16
+ 362              		.loc 1 356 0
+ 363 0190 45EA0645 		orr	r5, r5, r6, lsl #16
  355:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->sFilterRegister[CAN_FilterInitStruct->CAN_FilterNumber].FR1 = 
- 321              		.loc 1 355 0
- 322 016c 4834     		adds	r4, r4, #72
- 323 016e 43F83450 		str	r5, [r3, r4, lsl #3]
+ 364              		.loc 1 355 0
+ 365 0194 4834     		adds	r4, r4, #72
+ 366 0196 43F83450 		str	r5, [r3, r4, lsl #3]
  361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->sFilterRegister[CAN_FilterInitStruct->CAN_FilterNumber].FR2 = 
- 324              		.loc 1 361 0
- 325 0172 857A     		ldrb	r5, [r0, #10]	@ zero_extendqisi2
+ 367              		.loc 1 361 0
+ 368 019a 857A     		ldrb	r5, [r0, #10]	@ zero_extendqisi2
  362:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterMaskIdHigh) << 16) |
- 326              		.loc 1 362 0
- 327 0174 8688     		ldrh	r6, [r0, #4]
+ 369              		.loc 1 362 0
+ 370 019c 8688     		ldrh	r6, [r0, #4]
  363:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         (0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterIdHigh);
- 328              		.loc 1 363 0
- 329 0176 0488     		ldrh	r4, [r0]
+ 371              		.loc 1 363 0
+ 372 019e 0488     		ldrh	r4, [r0]
  362:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterMaskIdHigh) << 16) |
- 330              		.loc 1 362 0
- 331 0178 44EA0644 		orr	r4, r4, r6, lsl #16
+ 373              		.loc 1 362 0
+ 374 01a0 44EA0644 		orr	r4, r4, r6, lsl #16
  361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->sFilterRegister[CAN_FilterInitStruct->CAN_FilterNumber].FR2 = 
- 332              		.loc 1 361 0
- 333 017c 4835     		adds	r5, r5, #72
- 334 017e 03EBC503 		add	r3, r3, r5, lsl #3
- 335 0182 5C60     		str	r4, [r3, #4]
- 336              	.L32:
+ 375              		.loc 1 361 0
+ 376 01a4 4835     		adds	r5, r5, #72
+ 377 01a6 03EBC503 		add	r3, r3, r5, lsl #3
+ 378 01aa 5C60     		str	r4, [r3, #4]
+ 379              	.L32:
  366:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (CAN_FilterInitStruct->CAN_FilterScale == CAN_FilterScale_32bit)
- 337              		.loc 1 366 0
- 338 0184 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
- 339 0186 012B     		cmp	r3, #1
- 340 0188 16D1     		bne	.L33
+ 380              		.loc 1 366 0
+ 381 01ac 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
+ 382 01ae 012B     		cmp	r3, #1
+ 383 01b0 16D1     		bne	.L33
  369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->FS1R |= filter_number_bit_pos;
- 341              		.loc 1 369 0
- 342 018a 244B     		ldr	r3, .L39
- 343 018c D3F80C42 		ldr	r4, [r3, #524]
- 344 0190 0C43     		orrs	r4, r4, r1
- 345 0192 C3F80C42 		str	r4, [r3, #524]
+ 384              		.loc 1 369 0
+ 385 01b2 244B     		ldr	r3, .L39
+ 386 01b4 D3F80C42 		ldr	r4, [r3, #524]
+ 387 01b8 0C43     		orrs	r4, r4, r1
+ 388 01ba C3F80C42 		str	r4, [r3, #524]
  371:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->sFilterRegister[CAN_FilterInitStruct->CAN_FilterNumber].FR1 = 
- 346              		.loc 1 371 0
- 347 0196 847A     		ldrb	r4, [r0, #10]	@ zero_extendqisi2
+ 389              		.loc 1 371 0
+ 390 01be 847A     		ldrb	r4, [r0, #10]	@ zero_extendqisi2
  372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterIdHigh) << 16) |
- 348              		.loc 1 372 0
- 349 0198 0688     		ldrh	r6, [r0]
+ 391              		.loc 1 372 0
+ 392 01c0 0688     		ldrh	r6, [r0]
  373:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         (0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterIdLow);
- 350              		.loc 1 373 0
- 351 019a 4588     		ldrh	r5, [r0, #2]
+ 393              		.loc 1 373 0
+ 394 01c2 4588     		ldrh	r5, [r0, #2]
  372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterIdHigh) << 16) |
- 352              		.loc 1 372 0
- 353 019c 45EA0645 		orr	r5, r5, r6, lsl #16
+ 395              		.loc 1 372 0
+ 396 01c4 45EA0645 		orr	r5, r5, r6, lsl #16
  371:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->sFilterRegister[CAN_FilterInitStruct->CAN_FilterNumber].FR1 = 
- 354              		.loc 1 371 0
- 355 01a0 4834     		adds	r4, r4, #72
- 356 01a2 43F83450 		str	r5, [r3, r4, lsl #3]
+ 397              		.loc 1 371 0
+ 398 01c8 4834     		adds	r4, r4, #72
+ 399 01ca 43F83450 		str	r5, [r3, r4, lsl #3]
  375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->sFilterRegister[CAN_FilterInitStruct->CAN_FilterNumber].FR2 = 
- 357              		.loc 1 375 0
- 358 01a6 857A     		ldrb	r5, [r0, #10]	@ zero_extendqisi2
+ 400              		.loc 1 375 0
+ 401 01ce 857A     		ldrb	r5, [r0, #10]	@ zero_extendqisi2
  376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterMaskIdHigh) << 16) |
- 359              		.loc 1 376 0
- 360 01a8 8688     		ldrh	r6, [r0, #4]
+ 402              		.loc 1 376 0
+ 403 01d0 8688     		ldrh	r6, [r0, #4]
  377:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         (0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterMaskIdLow);
- 361              		.loc 1 377 0
- 362 01aa C488     		ldrh	r4, [r0, #6]
+ 404              		.loc 1 377 0
+ 405 01d2 C488     		ldrh	r4, [r0, #6]
  376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterMaskIdHigh) << 16) |
- 363              		.loc 1 376 0
- 364 01ac 44EA0644 		orr	r4, r4, r6, lsl #16
+ 406              		.loc 1 376 0
+ 407 01d4 44EA0644 		orr	r4, r4, r6, lsl #16
  375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->sFilterRegister[CAN_FilterInitStruct->CAN_FilterNumber].FR2 = 
- 365              		.loc 1 375 0
- 366 01b0 4835     		adds	r5, r5, #72
- 367 01b2 03EBC503 		add	r3, r3, r5, lsl #3
- 368 01b6 5C60     		str	r4, [r3, #4]
- 369              	.L33:
+ 408              		.loc 1 375 0
+ 409 01d8 4835     		adds	r5, r5, #72
+ 410 01da 03EBC503 		add	r3, r3, r5, lsl #3
+ 411 01de 5C60     		str	r4, [r3, #4]
+ 412              	.L33:
  381:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (CAN_FilterInitStruct->CAN_FilterMode == CAN_FilterMode_IdMask)
- 370              		.loc 1 381 0
- 371 01b8 C37A     		ldrb	r3, [r0, #11]	@ zero_extendqisi2
- 372 01ba 33B9     		cbnz	r3, .L34
+ 413              		.loc 1 381 0
+ 414 01e0 C37A     		ldrb	r3, [r0, #11]	@ zero_extendqisi2
+ 415 01e2 33B9     		cbnz	r3, .L34
  384:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->FM1R &= ~(uint32_t)filter_number_bit_pos;
- 373              		.loc 1 384 0
- 374 01bc 174B     		ldr	r3, .L39
- 375 01be D3F80442 		ldr	r4, [r3, #516]
- 376 01c2 1440     		ands	r4, r4, r2
- 377 01c4 C3F80442 		str	r4, [r3, #516]
- 378 01c8 05E0     		b	.L35
- 379              	.L34:
+ 416              		.loc 1 384 0
+ 417 01e4 174B     		ldr	r3, .L39
+ 418 01e6 D3F80442 		ldr	r4, [r3, #516]
+ 419 01ea 1440     		ands	r4, r4, r2
+ 420 01ec C3F80442 		str	r4, [r3, #516]
+ 421 01f0 05E0     		b	.L35
+ 422              	.L34:
  389:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->FM1R |= (uint32_t)filter_number_bit_pos;
- 380              		.loc 1 389 0
- 381 01ca 144B     		ldr	r3, .L39
- 382 01cc D3F80442 		ldr	r4, [r3, #516]
- 383 01d0 0C43     		orrs	r4, r4, r1
- 384 01d2 C3F80442 		str	r4, [r3, #516]
- 385              	.L35:
+ 423              		.loc 1 389 0
+ 424 01f2 144B     		ldr	r3, .L39
+ 425 01f4 D3F80442 		ldr	r4, [r3, #516]
+ 426 01f8 0C43     		orrs	r4, r4, r1
+ 427 01fa C3F80442 		str	r4, [r3, #516]
+ 428              	.L35:
  393:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (CAN_FilterInitStruct->CAN_FilterFIFOAssignment == CAN_Filter_FIFO0)
- 386              		.loc 1 393 0
- 387 01d6 0389     		ldrh	r3, [r0, #8]
- 388 01d8 2BB9     		cbnz	r3, .L36
+ 429              		.loc 1 393 0
+ 430 01fe 0389     		ldrh	r3, [r0, #8]
+ 431 0200 2BB9     		cbnz	r3, .L36
  396:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->FFA1R &= ~(uint32_t)filter_number_bit_pos;
- 389              		.loc 1 396 0
- 390 01da 104B     		ldr	r3, .L39
- 391 01dc D3F81442 		ldr	r4, [r3, #532]
- 392 01e0 2240     		ands	r2, r2, r4
- 393 01e2 C3F81422 		str	r2, [r3, #532]
- 394              	.L36:
+ 432              		.loc 1 396 0
+ 433 0202 104B     		ldr	r3, .L39
+ 434 0204 D3F81442 		ldr	r4, [r3, #532]
+ 435 0208 2240     		ands	r2, r2, r4
+ 436 020a C3F81422 		str	r2, [r3, #532]
+ 437              	.L36:
  399:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (CAN_FilterInitStruct->CAN_FilterFIFOAssignment == CAN_Filter_FIFO1)
- 395              		.loc 1 399 0
- 396 01e6 0389     		ldrh	r3, [r0, #8]
- 397 01e8 012B     		cmp	r3, #1
- 398 01ea 05D1     		bne	.L37
+ 438              		.loc 1 399 0
+ 439 020e 0389     		ldrh	r3, [r0, #8]
+ 440 0210 012B     		cmp	r3, #1
+ 441 0212 05D1     		bne	.L37
  402:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->FFA1R |= (uint32_t)filter_number_bit_pos;
- 399              		.loc 1 402 0
- 400 01ec 0B4B     		ldr	r3, .L39
- 401 01ee D3F81422 		ldr	r2, [r3, #532]
- 402 01f2 0A43     		orrs	r2, r2, r1
- 403 01f4 C3F81422 		str	r2, [r3, #532]
- 404              	.L37:
+ 442              		.loc 1 402 0
+ 443 0214 0B4B     		ldr	r3, .L39
+ 444 0216 D3F81422 		ldr	r2, [r3, #532]
+ 445 021a 0A43     		orrs	r2, r2, r1
+ 446 021c C3F81422 		str	r2, [r3, #532]
+ 447              	.L37:
  406:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (CAN_FilterInitStruct->CAN_FilterActivation == ENABLE)
- 405              		.loc 1 406 0
- 406 01f8 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
- 407 01fa 012B     		cmp	r3, #1
- 408 01fc 05D1     		bne	.L38
+ 448              		.loc 1 406 0
+ 449 0220 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 450 0222 012B     		cmp	r3, #1
+ 451 0224 05D1     		bne	.L38
  408:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CAN1->FA1R |= filter_number_bit_pos;
- 409              		.loc 1 408 0
- 410 01fe 074B     		ldr	r3, .L39
- 411 0200 D3F81C22 		ldr	r2, [r3, #540]
- 412 0204 1143     		orrs	r1, r1, r2
- 413              	.LVL26:
- 414 0206 C3F81C12 		str	r1, [r3, #540]
- 415              	.L38:
+ 452              		.loc 1 408 0
+ 453 0226 074B     		ldr	r3, .L39
+ 454 0228 D3F81C22 		ldr	r2, [r3, #540]
+ 455 022c 1143     		orrs	r1, r1, r2
+ 456              	.LVL30:
+ 457 022e C3F81C12 		str	r1, [r3, #540]
+ 458              	.L38:
  412:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN1->FMR &= ~FMR_FINIT;
- 416              		.loc 1 412 0
- 417 020a 044B     		ldr	r3, .L39
- 418 020c D3F80022 		ldr	r2, [r3, #512]
- 419 0210 22F00102 		bic	r2, r2, #1
- 420 0214 C3F80022 		str	r2, [r3, #512]
+ 459              		.loc 1 412 0
+ 460 0232 044B     		ldr	r3, .L39
+ 461 0234 D3F80022 		ldr	r2, [r3, #512]
+ 462 0238 22F00102 		bic	r2, r2, #1
+ 463 023c C3F80022 		str	r2, [r3, #512]
  413:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 421              		.loc 1 413 0
- 422 0218 70BC     		pop	{r4, r5, r6}
- 423 021a 7047     		bx	lr
- 424              	.L40:
- 425              		.align	2
- 426              	.L39:
- 427 021c 00640040 		.word	1073767424
- 428              		.cfi_endproc
- 429              	.LFE112:
- 431              		.align	2
- 432              		.global	CAN_StructInit
- 433              		.thumb
- 434              		.thumb_func
- 436              	CAN_StructInit:
- 437              	.LFB113:
- 421:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 438              		.loc 1 421 0
- 439              		.cfi_startproc
- 440              		@ args = 0, pretend = 0, frame = 0
- 441              		@ frame_needed = 0, uses_anonymous_args = 0
- 442              		@ link register save eliminated.
- 443              	.LVL27:
- 425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_TTCM = DISABLE;
- 444              		.loc 1 425 0
- 445 0220 0023     		movs	r3, #0
- 446 0222 8371     		strb	r3, [r0, #6]
- 428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_ABOM = DISABLE;
- 447              		.loc 1 428 0
- 448 0224 C371     		strb	r3, [r0, #7]
- 431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_AWUM = DISABLE;
- 449              		.loc 1 431 0
- 450 0226 0372     		strb	r3, [r0, #8]
- 434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_NART = DISABLE;
- 451              		.loc 1 434 0
- 452 0228 4372     		strb	r3, [r0, #9]
- 437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_RFLM = DISABLE;
- 453              		.loc 1 437 0
- 454 022a 8372     		strb	r3, [r0, #10]
- 440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_TXFP = DISABLE;
- 455              		.loc 1 440 0
- 456 022c C372     		strb	r3, [r0, #11]
- 443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_Mode = CAN_Mode_Normal;
- 457              		.loc 1 443 0
- 458 022e 8370     		strb	r3, [r0, #2]
- 446:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_SJW = CAN_SJW_1tq;
- 459              		.loc 1 446 0
- 460 0230 C370     		strb	r3, [r0, #3]
- 449:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_BS1 = CAN_BS1_4tq;
- 461              		.loc 1 449 0
- 462 0232 0323     		movs	r3, #3
- 463 0234 0371     		strb	r3, [r0, #4]
- 452:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_BS2 = CAN_BS2_3tq;
- 464              		.loc 1 452 0
- 465 0236 0223     		movs	r3, #2
- 466 0238 4371     		strb	r3, [r0, #5]
- 455:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_Prescaler = 1;
- 467              		.loc 1 455 0
- 468 023a 0123     		movs	r3, #1
- 469 023c 0380     		strh	r3, [r0]	@ movhi
- 470 023e 7047     		bx	lr
+ 464              		.loc 1 413 0
+ 465 0240 70BC     		pop	{r4, r5, r6}
+ 466 0242 7047     		bx	lr
+ 467              	.L40:
+ 468              		.align	2
+ 469              	.L39:
+ 470 0244 00640040 		.word	1073767424
  471              		.cfi_endproc
- 472              	.LFE113:
+ 472              	.LFE112:
  474              		.align	2
- 475              		.global	CAN_SlaveStartBank
+ 475              		.global	CAN_StructInit
  476              		.thumb
  477              		.thumb_func
- 479              	CAN_SlaveStartBank:
- 480              	.LFB114:
- 464:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 481              		.loc 1 464 0
+ 479              	CAN_StructInit:
+ 480              	.LFB113:
+ 421:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
+ 481              		.loc 1 421 0
  482              		.cfi_startproc
  483              		@ args = 0, pretend = 0, frame = 0
  484              		@ frame_needed = 0, uses_anonymous_args = 0
  485              		@ link register save eliminated.
- 486              	.LVL28:
+ 486              	.LVL31:
+ 425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_TTCM = DISABLE;
+ 487              		.loc 1 425 0
+ 488 0248 0023     		movs	r3, #0
+ 489 024a 8371     		strb	r3, [r0, #6]
+ 428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_ABOM = DISABLE;
+ 490              		.loc 1 428 0
+ 491 024c C371     		strb	r3, [r0, #7]
+ 431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_AWUM = DISABLE;
+ 492              		.loc 1 431 0
+ 493 024e 0372     		strb	r3, [r0, #8]
+ 434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_NART = DISABLE;
+ 494              		.loc 1 434 0
+ 495 0250 4372     		strb	r3, [r0, #9]
+ 437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_RFLM = DISABLE;
+ 496              		.loc 1 437 0
+ 497 0252 8372     		strb	r3, [r0, #10]
+ 440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_TXFP = DISABLE;
+ 498              		.loc 1 440 0
+ 499 0254 C372     		strb	r3, [r0, #11]
+ 443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_Mode = CAN_Mode_Normal;
+ 500              		.loc 1 443 0
+ 501 0256 8370     		strb	r3, [r0, #2]
+ 446:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_SJW = CAN_SJW_1tq;
+ 502              		.loc 1 446 0
+ 503 0258 C370     		strb	r3, [r0, #3]
+ 449:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_BS1 = CAN_BS1_4tq;
+ 504              		.loc 1 449 0
+ 505 025a 0323     		movs	r3, #3
+ 506 025c 0371     		strb	r3, [r0, #4]
+ 452:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_BS2 = CAN_BS2_3tq;
+ 507              		.loc 1 452 0
+ 508 025e 0223     		movs	r3, #2
+ 509 0260 4371     		strb	r3, [r0, #5]
+ 455:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN_InitStruct->CAN_Prescaler = 1;
+ 510              		.loc 1 455 0
+ 511 0262 0123     		movs	r3, #1
+ 512 0264 0380     		strh	r3, [r0]	@ movhi
+ 513 0266 7047     		bx	lr
+ 514              		.cfi_endproc
+ 515              	.LFE113:
+ 517              		.align	2
+ 518              		.global	CAN_SlaveStartBank
+ 519              		.thumb
+ 520              		.thumb_func
+ 522              	CAN_SlaveStartBank:
+ 523              	.LFB114:
+ 464:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
+ 524              		.loc 1 464 0
+ 525              		.cfi_startproc
+ 526              		@ args = 0, pretend = 0, frame = 0
+ 527              		@ frame_needed = 0, uses_anonymous_args = 0
+ 528              		@ link register save eliminated.
+ 529              	.LVL32:
  469:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN1->FMR |= FMR_FINIT;
- 487              		.loc 1 469 0
- 488 0240 0D4B     		ldr	r3, .L43
- 489 0242 D3F80022 		ldr	r2, [r3, #512]
- 490 0246 42F00102 		orr	r2, r2, #1
- 491 024a C3F80022 		str	r2, [r3, #512]
+ 530              		.loc 1 469 0
+ 531 0268 0D4B     		ldr	r3, .L43
+ 532 026a D3F80022 		ldr	r2, [r3, #512]
+ 533 026e 42F00102 		orr	r2, r2, #1
+ 534 0272 C3F80022 		str	r2, [r3, #512]
  472:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN1->FMR &= (uint32_t)0xFFFFC0F1 ;
- 492              		.loc 1 472 0
- 493 024e D3F80022 		ldr	r2, [r3, #512]
- 494 0252 22F47C52 		bic	r2, r2, #16128
- 495 0256 22F00E02 		bic	r2, r2, #14
- 496 025a C3F80022 		str	r2, [r3, #512]
+ 535              		.loc 1 472 0
+ 536 0276 D3F80022 		ldr	r2, [r3, #512]
+ 537 027a 22F47C52 		bic	r2, r2, #16128
+ 538 027e 22F00E02 		bic	r2, r2, #14
+ 539 0282 C3F80022 		str	r2, [r3, #512]
  473:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN1->FMR |= (uint32_t)(CAN_BankNumber)<<8;
- 497              		.loc 1 473 0
- 498 025e D3F80022 		ldr	r2, [r3, #512]
- 499 0262 42EA0020 		orr	r0, r2, r0, lsl #8
- 500              	.LVL29:
- 501 0266 C3F80002 		str	r0, [r3, #512]
+ 540              		.loc 1 473 0
+ 541 0286 D3F80022 		ldr	r2, [r3, #512]
+ 542 028a 42EA0020 		orr	r0, r2, r0, lsl #8
+ 543              	.LVL33:
+ 544 028e C3F80002 		str	r0, [r3, #512]
  476:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CAN1->FMR &= ~FMR_FINIT;
- 502              		.loc 1 476 0
- 503 026a D3F80022 		ldr	r2, [r3, #512]
- 504 026e 22F00102 		bic	r2, r2, #1
- 505 0272 C3F80022 		str	r2, [r3, #512]
- 506 0276 7047     		bx	lr
- 507              	.L44:
- 508              		.align	2
- 509              	.L43:
- 510 0278 00640040 		.word	1073767424
- 511              		.cfi_endproc
- 512              	.LFE114:
- 514              		.align	2
- 515              		.global	CAN_DBGFreeze
- 516              		.thumb
- 517              		.thumb_func
- 519              	CAN_DBGFreeze:
- 520              	.LFB115:
+ 545              		.loc 1 476 0
+ 546 0292 D3F80022 		ldr	r2, [r3, #512]
+ 547 0296 22F00102 		bic	r2, r2, #1
+ 548 029a C3F80022 		str	r2, [r3, #512]
+ 549 029e 7047     		bx	lr
+ 550              	.L44:
+ 551              		.align	2
+ 552              	.L43:
+ 553 02a0 00640040 		.word	1073767424
+ 554              		.cfi_endproc
+ 555              	.LFE114:
+ 557              		.align	2
+ 558              		.global	CAN_DBGFreeze
+ 559              		.thumb
+ 560              		.thumb_func
+ 562              	CAN_DBGFreeze:
+ 563              	.LFB115:
  489:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 521              		.loc 1 489 0
- 522              		.cfi_startproc
- 523              		@ args = 0, pretend = 0, frame = 0
- 524              		@ frame_needed = 0, uses_anonymous_args = 0
- 525              		@ link register save eliminated.
- 526              	.LVL30:
+ 564              		.loc 1 489 0
+ 565              		.cfi_startproc
+ 566              		@ args = 0, pretend = 0, frame = 0
+ 567              		@ frame_needed = 0, uses_anonymous_args = 0
+ 568              		@ link register save eliminated.
+ 569              	.LVL34:
  494:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (NewState != DISABLE)
- 527              		.loc 1 494 0
- 528 027c 21B1     		cbz	r1, .L46
+ 570              		.loc 1 494 0
+ 571 02a4 21B1     		cbz	r1, .L46
  497:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->MCR |= MCR_DBF;
- 529              		.loc 1 497 0
- 530 027e 0368     		ldr	r3, [r0]
- 531 0280 43F48033 		orr	r3, r3, #65536
- 532 0284 0360     		str	r3, [r0]
- 533 0286 7047     		bx	lr
- 534              	.L46:
+ 572              		.loc 1 497 0
+ 573 02a6 0368     		ldr	r3, [r0]
+ 574 02a8 43F48033 		orr	r3, r3, #65536
+ 575 02ac 0360     		str	r3, [r0]
+ 576 02ae 7047     		bx	lr
+ 577              	.L46:
  502:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->MCR &= ~MCR_DBF;
- 535              		.loc 1 502 0
- 536 0288 0368     		ldr	r3, [r0]
- 537 028a 23F48033 		bic	r3, r3, #65536
- 538 028e 0360     		str	r3, [r0]
- 539 0290 7047     		bx	lr
- 540              		.cfi_endproc
- 541              	.LFE115:
- 543 0292 00BF     		.align	2
- 544              		.global	CAN_TTComModeCmd
- 545              		.thumb
- 546              		.thumb_func
- 548              	CAN_TTComModeCmd:
- 549              	.LFB116:
+ 578              		.loc 1 502 0
+ 579 02b0 0368     		ldr	r3, [r0]
+ 580 02b2 23F48033 		bic	r3, r3, #65536
+ 581 02b6 0360     		str	r3, [r0]
+ 582 02b8 7047     		bx	lr
+ 583              		.cfi_endproc
+ 584              	.LFE115:
+ 586 02ba 00BF     		.align	2
+ 587              		.global	CAN_TTComModeCmd
+ 588              		.thumb
+ 589              		.thumb_func
+ 591              	CAN_TTComModeCmd:
+ 592              	.LFB116:
  519:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 550              		.loc 1 519 0
- 551              		.cfi_startproc
- 552              		@ args = 0, pretend = 0, frame = 0
- 553              		@ frame_needed = 0, uses_anonymous_args = 0
- 554              		@ link register save eliminated.
- 555              	.LVL31:
+ 593              		.loc 1 519 0
+ 594              		.cfi_startproc
+ 595              		@ args = 0, pretend = 0, frame = 0
+ 596              		@ frame_needed = 0, uses_anonymous_args = 0
+ 597              		@ link register save eliminated.
+ 598              	.LVL35:
  523:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (NewState != DISABLE)
- 556              		.loc 1 523 0
- 557 0294 B1B1     		cbz	r1, .L49
+ 599              		.loc 1 523 0
+ 600 02bc B1B1     		cbz	r1, .L49
  526:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->MCR |= CAN_MCR_TTCM;
- 558              		.loc 1 526 0
- 559 0296 0368     		ldr	r3, [r0]
- 560 0298 43F08003 		orr	r3, r3, #128
- 561 029c 0360     		str	r3, [r0]
+ 601              		.loc 1 526 0
+ 602 02be 0368     		ldr	r3, [r0]
+ 603 02c0 43F08003 		orr	r3, r3, #128
+ 604 02c4 0360     		str	r3, [r0]
  529:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[0].TDTR |= ((uint32_t)CAN_TDT0R_TGT);
- 562              		.loc 1 529 0
- 563 029e D0F88431 		ldr	r3, [r0, #388]
- 564 02a2 43F48073 		orr	r3, r3, #256
- 565 02a6 C0F88431 		str	r3, [r0, #388]
+ 605              		.loc 1 529 0
+ 606 02c6 D0F88431 		ldr	r3, [r0, #388]
+ 607 02ca 43F48073 		orr	r3, r3, #256
+ 608 02ce C0F88431 		str	r3, [r0, #388]
  530:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[1].TDTR |= ((uint32_t)CAN_TDT1R_TGT);
- 566              		.loc 1 530 0
- 567 02aa D0F89431 		ldr	r3, [r0, #404]
- 568 02ae 43F48073 		orr	r3, r3, #256
- 569 02b2 C0F89431 		str	r3, [r0, #404]
+ 609              		.loc 1 530 0
+ 610 02d2 D0F89431 		ldr	r3, [r0, #404]
+ 611 02d6 43F48073 		orr	r3, r3, #256
+ 612 02da C0F89431 		str	r3, [r0, #404]
  531:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[2].TDTR |= ((uint32_t)CAN_TDT2R_TGT);
- 570              		.loc 1 531 0
- 571 02b6 D0F8A431 		ldr	r3, [r0, #420]
- 572 02ba 43F48073 		orr	r3, r3, #256
- 573 02be C0F8A431 		str	r3, [r0, #420]
- 574 02c2 7047     		bx	lr
- 575              	.L49:
+ 613              		.loc 1 531 0
+ 614 02de D0F8A431 		ldr	r3, [r0, #420]
+ 615 02e2 43F48073 		orr	r3, r3, #256
+ 616 02e6 C0F8A431 		str	r3, [r0, #420]
+ 617 02ea 7047     		bx	lr
+ 618              	.L49:
  536:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->MCR &= (uint32_t)(~(uint32_t)CAN_MCR_TTCM);
- 576              		.loc 1 536 0
- 577 02c4 0368     		ldr	r3, [r0]
- 578 02c6 23F08003 		bic	r3, r3, #128
- 579 02ca 0360     		str	r3, [r0]
+ 619              		.loc 1 536 0
+ 620 02ec 0368     		ldr	r3, [r0]
+ 621 02ee 23F08003 		bic	r3, r3, #128
+ 622 02f2 0360     		str	r3, [r0]
  539:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[0].TDTR &= ((uint32_t)~CAN_TDT0R_TGT);
- 580              		.loc 1 539 0
- 581 02cc D0F88431 		ldr	r3, [r0, #388]
- 582 02d0 23F48073 		bic	r3, r3, #256
- 583 02d4 C0F88431 		str	r3, [r0, #388]
+ 623              		.loc 1 539 0
+ 624 02f4 D0F88431 		ldr	r3, [r0, #388]
+ 625 02f8 23F48073 		bic	r3, r3, #256
+ 626 02fc C0F88431 		str	r3, [r0, #388]
  540:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[1].TDTR &= ((uint32_t)~CAN_TDT1R_TGT);
- 584              		.loc 1 540 0
- 585 02d8 D0F89431 		ldr	r3, [r0, #404]
- 586 02dc 23F48073 		bic	r3, r3, #256
- 587 02e0 C0F89431 		str	r3, [r0, #404]
+ 627              		.loc 1 540 0
+ 628 0300 D0F89431 		ldr	r3, [r0, #404]
+ 629 0304 23F48073 		bic	r3, r3, #256
+ 630 0308 C0F89431 		str	r3, [r0, #404]
  541:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[2].TDTR &= ((uint32_t)~CAN_TDT2R_TGT);
- 588              		.loc 1 541 0
- 589 02e4 D0F8A431 		ldr	r3, [r0, #420]
- 590 02e8 23F48073 		bic	r3, r3, #256
- 591 02ec C0F8A431 		str	r3, [r0, #420]
- 592 02f0 7047     		bx	lr
- 593              		.cfi_endproc
- 594              	.LFE116:
- 596 02f2 00BF     		.align	2
- 597              		.global	CAN_Transmit
- 598              		.thumb
- 599              		.thumb_func
- 601              	CAN_Transmit:
- 602              	.LFB117:
+ 631              		.loc 1 541 0
+ 632 030c D0F8A431 		ldr	r3, [r0, #420]
+ 633 0310 23F48073 		bic	r3, r3, #256
+ 634 0314 C0F8A431 		str	r3, [r0, #420]
+ 635 0318 7047     		bx	lr
+ 636              		.cfi_endproc
+ 637              	.LFE116:
+ 639 031a 00BF     		.align	2
+ 640              		.global	CAN_Transmit
+ 641              		.thumb
+ 642              		.thumb_func
+ 644              	CAN_Transmit:
+ 645              	.LFB117:
  573:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 603              		.loc 1 573 0
- 604              		.cfi_startproc
- 605              		@ args = 0, pretend = 0, frame = 0
- 606              		@ frame_needed = 0, uses_anonymous_args = 0
- 607              		@ link register save eliminated.
- 608              	.LVL32:
- 609 02f4 F0B4     		push	{r4, r5, r6, r7}
- 610              		.cfi_def_cfa_offset 16
- 611              		.cfi_offset 4, -16
- 612              		.cfi_offset 5, -12
- 613              		.cfi_offset 6, -8
- 614              		.cfi_offset 7, -4
- 615 02f6 0346     		mov	r3, r0
- 616              	.LVL33:
+ 646              		.loc 1 573 0
+ 647              		.cfi_startproc
+ 648              		@ args = 0, pretend = 0, frame = 0
+ 649              		@ frame_needed = 0, uses_anonymous_args = 0
+ 650              		@ link register save eliminated.
+ 651              	.LVL36:
+ 652 031c F0B4     		push	{r4, r5, r6, r7}
+ 653              		.cfi_def_cfa_offset 16
+ 654              		.cfi_offset 4, -16
+ 655              		.cfi_offset 5, -12
+ 656              		.cfi_offset 6, -8
+ 657              		.cfi_offset 7, -4
+ 658 031e 0346     		mov	r3, r0
+ 659              	.LVL37:
  582:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if ((CANx->TSR&CAN_TSR_TME0) == CAN_TSR_TME0)
- 617              		.loc 1 582 0
- 618 02f8 8268     		ldr	r2, [r0, #8]
- 619 02fa 12F0806F 		tst	r2, #67108864
- 620 02fe 0BD1     		bne	.L56
+ 660              		.loc 1 582 0
+ 661 0320 8268     		ldr	r2, [r0, #8]
+ 662 0322 12F0806F 		tst	r2, #67108864
+ 663 0326 09D1     		bne	.L56
  586:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else if ((CANx->TSR&CAN_TSR_TME1) == CAN_TSR_TME1)
- 621              		.loc 1 586 0
- 622 0300 8268     		ldr	r2, [r0, #8]
- 623 0302 12F0006F 		tst	r2, #134217728
- 624 0306 09D1     		bne	.L57
+ 664              		.loc 1 586 0
+ 665 0328 8268     		ldr	r2, [r0, #8]
+ 666 032a 12F0006F 		tst	r2, #134217728
+ 667 032e 07D1     		bne	.L57
  590:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else if ((CANx->TSR&CAN_TSR_TME2) == CAN_TSR_TME2)
- 625              		.loc 1 590 0
- 626 0308 8268     		ldr	r2, [r0, #8]
- 627 030a 02F08052 		and	r2, r2, #268435456
+ 668              		.loc 1 590 0
+ 669 0330 8268     		ldr	r2, [r0, #8]
+ 670 0332 12F0805F 		tst	r2, #268435456
+ 671 0336 05D0     		beq	.L58
  592:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     transmit_mailbox = 2;
- 628              		.loc 1 592 0
- 629 030e 002A     		cmp	r2, #0
- 630 0310 0CBF     		ite	eq
- 631 0312 0420     		moveq	r0, #4
- 632 0314 0220     		movne	r0, #2
- 633              	.LVL34:
- 634 0316 02E0     		b	.L52
- 635              	.LVL35:
- 636              	.L56:
+ 672              		.loc 1 592 0
+ 673 0338 0220     		movs	r0, #2
+ 674              	.LVL38:
+ 675 033a 04E0     		b	.L52
+ 676              	.LVL39:
+ 677              	.L56:
  584:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     transmit_mailbox = 0;
- 637              		.loc 1 584 0
- 638 0318 0020     		movs	r0, #0
- 639              	.LVL36:
- 640 031a 00E0     		b	.L52
- 641              	.LVL37:
- 642              	.L57:
+ 678              		.loc 1 584 0
+ 679 033c 0020     		movs	r0, #0
+ 680              	.LVL40:
+ 681 033e 02E0     		b	.L52
+ 682              	.LVL41:
+ 683              	.L57:
  588:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     transmit_mailbox = 1;
- 643              		.loc 1 588 0
- 644 031c 0120     		movs	r0, #1
- 645              	.LVL38:
- 646              	.L52:
+ 684              		.loc 1 588 0
+ 685 0340 0120     		movs	r0, #1
+ 686              	.LVL42:
+ 687 0342 00E0     		b	.L52
+ 688              	.LVL43:
+ 689              	.L58:
+ 596:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     transmit_mailbox = CAN_TxStatus_NoMailBox;
+ 690              		.loc 1 596 0
+ 691 0344 0420     		movs	r0, #4
+ 692              	.LVL44:
+ 693              	.L52:
  599:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (transmit_mailbox != CAN_TxStatus_NoMailBox)
- 647              		.loc 1 599 0
- 648 031e 0428     		cmp	r0, #4
- 649 0320 50D0     		beq	.L53
+ 694              		.loc 1 599 0
+ 695 0346 0428     		cmp	r0, #4
+ 696 0348 50D0     		beq	.L53
  602:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TIR &= TMIDxR_TXRQ;
- 650              		.loc 1 602 0
- 651 0322 0546     		mov	r5, r0
- 652 0324 00F11802 		add	r2, r0, #24
- 653 0328 1201     		lsls	r2, r2, #4
- 654 032a 9C58     		ldr	r4, [r3, r2]
- 655 032c 04F00104 		and	r4, r4, #1
- 656 0330 9C50     		str	r4, [r3, r2]
+ 697              		.loc 1 602 0
+ 698 034a 0546     		mov	r5, r0
+ 699 034c 00F11802 		add	r2, r0, #24
+ 700 0350 1201     		lsls	r2, r2, #4
+ 701 0352 9C58     		ldr	r4, [r3, r2]
+ 702 0354 04F00104 		and	r4, r4, #1
+ 703 0358 9C50     		str	r4, [r3, r2]
  603:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if (TxMessage->IDE == CAN_Id_Standard)
- 657              		.loc 1 603 0
- 658 0332 0A7A     		ldrb	r2, [r1, #8]	@ zero_extendqisi2
- 659 0334 52B9     		cbnz	r2, .L54
+ 704              		.loc 1 603 0
+ 705 035a 0A7A     		ldrb	r2, [r1, #8]	@ zero_extendqisi2
+ 706 035c 52B9     		cbnz	r2, .L54
  606:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->sTxMailBox[transmit_mailbox].TIR |= ((TxMessage->StdId << 21) | \
- 660              		.loc 1 606 0
- 661 0336 00F11802 		add	r2, r0, #24
- 662 033a 1201     		lsls	r2, r2, #4
- 663 033c 9E58     		ldr	r6, [r3, r2]
- 664 033e 0C68     		ldr	r4, [r1]
+ 707              		.loc 1 606 0
+ 708 035e 00F11802 		add	r2, r0, #24
+ 709 0362 1201     		lsls	r2, r2, #4
+ 710 0364 9E58     		ldr	r6, [r3, r2]
+ 711 0366 0C68     		ldr	r4, [r1]
  607:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                                   TxMessage->RTR);
- 665              		.loc 1 607 0
- 666 0340 4F7A     		ldrb	r7, [r1, #9]	@ zero_extendqisi2
+ 712              		.loc 1 607 0
+ 713 0368 4F7A     		ldrb	r7, [r1, #9]	@ zero_extendqisi2
  606:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->sTxMailBox[transmit_mailbox].TIR |= ((TxMessage->StdId << 21) | \
- 667              		.loc 1 606 0
- 668 0342 47EA4454 		orr	r4, r7, r4, lsl #21
- 669 0346 3443     		orrs	r4, r4, r6
- 670 0348 9C50     		str	r4, [r3, r2]
- 671 034a 0CE0     		b	.L55
- 672              	.L54:
+ 714              		.loc 1 606 0
+ 715 036a 47EA4454 		orr	r4, r7, r4, lsl #21
+ 716 036e 3443     		orrs	r4, r4, r6
+ 717 0370 9C50     		str	r4, [r3, r2]
+ 718 0372 0CE0     		b	.L55
+ 719              	.L54:
  612:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->sTxMailBox[transmit_mailbox].TIR |= ((TxMessage->ExtId << 3) | \
- 673              		.loc 1 612 0
- 674 034c 00F11804 		add	r4, r0, #24
- 675 0350 2401     		lsls	r4, r4, #4
- 676 0352 1F59     		ldr	r7, [r3, r4]
- 677 0354 4E68     		ldr	r6, [r1, #4]
- 678 0356 42EAC602 		orr	r2, r2, r6, lsl #3
+ 720              		.loc 1 612 0
+ 721 0374 00F11804 		add	r4, r0, #24
+ 722 0378 2401     		lsls	r4, r4, #4
+ 723 037a 1F59     		ldr	r7, [r3, r4]
+ 724 037c 4E68     		ldr	r6, [r1, #4]
+ 725 037e 42EAC602 		orr	r2, r2, r6, lsl #3
  614:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                                   TxMessage->RTR);
- 679              		.loc 1 614 0
- 680 035a 91F809C0 		ldrb	ip, [r1, #9]	@ zero_extendqisi2
+ 726              		.loc 1 614 0
+ 727 0382 91F809C0 		ldrb	ip, [r1, #9]	@ zero_extendqisi2
  613:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                                   TxMessage->IDE | \
- 681              		.loc 1 613 0
- 682 035e 42EA0C02 		orr	r2, r2, ip
+ 728              		.loc 1 613 0
+ 729 0386 42EA0C02 		orr	r2, r2, ip
  612:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->sTxMailBox[transmit_mailbox].TIR |= ((TxMessage->ExtId << 3) | \
- 683              		.loc 1 612 0
- 684 0362 3A43     		orrs	r2, r2, r7
- 685 0364 1A51     		str	r2, [r3, r4]
- 686              	.L55:
+ 730              		.loc 1 612 0
+ 731 038a 3A43     		orrs	r2, r2, r7
+ 732 038c 1A51     		str	r2, [r3, r4]
+ 733              	.L55:
  618:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     TxMessage->DLC &= (uint8_t)0x0000000F;
- 687              		.loc 1 618 0
- 688 0366 8A7A     		ldrb	r2, [r1, #10]	@ zero_extendqisi2
- 689 0368 02F00F02 		and	r2, r2, #15
- 690 036c 8A72     		strb	r2, [r1, #10]
+ 734              		.loc 1 618 0
+ 735 038e 8A7A     		ldrb	r2, [r1, #10]	@ zero_extendqisi2
+ 736 0390 02F00F02 		and	r2, r2, #15
+ 737 0394 8A72     		strb	r2, [r1, #10]
  619:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TDTR &= (uint32_t)0xFFFFFFF0;
- 691              		.loc 1 619 0
- 692 036e 05F11804 		add	r4, r5, #24
- 693 0372 2401     		lsls	r4, r4, #4
- 694 0374 1A19     		adds	r2, r3, r4
- 695 0376 5668     		ldr	r6, [r2, #4]
- 696 0378 26F00F06 		bic	r6, r6, #15
- 697 037c 5660     		str	r6, [r2, #4]
+ 738              		.loc 1 619 0
+ 739 0396 05F11804 		add	r4, r5, #24
+ 740 039a 2401     		lsls	r4, r4, #4
+ 741 039c 1A19     		adds	r2, r3, r4
+ 742 039e 5668     		ldr	r6, [r2, #4]
+ 743 03a0 26F00F06 		bic	r6, r6, #15
+ 744 03a4 5660     		str	r6, [r2, #4]
  620:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TDTR |= TxMessage->DLC;
- 698              		.loc 1 620 0
- 699 037e 5768     		ldr	r7, [r2, #4]
- 700 0380 8E7A     		ldrb	r6, [r1, #10]	@ zero_extendqisi2
- 701 0382 3E43     		orrs	r6, r6, r7
- 702 0384 5660     		str	r6, [r2, #4]
+ 745              		.loc 1 620 0
+ 746 03a6 5768     		ldr	r7, [r2, #4]
+ 747 03a8 8E7A     		ldrb	r6, [r1, #10]	@ zero_extendqisi2
+ 748 03aa 3E43     		orrs	r6, r6, r7
+ 749 03ac 5660     		str	r6, [r2, #4]
  623:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TDLR = (((uint32_t)TxMessage->Data[3] << 24) | 
- 703              		.loc 1 623 0
- 704 0386 8A7B     		ldrb	r2, [r1, #14]	@ zero_extendqisi2
+ 750              		.loc 1 623 0
+ 751 03ae 8A7B     		ldrb	r2, [r1, #14]	@ zero_extendqisi2
  624:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[2] << 16) |
- 705              		.loc 1 624 0
- 706 0388 4E7B     		ldrb	r6, [r1, #13]	@ zero_extendqisi2
- 707 038a 3604     		lsls	r6, r6, #16
+ 752              		.loc 1 624 0
+ 753 03b0 4E7B     		ldrb	r6, [r1, #13]	@ zero_extendqisi2
+ 754 03b2 3604     		lsls	r6, r6, #16
  623:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TDLR = (((uint32_t)TxMessage->Data[3] << 24) | 
- 708              		.loc 1 623 0
- 709 038c 46EA0266 		orr	r6, r6, r2, lsl #24
+ 755              		.loc 1 623 0
+ 756 03b4 46EA0266 		orr	r6, r6, r2, lsl #24
  625:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[1] << 8) | 
- 710              		.loc 1 625 0
- 711 0390 0A7B     		ldrb	r2, [r1, #12]	@ zero_extendqisi2
+ 757              		.loc 1 625 0
+ 758 03b8 0A7B     		ldrb	r2, [r1, #12]	@ zero_extendqisi2
  624:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[2] << 16) |
- 712              		.loc 1 624 0
- 713 0392 46EA0226 		orr	r6, r6, r2, lsl #8
+ 759              		.loc 1 624 0
+ 760 03ba 46EA0226 		orr	r6, r6, r2, lsl #8
  626:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[0]));
- 714              		.loc 1 626 0
- 715 0396 CA7A     		ldrb	r2, [r1, #11]	@ zero_extendqisi2
+ 761              		.loc 1 626 0
+ 762 03be CA7A     		ldrb	r2, [r1, #11]	@ zero_extendqisi2
  625:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[1] << 8) | 
- 716              		.loc 1 625 0
- 717 0398 1643     		orrs	r6, r6, r2
+ 763              		.loc 1 625 0
+ 764 03c0 1643     		orrs	r6, r6, r2
  623:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TDLR = (((uint32_t)TxMessage->Data[3] << 24) | 
- 718              		.loc 1 623 0
- 719 039a 03EB0512 		add	r2, r3, r5, lsl #4
- 720 039e 02F5C475 		add	r5, r2, #392
- 721 03a2 C2F88861 		str	r6, [r2, #392]
+ 765              		.loc 1 623 0
+ 766 03c2 03EB0512 		add	r2, r3, r5, lsl #4
+ 767 03c6 02F5C475 		add	r5, r2, #392
+ 768 03ca C2F88861 		str	r6, [r2, #392]
  627:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TDHR = (((uint32_t)TxMessage->Data[7] << 24) | 
- 722              		.loc 1 627 0
- 723 03a6 8E7C     		ldrb	r6, [r1, #18]	@ zero_extendqisi2
+ 769              		.loc 1 627 0
+ 770 03ce 8E7C     		ldrb	r6, [r1, #18]	@ zero_extendqisi2
  628:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[6] << 16) |
- 724              		.loc 1 628 0
- 725 03a8 4A7C     		ldrb	r2, [r1, #17]	@ zero_extendqisi2
- 726 03aa 1204     		lsls	r2, r2, #16
+ 771              		.loc 1 628 0
+ 772 03d0 4A7C     		ldrb	r2, [r1, #17]	@ zero_extendqisi2
+ 773 03d2 1204     		lsls	r2, r2, #16
  627:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TDHR = (((uint32_t)TxMessage->Data[7] << 24) | 
- 727              		.loc 1 627 0
- 728 03ac 42EA0662 		orr	r2, r2, r6, lsl #24
+ 774              		.loc 1 627 0
+ 775 03d4 42EA0662 		orr	r2, r2, r6, lsl #24
  629:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[5] << 8) |
- 729              		.loc 1 629 0
- 730 03b0 0E7C     		ldrb	r6, [r1, #16]	@ zero_extendqisi2
+ 776              		.loc 1 629 0
+ 777 03d8 0E7C     		ldrb	r6, [r1, #16]	@ zero_extendqisi2
  628:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[6] << 16) |
- 731              		.loc 1 628 0
- 732 03b2 42EA0622 		orr	r2, r2, r6, lsl #8
+ 778              		.loc 1 628 0
+ 779 03da 42EA0622 		orr	r2, r2, r6, lsl #8
  630:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[4]));
- 733              		.loc 1 630 0
- 734 03b6 C97B     		ldrb	r1, [r1, #15]	@ zero_extendqisi2
- 735              	.LVL39:
+ 780              		.loc 1 630 0
+ 781 03de C97B     		ldrb	r1, [r1, #15]	@ zero_extendqisi2
+ 782              	.LVL45:
  629:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****                                              ((uint32_t)TxMessage->Data[5] << 8) |
- 736              		.loc 1 629 0
- 737 03b8 0A43     		orrs	r2, r2, r1
+ 783              		.loc 1 629 0
+ 784 03e0 0A43     		orrs	r2, r2, r1
  627:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TDHR = (((uint32_t)TxMessage->Data[7] << 24) | 
- 738              		.loc 1 627 0
- 739 03ba 6A60     		str	r2, [r5, #4]
+ 785              		.loc 1 627 0
+ 786 03e2 6A60     		str	r2, [r5, #4]
  632:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->sTxMailBox[transmit_mailbox].TIR |= TMIDxR_TXRQ;
- 740              		.loc 1 632 0
- 741 03bc 1A59     		ldr	r2, [r3, r4]
- 742 03be 42F00102 		orr	r2, r2, #1
- 743 03c2 1A51     		str	r2, [r3, r4]
- 744              	.L53:
+ 787              		.loc 1 632 0
+ 788 03e4 1A59     		ldr	r2, [r3, r4]
+ 789 03e6 42F00102 		orr	r2, r2, #1
+ 790 03ea 1A51     		str	r2, [r3, r4]
+ 791              	.L53:
  635:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 745              		.loc 1 635 0
- 746 03c4 F0BC     		pop	{r4, r5, r6, r7}
- 747 03c6 7047     		bx	lr
- 748              		.cfi_endproc
- 749              	.LFE117:
- 751              		.align	2
- 752              		.global	CAN_TransmitStatus
- 753              		.thumb
- 754              		.thumb_func
- 756              	CAN_TransmitStatus:
- 757              	.LFB118:
+ 792              		.loc 1 635 0
+ 793 03ec F0BC     		pop	{r4, r5, r6, r7}
+ 794 03ee 7047     		bx	lr
+ 795              		.cfi_endproc
+ 796              	.LFE117:
+ 798              		.align	2
+ 799              		.global	CAN_TransmitStatus
+ 800              		.thumb
+ 801              		.thumb_func
+ 803              	CAN_TransmitStatus:
+ 804              	.LFB118:
  645:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 758              		.loc 1 645 0
- 759              		.cfi_startproc
- 760              		@ args = 0, pretend = 0, frame = 0
- 761              		@ frame_needed = 0, uses_anonymous_args = 0
- 762              		@ link register save eliminated.
- 763              	.LVL40:
+ 805              		.loc 1 645 0
+ 806              		.cfi_startproc
+ 807              		@ args = 0, pretend = 0, frame = 0
+ 808              		@ frame_needed = 0, uses_anonymous_args = 0
+ 809              		@ link register save eliminated.
+ 810              	.LVL46:
  652:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   switch (TransmitMailbox)
- 764              		.loc 1 652 0
- 765 03c8 0129     		cmp	r1, #1
- 766 03ca 0DD0     		beq	.L61
- 767 03cc 11B1     		cbz	r1, .L62
- 768 03ce 0229     		cmp	r1, #2
- 769 03d0 0ED0     		beq	.L63
- 770 03d2 15E0     		b	.L72
- 771              	.L62:
+ 811              		.loc 1 652 0
+ 812 03f0 0129     		cmp	r1, #1
+ 813 03f2 0DD0     		beq	.L61
+ 814 03f4 11B1     		cbz	r1, .L62
+ 815 03f6 0229     		cmp	r1, #2
+ 816 03f8 0ED0     		beq	.L63
+ 817 03fa 15E0     		b	.L72
+ 818              	.L62:
  655:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       state =   CANx->TSR &  (CAN_TSR_RQCP0 | CAN_TSR_TXOK0 | CAN_TSR_TME0);
- 772              		.loc 1 655 0
- 773 03d4 8368     		ldr	r3, [r0, #8]
- 774 03d6 23F07B43 		bic	r3, r3, #-83886080
- 775 03da 23F47F03 		bic	r3, r3, #16711680
- 776 03de 23F47F43 		bic	r3, r3, #65280
- 777 03e2 23F0FC03 		bic	r3, r3, #252
- 778              	.LVL41:
+ 819              		.loc 1 655 0
+ 820 03fc 8368     		ldr	r3, [r0, #8]
+ 821 03fe 23F07B43 		bic	r3, r3, #-83886080
+ 822 0402 23F47F03 		bic	r3, r3, #16711680
+ 823 0406 23F47F43 		bic	r3, r3, #65280
+ 824 040a 23F0FC03 		bic	r3, r3, #252
+ 825              	.LVL47:
  656:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 779              		.loc 1 656 0
- 780 03e6 0CE0     		b	.L60
- 781              	.LVL42:
- 782              	.L61:
+ 826              		.loc 1 656 0
+ 827 040e 0CE0     		b	.L60
+ 828              	.LVL48:
+ 829              	.L61:
  658:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       state =   CANx->TSR &  (CAN_TSR_RQCP1 | CAN_TSR_TXOK1 | CAN_TSR_TME1);
- 783              		.loc 1 658 0
- 784 03e8 8268     		ldr	r2, [r0, #8]
- 785 03ea 114B     		ldr	r3, .L73
- 786 03ec 1340     		ands	r3, r3, r2
- 787              	.LVL43:
+ 830              		.loc 1 658 0
+ 831 0410 8268     		ldr	r2, [r0, #8]
+ 832 0412 114B     		ldr	r3, .L73
+ 833 0414 1340     		ands	r3, r3, r2
+ 834              	.LVL49:
  659:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 788              		.loc 1 659 0
- 789 03ee 08E0     		b	.L60
- 790              	.LVL44:
- 791              	.L63:
+ 835              		.loc 1 659 0
+ 836 0416 08E0     		b	.L60
+ 837              	.LVL50:
+ 838              	.L63:
  661:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       state =   CANx->TSR &  (CAN_TSR_RQCP2 | CAN_TSR_TXOK2 | CAN_TSR_TME2);
- 792              		.loc 1 661 0
- 793 03f0 8368     		ldr	r3, [r0, #8]
- 794 03f2 23F06F43 		bic	r3, r3, #-285212672
- 795 03f6 23F47C03 		bic	r3, r3, #16515072
- 796 03fa 1B0C     		lsrs	r3, r3, #16
- 797 03fc 1B04     		lsls	r3, r3, #16
- 798              	.LVL45:
+ 839              		.loc 1 661 0
+ 840 0418 8368     		ldr	r3, [r0, #8]
+ 841 041a 23F06F43 		bic	r3, r3, #-285212672
+ 842 041e 23F47C03 		bic	r3, r3, #16515072
+ 843 0422 1B0C     		lsrs	r3, r3, #16
+ 844 0424 1B04     		lsls	r3, r3, #16
+ 845              	.LVL51:
  662:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 799              		.loc 1 662 0
- 800 03fe 00E0     		b	.L60
- 801              	.LVL46:
- 802              	.L72:
+ 846              		.loc 1 662 0
+ 847 0426 00E0     		b	.L60
+ 848              	.LVL52:
+ 849              	.L72:
  664:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       state = CAN_TxStatus_Failed;
- 803              		.loc 1 664 0
- 804 0400 0023     		movs	r3, #0
- 805              	.LVL47:
- 806              	.L60:
+ 850              		.loc 1 664 0
+ 851 0428 0023     		movs	r3, #0
+ 852              	.LVL53:
+ 853              	.L60:
  667:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   switch (state)
- 807              		.loc 1 667 0
- 808 0402 0C4A     		ldr	r2, .L73+4
- 809 0404 9342     		cmp	r3, r2
- 810 0406 0BD0     		beq	.L65
- 811 0408 01D8     		bhi	.L66
- 812 040a 3BB1     		cbz	r3, .L67
- 813 040c 0EE0     		b	.L71
- 814              	.L66:
- 815 040e 084A     		ldr	r2, .L73
- 816 0410 9342     		cmp	r3, r2
- 817 0412 07D0     		beq	.L68
- 818 0414 084A     		ldr	r2, .L73+8
- 819 0416 9342     		cmp	r3, r2
- 820 0418 06D0     		beq	.L69
- 821 041a 07E0     		b	.L71
- 822              	.L67:
+ 854              		.loc 1 667 0
+ 855 042a 0C4A     		ldr	r2, .L73+4
+ 856 042c 9342     		cmp	r3, r2
+ 857 042e 0BD0     		beq	.L65
+ 858 0430 01D8     		bhi	.L66
+ 859 0432 3BB1     		cbz	r3, .L67
+ 860 0434 0EE0     		b	.L71
+ 861              	.L66:
+ 862 0436 084A     		ldr	r2, .L73
+ 863 0438 9342     		cmp	r3, r2
+ 864 043a 07D0     		beq	.L68
+ 865 043c 084A     		ldr	r2, .L73+8
+ 866 043e 9342     		cmp	r3, r2
+ 867 0440 06D0     		beq	.L69
+ 868 0442 07E0     		b	.L71
+ 869              	.L67:
  670:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     case (0x0): state = CAN_TxStatus_Pending;
- 823              		.loc 1 670 0
- 824 041c 0220     		movs	r0, #2
- 825              	.LVL48:
- 826 041e 7047     		bx	lr
- 827              	.LVL49:
- 828              	.L65:
+ 870              		.loc 1 670 0
+ 871 0444 0220     		movs	r0, #2
+ 872              	.LVL54:
+ 873 0446 7047     		bx	lr
+ 874              	.LVL55:
+ 875              	.L65:
  680:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     case (CAN_TSR_RQCP0 | CAN_TSR_TXOK0 | CAN_TSR_TME0):state = CAN_TxStatus_Ok;
- 829              		.loc 1 680 0
- 830 0420 0120     		movs	r0, #1
- 831              	.LVL50:
+ 876              		.loc 1 680 0
+ 877 0448 0120     		movs	r0, #1
+ 878              	.LVL56:
  681:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 832              		.loc 1 681 0
- 833 0422 7047     		bx	lr
- 834              	.LVL51:
- 835              	.L68:
+ 879              		.loc 1 681 0
+ 880 044a 7047     		bx	lr
+ 881              	.LVL57:
+ 882              	.L68:
  682:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     case (CAN_TSR_RQCP1 | CAN_TSR_TXOK1 | CAN_TSR_TME1):state = CAN_TxStatus_Ok;
- 836              		.loc 1 682 0
- 837 0424 0120     		movs	r0, #1
- 838              	.LVL52:
+ 883              		.loc 1 682 0
+ 884 044c 0120     		movs	r0, #1
+ 885              	.LVL58:
  683:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 839              		.loc 1 683 0
- 840 0426 7047     		bx	lr
- 841              	.LVL53:
- 842              	.L69:
+ 886              		.loc 1 683 0
+ 887 044e 7047     		bx	lr
+ 888              	.LVL59:
+ 889              	.L69:
  684:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     case (CAN_TSR_RQCP2 | CAN_TSR_TXOK2 | CAN_TSR_TME2):state = CAN_TxStatus_Ok;
- 843              		.loc 1 684 0
- 844 0428 0120     		movs	r0, #1
- 845              	.LVL54:
+ 890              		.loc 1 684 0
+ 891 0450 0120     		movs	r0, #1
+ 892              	.LVL60:
  685:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 846              		.loc 1 685 0
- 847 042a 7047     		bx	lr
- 848              	.LVL55:
- 849              	.L71:
+ 893              		.loc 1 685 0
+ 894 0452 7047     		bx	lr
+ 895              	.LVL61:
+ 896              	.L71:
  673:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****      case (CAN_TSR_RQCP0 | CAN_TSR_TME0): state = CAN_TxStatus_Failed;
- 850              		.loc 1 673 0
- 851 042c 0020     		movs	r0, #0
- 852              	.LVL56:
+ 897              		.loc 1 673 0
+ 898 0454 0020     		movs	r0, #0
+ 899              	.LVL62:
  690:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 853              		.loc 1 690 0
- 854 042e 7047     		bx	lr
- 855              	.L74:
- 856              		.align	2
- 857              	.L73:
- 858 0430 00030008 		.word	134218496
- 859 0434 03000004 		.word	67108867
- 860 0438 00000310 		.word	268632064
- 861              		.cfi_endproc
- 862              	.LFE118:
- 864              		.align	2
- 865              		.global	CAN_CancelTransmit
- 866              		.thumb
- 867              		.thumb_func
- 869              	CAN_CancelTransmit:
- 870              	.LFB119:
+ 900              		.loc 1 690 0
+ 901 0456 7047     		bx	lr
+ 902              	.L74:
+ 903              		.align	2
+ 904              	.L73:
+ 905 0458 00030008 		.word	134218496
+ 906 045c 03000004 		.word	67108867
+ 907 0460 00000310 		.word	268632064
+ 908              		.cfi_endproc
+ 909              	.LFE118:
+ 911              		.align	2
+ 912              		.global	CAN_CancelTransmit
+ 913              		.thumb
+ 914              		.thumb_func
+ 916              	CAN_CancelTransmit:
+ 917              	.LFB119:
  699:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 871              		.loc 1 699 0
- 872              		.cfi_startproc
- 873              		@ args = 0, pretend = 0, frame = 0
- 874              		@ frame_needed = 0, uses_anonymous_args = 0
- 875              		@ link register save eliminated.
- 876              	.LVL57:
+ 918              		.loc 1 699 0
+ 919              		.cfi_startproc
+ 920              		@ args = 0, pretend = 0, frame = 0
+ 921              		@ frame_needed = 0, uses_anonymous_args = 0
+ 922              		@ link register save eliminated.
+ 923              	.LVL63:
  704:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   switch (Mailbox)
- 877              		.loc 1 704 0
- 878 043c 0129     		cmp	r1, #1
- 879 043e 08D0     		beq	.L77
- 880 0440 11B1     		cbz	r1, .L78
- 881 0442 0229     		cmp	r1, #2
- 882 0444 0AD0     		beq	.L79
- 883 0446 7047     		bx	lr
- 884              	.L78:
+ 924              		.loc 1 704 0
+ 925 0464 0129     		cmp	r1, #1
+ 926 0466 08D0     		beq	.L77
+ 927 0468 11B1     		cbz	r1, .L78
+ 928 046a 0229     		cmp	r1, #2
+ 929 046c 0AD0     		beq	.L79
+ 930 046e 7047     		bx	lr
+ 931              	.L78:
  706:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     case (CAN_TXMAILBOX_0): CANx->TSR |= CAN_TSR_ABRQ0;
- 885              		.loc 1 706 0
- 886 0448 8368     		ldr	r3, [r0, #8]
- 887 044a 43F08003 		orr	r3, r3, #128
- 888 044e 8360     		str	r3, [r0, #8]
+ 932              		.loc 1 706 0
+ 933 0470 8368     		ldr	r3, [r0, #8]
+ 934 0472 43F08003 		orr	r3, r3, #128
+ 935 0476 8360     		str	r3, [r0, #8]
  707:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 889              		.loc 1 707 0
- 890 0450 7047     		bx	lr
- 891              	.L77:
+ 936              		.loc 1 707 0
+ 937 0478 7047     		bx	lr
+ 938              	.L77:
  708:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     case (CAN_TXMAILBOX_1): CANx->TSR |= CAN_TSR_ABRQ1;
- 892              		.loc 1 708 0
- 893 0452 8368     		ldr	r3, [r0, #8]
- 894 0454 43F40043 		orr	r3, r3, #32768
- 895 0458 8360     		str	r3, [r0, #8]
+ 939              		.loc 1 708 0
+ 940 047a 8368     		ldr	r3, [r0, #8]
+ 941 047c 43F40043 		orr	r3, r3, #32768
+ 942 0480 8360     		str	r3, [r0, #8]
  709:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 896              		.loc 1 709 0
- 897 045a 7047     		bx	lr
- 898              	.L79:
+ 943              		.loc 1 709 0
+ 944 0482 7047     		bx	lr
+ 945              	.L79:
  710:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     case (CAN_TXMAILBOX_2): CANx->TSR |= CAN_TSR_ABRQ2;
- 899              		.loc 1 710 0
- 900 045c 8368     		ldr	r3, [r0, #8]
- 901 045e 43F40003 		orr	r3, r3, #8388608
- 902 0462 8360     		str	r3, [r0, #8]
- 903 0464 7047     		bx	lr
- 904              		.cfi_endproc
- 905              	.LFE119:
- 907 0466 00BF     		.align	2
- 908              		.global	CAN_Receive
- 909              		.thumb
- 910              		.thumb_func
- 912              	CAN_Receive:
- 913              	.LFB120:
+ 946              		.loc 1 710 0
+ 947 0484 8368     		ldr	r3, [r0, #8]
+ 948 0486 43F40003 		orr	r3, r3, #8388608
+ 949 048a 8360     		str	r3, [r0, #8]
+ 950 048c 7047     		bx	lr
+ 951              		.cfi_endproc
+ 952              	.LFE119:
+ 954 048e 00BF     		.align	2
+ 955              		.global	CAN_Receive
+ 956              		.thumb
+ 957              		.thumb_func
+ 959              	CAN_Receive:
+ 960              	.LFB120:
  746:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 914              		.loc 1 746 0
- 915              		.cfi_startproc
- 916              		@ args = 0, pretend = 0, frame = 0
- 917              		@ frame_needed = 0, uses_anonymous_args = 0
- 918              		@ link register save eliminated.
- 919              	.LVL58:
- 920 0468 30B4     		push	{r4, r5}
- 921              		.cfi_def_cfa_offset 8
- 922              		.cfi_offset 4, -8
- 923              		.cfi_offset 5, -4
+ 961              		.loc 1 746 0
+ 962              		.cfi_startproc
+ 963              		@ args = 0, pretend = 0, frame = 0
+ 964              		@ frame_needed = 0, uses_anonymous_args = 0
+ 965              		@ link register save eliminated.
+ 966              	.LVL64:
+ 967 0490 30B4     		push	{r4, r5}
+ 968              		.cfi_def_cfa_offset 8
+ 969              		.cfi_offset 4, -8
+ 970              		.cfi_offset 5, -4
  751:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->IDE = (uint8_t)0x04 & CANx->sFIFOMailBox[FIFONumber].RIR;
- 924              		.loc 1 751 0
- 925 046a 01F11B03 		add	r3, r1, #27
- 926 046e 1B01     		lsls	r3, r3, #4
- 927 0470 C358     		ldr	r3, [r0, r3]
- 928 0472 03F00403 		and	r3, r3, #4
- 929 0476 DBB2     		uxtb	r3, r3
- 930 0478 1372     		strb	r3, [r2, #8]
+ 971              		.loc 1 751 0
+ 972 0492 01F11B03 		add	r3, r1, #27
+ 973 0496 1B01     		lsls	r3, r3, #4
+ 974 0498 C358     		ldr	r3, [r0, r3]
+ 975 049a 03F00403 		and	r3, r3, #4
+ 976 049e DBB2     		uxtb	r3, r3
+ 977 04a0 1372     		strb	r3, [r2, #8]
  752:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (RxMessage->IDE == CAN_Id_Standard)
- 931              		.loc 1 752 0
- 932 047a 33B9     		cbnz	r3, .L81
+ 978              		.loc 1 752 0
+ 979 04a2 33B9     		cbnz	r3, .L81
  754:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     RxMessage->StdId = (uint32_t)0x000007FF & (CANx->sFIFOMailBox[FIFONumber].RIR >> 21);
- 933              		.loc 1 754 0
- 934 047c 01F11B03 		add	r3, r1, #27
- 935 0480 1B01     		lsls	r3, r3, #4
- 936 0482 C358     		ldr	r3, [r0, r3]
- 937 0484 5B0D     		lsrs	r3, r3, #21
- 938 0486 1360     		str	r3, [r2]
- 939 0488 05E0     		b	.L82
- 940              	.L81:
+ 980              		.loc 1 754 0
+ 981 04a4 01F11B03 		add	r3, r1, #27
+ 982 04a8 1B01     		lsls	r3, r3, #4
+ 983 04aa C358     		ldr	r3, [r0, r3]
+ 984 04ac 5B0D     		lsrs	r3, r3, #21
+ 985 04ae 1360     		str	r3, [r2]
+ 986 04b0 05E0     		b	.L82
+ 987              	.L81:
  758:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     RxMessage->ExtId = (uint32_t)0x1FFFFFFF & (CANx->sFIFOMailBox[FIFONumber].RIR >> 3);
- 941              		.loc 1 758 0
- 942 048a 01F11B03 		add	r3, r1, #27
- 943 048e 1B01     		lsls	r3, r3, #4
- 944 0490 C358     		ldr	r3, [r0, r3]
- 945 0492 DB08     		lsrs	r3, r3, #3
- 946 0494 5360     		str	r3, [r2, #4]
- 947              	.L82:
+ 988              		.loc 1 758 0
+ 989 04b2 01F11B03 		add	r3, r1, #27
+ 990 04b6 1B01     		lsls	r3, r3, #4
+ 991 04b8 C358     		ldr	r3, [r0, r3]
+ 992 04ba DB08     		lsrs	r3, r3, #3
+ 993 04bc 5360     		str	r3, [r2, #4]
+ 994              	.L82:
  761:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->RTR = (uint8_t)0x02 & CANx->sFIFOMailBox[FIFONumber].RIR;
- 948              		.loc 1 761 0
- 949 0496 01F11B04 		add	r4, r1, #27
- 950 049a 2401     		lsls	r4, r4, #4
- 951 049c 0319     		adds	r3, r0, r4
- 952 049e 0459     		ldr	r4, [r0, r4]
- 953 04a0 04F00204 		and	r4, r4, #2
- 954 04a4 5472     		strb	r4, [r2, #9]
+ 995              		.loc 1 761 0
+ 996 04be 01F11B04 		add	r4, r1, #27
+ 997 04c2 2401     		lsls	r4, r4, #4
+ 998 04c4 0319     		adds	r3, r0, r4
+ 999 04c6 0459     		ldr	r4, [r0, r4]
+ 1000 04c8 04F00204 		and	r4, r4, #2
+ 1001 04cc 5472     		strb	r4, [r2, #9]
  763:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->DLC = (uint8_t)0x0F & CANx->sFIFOMailBox[FIFONumber].RDTR;
- 955              		.loc 1 763 0
- 956 04a6 5C68     		ldr	r4, [r3, #4]
- 957 04a8 04F00F04 		and	r4, r4, #15
- 958 04ac 9472     		strb	r4, [r2, #10]
+ 1002              		.loc 1 763 0
+ 1003 04ce 5C68     		ldr	r4, [r3, #4]
+ 1004 04d0 04F00F04 		and	r4, r4, #15
+ 1005 04d4 9472     		strb	r4, [r2, #10]
  765:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->FMI = (uint8_t)0xFF & (CANx->sFIFOMailBox[FIFONumber].RDTR >> 8);
- 959              		.loc 1 765 0
- 960 04ae 5B68     		ldr	r3, [r3, #4]
- 961 04b0 1B0A     		lsrs	r3, r3, #8
- 962 04b2 D374     		strb	r3, [r2, #19]
+ 1006              		.loc 1 765 0
+ 1007 04d6 5B68     		ldr	r3, [r3, #4]
+ 1008 04d8 1B0A     		lsrs	r3, r3, #8
+ 1009 04da D374     		strb	r3, [r2, #19]
  767:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->Data[0] = (uint8_t)0xFF & CANx->sFIFOMailBox[FIFONumber].RDLR;
- 963              		.loc 1 767 0
- 964 04b4 00EB0113 		add	r3, r0, r1, lsl #4
- 965 04b8 03F5DC74 		add	r4, r3, #440
- 966 04bc D3F8B851 		ldr	r5, [r3, #440]
- 967 04c0 D572     		strb	r5, [r2, #11]
+ 1010              		.loc 1 767 0
+ 1011 04dc 00EB0113 		add	r3, r0, r1, lsl #4
+ 1012 04e0 03F5DC74 		add	r4, r3, #440
+ 1013 04e4 D3F8B851 		ldr	r5, [r3, #440]
+ 1014 04e8 D572     		strb	r5, [r2, #11]
  768:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->Data[1] = (uint8_t)0xFF & (CANx->sFIFOMailBox[FIFONumber].RDLR >> 8);
- 968              		.loc 1 768 0
- 969 04c2 D3F8B851 		ldr	r5, [r3, #440]
- 970 04c6 2D0A     		lsrs	r5, r5, #8
- 971 04c8 1573     		strb	r5, [r2, #12]
+ 1015              		.loc 1 768 0
+ 1016 04ea D3F8B851 		ldr	r5, [r3, #440]
+ 1017 04ee 2D0A     		lsrs	r5, r5, #8
+ 1018 04f0 1573     		strb	r5, [r2, #12]
  769:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->Data[2] = (uint8_t)0xFF & (CANx->sFIFOMailBox[FIFONumber].RDLR >> 16);
- 972              		.loc 1 769 0
- 973 04ca D3F8B851 		ldr	r5, [r3, #440]
- 974 04ce 2D0C     		lsrs	r5, r5, #16
- 975 04d0 5573     		strb	r5, [r2, #13]
+ 1019              		.loc 1 769 0
+ 1020 04f2 D3F8B851 		ldr	r5, [r3, #440]
+ 1021 04f6 2D0C     		lsrs	r5, r5, #16
+ 1022 04f8 5573     		strb	r5, [r2, #13]
  770:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->Data[3] = (uint8_t)0xFF & (CANx->sFIFOMailBox[FIFONumber].RDLR >> 24);
- 976              		.loc 1 770 0
- 977 04d2 D3F8B831 		ldr	r3, [r3, #440]
- 978 04d6 1B0E     		lsrs	r3, r3, #24
- 979 04d8 9373     		strb	r3, [r2, #14]
+ 1023              		.loc 1 770 0
+ 1024 04fa D3F8B831 		ldr	r3, [r3, #440]
+ 1025 04fe 1B0E     		lsrs	r3, r3, #24
+ 1026 0500 9373     		strb	r3, [r2, #14]
  771:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->Data[4] = (uint8_t)0xFF & CANx->sFIFOMailBox[FIFONumber].RDHR;
- 980              		.loc 1 771 0
- 981 04da 6368     		ldr	r3, [r4, #4]
- 982 04dc D373     		strb	r3, [r2, #15]
+ 1027              		.loc 1 771 0
+ 1028 0502 6368     		ldr	r3, [r4, #4]
+ 1029 0504 D373     		strb	r3, [r2, #15]
  772:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->Data[5] = (uint8_t)0xFF & (CANx->sFIFOMailBox[FIFONumber].RDHR >> 8);
- 983              		.loc 1 772 0
- 984 04de 6368     		ldr	r3, [r4, #4]
- 985 04e0 1B0A     		lsrs	r3, r3, #8
- 986 04e2 1374     		strb	r3, [r2, #16]
+ 1030              		.loc 1 772 0
+ 1031 0506 6368     		ldr	r3, [r4, #4]
+ 1032 0508 1B0A     		lsrs	r3, r3, #8
+ 1033 050a 1374     		strb	r3, [r2, #16]
  773:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->Data[6] = (uint8_t)0xFF & (CANx->sFIFOMailBox[FIFONumber].RDHR >> 16);
- 987              		.loc 1 773 0
- 988 04e4 6368     		ldr	r3, [r4, #4]
- 989 04e6 1B0C     		lsrs	r3, r3, #16
- 990 04e8 5374     		strb	r3, [r2, #17]
+ 1034              		.loc 1 773 0
+ 1035 050c 6368     		ldr	r3, [r4, #4]
+ 1036 050e 1B0C     		lsrs	r3, r3, #16
+ 1037 0510 5374     		strb	r3, [r2, #17]
  774:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   RxMessage->Data[7] = (uint8_t)0xFF & (CANx->sFIFOMailBox[FIFONumber].RDHR >> 24);
- 991              		.loc 1 774 0
- 992 04ea 6368     		ldr	r3, [r4, #4]
- 993 04ec 1B0E     		lsrs	r3, r3, #24
- 994 04ee 9374     		strb	r3, [r2, #18]
+ 1038              		.loc 1 774 0
+ 1039 0512 6368     		ldr	r3, [r4, #4]
+ 1040 0514 1B0E     		lsrs	r3, r3, #24
+ 1041 0516 9374     		strb	r3, [r2, #18]
  777:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (FIFONumber == CAN_FIFO0)
- 995              		.loc 1 777 0
- 996 04f0 21B9     		cbnz	r1, .L83
+ 1042              		.loc 1 777 0
+ 1043 0518 21B9     		cbnz	r1, .L83
  779:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->RF0R |= CAN_RF0R_RFOM0;
- 997              		.loc 1 779 0
- 998 04f2 C368     		ldr	r3, [r0, #12]
- 999 04f4 43F02003 		orr	r3, r3, #32
- 1000 04f8 C360     		str	r3, [r0, #12]
- 1001 04fa 03E0     		b	.L80
- 1002              	.L83:
+ 1044              		.loc 1 779 0
+ 1045 051a C368     		ldr	r3, [r0, #12]
+ 1046 051c 43F02003 		orr	r3, r3, #32
+ 1047 0520 C360     		str	r3, [r0, #12]
+ 1048 0522 03E0     		b	.L80
+ 1049              	.L83:
  784:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->RF1R |= CAN_RF1R_RFOM1;
- 1003              		.loc 1 784 0
- 1004 04fc 0369     		ldr	r3, [r0, #16]
- 1005 04fe 43F02003 		orr	r3, r3, #32
- 1006 0502 0361     		str	r3, [r0, #16]
- 1007              	.L80:
+ 1050              		.loc 1 784 0
+ 1051 0524 0369     		ldr	r3, [r0, #16]
+ 1052 0526 43F02003 		orr	r3, r3, #32
+ 1053 052a 0361     		str	r3, [r0, #16]
+ 1054              	.L80:
  786:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1008              		.loc 1 786 0
- 1009 0504 30BC     		pop	{r4, r5}
- 1010 0506 7047     		bx	lr
- 1011              		.cfi_endproc
- 1012              	.LFE120:
- 1014              		.align	2
- 1015              		.global	CAN_FIFORelease
- 1016              		.thumb
- 1017              		.thumb_func
- 1019              	CAN_FIFORelease:
- 1020              	.LFB121:
+ 1055              		.loc 1 786 0
+ 1056 052c 30BC     		pop	{r4, r5}
+ 1057 052e 7047     		bx	lr
+ 1058              		.cfi_endproc
+ 1059              	.LFE120:
+ 1061              		.align	2
+ 1062              		.global	CAN_FIFORelease
+ 1063              		.thumb
+ 1064              		.thumb_func
+ 1066              	CAN_FIFORelease:
+ 1067              	.LFB121:
  795:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1021              		.loc 1 795 0
- 1022              		.cfi_startproc
- 1023              		@ args = 0, pretend = 0, frame = 0
- 1024              		@ frame_needed = 0, uses_anonymous_args = 0
- 1025              		@ link register save eliminated.
- 1026              	.LVL59:
- 800:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (FIFONumber == CAN_FIFO0)
- 1027              		.loc 1 800 0
- 1028 0508 21B9     		cbnz	r1, .L86
- 802:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->RF0R |= CAN_RF0R_RFOM0;
- 1029              		.loc 1 802 0
- 1030 050a C368     		ldr	r3, [r0, #12]
- 1031 050c 43F02003 		orr	r3, r3, #32
- 1032 0510 C360     		str	r3, [r0, #12]
- 1033 0512 7047     		bx	lr
- 1034              	.L86:
- 807:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->RF1R |= CAN_RF1R_RFOM1;
- 1035              		.loc 1 807 0
- 1036 0514 0369     		ldr	r3, [r0, #16]
- 1037 0516 43F02003 		orr	r3, r3, #32
- 1038 051a 0361     		str	r3, [r0, #16]
- 1039 051c 7047     		bx	lr
- 1040              		.cfi_endproc
- 1041              	.LFE121:
- 1043 051e 00BF     		.align	2
- 1044              		.global	CAN_MessagePending
- 1045              		.thumb
- 1046              		.thumb_func
- 1048              	CAN_MessagePending:
- 1049              	.LFB122:
- 818:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1050              		.loc 1 818 0
- 1051              		.cfi_startproc
- 1052              		@ args = 0, pretend = 0, frame = 0
- 1053              		@ frame_needed = 0, uses_anonymous_args = 0
- 1054              		@ link register save eliminated.
- 1055              	.LVL60:
- 823:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (FIFONumber == CAN_FIFO0)
- 1056              		.loc 1 823 0
- 1057 0520 19B9     		cbnz	r1, .L89
- 825:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     message_pending = (uint8_t)(CANx->RF0R&(uint32_t)0x03);
- 1058              		.loc 1 825 0
- 1059 0522 C068     		ldr	r0, [r0, #12]
- 1060              	.LVL61:
- 1061 0524 00F00300 		and	r0, r0, #3
- 1062              	.LVL62:
- 1063 0528 7047     		bx	lr
- 1064              	.LVL63:
- 1065              	.L89:
- 827:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else if (FIFONumber == CAN_FIFO1)
- 1066              		.loc 1 827 0
- 1067 052a 0129     		cmp	r1, #1
- 829:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     message_pending = (uint8_t)(CANx->RF1R&(uint32_t)0x03);
- 1068              		.loc 1 829 0
- 1069 052c 06BF     		itte	eq
- 1070 052e 0069     		ldreq	r0, [r0, #16]
- 1071              	.LVL64:
- 1072 0530 00F00300 		andeq	r0, r0, #3
+ 1068              		.loc 1 795 0
+ 1069              		.cfi_startproc
+ 1070              		@ args = 0, pretend = 0, frame = 0
+ 1071              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1072              		@ link register save eliminated.
  1073              	.LVL65:
+ 800:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (FIFONumber == CAN_FIFO0)
+ 1074              		.loc 1 800 0
+ 1075 0530 21B9     		cbnz	r1, .L86
+ 802:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->RF0R |= CAN_RF0R_RFOM0;
+ 1076              		.loc 1 802 0
+ 1077 0532 C368     		ldr	r3, [r0, #12]
+ 1078 0534 43F02003 		orr	r3, r3, #32
+ 1079 0538 C360     		str	r3, [r0, #12]
+ 1080 053a 7047     		bx	lr
+ 1081              	.L86:
+ 807:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->RF1R |= CAN_RF1R_RFOM1;
+ 1082              		.loc 1 807 0
+ 1083 053c 0369     		ldr	r3, [r0, #16]
+ 1084 053e 43F02003 		orr	r3, r3, #32
+ 1085 0542 0361     		str	r3, [r0, #16]
+ 1086 0544 7047     		bx	lr
+ 1087              		.cfi_endproc
+ 1088              	.LFE121:
+ 1090 0546 00BF     		.align	2
+ 1091              		.global	CAN_MessagePending
+ 1092              		.thumb
+ 1093              		.thumb_func
+ 1095              	CAN_MessagePending:
+ 1096              	.LFB122:
+ 818:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
+ 1097              		.loc 1 818 0
+ 1098              		.cfi_startproc
+ 1099              		@ args = 0, pretend = 0, frame = 0
+ 1100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1101              		@ link register save eliminated.
+ 1102              	.LVL66:
+ 823:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (FIFONumber == CAN_FIFO0)
+ 1103              		.loc 1 823 0
+ 1104 0548 19B9     		cbnz	r1, .L89
+ 825:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     message_pending = (uint8_t)(CANx->RF0R&(uint32_t)0x03);
+ 1105              		.loc 1 825 0
+ 1106 054a C068     		ldr	r0, [r0, #12]
+ 1107              	.LVL67:
+ 1108 054c 00F00300 		and	r0, r0, #3
+ 1109              	.LVL68:
+ 1110 0550 7047     		bx	lr
+ 1111              	.LVL69:
+ 1112              	.L89:
+ 827:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else if (FIFONumber == CAN_FIFO1)
+ 1113              		.loc 1 827 0
+ 1114 0552 0129     		cmp	r1, #1
+ 1115 0554 03D1     		bne	.L91
+ 829:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     message_pending = (uint8_t)(CANx->RF1R&(uint32_t)0x03);
+ 1116              		.loc 1 829 0
+ 1117 0556 0069     		ldr	r0, [r0, #16]
+ 1118              	.LVL70:
+ 1119 0558 00F00300 		and	r0, r0, #3
+ 1120              	.LVL71:
+ 1121 055c 7047     		bx	lr
+ 1122              	.LVL72:
+ 1123              	.L91:
  833:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     message_pending = 0;
- 1074              		.loc 1 833 0
- 1075 0534 0020     		movne	r0, #0
- 1076              	.LVL66:
+ 1124              		.loc 1 833 0
+ 1125 055e 0020     		movs	r0, #0
+ 1126              	.LVL73:
  836:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1077              		.loc 1 836 0
- 1078 0536 7047     		bx	lr
- 1079              		.cfi_endproc
- 1080              	.LFE122:
- 1082              		.align	2
- 1083              		.global	CAN_OperatingModeRequest
- 1084              		.thumb
- 1085              		.thumb_func
- 1087              	CAN_OperatingModeRequest:
- 1088              	.LFB123:
+ 1127              		.loc 1 836 0
+ 1128 0560 7047     		bx	lr
+ 1129              		.cfi_endproc
+ 1130              	.LFE122:
+ 1132 0562 00BF     		.align	2
+ 1133              		.global	CAN_OperatingModeRequest
+ 1134              		.thumb
+ 1135              		.thumb_func
+ 1137              	CAN_OperatingModeRequest:
+ 1138              	.LFB123:
  868:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1089              		.loc 1 868 0
- 1090              		.cfi_startproc
- 1091              		@ args = 0, pretend = 0, frame = 0
- 1092              		@ frame_needed = 0, uses_anonymous_args = 0
- 1093              		@ link register save eliminated.
- 1094              	.LVL67:
+ 1139              		.loc 1 868 0
+ 1140              		.cfi_startproc
+ 1141              		@ args = 0, pretend = 0, frame = 0
+ 1142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1143              		@ link register save eliminated.
+ 1144              	.LVL74:
  878:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (CAN_OperatingMode == CAN_OperatingMode_Initialization)
- 1095              		.loc 1 878 0
- 1096 0538 C1B9     		cbnz	r1, .L93
+ 1145              		.loc 1 878 0
+ 1146 0564 B9B9     		cbnz	r1, .L93
  881:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->MCR = (uint32_t)((CANx->MCR & (uint32_t)(~(uint32_t)CAN_MCR_SLEEP)) | CAN_MCR_INRQ);
- 1097              		.loc 1 881 0
- 1098 053a 0368     		ldr	r3, [r0]
- 1099 053c 23F00303 		bic	r3, r3, #3
- 1100 0540 43F00103 		orr	r3, r3, #1
- 1101 0544 0360     		str	r3, [r0]
+ 1147              		.loc 1 881 0
+ 1148 0566 0368     		ldr	r3, [r0]
+ 1149 0568 23F00303 		bic	r3, r3, #3
+ 1150 056c 43F00103 		orr	r3, r3, #1
+ 1151 0570 0360     		str	r3, [r0]
  872:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   uint32_t timeout = INAK_TIMEOUT; 
- 1102              		.loc 1 872 0
- 1103 0546 4FF6FF73 		movw	r3, #65535
+ 1152              		.loc 1 872 0
+ 1153 0572 4FF6FF73 		movw	r3, #65535
  884:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     while (((CANx->MSR & CAN_MODE_MASK) != CAN_MSR_INAK) && (timeout != 0))
- 1104              		.loc 1 884 0
- 1105 054a 00E0     		b	.L94
- 1106              	.LVL68:
- 1107              	.L96:
+ 1154              		.loc 1 884 0
+ 1155 0576 00E0     		b	.L94
+ 1156              	.LVL75:
+ 1157              	.L96:
  886:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       timeout--;
- 1108              		.loc 1 886 0
- 1109 054c 013B     		subs	r3, r3, #1
- 1110              	.LVL69:
- 1111              	.L94:
+ 1158              		.loc 1 886 0
+ 1159 0578 013B     		subs	r3, r3, #1
+ 1160              	.LVL76:
+ 1161              	.L94:
  884:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     while (((CANx->MSR & CAN_MODE_MASK) != CAN_MSR_INAK) && (timeout != 0))
- 1112              		.loc 1 884 0 discriminator 1
- 1113 054e 4268     		ldr	r2, [r0, #4]
- 1114 0550 02F00302 		and	r2, r2, #3
- 1115 0554 012A     		cmp	r2, #1
- 1116 0556 01D0     		beq	.L95
+ 1162              		.loc 1 884 0 discriminator 1
+ 1163 057a 4268     		ldr	r2, [r0, #4]
+ 1164 057c 02F00302 		and	r2, r2, #3
+ 1165 0580 012A     		cmp	r2, #1
+ 1166 0582 01D0     		beq	.L95
  884:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     while (((CANx->MSR & CAN_MODE_MASK) != CAN_MSR_INAK) && (timeout != 0))
- 1117              		.loc 1 884 0 is_stmt 0 discriminator 2
- 1118 0558 002B     		cmp	r3, #0
- 1119 055a F7D1     		bne	.L96
- 1120              	.L95:
+ 1167              		.loc 1 884 0 is_stmt 0 discriminator 2
+ 1168 0584 002B     		cmp	r3, #0
+ 1169 0586 F7D1     		bne	.L96
+ 1170              	.L95:
  888:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((CANx->MSR & CAN_MODE_MASK) != CAN_MSR_INAK)
- 1121              		.loc 1 888 0 is_stmt 1
- 1122 055c 4068     		ldr	r0, [r0, #4]
- 1123              	.LVL70:
- 1124 055e 00F00300 		and	r0, r0, #3
+ 1171              		.loc 1 888 0 is_stmt 1
+ 1172 0588 4368     		ldr	r3, [r0, #4]
+ 1173              	.LVL77:
+ 1174 058a 03F00303 		and	r3, r3, #3
+ 1175 058e 012B     		cmp	r3, #1
+ 1176 0590 31D0     		beq	.L105
  890:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       status = CAN_ModeStatus_Failed;
- 1125              		.loc 1 890 0
- 1126 0562 0128     		cmp	r0, #1
- 1127 0564 14BF     		ite	ne
- 1128 0566 0020     		movne	r0, #0
- 1129 0568 0120     		moveq	r0, #1
- 1130 056a 7047     		bx	lr
- 1131              	.LVL71:
- 1132              	.L93:
+ 1177              		.loc 1 890 0
+ 1178 0592 0020     		movs	r0, #0
+ 1179              	.LVL78:
+ 1180 0594 7047     		bx	lr
+ 1181              	.LVL79:
+ 1182              	.L93:
  897:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else  if (CAN_OperatingMode == CAN_OperatingMode_Normal)
- 1133              		.loc 1 897 0
- 1134 056c 0129     		cmp	r1, #1
- 1135 056e 15D1     		bne	.L98
+ 1183              		.loc 1 897 0
+ 1184 0596 0129     		cmp	r1, #1
+ 1185 0598 13D1     		bne	.L98
  900:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->MCR &= (uint32_t)(~(CAN_MCR_SLEEP|CAN_MCR_INRQ));
- 1136              		.loc 1 900 0
- 1137 0570 0368     		ldr	r3, [r0]
- 1138 0572 23F00303 		bic	r3, r3, #3
- 1139 0576 0360     		str	r3, [r0]
+ 1186              		.loc 1 900 0
+ 1187 059a 0368     		ldr	r3, [r0]
+ 1188 059c 23F00303 		bic	r3, r3, #3
+ 1189 05a0 0360     		str	r3, [r0]
  872:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   uint32_t timeout = INAK_TIMEOUT; 
- 1140              		.loc 1 872 0
- 1141 0578 4FF6FF73 		movw	r3, #65535
+ 1190              		.loc 1 872 0
+ 1191 05a2 4FF6FF73 		movw	r3, #65535
  903:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     while (((CANx->MSR & CAN_MODE_MASK) != 0) && (timeout!=0))
- 1142              		.loc 1 903 0
- 1143 057c 00E0     		b	.L99
- 1144              	.LVL72:
- 1145              	.L101:
+ 1192              		.loc 1 903 0
+ 1193 05a6 00E0     		b	.L99
+ 1194              	.LVL80:
+ 1195              	.L101:
  905:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       timeout--;
- 1146              		.loc 1 905 0
- 1147 057e 013B     		subs	r3, r3, #1
- 1148              	.LVL73:
- 1149              	.L99:
+ 1196              		.loc 1 905 0
+ 1197 05a8 013B     		subs	r3, r3, #1
+ 1198              	.LVL81:
+ 1199              	.L99:
  903:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     while (((CANx->MSR & CAN_MODE_MASK) != 0) && (timeout!=0))
- 1150              		.loc 1 903 0 discriminator 1
- 1151 0580 4268     		ldr	r2, [r0, #4]
- 1152 0582 12F0030F 		tst	r2, #3
- 1153 0586 01D0     		beq	.L100
+ 1200              		.loc 1 903 0 discriminator 1
+ 1201 05aa 4268     		ldr	r2, [r0, #4]
+ 1202 05ac 12F0030F 		tst	r2, #3
+ 1203 05b0 01D0     		beq	.L100
  903:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     while (((CANx->MSR & CAN_MODE_MASK) != 0) && (timeout!=0))
- 1154              		.loc 1 903 0 is_stmt 0 discriminator 2
- 1155 0588 002B     		cmp	r3, #0
- 1156 058a F8D1     		bne	.L101
- 1157              	.L100:
+ 1204              		.loc 1 903 0 is_stmt 0 discriminator 2
+ 1205 05b2 002B     		cmp	r3, #0
+ 1206 05b4 F8D1     		bne	.L101
+ 1207              	.L100:
  907:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((CANx->MSR & CAN_MODE_MASK) != 0)
- 1158              		.loc 1 907 0 is_stmt 1
- 1159 058c 4068     		ldr	r0, [r0, #4]
- 1160              	.LVL74:
- 1161 058e 00F00300 		and	r0, r0, #3
+ 1208              		.loc 1 907 0 is_stmt 1
+ 1209 05b6 4368     		ldr	r3, [r0, #4]
+ 1210              	.LVL82:
+ 1211 05b8 13F0030F 		tst	r3, #3
+ 1212 05bc 1DD0     		beq	.L106
  909:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       status = CAN_ModeStatus_Failed;
- 1162              		.loc 1 909 0
- 1163 0592 D0F10100 		rsbs	r0, r0, #1
- 1164 0596 38BF     		it	cc
- 1165 0598 0020     		movcc	r0, #0
- 1166 059a 7047     		bx	lr
- 1167              	.LVL75:
- 1168              	.L98:
+ 1213              		.loc 1 909 0
+ 1214 05be 0020     		movs	r0, #0
+ 1215              	.LVL83:
+ 1216 05c0 7047     		bx	lr
+ 1217              	.LVL84:
+ 1218              	.L98:
  916:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else  if (CAN_OperatingMode == CAN_OperatingMode_Sleep)
- 1169              		.loc 1 916 0
- 1170 059c 0229     		cmp	r1, #2
- 1171 059e 18D1     		bne	.L107
+ 1219              		.loc 1 916 0
+ 1220 05c2 0229     		cmp	r1, #2
+ 1221 05c4 1BD1     		bne	.L107
  919:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->MCR = (uint32_t)((CANx->MCR & (uint32_t)(~(uint32_t)CAN_MCR_INRQ)) | CAN_MCR_SLEEP);
- 1172              		.loc 1 919 0
- 1173 05a0 0368     		ldr	r3, [r0]
- 1174 05a2 23F00303 		bic	r3, r3, #3
- 1175 05a6 43F00203 		orr	r3, r3, #2
- 1176 05aa 0360     		str	r3, [r0]
+ 1222              		.loc 1 919 0
+ 1223 05c6 0368     		ldr	r3, [r0]
+ 1224 05c8 23F00303 		bic	r3, r3, #3
+ 1225 05cc 43F00203 		orr	r3, r3, #2
+ 1226 05d0 0360     		str	r3, [r0]
  872:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   uint32_t timeout = INAK_TIMEOUT; 
- 1177              		.loc 1 872 0
- 1178 05ac 4FF6FF73 		movw	r3, #65535
+ 1227              		.loc 1 872 0
+ 1228 05d2 4FF6FF73 		movw	r3, #65535
  922:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     while (((CANx->MSR & CAN_MODE_MASK) != CAN_MSR_SLAK) && (timeout!=0))
- 1179              		.loc 1 922 0
- 1180 05b0 00E0     		b	.L102
- 1181              	.LVL76:
- 1182              	.L104:
+ 1229              		.loc 1 922 0
+ 1230 05d6 00E0     		b	.L102
+ 1231              	.LVL85:
+ 1232              	.L104:
  924:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       timeout--;
- 1183              		.loc 1 924 0
- 1184 05b2 013B     		subs	r3, r3, #1
- 1185              	.LVL77:
- 1186              	.L102:
+ 1233              		.loc 1 924 0
+ 1234 05d8 013B     		subs	r3, r3, #1
+ 1235              	.LVL86:
+ 1236              	.L102:
  922:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     while (((CANx->MSR & CAN_MODE_MASK) != CAN_MSR_SLAK) && (timeout!=0))
- 1187              		.loc 1 922 0 discriminator 1
- 1188 05b4 4268     		ldr	r2, [r0, #4]
- 1189 05b6 02F00302 		and	r2, r2, #3
- 1190 05ba 022A     		cmp	r2, #2
- 1191 05bc 01D0     		beq	.L103
+ 1237              		.loc 1 922 0 discriminator 1
+ 1238 05da 4268     		ldr	r2, [r0, #4]
+ 1239 05dc 02F00302 		and	r2, r2, #3
+ 1240 05e0 022A     		cmp	r2, #2
+ 1241 05e2 01D0     		beq	.L103
  922:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     while (((CANx->MSR & CAN_MODE_MASK) != CAN_MSR_SLAK) && (timeout!=0))
- 1192              		.loc 1 922 0 is_stmt 0 discriminator 2
- 1193 05be 002B     		cmp	r3, #0
- 1194 05c0 F7D1     		bne	.L104
- 1195              	.L103:
+ 1242              		.loc 1 922 0 is_stmt 0 discriminator 2
+ 1243 05e4 002B     		cmp	r3, #0
+ 1244 05e6 F7D1     		bne	.L104
+ 1245              	.L103:
  926:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((CANx->MSR & CAN_MODE_MASK) != CAN_MSR_SLAK)
- 1196              		.loc 1 926 0 is_stmt 1
- 1197 05c2 4068     		ldr	r0, [r0, #4]
- 1198              	.LVL78:
- 1199 05c4 00F00300 		and	r0, r0, #3
+ 1246              		.loc 1 926 0 is_stmt 1
+ 1247 05e8 4368     		ldr	r3, [r0, #4]
+ 1248              	.LVL87:
+ 1249 05ea 03F00303 		and	r3, r3, #3
+ 1250 05ee 022B     		cmp	r3, #2
+ 1251 05f0 07D0     		beq	.L108
  928:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       status = CAN_ModeStatus_Failed;
- 1200              		.loc 1 928 0
- 1201 05c8 0228     		cmp	r0, #2
- 1202 05ca 14BF     		ite	ne
- 1203 05cc 0020     		movne	r0, #0
- 1204 05ce 0120     		moveq	r0, #1
- 1205 05d0 7047     		bx	lr
- 1206              	.LVL79:
- 1207              	.L107:
+ 1252              		.loc 1 928 0
+ 1253 05f2 0020     		movs	r0, #0
+ 1254              	.LVL88:
+ 1255 05f4 7047     		bx	lr
+ 1256              	.LVL89:
+ 1257              	.L105:
+ 894:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       status = CAN_ModeStatus_Success;
+ 1258              		.loc 1 894 0
+ 1259 05f6 0120     		movs	r0, #1
+ 1260              	.LVL90:
+ 1261 05f8 7047     		bx	lr
+ 1262              	.LVL91:
+ 1263              	.L106:
+ 913:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       status = CAN_ModeStatus_Success;
+ 1264              		.loc 1 913 0
+ 1265 05fa 0120     		movs	r0, #1
+ 1266              	.LVL92:
+ 1267 05fc 7047     		bx	lr
+ 1268              	.LVL93:
+ 1269              	.L107:
  937:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     status = CAN_ModeStatus_Failed;
- 1208              		.loc 1 937 0
- 1209 05d2 0020     		movs	r0, #0
- 1210              	.LVL80:
+ 1270              		.loc 1 937 0
+ 1271 05fe 0020     		movs	r0, #0
+ 1272              	.LVL94:
+ 1273 0600 7047     		bx	lr
+ 1274              	.LVL95:
+ 1275              	.L108:
+ 932:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       status = CAN_ModeStatus_Success;
+ 1276              		.loc 1 932 0
+ 1277 0602 0120     		movs	r0, #1
+ 1278              	.LVL96:
  941:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1211              		.loc 1 941 0
- 1212 05d4 7047     		bx	lr
- 1213              		.cfi_endproc
- 1214              	.LFE123:
- 1216 05d6 00BF     		.align	2
- 1217              		.global	CAN_Sleep
- 1218              		.thumb
- 1219              		.thumb_func
- 1221              	CAN_Sleep:
- 1222              	.LFB124:
+ 1279              		.loc 1 941 0
+ 1280 0604 7047     		bx	lr
+ 1281              		.cfi_endproc
+ 1282              	.LFE123:
+ 1284 0606 00BF     		.align	2
+ 1285              		.global	CAN_Sleep
+ 1286              		.thumb
+ 1287              		.thumb_func
+ 1289              	CAN_Sleep:
+ 1290              	.LFB124:
  949:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1223              		.loc 1 949 0
- 1224              		.cfi_startproc
- 1225              		@ args = 0, pretend = 0, frame = 0
- 1226              		@ frame_needed = 0, uses_anonymous_args = 0
- 1227              		@ link register save eliminated.
- 1228              	.LVL81:
+ 1291              		.loc 1 949 0
+ 1292              		.cfi_startproc
+ 1293              		@ args = 0, pretend = 0, frame = 0
+ 1294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1295              		@ link register save eliminated.
+ 1296              	.LVL97:
  956:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****    CANx->MCR = (((CANx->MCR) & (uint32_t)(~(uint32_t)CAN_MCR_INRQ)) | CAN_MCR_SLEEP);
- 1229              		.loc 1 956 0
- 1230 05d8 0368     		ldr	r3, [r0]
- 1231 05da 23F00303 		bic	r3, r3, #3
- 1232 05de 43F00203 		orr	r3, r3, #2
- 1233 05e2 0360     		str	r3, [r0]
+ 1297              		.loc 1 956 0
+ 1298 0608 0368     		ldr	r3, [r0]
+ 1299 060a 23F00303 		bic	r3, r3, #3
+ 1300 060e 43F00203 		orr	r3, r3, #2
+ 1301 0612 0360     		str	r3, [r0]
  959:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if ((CANx->MSR & (CAN_MSR_SLAK|CAN_MSR_INAK)) == CAN_MSR_SLAK)
- 1234              		.loc 1 959 0
- 1235 05e4 4068     		ldr	r0, [r0, #4]
- 1236              	.LVL82:
- 1237 05e6 00F00300 		and	r0, r0, #3
- 1238              	.LVL83:
+ 1302              		.loc 1 959 0
+ 1303 0614 4368     		ldr	r3, [r0, #4]
+ 1304 0616 03F00303 		and	r3, r3, #3
+ 1305 061a 022B     		cmp	r3, #2
+ 1306 061c 01D0     		beq	.L111
+ 950:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   uint8_t sleepstatus = CAN_Sleep_Failed;
+ 1307              		.loc 1 950 0
+ 1308 061e 0020     		movs	r0, #0
+ 1309              	.LVL98:
+ 1310 0620 7047     		bx	lr
+ 1311              	.LVL99:
+ 1312              	.L111:
+ 962:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     sleepstatus =  CAN_Sleep_Ok;
+ 1313              		.loc 1 962 0
+ 1314 0622 0120     		movs	r0, #1
+ 1315              	.LVL100:
  966:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1239              		.loc 1 966 0
- 1240 05ea 0228     		cmp	r0, #2
- 1241 05ec 14BF     		ite	ne
- 1242 05ee 0020     		movne	r0, #0
- 1243              	.LVL84:
- 1244 05f0 0120     		moveq	r0, #1
- 1245 05f2 7047     		bx	lr
- 1246              		.cfi_endproc
- 1247              	.LFE124:
- 1249              		.align	2
- 1250              		.global	CAN_WakeUp
- 1251              		.thumb
- 1252              		.thumb_func
- 1254              	CAN_WakeUp:
- 1255              	.LFB125:
- 974:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1256              		.loc 1 974 0
- 1257              		.cfi_startproc
- 1258              		@ args = 0, pretend = 0, frame = 0
- 1259              		@ frame_needed = 0, uses_anonymous_args = 0
- 1260              		@ link register save eliminated.
- 1261              	.LVL85:
- 982:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CANx->MCR &= ~(uint32_t)CAN_MCR_SLEEP;
- 1262              		.loc 1 982 0
- 1263 05f4 0368     		ldr	r3, [r0]
- 1264 05f6 23F00203 		bic	r3, r3, #2
- 1265 05fa 0360     		str	r3, [r0]
- 975:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   uint32_t wait_slak = SLAK_TIMEOUT;
- 1266              		.loc 1 975 0
- 1267 05fc 4FF6FF73 		movw	r3, #65535
- 985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   while(((CANx->MSR & CAN_MSR_SLAK) == CAN_MSR_SLAK)&&(wait_slak!=0x00))
- 1268              		.loc 1 985 0
- 1269 0600 00E0     		b	.L113
- 1270              	.LVL86:
- 1271              	.L115:
- 987:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****    wait_slak--;
- 1272              		.loc 1 987 0
- 1273 0602 013B     		subs	r3, r3, #1
- 1274              	.LVL87:
- 1275              	.L113:
- 985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   while(((CANx->MSR & CAN_MSR_SLAK) == CAN_MSR_SLAK)&&(wait_slak!=0x00))
- 1276              		.loc 1 985 0 discriminator 1
- 1277 0604 4268     		ldr	r2, [r0, #4]
- 1278 0606 12F0020F 		tst	r2, #2
- 1279 060a 01D0     		beq	.L114
- 985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   while(((CANx->MSR & CAN_MSR_SLAK) == CAN_MSR_SLAK)&&(wait_slak!=0x00))
- 1280              		.loc 1 985 0 is_stmt 0 discriminator 2
- 1281 060c 002B     		cmp	r3, #0
- 1282 060e F8D1     		bne	.L115
- 1283              	.L114:
- 989:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if((CANx->MSR & CAN_MSR_SLAK) != CAN_MSR_SLAK)
- 1284              		.loc 1 989 0 is_stmt 1
- 1285 0610 4068     		ldr	r0, [r0, #4]
- 1286              	.LVL88:
- 1287 0612 00F00200 		and	r0, r0, #2
- 1288              	.LVL89:
- 996:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1289              		.loc 1 996 0
- 1290 0616 D0F10100 		rsbs	r0, r0, #1
- 1291              	.LVL90:
- 1292 061a 38BF     		it	cc
- 1293 061c 0020     		movcc	r0, #0
- 1294 061e 7047     		bx	lr
- 1295              		.cfi_endproc
- 1296              	.LFE125:
- 1298              		.align	2
- 1299              		.global	CAN_GetLastErrorCode
- 1300              		.thumb
- 1301              		.thumb_func
- 1303              	CAN_GetLastErrorCode:
- 1304              	.LFB126:
-1036:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1305              		.loc 1 1036 0
- 1306              		.cfi_startproc
- 1307              		@ args = 0, pretend = 0, frame = 0
- 1308              		@ frame_needed = 0, uses_anonymous_args = 0
- 1309              		@ link register save eliminated.
- 1310              	.LVL91:
-1043:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   errorcode = (((uint8_t)CANx->ESR) & (uint8_t)CAN_ESR_LEC);
- 1311              		.loc 1 1043 0
- 1312 0620 8069     		ldr	r0, [r0, #24]
- 1313              	.LVL92:
-1047:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1314              		.loc 1 1047 0
- 1315 0622 00F07000 		and	r0, r0, #112
- 1316              	.LVL93:
- 1317 0626 7047     		bx	lr
+ 1316              		.loc 1 966 0
+ 1317 0624 7047     		bx	lr
  1318              		.cfi_endproc
- 1319              	.LFE126:
- 1321              		.align	2
- 1322              		.global	CAN_GetReceiveErrorCounter
+ 1319              	.LFE124:
+ 1321 0626 00BF     		.align	2
+ 1322              		.global	CAN_WakeUp
  1323              		.thumb
  1324              		.thumb_func
- 1326              	CAN_GetReceiveErrorCounter:
- 1327              	.LFB127:
-1061:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1328              		.loc 1 1061 0
+ 1326              	CAN_WakeUp:
+ 1327              	.LFB125:
+ 974:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
+ 1328              		.loc 1 974 0
  1329              		.cfi_startproc
  1330              		@ args = 0, pretend = 0, frame = 0
  1331              		@ frame_needed = 0, uses_anonymous_args = 0
  1332              		@ link register save eliminated.
- 1333              	.LVL94:
+ 1333              	.LVL101:
+ 982:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   CANx->MCR &= ~(uint32_t)CAN_MCR_SLEEP;
+ 1334              		.loc 1 982 0
+ 1335 0628 0368     		ldr	r3, [r0]
+ 1336 062a 23F00203 		bic	r3, r3, #2
+ 1337 062e 0360     		str	r3, [r0]
+ 975:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   uint32_t wait_slak = SLAK_TIMEOUT;
+ 1338              		.loc 1 975 0
+ 1339 0630 4FF6FF73 		movw	r3, #65535
+ 985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   while(((CANx->MSR & CAN_MSR_SLAK) == CAN_MSR_SLAK)&&(wait_slak!=0x00))
+ 1340              		.loc 1 985 0
+ 1341 0634 00E0     		b	.L113
+ 1342              	.LVL102:
+ 1343              	.L115:
+ 987:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****    wait_slak--;
+ 1344              		.loc 1 987 0
+ 1345 0636 013B     		subs	r3, r3, #1
+ 1346              	.LVL103:
+ 1347              	.L113:
+ 985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   while(((CANx->MSR & CAN_MSR_SLAK) == CAN_MSR_SLAK)&&(wait_slak!=0x00))
+ 1348              		.loc 1 985 0 discriminator 1
+ 1349 0638 4268     		ldr	r2, [r0, #4]
+ 1350 063a 12F0020F 		tst	r2, #2
+ 1351 063e 01D0     		beq	.L114
+ 985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   while(((CANx->MSR & CAN_MSR_SLAK) == CAN_MSR_SLAK)&&(wait_slak!=0x00))
+ 1352              		.loc 1 985 0 is_stmt 0 discriminator 2
+ 1353 0640 002B     		cmp	r3, #0
+ 1354 0642 F8D1     		bne	.L115
+ 1355              	.L114:
+ 989:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if((CANx->MSR & CAN_MSR_SLAK) != CAN_MSR_SLAK)
+ 1356              		.loc 1 989 0 is_stmt 1
+ 1357 0644 4368     		ldr	r3, [r0, #4]
+ 1358              	.LVL104:
+ 1359 0646 13F0020F 		tst	r3, #2
+ 1360 064a 01D0     		beq	.L117
+ 976:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   uint8_t wakeupstatus = CAN_WakeUp_Failed;
+ 1361              		.loc 1 976 0
+ 1362 064c 0020     		movs	r0, #0
+ 1363              	.LVL105:
+ 1364 064e 7047     		bx	lr
+ 1365              	.LVL106:
+ 1366              	.L117:
+ 992:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     wakeupstatus = CAN_WakeUp_Ok;
+ 1367              		.loc 1 992 0
+ 1368 0650 0120     		movs	r0, #1
+ 1369              	.LVL107:
+ 996:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
+ 1370              		.loc 1 996 0
+ 1371 0652 7047     		bx	lr
+ 1372              		.cfi_endproc
+ 1373              	.LFE125:
+ 1375              		.align	2
+ 1376              		.global	CAN_GetLastErrorCode
+ 1377              		.thumb
+ 1378              		.thumb_func
+ 1380              	CAN_GetLastErrorCode:
+ 1381              	.LFB126:
+1036:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
+ 1382              		.loc 1 1036 0
+ 1383              		.cfi_startproc
+ 1384              		@ args = 0, pretend = 0, frame = 0
+ 1385              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1386              		@ link register save eliminated.
+ 1387              	.LVL108:
+1043:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   errorcode = (((uint8_t)CANx->ESR) & (uint8_t)CAN_ESR_LEC);
+ 1388              		.loc 1 1043 0
+ 1389 0654 8069     		ldr	r0, [r0, #24]
+ 1390              	.LVL109:
+1047:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
+ 1391              		.loc 1 1047 0
+ 1392 0656 00F07000 		and	r0, r0, #112
+ 1393              	.LVL110:
+ 1394 065a 7047     		bx	lr
+ 1395              		.cfi_endproc
+ 1396              	.LFE126:
+ 1398              		.align	2
+ 1399              		.global	CAN_GetReceiveErrorCounter
+ 1400              		.thumb
+ 1401              		.thumb_func
+ 1403              	CAN_GetReceiveErrorCounter:
+ 1404              	.LFB127:
+1061:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
+ 1405              		.loc 1 1061 0
+ 1406              		.cfi_startproc
+ 1407              		@ args = 0, pretend = 0, frame = 0
+ 1408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1409              		@ link register save eliminated.
+ 1410              	.LVL111:
 1068:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   counter = (uint8_t)((CANx->ESR & CAN_ESR_REC)>> 24);
- 1334              		.loc 1 1068 0
- 1335 0628 8069     		ldr	r0, [r0, #24]
- 1336              	.LVL95:
+ 1411              		.loc 1 1068 0
+ 1412 065c 8069     		ldr	r0, [r0, #24]
+ 1413              	.LVL112:
 1072:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1337              		.loc 1 1072 0
- 1338 062a 000E     		lsrs	r0, r0, #24
- 1339              	.LVL96:
- 1340 062c 7047     		bx	lr
- 1341              		.cfi_endproc
- 1342              	.LFE127:
- 1344 062e 00BF     		.align	2
- 1345              		.global	CAN_GetLSBTransmitErrorCounter
- 1346              		.thumb
- 1347              		.thumb_func
- 1349              	CAN_GetLSBTransmitErrorCounter:
- 1350              	.LFB128:
+ 1414              		.loc 1 1072 0
+ 1415 065e 000E     		lsrs	r0, r0, #24
+ 1416              	.LVL113:
+ 1417 0660 7047     		bx	lr
+ 1418              		.cfi_endproc
+ 1419              	.LFE127:
+ 1421 0662 00BF     		.align	2
+ 1422              		.global	CAN_GetLSBTransmitErrorCounter
+ 1423              		.thumb
+ 1424              		.thumb_func
+ 1426              	CAN_GetLSBTransmitErrorCounter:
+ 1427              	.LFB128:
 1081:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1351              		.loc 1 1081 0
- 1352              		.cfi_startproc
- 1353              		@ args = 0, pretend = 0, frame = 0
- 1354              		@ frame_needed = 0, uses_anonymous_args = 0
- 1355              		@ link register save eliminated.
- 1356              	.LVL97:
+ 1428              		.loc 1 1081 0
+ 1429              		.cfi_startproc
+ 1430              		@ args = 0, pretend = 0, frame = 0
+ 1431              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1432              		@ link register save eliminated.
+ 1433              	.LVL114:
 1088:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   counter = (uint8_t)((CANx->ESR & CAN_ESR_TEC)>> 16);
- 1357              		.loc 1 1088 0
- 1358 0630 8069     		ldr	r0, [r0, #24]
- 1359              	.LVL98:
+ 1434              		.loc 1 1088 0
+ 1435 0664 8069     		ldr	r0, [r0, #24]
+ 1436              	.LVL115:
 1092:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1360              		.loc 1 1092 0
- 1361 0632 C0F30740 		ubfx	r0, r0, #16, #8
- 1362              	.LVL99:
- 1363 0636 7047     		bx	lr
- 1364              		.cfi_endproc
- 1365              	.LFE128:
- 1367              		.align	2
- 1368              		.global	CAN_ITConfig
- 1369              		.thumb
- 1370              		.thumb_func
- 1372              	CAN_ITConfig:
- 1373              	.LFB129:
+ 1437              		.loc 1 1092 0
+ 1438 0666 C0F30740 		ubfx	r0, r0, #16, #8
+ 1439              	.LVL116:
+ 1440 066a 7047     		bx	lr
+ 1441              		.cfi_endproc
+ 1442              	.LFE128:
+ 1444              		.align	2
+ 1445              		.global	CAN_ITConfig
+ 1446              		.thumb
+ 1447              		.thumb_func
+ 1449              	CAN_ITConfig:
+ 1450              	.LFB129:
 1288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1374              		.loc 1 1288 0
- 1375              		.cfi_startproc
- 1376              		@ args = 0, pretend = 0, frame = 0
- 1377              		@ frame_needed = 0, uses_anonymous_args = 0
- 1378              		@ link register save eliminated.
- 1379              	.LVL100:
+ 1451              		.loc 1 1288 0
+ 1452              		.cfi_startproc
+ 1453              		@ args = 0, pretend = 0, frame = 0
+ 1454              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1455              		@ link register save eliminated.
+ 1456              	.LVL117:
 1294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (NewState != DISABLE)
- 1380              		.loc 1 1294 0
- 1381 0638 1AB1     		cbz	r2, .L122
+ 1457              		.loc 1 1294 0
+ 1458 066c 1AB1     		cbz	r2, .L122
 1297:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->IER |= CAN_IT;
- 1382              		.loc 1 1297 0
- 1383 063a 4369     		ldr	r3, [r0, #20]
- 1384 063c 1943     		orrs	r1, r1, r3
- 1385              	.LVL101:
- 1386 063e 4161     		str	r1, [r0, #20]
- 1387 0640 7047     		bx	lr
- 1388              	.LVL102:
- 1389              	.L122:
+ 1459              		.loc 1 1297 0
+ 1460 066e 4369     		ldr	r3, [r0, #20]
+ 1461 0670 1943     		orrs	r1, r1, r3
+ 1462              	.LVL118:
+ 1463 0672 4161     		str	r1, [r0, #20]
+ 1464 0674 7047     		bx	lr
+ 1465              	.LVL119:
+ 1466              	.L122:
 1302:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->IER &= ~CAN_IT;
- 1390              		.loc 1 1302 0
- 1391 0642 4369     		ldr	r3, [r0, #20]
- 1392 0644 23EA0101 		bic	r1, r3, r1
- 1393              	.LVL103:
- 1394 0648 4161     		str	r1, [r0, #20]
- 1395 064a 7047     		bx	lr
- 1396              		.cfi_endproc
- 1397              	.LFE129:
- 1399              		.align	2
- 1400              		.global	CAN_GetFlagStatus
- 1401              		.thumb
- 1402              		.thumb_func
- 1404              	CAN_GetFlagStatus:
- 1405              	.LFB130:
+ 1467              		.loc 1 1302 0
+ 1468 0676 4369     		ldr	r3, [r0, #20]
+ 1469 0678 23EA0101 		bic	r1, r3, r1
+ 1470              	.LVL120:
+ 1471 067c 4161     		str	r1, [r0, #20]
+ 1472 067e 7047     		bx	lr
+ 1473              		.cfi_endproc
+ 1474              	.LFE129:
+ 1476              		.align	2
+ 1477              		.global	CAN_GetFlagStatus
+ 1478              		.thumb
+ 1479              		.thumb_func
+ 1481              	CAN_GetFlagStatus:
+ 1482              	.LFB130:
 1328:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1406              		.loc 1 1328 0
- 1407              		.cfi_startproc
- 1408              		@ args = 0, pretend = 0, frame = 0
- 1409              		@ frame_needed = 0, uses_anonymous_args = 0
- 1410              		@ link register save eliminated.
- 1411              	.LVL104:
+ 1483              		.loc 1 1328 0
+ 1484              		.cfi_startproc
+ 1485              		@ args = 0, pretend = 0, frame = 0
+ 1486              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1487              		@ link register save eliminated.
+ 1488              	.LVL121:
 1336:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if((CAN_FLAG & CAN_FLAGS_ESR) != (uint32_t)RESET)
- 1412              		.loc 1 1336 0
- 1413 064c 11F4700F 		tst	r1, #15728640
- 1414 0650 07D0     		beq	.L125
+ 1489              		.loc 1 1336 0
+ 1490 0680 11F4700F 		tst	r1, #15728640
+ 1491 0684 06D0     		beq	.L125
 1339:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((CANx->ESR & (CAN_FLAG & 0x000FFFFF)) != (uint32_t)RESET)
- 1415              		.loc 1 1339 0
- 1416 0652 8369     		ldr	r3, [r0, #24]
- 1417 0654 1940     		ands	r1, r1, r3
- 1418              	.LVL105:
- 1419 0656 C1F31301 		ubfx	r1, r1, #0, #20
+ 1492              		.loc 1 1339 0
+ 1493 0686 8369     		ldr	r3, [r0, #24]
+ 1494 0688 1940     		ands	r1, r1, r3
+ 1495              	.LVL122:
+ 1496 068a C1F31301 		ubfx	r1, r1, #0, #20
+ 1497 068e 31B3     		cbz	r1, .L130
 1342:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = SET;
- 1420              		.loc 1 1342 0
- 1421 065a 081C     		adds	r0, r1, #0
- 1422              	.LVL106:
- 1423 065c 18BF     		it	ne
- 1424 065e 0120     		movne	r0, #1
- 1425 0660 7047     		bx	lr
- 1426              	.LVL107:
- 1427              	.L125:
+ 1498              		.loc 1 1342 0
+ 1499 0690 0120     		movs	r0, #1
+ 1500              	.LVL123:
+ 1501 0692 7047     		bx	lr
+ 1502              	.LVL124:
+ 1503              	.L125:
 1350:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else if((CAN_FLAG & CAN_FLAGS_MSR) != (uint32_t)RESET)
- 1428              		.loc 1 1350 0
- 1429 0662 11F0807F 		tst	r1, #16777216
- 1430 0666 07D0     		beq	.L127
+ 1504              		.loc 1 1350 0
+ 1505 0694 11F0807F 		tst	r1, #16777216
+ 1506 0698 06D0     		beq	.L127
 1353:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((CANx->MSR & (CAN_FLAG & 0x000FFFFF)) != (uint32_t)RESET)
- 1431              		.loc 1 1353 0
- 1432 0668 4068     		ldr	r0, [r0, #4]
- 1433              	.LVL108:
- 1434 066a 0140     		ands	r1, r1, r0
- 1435              	.LVL109:
- 1436 066c C1F31301 		ubfx	r1, r1, #0, #20
+ 1507              		.loc 1 1353 0
+ 1508 069a 4368     		ldr	r3, [r0, #4]
+ 1509 069c 1940     		ands	r1, r1, r3
+ 1510              	.LVL125:
+ 1511 069e C1F31301 		ubfx	r1, r1, #0, #20
+ 1512 06a2 F1B1     		cbz	r1, .L131
 1356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = SET;
- 1437              		.loc 1 1356 0
- 1438 0670 081C     		adds	r0, r1, #0
- 1439 0672 18BF     		it	ne
- 1440 0674 0120     		movne	r0, #1
- 1441 0676 7047     		bx	lr
- 1442              	.LVL110:
- 1443              	.L127:
+ 1513              		.loc 1 1356 0
+ 1514 06a4 0120     		movs	r0, #1
+ 1515              	.LVL126:
+ 1516 06a6 7047     		bx	lr
+ 1517              	.LVL127:
+ 1518              	.L127:
 1364:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else if((CAN_FLAG & CAN_FLAGS_TSR) != (uint32_t)RESET)
- 1444              		.loc 1 1364 0
- 1445 0678 11F0006F 		tst	r1, #134217728
- 1446 067c 07D0     		beq	.L128
+ 1519              		.loc 1 1364 0
+ 1520 06a8 11F0006F 		tst	r1, #134217728
+ 1521 06ac 06D0     		beq	.L128
 1367:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((CANx->TSR & (CAN_FLAG & 0x000FFFFF)) != (uint32_t)RESET)
- 1447              		.loc 1 1367 0
- 1448 067e 8068     		ldr	r0, [r0, #8]
- 1449              	.LVL111:
- 1450 0680 0140     		ands	r1, r1, r0
- 1451              	.LVL112:
- 1452 0682 C1F31301 		ubfx	r1, r1, #0, #20
+ 1522              		.loc 1 1367 0
+ 1523 06ae 8368     		ldr	r3, [r0, #8]
+ 1524 06b0 1940     		ands	r1, r1, r3
+ 1525              	.LVL128:
+ 1526 06b2 C1F31301 		ubfx	r1, r1, #0, #20
+ 1527 06b6 B1B1     		cbz	r1, .L132
 1370:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = SET;
- 1453              		.loc 1 1370 0
- 1454 0686 081C     		adds	r0, r1, #0
- 1455 0688 18BF     		it	ne
- 1456 068a 0120     		movne	r0, #1
- 1457 068c 7047     		bx	lr
- 1458              	.LVL113:
- 1459              	.L128:
+ 1528              		.loc 1 1370 0
+ 1529 06b8 0120     		movs	r0, #1
+ 1530              	.LVL129:
+ 1531 06ba 7047     		bx	lr
+ 1532              	.LVL130:
+ 1533              	.L128:
 1378:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   else if((CAN_FLAG & CAN_FLAGS_RF0R) != (uint32_t)RESET)
- 1460              		.loc 1 1378 0
- 1461 068e 11F0007F 		tst	r1, #33554432
+ 1534              		.loc 1 1378 0
+ 1535 06bc 11F0007F 		tst	r1, #33554432
+ 1536 06c0 06D0     		beq	.L129
 1381:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((CANx->RF0R & (CAN_FLAG & 0x000FFFFF)) != (uint32_t)RESET)
- 1462              		.loc 1 1381 0
- 1463 0692 14BF     		ite	ne
- 1464 0694 C068     		ldrne	r0, [r0, #12]
- 1465              	.LVL114:
+ 1537              		.loc 1 1381 0
+ 1538 06c2 C368     		ldr	r3, [r0, #12]
+ 1539 06c4 1940     		ands	r1, r1, r3
+ 1540              	.LVL131:
+ 1541 06c6 C1F31301 		ubfx	r1, r1, #0, #20
+ 1542 06ca 71B1     		cbz	r1, .L133
+1384:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = SET;
+ 1543              		.loc 1 1384 0
+ 1544 06cc 0120     		movs	r0, #1
+ 1545              	.LVL132:
+ 1546 06ce 7047     		bx	lr
+ 1547              	.LVL133:
+ 1548              	.L129:
 1395:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((uint32_t)(CANx->RF1R & (CAN_FLAG & 0x000FFFFF)) != (uint32_t)RESET)
- 1466              		.loc 1 1395 0
- 1467 0696 0069     		ldreq	r0, [r0, #16]
- 1468 0698 0140     		ands	r1, r1, r0
- 1469              	.LVL115:
- 1470 069a C1F31301 		ubfx	r1, r1, #0, #20
+ 1549              		.loc 1 1395 0
+ 1550 06d0 0369     		ldr	r3, [r0, #16]
+ 1551 06d2 1940     		ands	r1, r1, r3
+ 1552              	.LVL134:
+ 1553 06d4 C1F31301 		ubfx	r1, r1, #0, #20
+ 1554 06d8 49B1     		cbz	r1, .L134
 1398:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = SET;
- 1471              		.loc 1 1398 0
- 1472 069e 081C     		adds	r0, r1, #0
- 1473 06a0 18BF     		it	ne
- 1474 06a2 0120     		movne	r0, #1
- 1475              	.LVL116:
+ 1555              		.loc 1 1398 0
+ 1556 06da 0120     		movs	r0, #1
+ 1557              	.LVL135:
+ 1558 06dc 7047     		bx	lr
+ 1559              	.LVL136:
+ 1560              	.L130:
+1347:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = RESET;
+ 1561              		.loc 1 1347 0
+ 1562 06de 0020     		movs	r0, #0
+ 1563              	.LVL137:
+ 1564 06e0 7047     		bx	lr
+ 1565              	.LVL138:
+ 1566              	.L131:
+1361:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = RESET;
+ 1567              		.loc 1 1361 0
+ 1568 06e2 0020     		movs	r0, #0
+ 1569              	.LVL139:
+ 1570 06e4 7047     		bx	lr
+ 1571              	.LVL140:
+ 1572              	.L132:
+1375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = RESET;
+ 1573              		.loc 1 1375 0
+ 1574 06e6 0020     		movs	r0, #0
+ 1575              	.LVL141:
+ 1576 06e8 7047     		bx	lr
+ 1577              	.LVL142:
+ 1578              	.L133:
+1389:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = RESET;
+ 1579              		.loc 1 1389 0
+ 1580 06ea 0020     		movs	r0, #0
+ 1581              	.LVL143:
+ 1582 06ec 7047     		bx	lr
+ 1583              	.LVL144:
+ 1584              	.L134:
+1403:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       bitstatus = RESET;
+ 1585              		.loc 1 1403 0
+ 1586 06ee 0020     		movs	r0, #0
+ 1587              	.LVL145:
 1408:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1476              		.loc 1 1408 0
- 1477 06a4 7047     		bx	lr
- 1478              		.cfi_endproc
- 1479              	.LFE130:
- 1481 06a6 00BF     		.align	2
- 1482              		.global	CAN_ClearFlag
- 1483              		.thumb
- 1484              		.thumb_func
- 1486              	CAN_ClearFlag:
- 1487              	.LFB131:
+ 1588              		.loc 1 1408 0
+ 1589 06f0 7047     		bx	lr
+ 1590              		.cfi_endproc
+ 1591              	.LFE130:
+ 1593 06f2 00BF     		.align	2
+ 1594              		.global	CAN_ClearFlag
+ 1595              		.thumb
+ 1596              		.thumb_func
+ 1598              	CAN_ClearFlag:
+ 1599              	.LFB131:
 1428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1488              		.loc 1 1428 0
- 1489              		.cfi_startproc
- 1490              		@ args = 0, pretend = 0, frame = 0
- 1491              		@ frame_needed = 0, uses_anonymous_args = 0
- 1492              		@ link register save eliminated.
- 1493              	.LVL117:
+ 1600              		.loc 1 1428 0
+ 1601              		.cfi_startproc
+ 1602              		@ args = 0, pretend = 0, frame = 0
+ 1603              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1604              		@ link register save eliminated.
+ 1605              	.LVL146:
 1434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   if (CAN_FLAG == CAN_FLAG_LEC) /* ESR register */
- 1494              		.loc 1 1434 0
- 1495 06a8 0B4B     		ldr	r3, .L141
- 1496 06aa 9942     		cmp	r1, r3
- 1497 06ac 02D1     		bne	.L136
+ 1606              		.loc 1 1434 0
+ 1607 06f4 0C4B     		ldr	r3, .L141
+ 1608 06f6 9942     		cmp	r1, r3
+ 1609 06f8 02D1     		bne	.L136
 1437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     CANx->ESR = (uint32_t)RESET;
- 1498              		.loc 1 1437 0
- 1499 06ae 0023     		movs	r3, #0
- 1500 06b0 8361     		str	r3, [r0, #24]
- 1501 06b2 7047     		bx	lr
- 1502              	.L136:
+ 1610              		.loc 1 1437 0
+ 1611 06fa 0023     		movs	r3, #0
+ 1612 06fc 8361     		str	r3, [r0, #24]
+ 1613 06fe 7047     		bx	lr
+ 1614              	.L136:
 1441:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     flagtmp = CAN_FLAG & 0x000FFFFF;
- 1503              		.loc 1 1441 0
- 1504 06b4 C1F31303 		ubfx	r3, r1, #0, #20
- 1505              	.LVL118:
+ 1615              		.loc 1 1441 0
+ 1616 0700 C1F31303 		ubfx	r3, r1, #0, #20
+ 1617              	.LVL147:
 1443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     if ((CAN_FLAG & CAN_FLAGS_RF0R)!=(uint32_t)RESET)
- 1506              		.loc 1 1443 0
- 1507 06b8 11F0007F 		tst	r1, #33554432
- 1508 06bc 01D0     		beq	.L138
+ 1618              		.loc 1 1443 0
+ 1619 0704 11F0007F 		tst	r1, #33554432
+ 1620 0708 01D0     		beq	.L138
 1446:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->RF0R = (uint32_t)(flagtmp);
- 1509              		.loc 1 1446 0
- 1510 06be C360     		str	r3, [r0, #12]
- 1511 06c0 7047     		bx	lr
- 1512              	.L138:
+ 1621              		.loc 1 1446 0
+ 1622 070a C360     		str	r3, [r0, #12]
+ 1623 070c 7047     		bx	lr
+ 1624              	.L138:
 1448:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     else if ((CAN_FLAG & CAN_FLAGS_RF1R)!=(uint32_t)RESET)
- 1513              		.loc 1 1448 0
- 1514 06c2 11F0806F 		tst	r1, #67108864
- 1515 06c6 01D0     		beq	.L139
+ 1625              		.loc 1 1448 0
+ 1626 070e 11F0806F 		tst	r1, #67108864
+ 1627 0712 01D0     		beq	.L139
 1451:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->RF1R = (uint32_t)(flagtmp);
- 1516              		.loc 1 1451 0
- 1517 06c8 0361     		str	r3, [r0, #16]
- 1518 06ca 7047     		bx	lr
- 1519              	.L139:
+ 1628              		.loc 1 1451 0
+ 1629 0714 0361     		str	r3, [r0, #16]
+ 1630 0716 7047     		bx	lr
+ 1631              	.L139:
 1453:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     else if ((CAN_FLAG & CAN_FLAGS_TSR)!=(uint32_t)RESET)
- 1520              		.loc 1 1453 0
- 1521 06cc 11F0006F 		tst	r1, #134217728
+ 1632              		.loc 1 1453 0
+ 1633 0718 11F0006F 		tst	r1, #134217728
+ 1634 071c 01D0     		beq	.L140
 1456:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->TSR = (uint32_t)(flagtmp);
- 1522              		.loc 1 1456 0
- 1523 06d0 14BF     		ite	ne
- 1524 06d2 8360     		strne	r3, [r0, #8]
+ 1635              		.loc 1 1456 0
+ 1636 071e 8360     		str	r3, [r0, #8]
+ 1637 0720 7047     		bx	lr
+ 1638              	.L140:
 1461:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MSR = (uint32_t)(flagtmp);
- 1525              		.loc 1 1461 0
- 1526 06d4 4360     		streq	r3, [r0, #4]
- 1527 06d6 7047     		bx	lr
- 1528              	.L142:
- 1529              		.align	2
- 1530              	.L141:
- 1531 06d8 7000F030 		.word	821035120
- 1532              		.cfi_endproc
- 1533              	.LFE131:
- 1535              		.align	2
- 1536              		.global	CAN_GetITStatus
- 1537              		.thumb
- 1538              		.thumb_func
- 1540              	CAN_GetITStatus:
- 1541              	.LFB132:
+ 1639              		.loc 1 1461 0
+ 1640 0722 4360     		str	r3, [r0, #4]
+ 1641 0724 7047     		bx	lr
+ 1642              	.L142:
+ 1643 0726 00BF     		.align	2
+ 1644              	.L141:
+ 1645 0728 7000F030 		.word	821035120
+ 1646              		.cfi_endproc
+ 1647              	.LFE131:
+ 1649              		.align	2
+ 1650              		.global	CAN_GetITStatus
+ 1651              		.thumb
+ 1652              		.thumb_func
+ 1654              	CAN_GetITStatus:
+ 1655              	.LFB132:
 1488:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1542              		.loc 1 1488 0
- 1543              		.cfi_startproc
- 1544              		@ args = 0, pretend = 0, frame = 0
- 1545              		@ frame_needed = 0, uses_anonymous_args = 0
- 1546              	.LVL119:
- 1547 06dc 08B5     		push	{r3, lr}
- 1548              		.cfi_def_cfa_offset 8
- 1549              		.cfi_offset 3, -8
- 1550              		.cfi_offset 14, -4
- 1551              	.LVL120:
+ 1656              		.loc 1 1488 0
+ 1657              		.cfi_startproc
+ 1658              		@ args = 0, pretend = 0, frame = 0
+ 1659              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1660              	.LVL148:
+ 1661 072c 08B5     		push	{r3, lr}
+ 1662              		.cfi_def_cfa_offset 8
+ 1663              		.cfi_offset 3, -8
+ 1664              		.cfi_offset 14, -4
+ 1665              	.LVL149:
 1495:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****  if((CANx->IER & CAN_IT) != RESET)
- 1552              		.loc 1 1495 0
- 1553 06de 4369     		ldr	r3, [r0, #20]
- 1554 06e0 0B42     		tst	r3, r1
- 1555 06e2 6FD0     		beq	.L162
+ 1666              		.loc 1 1495 0
+ 1667 072e 4369     		ldr	r3, [r0, #20]
+ 1668 0730 0B42     		tst	r3, r1
+ 1669 0732 6FD0     		beq	.L162
 1498:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     switch (CAN_IT)
- 1556              		.loc 1 1498 0
- 1557 06e4 4029     		cmp	r1, #64
- 1558 06e6 45D0     		beq	.L145
- 1559 06e8 0ED8     		bhi	.L146
- 1560 06ea 0429     		cmp	r1, #4
- 1561 06ec 2ED0     		beq	.L147
- 1562 06ee 04D8     		bhi	.L148
- 1563 06f0 0129     		cmp	r1, #1
- 1564 06f2 21D0     		beq	.L149
- 1565 06f4 0229     		cmp	r1, #2
- 1566 06f6 24D0     		beq	.L150
- 1567 06f8 66E0     		b	.L163
- 1568              	.L148:
- 1569 06fa 1029     		cmp	r1, #16
- 1570 06fc 30D0     		beq	.L151
- 1571 06fe 2029     		cmp	r1, #32
- 1572 0700 33D0     		beq	.L152
- 1573 0702 0829     		cmp	r1, #8
- 1574 0704 60D1     		bne	.L163
- 1575 0706 26E0     		b	.L153
- 1576              	.L146:
- 1577 0708 B1F5006F 		cmp	r1, #2048
- 1578 070c 50D0     		beq	.L154
- 1579 070e 09D8     		bhi	.L155
- 1580 0710 B1F5007F 		cmp	r1, #512
- 1581 0714 42D0     		beq	.L156
- 1582 0716 B1F5806F 		cmp	r1, #1024
- 1583 071a 44D0     		beq	.L157
- 1584 071c B1F5807F 		cmp	r1, #256
- 1585 0720 52D1     		bne	.L163
- 1586 0722 36E0     		b	.L158
- 1587              	.L155:
- 1588 0724 B1F5803F 		cmp	r1, #65536
- 1589 0728 29D0     		beq	.L159
- 1590 072a B1F5003F 		cmp	r1, #131072
- 1591 072e 2BD0     		beq	.L160
- 1592 0730 B1F5004F 		cmp	r1, #32768
- 1593 0734 48D1     		bne	.L163
- 1594 0736 40E0     		b	.L161
- 1595              	.L149:
+ 1670              		.loc 1 1498 0
+ 1671 0734 4029     		cmp	r1, #64
+ 1672 0736 45D0     		beq	.L145
+ 1673 0738 0ED8     		bhi	.L146
+ 1674 073a 0429     		cmp	r1, #4
+ 1675 073c 2ED0     		beq	.L147
+ 1676 073e 04D8     		bhi	.L148
+ 1677 0740 0129     		cmp	r1, #1
+ 1678 0742 21D0     		beq	.L149
+ 1679 0744 0229     		cmp	r1, #2
+ 1680 0746 24D0     		beq	.L150
+ 1681 0748 66E0     		b	.L163
+ 1682              	.L148:
+ 1683 074a 1029     		cmp	r1, #16
+ 1684 074c 30D0     		beq	.L151
+ 1685 074e 2029     		cmp	r1, #32
+ 1686 0750 33D0     		beq	.L152
+ 1687 0752 0829     		cmp	r1, #8
+ 1688 0754 60D1     		bne	.L163
+ 1689 0756 26E0     		b	.L153
+ 1690              	.L146:
+ 1691 0758 B1F5006F 		cmp	r1, #2048
+ 1692 075c 50D0     		beq	.L154
+ 1693 075e 09D8     		bhi	.L155
+ 1694 0760 B1F5007F 		cmp	r1, #512
+ 1695 0764 42D0     		beq	.L156
+ 1696 0766 B1F5806F 		cmp	r1, #1024
+ 1697 076a 44D0     		beq	.L157
+ 1698 076c B1F5807F 		cmp	r1, #256
+ 1699 0770 52D1     		bne	.L163
+ 1700 0772 36E0     		b	.L158
+ 1701              	.L155:
+ 1702 0774 B1F5803F 		cmp	r1, #65536
+ 1703 0778 29D0     		beq	.L159
+ 1704 077a B1F5003F 		cmp	r1, #131072
+ 1705 077e 2BD0     		beq	.L160
+ 1706 0780 B1F5004F 		cmp	r1, #32768
+ 1707 0784 48D1     		bne	.L163
+ 1708 0786 40E0     		b	.L161
+ 1709              	.L149:
 1502:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->TSR, CAN_TSR_RQCP0|CAN_TSR_RQCP1|CAN_TSR_RQCP2);  
- 1596              		.loc 1 1502 0
- 1597 0738 8068     		ldr	r0, [r0, #8]
- 1598              	.LVL121:
- 1599 073a 2449     		ldr	r1, .L164
- 1600              	.LVL122:
- 1601 073c FFF760FC 		bl	CheckITStatus
- 1602              	.LVL123:
+ 1710              		.loc 1 1502 0
+ 1711 0788 8068     		ldr	r0, [r0, #8]
+ 1712              	.LVL150:
+ 1713 078a 2449     		ldr	r1, .L164
+ 1714              	.LVL151:
+ 1715 078c FFF738FC 		bl	CheckITStatus
+ 1716              	.LVL152:
 1503:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1603              		.loc 1 1503 0
- 1604 0740 08BD     		pop	{r3, pc}
- 1605              	.LVL124:
- 1606              	.L150:
+ 1717              		.loc 1 1503 0
+ 1718 0790 08BD     		pop	{r3, pc}
+ 1719              	.LVL153:
+ 1720              	.L150:
 1506:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->RF0R, CAN_RF0R_FMP0);  
- 1607              		.loc 1 1506 0
- 1608 0742 C068     		ldr	r0, [r0, #12]
- 1609              	.LVL125:
- 1610 0744 0321     		movs	r1, #3
- 1611              	.LVL126:
- 1612 0746 FFF75BFC 		bl	CheckITStatus
- 1613              	.LVL127:
+ 1721              		.loc 1 1506 0
+ 1722 0792 C068     		ldr	r0, [r0, #12]
+ 1723              	.LVL154:
+ 1724 0794 0321     		movs	r1, #3
+ 1725              	.LVL155:
+ 1726 0796 FFF733FC 		bl	CheckITStatus
+ 1727              	.LVL156:
 1507:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1614              		.loc 1 1507 0
- 1615 074a 08BD     		pop	{r3, pc}
- 1616              	.LVL128:
- 1617              	.L147:
+ 1728              		.loc 1 1507 0
+ 1729 079a 08BD     		pop	{r3, pc}
+ 1730              	.LVL157:
+ 1731              	.L147:
 1510:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->RF0R, CAN_RF0R_FULL0);  
- 1618              		.loc 1 1510 0
- 1619 074c C068     		ldr	r0, [r0, #12]
- 1620              	.LVL129:
- 1621 074e 0821     		movs	r1, #8
- 1622              	.LVL130:
- 1623 0750 FFF756FC 		bl	CheckITStatus
- 1624              	.LVL131:
+ 1732              		.loc 1 1510 0
+ 1733 079c C068     		ldr	r0, [r0, #12]
+ 1734              	.LVL158:
+ 1735 079e 0821     		movs	r1, #8
+ 1736              	.LVL159:
+ 1737 07a0 FFF72EFC 		bl	CheckITStatus
+ 1738              	.LVL160:
 1511:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1625              		.loc 1 1511 0
- 1626 0754 08BD     		pop	{r3, pc}
- 1627              	.LVL132:
- 1628              	.L153:
+ 1739              		.loc 1 1511 0
+ 1740 07a4 08BD     		pop	{r3, pc}
+ 1741              	.LVL161:
+ 1742              	.L153:
 1514:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->RF0R, CAN_RF0R_FOVR0);  
- 1629              		.loc 1 1514 0
- 1630 0756 C068     		ldr	r0, [r0, #12]
- 1631              	.LVL133:
- 1632 0758 1021     		movs	r1, #16
- 1633              	.LVL134:
- 1634 075a FFF751FC 		bl	CheckITStatus
- 1635              	.LVL135:
+ 1743              		.loc 1 1514 0
+ 1744 07a6 C068     		ldr	r0, [r0, #12]
+ 1745              	.LVL162:
+ 1746 07a8 1021     		movs	r1, #16
+ 1747              	.LVL163:
+ 1748 07aa FFF729FC 		bl	CheckITStatus
+ 1749              	.LVL164:
 1515:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1636              		.loc 1 1515 0
- 1637 075e 08BD     		pop	{r3, pc}
- 1638              	.LVL136:
- 1639              	.L151:
+ 1750              		.loc 1 1515 0
+ 1751 07ae 08BD     		pop	{r3, pc}
+ 1752              	.LVL165:
+ 1753              	.L151:
 1518:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->RF1R, CAN_RF1R_FMP1);  
- 1640              		.loc 1 1518 0
- 1641 0760 0069     		ldr	r0, [r0, #16]
- 1642              	.LVL137:
- 1643 0762 0321     		movs	r1, #3
- 1644              	.LVL138:
- 1645 0764 FFF74CFC 		bl	CheckITStatus
- 1646              	.LVL139:
+ 1754              		.loc 1 1518 0
+ 1755 07b0 0069     		ldr	r0, [r0, #16]
+ 1756              	.LVL166:
+ 1757 07b2 0321     		movs	r1, #3
+ 1758              	.LVL167:
+ 1759 07b4 FFF724FC 		bl	CheckITStatus
+ 1760              	.LVL168:
 1519:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1647              		.loc 1 1519 0
- 1648 0768 08BD     		pop	{r3, pc}
- 1649              	.LVL140:
- 1650              	.L152:
+ 1761              		.loc 1 1519 0
+ 1762 07b8 08BD     		pop	{r3, pc}
+ 1763              	.LVL169:
+ 1764              	.L152:
 1522:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->RF1R, CAN_RF1R_FULL1);  
- 1651              		.loc 1 1522 0
- 1652 076a 0069     		ldr	r0, [r0, #16]
- 1653              	.LVL141:
- 1654 076c 0821     		movs	r1, #8
- 1655              	.LVL142:
- 1656 076e FFF747FC 		bl	CheckITStatus
- 1657              	.LVL143:
+ 1765              		.loc 1 1522 0
+ 1766 07ba 0069     		ldr	r0, [r0, #16]
+ 1767              	.LVL170:
+ 1768 07bc 0821     		movs	r1, #8
+ 1769              	.LVL171:
+ 1770 07be FFF71FFC 		bl	CheckITStatus
+ 1771              	.LVL172:
 1523:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1658              		.loc 1 1523 0
- 1659 0772 08BD     		pop	{r3, pc}
- 1660              	.LVL144:
- 1661              	.L145:
+ 1772              		.loc 1 1523 0
+ 1773 07c2 08BD     		pop	{r3, pc}
+ 1774              	.LVL173:
+ 1775              	.L145:
 1526:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->RF1R, CAN_RF1R_FOVR1);  
- 1662              		.loc 1 1526 0
- 1663 0774 0069     		ldr	r0, [r0, #16]
- 1664              	.LVL145:
- 1665 0776 1021     		movs	r1, #16
- 1666              	.LVL146:
- 1667 0778 FFF742FC 		bl	CheckITStatus
- 1668              	.LVL147:
+ 1776              		.loc 1 1526 0
+ 1777 07c4 0069     		ldr	r0, [r0, #16]
+ 1778              	.LVL174:
+ 1779 07c6 1021     		movs	r1, #16
+ 1780              	.LVL175:
+ 1781 07c8 FFF71AFC 		bl	CheckITStatus
+ 1782              	.LVL176:
 1527:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1669              		.loc 1 1527 0
- 1670 077c 08BD     		pop	{r3, pc}
- 1671              	.LVL148:
- 1672              	.L159:
+ 1783              		.loc 1 1527 0
+ 1784 07cc 08BD     		pop	{r3, pc}
+ 1785              	.LVL177:
+ 1786              	.L159:
 1530:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->MSR, CAN_MSR_WKUI);  
- 1673              		.loc 1 1530 0
- 1674 077e 4068     		ldr	r0, [r0, #4]
- 1675              	.LVL149:
- 1676 0780 0821     		movs	r1, #8
- 1677              	.LVL150:
- 1678 0782 FFF73DFC 		bl	CheckITStatus
- 1679              	.LVL151:
+ 1787              		.loc 1 1530 0
+ 1788 07ce 4068     		ldr	r0, [r0, #4]
+ 1789              	.LVL178:
+ 1790 07d0 0821     		movs	r1, #8
+ 1791              	.LVL179:
+ 1792 07d2 FFF715FC 		bl	CheckITStatus
+ 1793              	.LVL180:
 1531:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1680              		.loc 1 1531 0
- 1681 0786 08BD     		pop	{r3, pc}
- 1682              	.LVL152:
- 1683              	.L160:
+ 1794              		.loc 1 1531 0
+ 1795 07d6 08BD     		pop	{r3, pc}
+ 1796              	.LVL181:
+ 1797              	.L160:
 1534:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->MSR, CAN_MSR_SLAKI);  
- 1684              		.loc 1 1534 0
- 1685 0788 4068     		ldr	r0, [r0, #4]
- 1686              	.LVL153:
- 1687 078a 1021     		movs	r1, #16
- 1688              	.LVL154:
- 1689 078c FFF738FC 		bl	CheckITStatus
- 1690              	.LVL155:
+ 1798              		.loc 1 1534 0
+ 1799 07d8 4068     		ldr	r0, [r0, #4]
+ 1800              	.LVL182:
+ 1801 07da 1021     		movs	r1, #16
+ 1802              	.LVL183:
+ 1803 07dc FFF710FC 		bl	CheckITStatus
+ 1804              	.LVL184:
 1535:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1691              		.loc 1 1535 0
- 1692 0790 08BD     		pop	{r3, pc}
- 1693              	.LVL156:
- 1694              	.L158:
+ 1805              		.loc 1 1535 0
+ 1806 07e0 08BD     		pop	{r3, pc}
+ 1807              	.LVL185:
+ 1808              	.L158:
 1538:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->ESR, CAN_ESR_EWGF);  
- 1695              		.loc 1 1538 0
- 1696 0792 8069     		ldr	r0, [r0, #24]
- 1697              	.LVL157:
- 1698 0794 0121     		movs	r1, #1
- 1699              	.LVL158:
- 1700 0796 FFF733FC 		bl	CheckITStatus
- 1701              	.LVL159:
+ 1809              		.loc 1 1538 0
+ 1810 07e2 8069     		ldr	r0, [r0, #24]
+ 1811              	.LVL186:
+ 1812 07e4 0121     		movs	r1, #1
+ 1813              	.LVL187:
+ 1814 07e6 FFF70BFC 		bl	CheckITStatus
+ 1815              	.LVL188:
 1539:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1702              		.loc 1 1539 0
- 1703 079a 08BD     		pop	{r3, pc}
- 1704              	.LVL160:
- 1705              	.L156:
+ 1816              		.loc 1 1539 0
+ 1817 07ea 08BD     		pop	{r3, pc}
+ 1818              	.LVL189:
+ 1819              	.L156:
 1542:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->ESR, CAN_ESR_EPVF);  
- 1706              		.loc 1 1542 0
- 1707 079c 8069     		ldr	r0, [r0, #24]
- 1708              	.LVL161:
- 1709 079e 0221     		movs	r1, #2
- 1710              	.LVL162:
- 1711 07a0 FFF72EFC 		bl	CheckITStatus
- 1712              	.LVL163:
+ 1820              		.loc 1 1542 0
+ 1821 07ec 8069     		ldr	r0, [r0, #24]
+ 1822              	.LVL190:
+ 1823 07ee 0221     		movs	r1, #2
+ 1824              	.LVL191:
+ 1825 07f0 FFF706FC 		bl	CheckITStatus
+ 1826              	.LVL192:
 1543:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1713              		.loc 1 1543 0
- 1714 07a4 08BD     		pop	{r3, pc}
- 1715              	.LVL164:
- 1716              	.L157:
+ 1827              		.loc 1 1543 0
+ 1828 07f4 08BD     		pop	{r3, pc}
+ 1829              	.LVL193:
+ 1830              	.L157:
 1546:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->ESR, CAN_ESR_BOFF);  
- 1717              		.loc 1 1546 0
- 1718 07a6 8069     		ldr	r0, [r0, #24]
- 1719              	.LVL165:
- 1720 07a8 0421     		movs	r1, #4
- 1721              	.LVL166:
- 1722 07aa FFF729FC 		bl	CheckITStatus
- 1723              	.LVL167:
+ 1831              		.loc 1 1546 0
+ 1832 07f6 8069     		ldr	r0, [r0, #24]
+ 1833              	.LVL194:
+ 1834 07f8 0421     		movs	r1, #4
+ 1835              	.LVL195:
+ 1836 07fa FFF701FC 		bl	CheckITStatus
+ 1837              	.LVL196:
 1547:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1724              		.loc 1 1547 0
- 1725 07ae 08BD     		pop	{r3, pc}
- 1726              	.LVL168:
- 1727              	.L154:
+ 1838              		.loc 1 1547 0
+ 1839 07fe 08BD     		pop	{r3, pc}
+ 1840              	.LVL197:
+ 1841              	.L154:
 1550:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->ESR, CAN_ESR_LEC);  
- 1728              		.loc 1 1550 0
- 1729 07b0 8069     		ldr	r0, [r0, #24]
- 1730              	.LVL169:
- 1731 07b2 7021     		movs	r1, #112
- 1732              	.LVL170:
- 1733 07b4 FFF724FC 		bl	CheckITStatus
- 1734              	.LVL171:
+ 1842              		.loc 1 1550 0
+ 1843 0800 8069     		ldr	r0, [r0, #24]
+ 1844              	.LVL198:
+ 1845 0802 7021     		movs	r1, #112
+ 1846              	.LVL199:
+ 1847 0804 FFF7FCFB 		bl	CheckITStatus
+ 1848              	.LVL200:
 1551:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1735              		.loc 1 1551 0
- 1736 07b8 08BD     		pop	{r3, pc}
- 1737              	.LVL172:
- 1738              	.L161:
+ 1849              		.loc 1 1551 0
+ 1850 0808 08BD     		pop	{r3, pc}
+ 1851              	.LVL201:
+ 1852              	.L161:
 1554:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = CheckITStatus(CANx->MSR, CAN_MSR_ERRI); 
- 1739              		.loc 1 1554 0
- 1740 07ba 4068     		ldr	r0, [r0, #4]
- 1741              	.LVL173:
- 1742 07bc 0421     		movs	r1, #4
- 1743              	.LVL174:
- 1744 07be FFF71FFC 		bl	CheckITStatus
- 1745              	.LVL175:
+ 1853              		.loc 1 1554 0
+ 1854 080a 4068     		ldr	r0, [r0, #4]
+ 1855              	.LVL202:
+ 1856 080c 0421     		movs	r1, #4
+ 1857              	.LVL203:
+ 1858 080e FFF7F7FB 		bl	CheckITStatus
+ 1859              	.LVL204:
 1555:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         break;
- 1746              		.loc 1 1555 0
- 1747 07c2 08BD     		pop	{r3, pc}
- 1748              	.LVL176:
- 1749              	.L162:
+ 1860              		.loc 1 1555 0
+ 1861 0812 08BD     		pop	{r3, pc}
+ 1862              	.LVL205:
+ 1863              	.L162:
 1565:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****     itstatus  = RESET;
- 1750              		.loc 1 1565 0
- 1751 07c4 0020     		movs	r0, #0
- 1752              	.LVL177:
- 1753 07c6 08BD     		pop	{r3, pc}
- 1754              	.LVL178:
- 1755              	.L163:
+ 1864              		.loc 1 1565 0
+ 1865 0814 0020     		movs	r0, #0
+ 1866              	.LVL206:
+ 1867 0816 08BD     		pop	{r3, pc}
+ 1868              	.LVL207:
+ 1869              	.L163:
 1558:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****         itstatus = RESET;
- 1756              		.loc 1 1558 0
- 1757 07c8 0020     		movs	r0, #0
- 1758              	.LVL179:
+ 1870              		.loc 1 1558 0
+ 1871 0818 0020     		movs	r0, #0
+ 1872              	.LVL208:
 1570:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** }
- 1759              		.loc 1 1570 0
- 1760 07ca 08BD     		pop	{r3, pc}
- 1761              	.L165:
- 1762              		.align	2
- 1763              	.L164:
- 1764 07cc 01010100 		.word	65793
- 1765              		.cfi_endproc
- 1766              	.LFE132:
- 1768              		.align	2
- 1769              		.global	CAN_ClearITPendingBit
- 1770              		.thumb
- 1771              		.thumb_func
- 1773              	CAN_ClearITPendingBit:
- 1774              	.LFB133:
+ 1873              		.loc 1 1570 0
+ 1874 081a 08BD     		pop	{r3, pc}
+ 1875              	.L165:
+ 1876              		.align	2
+ 1877              	.L164:
+ 1878 081c 01010100 		.word	65793
+ 1879              		.cfi_endproc
+ 1880              	.LFE132:
+ 1882              		.align	2
+ 1883              		.global	CAN_ClearITPendingBit
+ 1884              		.thumb
+ 1885              		.thumb_func
+ 1887              	CAN_ClearITPendingBit:
+ 1888              	.LFB133:
 1592:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c **** {
- 1775              		.loc 1 1592 0
- 1776              		.cfi_startproc
- 1777              		@ args = 0, pretend = 0, frame = 0
- 1778              		@ frame_needed = 0, uses_anonymous_args = 0
- 1779              		@ link register save eliminated.
- 1780              	.LVL180:
+ 1889              		.loc 1 1592 0
+ 1890              		.cfi_startproc
+ 1891              		@ args = 0, pretend = 0, frame = 0
+ 1892              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1893              		@ link register save eliminated.
+ 1894              	.LVL209:
 1597:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****   switch (CAN_IT)
- 1781              		.loc 1 1597 0
- 1782 07d0 B1F5807F 		cmp	r1, #256
- 1783 07d4 37D0     		beq	.L168
- 1784 07d6 0CD8     		bhi	.L169
- 1785 07d8 0829     		cmp	r1, #8
- 1786 07da 25D0     		beq	.L170
- 1787 07dc 04D8     		bhi	.L171
- 1788 07de 0129     		cmp	r1, #1
- 1789 07e0 1CD0     		beq	.L172
- 1790 07e2 0429     		cmp	r1, #4
- 1791 07e4 1DD0     		beq	.L173
- 1792 07e6 7047     		bx	lr
- 1793              	.L171:
- 1794 07e8 2029     		cmp	r1, #32
- 1795 07ea 20D0     		beq	.L174
- 1796 07ec 4029     		cmp	r1, #64
- 1797 07ee 21D0     		beq	.L175
- 1798 07f0 7047     		bx	lr
- 1799              	.L169:
- 1800 07f2 B1F5006F 		cmp	r1, #2048
- 1801 07f6 2FD0     		beq	.L176
- 1802 07f8 06D8     		bhi	.L177
- 1803 07fa B1F5007F 		cmp	r1, #512
- 1804 07fe 25D0     		beq	.L178
- 1805 0800 B1F5806F 		cmp	r1, #1024
- 1806 0804 25D0     		beq	.L179
- 1807 0806 7047     		bx	lr
- 1808              	.L177:
- 1809 0808 B1F5803F 		cmp	r1, #65536
- 1810 080c 15D0     		beq	.L180
- 1811 080e B1F5003F 		cmp	r1, #131072
- 1812 0812 15D0     		beq	.L181
- 1813 0814 B1F5004F 		cmp	r1, #32768
- 1814 0818 27D1     		bne	.L166
- 1815 081a 22E0     		b	.L182
- 1816              	.L172:
+ 1895              		.loc 1 1597 0
+ 1896 0820 B1F5807F 		cmp	r1, #256
+ 1897 0824 37D0     		beq	.L168
+ 1898 0826 0CD8     		bhi	.L169
+ 1899 0828 0829     		cmp	r1, #8
+ 1900 082a 25D0     		beq	.L170
+ 1901 082c 04D8     		bhi	.L171
+ 1902 082e 0129     		cmp	r1, #1
+ 1903 0830 1CD0     		beq	.L172
+ 1904 0832 0429     		cmp	r1, #4
+ 1905 0834 1DD0     		beq	.L173
+ 1906 0836 7047     		bx	lr
+ 1907              	.L171:
+ 1908 0838 2029     		cmp	r1, #32
+ 1909 083a 20D0     		beq	.L174
+ 1910 083c 4029     		cmp	r1, #64
+ 1911 083e 21D0     		beq	.L175
+ 1912 0840 7047     		bx	lr
+ 1913              	.L169:
+ 1914 0842 B1F5006F 		cmp	r1, #2048
+ 1915 0846 2FD0     		beq	.L176
+ 1916 0848 06D8     		bhi	.L177
+ 1917 084a B1F5007F 		cmp	r1, #512
+ 1918 084e 25D0     		beq	.L178
+ 1919 0850 B1F5806F 		cmp	r1, #1024
+ 1920 0854 25D0     		beq	.L179
+ 1921 0856 7047     		bx	lr
+ 1922              	.L177:
+ 1923 0858 B1F5803F 		cmp	r1, #65536
+ 1924 085c 15D0     		beq	.L180
+ 1925 085e B1F5003F 		cmp	r1, #131072
+ 1926 0862 15D0     		beq	.L181
+ 1927 0864 B1F5004F 		cmp	r1, #32768
+ 1928 0868 27D1     		bne	.L166
+ 1929 086a 22E0     		b	.L182
+ 1930              	.L172:
 1601:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->TSR = CAN_TSR_RQCP0|CAN_TSR_RQCP1|CAN_TSR_RQCP2;  
- 1817              		.loc 1 1601 0
- 1818 081c 134B     		ldr	r3, .L183
- 1819 081e 8360     		str	r3, [r0, #8]
+ 1931              		.loc 1 1601 0
+ 1932 086c 134B     		ldr	r3, .L183
+ 1933 086e 8360     		str	r3, [r0, #8]
 1602:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1820              		.loc 1 1602 0
- 1821 0820 7047     		bx	lr
- 1822              	.L173:
+ 1934              		.loc 1 1602 0
+ 1935 0870 7047     		bx	lr
+ 1936              	.L173:
 1605:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->RF0R = CAN_RF0R_FULL0; 
- 1823              		.loc 1 1605 0
- 1824 0822 0823     		movs	r3, #8
- 1825 0824 C360     		str	r3, [r0, #12]
+ 1937              		.loc 1 1605 0
+ 1938 0872 0823     		movs	r3, #8
+ 1939 0874 C360     		str	r3, [r0, #12]
 1606:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1826              		.loc 1 1606 0
- 1827 0826 7047     		bx	lr
- 1828              	.L170:
+ 1940              		.loc 1 1606 0
+ 1941 0876 7047     		bx	lr
+ 1942              	.L170:
 1609:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->RF0R = CAN_RF0R_FOVR0; 
- 1829              		.loc 1 1609 0
- 1830 0828 1023     		movs	r3, #16
- 1831 082a C360     		str	r3, [r0, #12]
+ 1943              		.loc 1 1609 0
+ 1944 0878 1023     		movs	r3, #16
+ 1945 087a C360     		str	r3, [r0, #12]
 1610:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1832              		.loc 1 1610 0
- 1833 082c 7047     		bx	lr
- 1834              	.L174:
+ 1946              		.loc 1 1610 0
+ 1947 087c 7047     		bx	lr
+ 1948              	.L174:
 1613:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->RF1R = CAN_RF1R_FULL1;  
- 1835              		.loc 1 1613 0
- 1836 082e 0823     		movs	r3, #8
- 1837 0830 0361     		str	r3, [r0, #16]
+ 1949              		.loc 1 1613 0
+ 1950 087e 0823     		movs	r3, #8
+ 1951 0880 0361     		str	r3, [r0, #16]
 1614:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1838              		.loc 1 1614 0
- 1839 0832 7047     		bx	lr
- 1840              	.L175:
+ 1952              		.loc 1 1614 0
+ 1953 0882 7047     		bx	lr
+ 1954              	.L175:
 1617:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->RF1R = CAN_RF1R_FOVR1; 
- 1841              		.loc 1 1617 0
- 1842 0834 1023     		movs	r3, #16
- 1843 0836 0361     		str	r3, [r0, #16]
+ 1955              		.loc 1 1617 0
+ 1956 0884 1023     		movs	r3, #16
+ 1957 0886 0361     		str	r3, [r0, #16]
 1618:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1844              		.loc 1 1618 0
- 1845 0838 7047     		bx	lr
- 1846              	.L180:
+ 1958              		.loc 1 1618 0
+ 1959 0888 7047     		bx	lr
+ 1960              	.L180:
 1621:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MSR = CAN_MSR_WKUI;  
- 1847              		.loc 1 1621 0
- 1848 083a 0823     		movs	r3, #8
- 1849 083c 4360     		str	r3, [r0, #4]
+ 1961              		.loc 1 1621 0
+ 1962 088a 0823     		movs	r3, #8
+ 1963 088c 4360     		str	r3, [r0, #4]
 1622:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1850              		.loc 1 1622 0
- 1851 083e 7047     		bx	lr
- 1852              	.L181:
+ 1964              		.loc 1 1622 0
+ 1965 088e 7047     		bx	lr
+ 1966              	.L181:
 1625:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MSR = CAN_MSR_SLAKI;   
- 1853              		.loc 1 1625 0
- 1854 0840 1023     		movs	r3, #16
- 1855 0842 4360     		str	r3, [r0, #4]
+ 1967              		.loc 1 1625 0
+ 1968 0890 1023     		movs	r3, #16
+ 1969 0892 4360     		str	r3, [r0, #4]
 1626:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1856              		.loc 1 1626 0
- 1857 0844 7047     		bx	lr
- 1858              	.L168:
+ 1970              		.loc 1 1626 0
+ 1971 0894 7047     		bx	lr
+ 1972              	.L168:
 1629:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MSR = CAN_MSR_ERRI;
- 1859              		.loc 1 1629 0
- 1860 0846 0423     		movs	r3, #4
- 1861 0848 4360     		str	r3, [r0, #4]
+ 1973              		.loc 1 1629 0
+ 1974 0896 0423     		movs	r3, #4
+ 1975 0898 4360     		str	r3, [r0, #4]
 1631:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1862              		.loc 1 1631 0
- 1863 084a 7047     		bx	lr
- 1864              	.L178:
+ 1976              		.loc 1 1631 0
+ 1977 089a 7047     		bx	lr
+ 1978              	.L178:
 1634:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MSR = CAN_MSR_ERRI; 
- 1865              		.loc 1 1634 0
- 1866 084c 0423     		movs	r3, #4
- 1867 084e 4360     		str	r3, [r0, #4]
+ 1979              		.loc 1 1634 0
+ 1980 089c 0423     		movs	r3, #4
+ 1981 089e 4360     		str	r3, [r0, #4]
 1636:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1868              		.loc 1 1636 0
- 1869 0850 7047     		bx	lr
- 1870              	.L179:
+ 1982              		.loc 1 1636 0
+ 1983 08a0 7047     		bx	lr
+ 1984              	.L179:
 1639:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MSR = CAN_MSR_ERRI; 
- 1871              		.loc 1 1639 0
- 1872 0852 0423     		movs	r3, #4
- 1873 0854 4360     		str	r3, [r0, #4]
+ 1985              		.loc 1 1639 0
+ 1986 08a2 0423     		movs	r3, #4
+ 1987 08a4 4360     		str	r3, [r0, #4]
 1641:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****        break;
- 1874              		.loc 1 1641 0
- 1875 0856 7047     		bx	lr
- 1876              	.L176:
+ 1988              		.loc 1 1641 0
+ 1989 08a6 7047     		bx	lr
+ 1990              	.L176:
 1644:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->ESR = RESET; 
- 1877              		.loc 1 1644 0
- 1878 0858 0023     		movs	r3, #0
- 1879 085a 8361     		str	r3, [r0, #24]
+ 1991              		.loc 1 1644 0
+ 1992 08a8 0023     		movs	r3, #0
+ 1993 08aa 8361     		str	r3, [r0, #24]
 1646:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MSR = CAN_MSR_ERRI; 
- 1880              		.loc 1 1646 0
- 1881 085c 0423     		movs	r3, #4
- 1882 085e 4360     		str	r3, [r0, #4]
+ 1994              		.loc 1 1646 0
+ 1995 08ac 0423     		movs	r3, #4
+ 1996 08ae 4360     		str	r3, [r0, #4]
 1647:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       break;
- 1883              		.loc 1 1647 0
- 1884 0860 7047     		bx	lr
- 1885              	.L182:
+ 1997              		.loc 1 1647 0
+ 1998 08b0 7047     		bx	lr
+ 1999              	.L182:
 1650:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->ESR = RESET; 
- 1886              		.loc 1 1650 0
- 1887 0862 0023     		movs	r3, #0
- 1888 0864 8361     		str	r3, [r0, #24]
+ 2000              		.loc 1 1650 0
+ 2001 08b2 0023     		movs	r3, #0
+ 2002 08b4 8361     		str	r3, [r0, #24]
 1652:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c ****       CANx->MSR = CAN_MSR_ERRI; 
- 1889              		.loc 1 1652 0
- 1890 0866 0423     		movs	r3, #4
- 1891 0868 4360     		str	r3, [r0, #4]
- 1892              	.L166:
- 1893 086a 7047     		bx	lr
- 1894              	.L184:
- 1895              		.align	2
- 1896              	.L183:
- 1897 086c 01010100 		.word	65793
- 1898              		.cfi_endproc
- 1899              	.LFE133:
- 1901              	.Letext0:
- 1902              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 1903              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 1904              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
- 1905              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_can.h"
- 1906              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
- 1907              		.file 7 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_rcc.h"
+ 2003              		.loc 1 1652 0
+ 2004 08b6 0423     		movs	r3, #4
+ 2005 08b8 4360     		str	r3, [r0, #4]
+ 2006              	.L166:
+ 2007 08ba 7047     		bx	lr
+ 2008              	.L184:
+ 2009              		.align	2
+ 2010              	.L183:
+ 2011 08bc 01010100 		.word	65793
+ 2012              		.cfi_endproc
+ 2013              	.LFE133:
+ 2015              	.Letext0:
+ 2016              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 2017              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 2018              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx\\Include/stm32f4xx.
+ 2019              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx_StdPeriph_Driver\\i
+ 2020              		.file 6 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\CMSIS\\Include/core_cm4.h"
+ 2021              		.file 7 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx_StdPeriph_Driver\\i
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_can.c
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:22     .text:00000000 CheckITStatus
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:48     .text:0000000c CAN_DeInit
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:92     .text:00000040 $d
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:96     .text:00000044 $t
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:101    .text:00000044 CAN_Init
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:276    .text:00000130 CAN_FilterInit
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:427    .text:0000021c $d
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:431    .text:00000220 $t
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:436    .text:00000220 CAN_StructInit
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:479    .text:00000240 CAN_SlaveStartBank
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:510    .text:00000278 $d
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:514    .text:0000027c $t
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:519    .text:0000027c CAN_DBGFreeze
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:548    .text:00000294 CAN_TTComModeCmd
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:601    .text:000002f4 CAN_Transmit
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:756    .text:000003c8 CAN_TransmitStatus
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:858    .text:00000430 $d
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:864    .text:0000043c $t
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:869    .text:0000043c CAN_CancelTransmit
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:912    .text:00000468 CAN_Receive
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1019   .text:00000508 CAN_FIFORelease
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1048   .text:00000520 CAN_MessagePending
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1087   .text:00000538 CAN_OperatingModeRequest
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1221   .text:000005d8 CAN_Sleep
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1254   .text:000005f4 CAN_WakeUp
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1303   .text:00000620 CAN_GetLastErrorCode
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1326   .text:00000628 CAN_GetReceiveErrorCounter
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1349   .text:00000630 CAN_GetLSBTransmitErrorCounter
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1372   .text:00000638 CAN_ITConfig
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1404   .text:0000064c CAN_GetFlagStatus
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1486   .text:000006a8 CAN_ClearFlag
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1531   .text:000006d8 $d
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1535   .text:000006dc $t
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1540   .text:000006dc CAN_GetITStatus
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1764   .text:000007cc $d
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1768   .text:000007d0 $t
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1773   .text:000007d0 CAN_ClearITPendingBit
-C:\Users\Filip\AppData\Local\Temp\ccamRVLK.s:1897   .text:0000086c $d
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:22     .text:00000000 CheckITStatus
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:53     .text:0000000c CAN_DeInit
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:97     .text:00000040 $d
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:101    .text:00000044 $t
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:106    .text:00000044 CAN_Init
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:319    .text:00000158 CAN_FilterInit
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:470    .text:00000244 $d
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:474    .text:00000248 $t
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:479    .text:00000248 CAN_StructInit
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:522    .text:00000268 CAN_SlaveStartBank
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:553    .text:000002a0 $d
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:557    .text:000002a4 $t
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:562    .text:000002a4 CAN_DBGFreeze
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:591    .text:000002bc CAN_TTComModeCmd
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:644    .text:0000031c CAN_Transmit
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:803    .text:000003f0 CAN_TransmitStatus
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:905    .text:00000458 $d
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:911    .text:00000464 $t
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:916    .text:00000464 CAN_CancelTransmit
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:959    .text:00000490 CAN_Receive
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1066   .text:00000530 CAN_FIFORelease
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1095   .text:00000548 CAN_MessagePending
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1137   .text:00000564 CAN_OperatingModeRequest
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1289   .text:00000608 CAN_Sleep
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1326   .text:00000628 CAN_WakeUp
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1380   .text:00000654 CAN_GetLastErrorCode
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1403   .text:0000065c CAN_GetReceiveErrorCounter
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1426   .text:00000664 CAN_GetLSBTransmitErrorCounter
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1449   .text:0000066c CAN_ITConfig
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1481   .text:00000680 CAN_GetFlagStatus
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1598   .text:000006f4 CAN_ClearFlag
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1645   .text:00000728 $d
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1649   .text:0000072c $t
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1654   .text:0000072c CAN_GetITStatus
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1878   .text:0000081c $d
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1882   .text:00000820 $t
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:1887   .text:00000820 CAN_ClearITPendingBit
+C:\Users\Filip\AppData\Local\Temp\ccmc9olf.s:2011   .text:000008bc $d
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

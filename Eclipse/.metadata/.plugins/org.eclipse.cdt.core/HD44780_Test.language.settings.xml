@@ -4,13 +4,13 @@
 		<extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
 			<provider id="ilg.gnuarmeclipse.managedbuild.cross.GCCBuiltinSpecsDetector">
 				<language id="org.eclipse.cdt.core.gcc">
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/lib/gcc/arm-none-eabi/4.8.3/include">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/lib/gcc/arm-none-eabi/4.8.4/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/lib/gcc/arm-none-eabi/4.8.3/include-fixed">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/lib/gcc/arm-none-eabi/4.8.4/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ACCUM_EPSILON__" value="0x1P-15K">
@@ -367,7 +367,7 @@
 					<entry kind="macro" name="__GNUC_MINOR__" value="8">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="3">
+					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC_STDC_INLINE__" value="1">
@@ -1045,7 +1045,7 @@
 					<entry kind="macro" name="__UTQ_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__VERSION__" value="&quot;4.8.3 20140228 (release) [ARM/embedded-4_8-branch revision 208322]&quot;">
+					<entry kind="macro" name="__VERSION__" value="&quot;4.8.4 20140526 (release) [ARM/embedded-4_8-branch revision 211358]&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VFP_FP__" value="1">
@@ -1080,22 +1080,22 @@
 					</entry>
 				</language>
 				<language id="org.eclipse.cdt.core.g++">
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include/c++/4.8.3">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include/c++/4.8.4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include/c++/4.8.3/arm-none-eabi/armv7e-m">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include/c++/4.8.4/arm-none-eabi/armv7e-m">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include/c++/4.8.3/backward">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include/c++/4.8.4/backward">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/lib/gcc/arm-none-eabi/4.8.3/include">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/lib/gcc/arm-none-eabi/4.8.4/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/lib/gcc/arm-none-eabi/4.8.3/include-fixed">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/lib/gcc/arm-none-eabi/4.8.4/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ACCUM_EPSILON__" value="0x1P-15K">
@@ -1458,7 +1458,7 @@
 					<entry kind="macro" name="__GNUC_MINOR__" value="8">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="3">
+					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC_STDC_INLINE__" value="1">
@@ -2139,7 +2139,7 @@
 					<entry kind="macro" name="__UTQ_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__VERSION__" value="&quot;4.8.3 20140228 (release) [ARM/embedded-4_8-branch revision 208322]&quot;">
+					<entry kind="macro" name="__VERSION__" value="&quot;4.8.4 20140526 (release) [ARM/embedded-4_8-branch revision 211358]&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VFP_FP__" value="1">
@@ -2186,13 +2186,13 @@
 		<extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
 			<provider id="ilg.gnuarmeclipse.managedbuild.cross.GCCBuiltinSpecsDetector">
 				<language id="org.eclipse.cdt.core.gcc">
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/lib/gcc/arm-none-eabi/4.8.3/include">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/lib/gcc/arm-none-eabi/4.8.4/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/lib/gcc/arm-none-eabi/4.8.3/include-fixed">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/lib/gcc/arm-none-eabi/4.8.4/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ACCUM_EPSILON__" value="0x1P-15K">
@@ -2540,7 +2540,7 @@
 					<entry kind="macro" name="__GNUC_MINOR__" value="8">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="3">
+					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC_STDC_INLINE__" value="1">
@@ -3221,7 +3221,7 @@
 					<entry kind="macro" name="__UTQ_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__VERSION__" value="&quot;4.8.3 20140228 (release) [ARM/embedded-4_8-branch revision 208322]&quot;">
+					<entry kind="macro" name="__VERSION__" value="&quot;4.8.4 20140526 (release) [ARM/embedded-4_8-branch revision 211358]&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VFP_FP__" value="1">
@@ -3256,22 +3256,22 @@
 					</entry>
 				</language>
 				<language id="org.eclipse.cdt.core.g++">
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include/c++/4.8.3">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include/c++/4.8.4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include/c++/4.8.3/arm-none-eabi/armv7-m">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include/c++/4.8.4/arm-none-eabi/armv7-m">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include/c++/4.8.3/backward">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include/c++/4.8.4/backward">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/lib/gcc/arm-none-eabi/4.8.3/include">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/lib/gcc/arm-none-eabi/4.8.4/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/lib/gcc/arm-none-eabi/4.8.3/include-fixed">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/lib/gcc/arm-none-eabi/4.8.4/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q1/arm-none-eabi/include">
+					<entry kind="includePath" name="C:/Program Files (x86)/GNU Tools ARM Embedded/4.8 2014q2/arm-none-eabi/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ACCUM_EPSILON__" value="0x1P-15K">
@@ -3625,7 +3625,7 @@
 					<entry kind="macro" name="__GNUC_MINOR__" value="8">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="3">
+					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC_STDC_INLINE__" value="1">
@@ -4309,7 +4309,7 @@
 					<entry kind="macro" name="__UTQ_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__VERSION__" value="&quot;4.8.3 20140228 (release) [ARM/embedded-4_8-branch revision 208322]&quot;">
+					<entry kind="macro" name="__VERSION__" value="&quot;4.8.4 20140526 (release) [ARM/embedded-4_8-branch revision 211358]&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VFP_FP__" value="1">

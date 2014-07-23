@@ -266,361 +266,361 @@
  125              	.LVL17:
  126              	.LBB18:
  127              	.LBB19:
- 128              		.file 2 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cmInstr.h"
-   1:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /**************************************************************************//**
-   2:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @file     core_cmInstr.h
-   3:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @brief    CMSIS Cortex-M Core Instruction Access Header File
-   4:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @version  V2.10
-   5:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @date     19. July 2011
-   6:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  *
-   7:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @note
-   8:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * Copyright (C) 2009-2011 ARM Limited. All rights reserved.
-   9:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  *
-  10:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @par
-  11:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M 
-  12:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * processor based microcontrollers.  This file can be freely distributed 
-  13:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * within development tools that are supporting such ARM based processors. 
-  14:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  *
-  15:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * @par
-  16:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
-  17:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
-  18:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
-  19:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
-  20:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
-  21:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  *
-  22:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  ******************************************************************************/
-  23:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  24:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #ifndef __CORE_CMINSTR_H
-  25:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __CORE_CMINSTR_H
-  26:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  27:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  28:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /* ##########################  Core Instruction Access  ######################### */
-  29:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
-  30:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   Access to dedicated instructions
-  31:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   @{
-  32:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** */
-  33:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  34:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
-  35:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /* ARM armcc specific functions */
-  36:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  37:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #if (__ARMCC_VERSION < 400677)
-  38:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
-  39:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #endif
-  40:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  41:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  42:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
-  43:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  44:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
-  45:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
-  46:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __NOP                             __nop
-  47:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  48:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  49:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
-  50:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  51:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
-  52:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
-  53:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
-  54:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __WFI                             __wfi
-  55:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  56:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  57:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
-  58:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  59:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
-  60:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
-  61:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
-  62:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __WFE                             __wfe
-  63:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  64:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  65:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
-  66:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  67:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
-  68:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
-  69:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __SEV                             __sev
-  70:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  71:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  72:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
-  73:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  74:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
-  75:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
-  76:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
-  77:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
-  78:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __ISB()                           __isb(0xF)
-  79:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  80:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  81:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
-  82:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  83:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
-  84:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
-  85:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
-  86:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __DSB()                           __dsb(0xF)
-  87:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  88:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  89:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
-  90:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  91:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
-  92:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
-  93:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
-  94:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __DMB()                           __dmb(0xF)
-  95:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  96:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  97:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
-  98:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
-  99:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
- 100:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 101:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
- 102:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
- 103:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 104:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __REV                             __rev
- 105:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 106:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 107:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (16 bit)
- 108:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 109:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in two unsigned short values.
- 110:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 111:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
- 112:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
- 113:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 114:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM uint32_t __REV16(uint32_t value)
- 115:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 116:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   rev16 r0, r0
- 117:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   bx lr
- 118:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
- 119:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 120:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 121:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order in signed short value
- 122:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 123:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in a signed short value with sign extension to integer.
- 124:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 125:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
- 126:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
- 127:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 128:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM int32_t __REVSH(int32_t value)
- 129:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 130:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   revsh r0, r0
- 131:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   bx lr
- 132:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
- 133:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 134:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 135:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #if       (__CORTEX_M >= 0x03)
- 136:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 137:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse bit order of value
- 138:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 139:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the bit order of the given value.
- 140:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 141:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
- 142:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
- 143:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 144:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __RBIT                            __rbit
- 145:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 146:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 147:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (8 bit)
- 148:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 149:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 8 bit value.
- 150:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 151:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
- 152:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return             value of type uint8_t at (*ptr)
- 153:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 154:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __LDREXB(ptr)                     ((uint8_t ) __ldrex(ptr))
- 155:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 156:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 157:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (16 bit)
- 158:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 159:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 16 bit values.
- 160:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 161:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
- 162:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint16_t at (*ptr)
- 163:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 164:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __LDREXH(ptr)                     ((uint16_t) __ldrex(ptr))
- 165:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 166:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 167:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (32 bit)
- 168:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 169:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 32 bit values.
- 170:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 171:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
- 172:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint32_t at (*ptr)
- 173:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 174:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __LDREXW(ptr)                     ((uint32_t ) __ldrex(ptr))
- 175:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 176:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 177:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (8 bit)
- 178:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 179:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 8 bit values.
- 180:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 181:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
- 182:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
- 183:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
- 184:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
- 185:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 186:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __STREXB(value, ptr)              __strex(value, ptr)
- 187:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 188:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 189:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (16 bit)
- 190:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 191:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 16 bit values.
- 192:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 193:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
- 194:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
- 195:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
- 196:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
- 197:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 198:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __STREXH(value, ptr)              __strex(value, ptr)
- 199:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 200:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 201:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (32 bit)
- 202:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 203:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 32 bit values.
- 204:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 205:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
- 206:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
- 207:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
- 208:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
- 209:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 210:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __STREXW(value, ptr)              __strex(value, ptr)
- 211:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 212:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 213:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Remove the exclusive lock
- 214:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 215:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function removes the exclusive lock which is created by LDREX.
- 216:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 217:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 218:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __CLREX                           __clrex
- 219:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 220:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 221:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Signed Saturate
- 222:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 223:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function saturates a signed value.
- 224:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 225:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
- 226:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (1..32)
- 227:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
- 228:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 229:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __SSAT                            __ssat
- 230:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 231:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 232:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Unsigned Saturate
- 233:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 234:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function saturates an unsigned value.
- 235:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 236:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
- 237:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (0..31)
- 238:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
- 239:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 240:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __USAT                            __usat
- 241:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 242:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 243:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Count leading zeros
- 244:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 245:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function counts the number of leading zeros of a data value.
- 246:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 247:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to count the leading zeros
- 248:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return             number of leading zeros in value
- 249:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 250:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #define __CLZ                             __clz 
- 251:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 252:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #endif /* (__CORTEX_M >= 0x03) */
- 253:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 254:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 255:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 256:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
- 257:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /* IAR iccarm specific functions */
- 258:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 259:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #include <cmsis_iar.h>
- 260:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 261:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 262:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
- 263:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /* GNU gcc specific functions */
- 264:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 265:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
- 266:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 267:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
- 268:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 269:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __NOP(void)
- 270:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 271:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("nop");
- 272:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
- 273:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 274:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 275:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
- 276:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 277:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
- 278:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
- 279:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 280:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFI(void)
- 281:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 282:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfi");
- 283:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
- 284:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 285:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 286:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
- 287:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 288:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
- 289:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
- 290:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 291:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFE(void)
- 292:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 293:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfe");
- 294:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
- 295:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 296:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 297:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
- 298:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 299:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
- 300:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 301:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __SEV(void)
- 302:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 303:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("sev");
- 304:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
- 305:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 306:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 307:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
- 308:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 309:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
- 310:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
- 311:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
- 312:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 313:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __ISB(void)
- 314:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 315:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("isb");
- 316:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
- 317:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 318:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 319:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
- 320:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 321:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
- 322:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
- 323:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 324:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __DSB(void)
- 325:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 326:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("dsb");
- 327:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
- 328:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 329:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 330:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
- 331:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 332:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
- 333:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
- 334:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 335:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __DMB(void)
- 336:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 337:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("dmb");
- 338:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** }
- 339:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 340:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 341:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
- 342:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 343:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
- 344:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** 
- 345:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
- 346:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
- 347:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****  */
- 348:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __REV(uint32_t value)
- 349:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h **** {
- 350:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   uint32_t result;
- 351:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   
- 352:C:\Users\Filip\Eclipse\Template\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("rev %0, %1" : "=r" (result) : "r" (value) );
+ 128              		.file 2 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\CMSIS\\Include/core_
+   1:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /**************************************************************************//**
+   2:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * @file     core_cmInstr.h
+   3:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * @brief    CMSIS Cortex-M Core Instruction Access Header File
+   4:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * @version  V2.10
+   5:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * @date     19. July 2011
+   6:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  *
+   7:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * @note
+   8:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * Copyright (C) 2009-2011 ARM Limited. All rights reserved.
+   9:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  *
+  10:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * @par
+  11:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M 
+  12:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * processor based microcontrollers.  This file can be freely distributed 
+  13:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * within development tools that are supporting such ARM based processors. 
+  14:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  *
+  15:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * @par
+  16:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  17:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  18:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  19:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  20:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  21:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  *
+  22:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  ******************************************************************************/
+  23:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  24:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #ifndef __CORE_CMINSTR_H
+  25:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __CORE_CMINSTR_H
+  26:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  27:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  28:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /* ##########################  Core Instruction Access  ######################### */
+  29:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
+  30:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   Access to dedicated instructions
+  31:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   @{
+  32:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** */
+  33:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  34:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
+  35:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /* ARM armcc specific functions */
+  36:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  37:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #if (__ARMCC_VERSION < 400677)
+  38:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
+  39:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #endif
+  40:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  41:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  42:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
+  43:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  44:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+  45:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+  46:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __NOP                             __nop
+  47:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  48:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  49:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
+  50:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  51:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+  52:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
+  53:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+  54:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __WFI                             __wfi
+  55:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  56:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  57:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
+  58:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  59:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+  60:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+  61:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+  62:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __WFE                             __wfe
+  63:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  64:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  65:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
+  66:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  67:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+  68:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+  69:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __SEV                             __sev
+  70:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  71:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  72:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
+  73:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  74:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
+  75:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
+  76:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
+  77:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+  78:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __ISB()                           __isb(0xF)
+  79:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  80:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  81:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
+  82:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  83:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
+  84:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
+  85:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+  86:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __DSB()                           __dsb(0xF)
+  87:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  88:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  89:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
+  90:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  91:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
+  92:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
+  93:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+  94:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __DMB()                           __dmb(0xF)
+  95:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  96:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  97:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
+  98:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+  99:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
+ 100:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 101:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 102:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 103:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 104:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __REV                             __rev
+ 105:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 106:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 107:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (16 bit)
+ 108:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 109:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in two unsigned short values.
+ 110:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 111:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 112:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 113:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 114:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM uint32_t __REV16(uint32_t value)
+ 115:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 116:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   rev16 r0, r0
+ 117:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   bx lr
+ 118:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** }
+ 119:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 120:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 121:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order in signed short value
+ 122:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 123:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in a signed short value with sign extension to integer.
+ 124:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 125:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 126:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 127:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 128:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** static __INLINE __ASM int32_t __REVSH(int32_t value)
+ 129:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 130:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   revsh r0, r0
+ 131:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   bx lr
+ 132:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** }
+ 133:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 134:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 135:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #if       (__CORTEX_M >= 0x03)
+ 136:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 137:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse bit order of value
+ 138:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 139:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function reverses the bit order of the given value.
+ 140:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 141:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 142:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 143:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 144:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __RBIT                            __rbit
+ 145:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 146:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 147:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (8 bit)
+ 148:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 149:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 8 bit value.
+ 150:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 151:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 152:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return             value of type uint8_t at (*ptr)
+ 153:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 154:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __LDREXB(ptr)                     ((uint8_t ) __ldrex(ptr))
+ 155:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 156:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 157:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (16 bit)
+ 158:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 159:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 16 bit values.
+ 160:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 161:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 162:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint16_t at (*ptr)
+ 163:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 164:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __LDREXH(ptr)                     ((uint16_t) __ldrex(ptr))
+ 165:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 166:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 167:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  LDR Exclusive (32 bit)
+ 168:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 169:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive LDR command for 32 bit values.
+ 170:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 171:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 172:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return        value of type uint32_t at (*ptr)
+ 173:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 174:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __LDREXW(ptr)                     ((uint32_t ) __ldrex(ptr))
+ 175:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 176:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 177:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (8 bit)
+ 178:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 179:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 8 bit values.
+ 180:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 181:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 182:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 183:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 184:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 185:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 186:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __STREXB(value, ptr)              __strex(value, ptr)
+ 187:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 188:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 189:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (16 bit)
+ 190:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 191:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 16 bit values.
+ 192:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 193:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 194:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 195:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 196:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 197:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 198:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __STREXH(value, ptr)              __strex(value, ptr)
+ 199:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 200:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 201:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  STR Exclusive (32 bit)
+ 202:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 203:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function performs a exclusive STR command for 32 bit values.
+ 204:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 205:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to store
+ 206:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 207:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return          0  Function succeeded
+ 208:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return          1  Function failed
+ 209:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 210:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __STREXW(value, ptr)              __strex(value, ptr)
+ 211:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 212:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 213:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Remove the exclusive lock
+ 214:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 215:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function removes the exclusive lock which is created by LDREX.
+ 216:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 217:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 218:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __CLREX                           __clrex
+ 219:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 220:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 221:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Signed Saturate
+ 222:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 223:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function saturates a signed value.
+ 224:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 225:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 226:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (1..32)
+ 227:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
+ 228:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 229:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __SSAT                            __ssat
+ 230:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 231:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 232:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Unsigned Saturate
+ 233:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 234:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function saturates an unsigned value.
+ 235:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 236:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 237:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (0..31)
+ 238:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return             Saturated value
+ 239:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 240:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __USAT                            __usat
+ 241:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 242:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 243:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Count leading zeros
+ 244:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 245:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function counts the number of leading zeros of a data value.
+ 246:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 247:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]  value  Value to count the leading zeros
+ 248:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return             number of leading zeros in value
+ 249:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 250:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #define __CLZ                             __clz 
+ 251:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 252:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #endif /* (__CORTEX_M >= 0x03) */
+ 253:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 254:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 255:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 256:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
+ 257:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /* IAR iccarm specific functions */
+ 258:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 259:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #include <cmsis_iar.h>
+ 260:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 261:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 262:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
+ 263:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /* GNU gcc specific functions */
+ 264:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 265:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  No Operation
+ 266:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 267:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+ 268:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 269:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __NOP(void)
+ 270:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 271:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("nop");
+ 272:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** }
+ 273:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 274:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 275:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Interrupt
+ 276:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 277:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+ 278:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     until one of a number of events occurs.
+ 279:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 280:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFI(void)
+ 281:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 282:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfi");
+ 283:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** }
+ 284:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 285:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 286:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Wait For Event
+ 287:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 288:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+ 289:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+ 290:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 291:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __WFE(void)
+ 292:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 293:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("wfe");
+ 294:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** }
+ 295:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 296:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 297:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Send Event
+ 298:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 299:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+ 300:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 301:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __SEV(void)
+ 302:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 303:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("sev");
+ 304:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** }
+ 305:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 306:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 307:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
+ 308:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 309:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor, 
+ 310:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or 
+ 311:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     memory, after the instruction has been completed.
+ 312:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 313:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __ISB(void)
+ 314:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 315:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("isb");
+ 316:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** }
+ 317:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 318:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 319:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Synchronization Barrier
+ 320:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 321:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier. 
+ 322:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
+ 323:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 324:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __DSB(void)
+ 325:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 326:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("dsb");
+ 327:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** }
+ 328:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 329:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 330:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Data Memory Barrier
+ 331:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 332:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before 
+ 333:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     and after the instruction, without ensuring their completion.
+ 334:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 335:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __DMB(void)
+ 336:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 337:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("dmb");
+ 338:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** }
+ 339:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 340:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 341:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
+ 342:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 343:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     This function reverses the byte order in integer value.
+ 344:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** 
+ 345:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 346:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****     \return               Reversed value
+ 347:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****  */
+ 348:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE uint32_t __REV(uint32_t value)
+ 349:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h **** {
+ 350:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   uint32_t result;
+ 351:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   
+ 352:C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include\core_cmInstr.h ****   __ASM volatile ("rev %0, %1" : "=r" (result) : "r" (value) );
  129              		.loc 2 352 0
- 130              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 130              	@ 352 "C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include/core_cmInstr.h" 
  131 0076 1BBA     		rev r3, r3
  132              	@ 0 "" 2
  133              	.LVL18:
@@ -638,7 +638,7 @@
  143              	.LBB20:
  144              	.LBB21:
  145              		.loc 2 352 0
- 146              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 146              	@ 352 "C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include/core_cmInstr.h" 
  147 007c 1BBA     		rev r3, r3
  148              	@ 0 "" 2
  149              	.LVL21:
@@ -656,7 +656,7 @@
  159              	.LBB22:
  160              	.LBB23:
  161              		.loc 2 352 0
- 162              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 162              	@ 352 "C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include/core_cmInstr.h" 
  163 0082 1BBA     		rev r3, r3
  164              	@ 0 "" 2
  165              	.LVL24:
@@ -674,7 +674,7 @@
  175              	.LBB24:
  176              	.LBB25:
  177              		.loc 2 352 0
- 178              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
+ 178              	@ 352 "C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include/core_cmInstr.h" 
  179 0088 1BBA     		rev r3, r3
  180              	@ 0 "" 2
  181              	.LVL27:
@@ -807,99 +807,103 @@
  190:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   if(Keylen > 64)
  265              		.loc 1 190 0
  266 00d8 402D     		cmp	r5, #64
+ 267 00da 03D9     		bls	.L10
  191:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
  192:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* HMAC long Key */
  193:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     MD5_HASH_InitStructure.HASH_HMACKeyType = HASH_HMACKeyType_LongKey;
- 267              		.loc 1 193 0
- 268 00da 8CBF     		ite	hi
- 269 00dc 4FF48033 		movhi	r3, #65536
+ 268              		.loc 1 193 0
+ 269 00dc 4FF48033 		mov	r3, #65536
+ 270 00e0 0B93     		str	r3, [sp, #44]
+ 271 00e2 01E0     		b	.L11
+ 272              	.L10:
  194:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
  195:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   else
  196:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
  197:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* HMAC short Key */
  198:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     MD5_HASH_InitStructure.HASH_HMACKeyType = HASH_HMACKeyType_ShortKey;
- 270              		.loc 1 198 0
- 271 00e0 0023     		movls	r3, #0
- 272 00e2 0B93     		str	r3, [sp, #44]
+ 273              		.loc 1 198 0
+ 274 00e4 0023     		movs	r3, #0
+ 275 00e6 0B93     		str	r3, [sp, #44]
+ 276              	.L11:
  199:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
  200:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_Init(&MD5_HASH_InitStructure);
- 273              		.loc 1 200 0
- 274 00e4 08A8     		add	r0, sp, #32
- 275 00e6 FFF7FEFF 		bl	HASH_Init
- 276              	.LVL37:
+ 277              		.loc 1 200 0
+ 278 00e8 08A8     		add	r0, sp, #32
+ 279 00ea FFF7FEFF 		bl	HASH_Init
+ 280              	.LVL37:
  201:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  202:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Configure the number of valid bits in last word of the Key */
  203:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_SetLastWordValidBitsNbr(nbvalidbitskey);
- 277              		.loc 1 203 0
- 278 00ea BDF80800 		ldrh	r0, [sp, #8]
- 279 00ee 80B2     		uxth	r0, r0
- 280 00f0 FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
- 281              	.LVL38:
+ 281              		.loc 1 203 0
+ 282 00ee BDF80800 		ldrh	r0, [sp, #8]
+ 283 00f2 80B2     		uxth	r0, r0
+ 284 00f4 FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
+ 285              	.LVL38:
  204:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  205:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Write the Key */
  206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   for(i=0; i<Keylen; i+=4)
- 282              		.loc 1 206 0
- 283 00f4 0024     		movs	r4, #0
- 284 00f6 04E0     		b	.L12
- 285              	.LVL39:
- 286              	.L13:
+ 286              		.loc 1 206 0
+ 287 00f8 0024     		movs	r4, #0
+ 288 00fa 04E0     		b	.L12
+ 289              	.LVL39:
+ 290              	.L13:
  207:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
  208:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     HASH_DataIn(*(uint32_t*)keyaddr);
- 287              		.loc 1 208 0 discriminator 2
- 288 00f8 59F8040B 		ldr	r0, [r9], #4
- 289              	.LVL40:
- 290 00fc FFF7FEFF 		bl	HASH_DataIn
- 291              	.LVL41:
+ 291              		.loc 1 208 0 discriminator 2
+ 292 00fc 59F8040B 		ldr	r0, [r9], #4
+ 293              	.LVL40:
+ 294 0100 FFF7FEFF 		bl	HASH_DataIn
+ 295              	.LVL41:
  206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   for(i=0; i<Keylen; i+=4)
- 292              		.loc 1 206 0 discriminator 2
- 293 0100 0434     		adds	r4, r4, #4
- 294              	.LVL42:
- 295              	.L12:
+ 296              		.loc 1 206 0 discriminator 2
+ 297 0104 0434     		adds	r4, r4, #4
+ 298              	.LVL42:
+ 299              	.L12:
  206:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   for(i=0; i<Keylen; i+=4)
- 296              		.loc 1 206 0 is_stmt 0 discriminator 1
- 297 0102 AC42     		cmp	r4, r5
- 298 0104 F8D3     		bcc	.L13
+ 300              		.loc 1 206 0 is_stmt 0 discriminator 1
+ 301 0106 AC42     		cmp	r4, r5
+ 302 0108 F8D3     		bcc	.L13
  209:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     keyaddr+=4;
  210:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
  211:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   
  212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* Start the HASH processor */
  213:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   HASH_StartDigest();
- 299              		.loc 1 213 0 is_stmt 1
- 300 0106 FFF7FEFF 		bl	HASH_StartDigest
- 301              	.LVL43:
+ 303              		.loc 1 213 0 is_stmt 1
+ 304 010a FFF7FEFF 		bl	HASH_StartDigest
+ 305              	.LVL43:
  214:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  215:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   /* wait until the Busy flag is RESET */
  216:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   do
  217:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
  218:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     busystatus = HASH_GetFlagStatus(HASH_FLAG_BUSY);
- 302              		.loc 1 218 0
- 303 010a 4FF00809 		mov	r9, #8
- 304              	.LVL44:
- 305              	.L15:
- 306              		.loc 1 218 0 is_stmt 0 discriminator 1
- 307 010e 4846     		mov	r0, r9
- 308 0110 FFF7FEFF 		bl	HASH_GetFlagStatus
- 309              	.LVL45:
- 310 0114 0346     		mov	r3, r0
- 311              	.LVL46:
+ 306              		.loc 1 218 0
+ 307 010e 4FF00809 		mov	r9, #8
+ 308              	.LVL44:
+ 309              	.L15:
+ 310              		.loc 1 218 0 is_stmt 0 discriminator 1
+ 311 0112 4846     		mov	r0, r9
+ 312 0114 FFF7FEFF 		bl	HASH_GetFlagStatus
+ 313              	.LVL45:
+ 314 0118 0346     		mov	r3, r0
+ 315              	.LVL46:
  219:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     counter++;
- 312              		.loc 1 219 0 is_stmt 1 discriminator 1
- 313 0116 019C     		ldr	r4, [sp, #4]
- 314 0118 0134     		adds	r4, r4, #1
- 315 011a 0194     		str	r4, [sp, #4]
+ 316              		.loc 1 219 0 is_stmt 1 discriminator 1
+ 317 011a 019C     		ldr	r4, [sp, #4]
+ 318 011c 0134     		adds	r4, r4, #1
+ 319 011e 0194     		str	r4, [sp, #4]
  220:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }while ((counter != MD5BUSY_TIMEOUT) && (busystatus != RESET));
- 316              		.loc 1 220 0 discriminator 1
- 317 011c 019C     		ldr	r4, [sp, #4]
- 318 011e B4F5803F 		cmp	r4, #65536
- 319 0122 01D0     		beq	.L14
- 320 0124 0028     		cmp	r0, #0
- 321 0126 F2D1     		bne	.L15
- 322              	.L14:
+ 320              		.loc 1 220 0 discriminator 1
+ 321 0120 019C     		ldr	r4, [sp, #4]
+ 322 0122 B4F5803F 		cmp	r4, #65536
+ 323 0126 01D0     		beq	.L14
+ 324 0128 0028     		cmp	r0, #0
+ 325 012a F2D1     		bne	.L15
+ 326              	.L14:
  221:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  222:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   if (busystatus != RESET)
- 323              		.loc 1 222 0
- 324 0128 002B     		cmp	r3, #0
- 325 012a 54D1     		bne	.L25
+ 327              		.loc 1 222 0
+ 328 012c 002B     		cmp	r3, #0
+ 329 012e 54D1     		bne	.L25
  223:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
  224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****      status = ERROR;
  225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
@@ -907,81 +911,81 @@
  227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   {
  228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* Configure the number of valid bits in last word of the Input data */
  229:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     HASH_SetLastWordValidBitsNbr(nbvalidbitsdata);
- 326              		.loc 1 229 0
- 327 012c BDF80A00 		ldrh	r0, [sp, #10]
- 328              	.LVL47:
- 329 0130 80B2     		uxth	r0, r0
- 330 0132 FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
- 331              	.LVL48:
+ 330              		.loc 1 229 0
+ 331 0130 BDF80A00 		ldrh	r0, [sp, #10]
+ 332              	.LVL47:
+ 333 0134 80B2     		uxth	r0, r0
+ 334 0136 FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
+ 335              	.LVL48:
  230:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  231:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* Write the Input block in the IN FIFO */
  232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     for(i=0; i<Ilen; i+=4)
- 332              		.loc 1 232 0
- 333 0136 0024     		movs	r4, #0
- 334 0138 04E0     		b	.L17
- 335              	.LVL49:
- 336              	.L18:
+ 336              		.loc 1 232 0
+ 337 013a 0024     		movs	r4, #0
+ 338 013c 04E0     		b	.L17
+ 339              	.LVL49:
+ 340              	.L18:
  233:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     {
  234:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       HASH_DataIn(*(uint32_t*)inputaddr);
- 337              		.loc 1 234 0 discriminator 2
- 338 013a 56F8040B 		ldr	r0, [r6], #4
- 339              	.LVL50:
- 340 013e FFF7FEFF 		bl	HASH_DataIn
- 341              	.LVL51:
+ 341              		.loc 1 234 0 discriminator 2
+ 342 013e 56F8040B 		ldr	r0, [r6], #4
+ 343              	.LVL50:
+ 344 0142 FFF7FEFF 		bl	HASH_DataIn
+ 345              	.LVL51:
  232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     for(i=0; i<Ilen; i+=4)
- 342              		.loc 1 232 0 discriminator 2
- 343 0142 0434     		adds	r4, r4, #4
- 344              	.LVL52:
- 345              	.L17:
+ 346              		.loc 1 232 0 discriminator 2
+ 347 0146 0434     		adds	r4, r4, #4
+ 348              	.LVL52:
+ 349              	.L17:
  232:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     for(i=0; i<Ilen; i+=4)
- 346              		.loc 1 232 0 is_stmt 0 discriminator 1
- 347 0144 BC42     		cmp	r4, r7
- 348 0146 F8D3     		bcc	.L18
+ 350              		.loc 1 232 0 is_stmt 0 discriminator 1
+ 351 0148 BC42     		cmp	r4, r7
+ 352 014a F8D3     		bcc	.L18
  235:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       inputaddr+=4;
  236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     }
  237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  238:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* Start the HASH processor */
  239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     HASH_StartDigest();
- 349              		.loc 1 239 0 is_stmt 1
- 350 0148 FFF7FEFF 		bl	HASH_StartDigest
- 351              	.LVL53:
+ 353              		.loc 1 239 0 is_stmt 1
+ 354 014c FFF7FEFF 		bl	HASH_StartDigest
+ 355              	.LVL53:
  240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     /* wait until the Busy flag is RESET */
  242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     counter =0;
- 352              		.loc 1 242 0
- 353 014c 0023     		movs	r3, #0
- 354 014e 0193     		str	r3, [sp, #4]
+ 356              		.loc 1 242 0
+ 357 0150 0023     		movs	r3, #0
+ 358 0152 0193     		str	r3, [sp, #4]
  243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     do
  244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     {
  245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        busystatus = HASH_GetFlagStatus(HASH_FLAG_BUSY);
- 355              		.loc 1 245 0
- 356 0150 0824     		movs	r4, #8
- 357              	.LVL54:
- 358              	.L20:
- 359              		.loc 1 245 0 is_stmt 0 discriminator 1
- 360 0152 2046     		mov	r0, r4
- 361 0154 FFF7FEFF 		bl	HASH_GetFlagStatus
- 362              	.LVL55:
- 363 0158 0246     		mov	r2, r0
- 364              	.LVL56:
+ 359              		.loc 1 245 0
+ 360 0154 0824     		movs	r4, #8
+ 361              	.LVL54:
+ 362              	.L20:
+ 363              		.loc 1 245 0 is_stmt 0 discriminator 1
+ 364 0156 2046     		mov	r0, r4
+ 365 0158 FFF7FEFF 		bl	HASH_GetFlagStatus
+ 366              	.LVL55:
+ 367 015c 0246     		mov	r2, r0
+ 368              	.LVL56:
  246:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        counter++;
- 365              		.loc 1 246 0 is_stmt 1 discriminator 1
- 366 015a 019B     		ldr	r3, [sp, #4]
- 367 015c 0133     		adds	r3, r3, #1
- 368 015e 0193     		str	r3, [sp, #4]
+ 369              		.loc 1 246 0 is_stmt 1 discriminator 1
+ 370 015e 019B     		ldr	r3, [sp, #4]
+ 371 0160 0133     		adds	r3, r3, #1
+ 372 0162 0193     		str	r3, [sp, #4]
  247:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     }while ((counter != MD5BUSY_TIMEOUT) && (busystatus != RESET));
- 369              		.loc 1 247 0 discriminator 1
- 370 0160 019B     		ldr	r3, [sp, #4]
- 371 0162 B3F5803F 		cmp	r3, #65536
- 372 0166 01D0     		beq	.L19
- 373 0168 0028     		cmp	r0, #0
- 374 016a F2D1     		bne	.L20
- 375              	.L19:
+ 373              		.loc 1 247 0 discriminator 1
+ 374 0164 019B     		ldr	r3, [sp, #4]
+ 375 0166 B3F5803F 		cmp	r3, #65536
+ 376 016a 01D0     		beq	.L19
+ 377 016c 0028     		cmp	r0, #0
+ 378 016e F2D1     		bne	.L20
+ 379              	.L19:
  248:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  249:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     if (busystatus != RESET)
- 376              		.loc 1 249 0
- 377 016c 002A     		cmp	r2, #0
- 378 016e 34D1     		bne	.L26
+ 380              		.loc 1 249 0
+ 381 0170 002A     		cmp	r2, #0
+ 382 0172 34D1     		bne	.L26
  250:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     {
  251:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       status = ERROR;
  252:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     }
@@ -989,81 +993,81 @@
  254:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     {  
  255:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       /* Configure the number of valid bits in last word of the Key */
  256:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       HASH_SetLastWordValidBitsNbr(nbvalidbitskey);
- 379              		.loc 1 256 0
- 380 0170 BDF80800 		ldrh	r0, [sp, #8]
- 381              	.LVL57:
- 382 0174 80B2     		uxth	r0, r0
- 383 0176 FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
- 384              	.LVL58:
+ 383              		.loc 1 256 0
+ 384 0174 BDF80800 		ldrh	r0, [sp, #8]
+ 385              	.LVL57:
+ 386 0178 80B2     		uxth	r0, r0
+ 387 017a FFF7FEFF 		bl	HASH_SetLastWordValidBitsNbr
+ 388              	.LVL58:
  257:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  258:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       /* Write the Key */
  259:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       keyaddr = (uint32_t)Key;
  260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       for(i=0; i<Keylen; i+=4)
- 385              		.loc 1 260 0
- 386 017a 0024     		movs	r4, #0
- 387 017c 04E0     		b	.L21
- 388              	.LVL59:
- 389              	.L22:
+ 389              		.loc 1 260 0
+ 390 017e 0024     		movs	r4, #0
+ 391 0180 04E0     		b	.L21
+ 392              	.LVL59:
+ 393              	.L22:
  261:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       {
  262:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****         HASH_DataIn(*(uint32_t*)keyaddr);
- 390              		.loc 1 262 0 discriminator 2
- 391 017e 58F8040B 		ldr	r0, [r8], #4
- 392              	.LVL60:
- 393 0182 FFF7FEFF 		bl	HASH_DataIn
- 394              	.LVL61:
+ 394              		.loc 1 262 0 discriminator 2
+ 395 0182 58F8040B 		ldr	r0, [r8], #4
+ 396              	.LVL60:
+ 397 0186 FFF7FEFF 		bl	HASH_DataIn
+ 398              	.LVL61:
  260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       for(i=0; i<Keylen; i+=4)
- 395              		.loc 1 260 0 discriminator 2
- 396 0186 0434     		adds	r4, r4, #4
- 397              	.LVL62:
- 398              	.L21:
+ 399              		.loc 1 260 0 discriminator 2
+ 400 018a 0434     		adds	r4, r4, #4
+ 401              	.LVL62:
+ 402              	.L21:
  260:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       for(i=0; i<Keylen; i+=4)
- 399              		.loc 1 260 0 is_stmt 0 discriminator 1
- 400 0188 AC42     		cmp	r4, r5
- 401 018a F8D3     		bcc	.L22
+ 403              		.loc 1 260 0 is_stmt 0 discriminator 1
+ 404 018c AC42     		cmp	r4, r5
+ 405 018e F8D3     		bcc	.L22
  263:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****         keyaddr+=4;
  264:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       }
  265:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   
  266:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        /* Start the HASH processor */
  267:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        HASH_StartDigest();
- 402              		.loc 1 267 0 is_stmt 1
- 403 018c FFF7FEFF 		bl	HASH_StartDigest
- 404              	.LVL63:
+ 406              		.loc 1 267 0 is_stmt 1
+ 407 0190 FFF7FEFF 		bl	HASH_StartDigest
+ 408              	.LVL63:
  268:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  269:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        /* wait until the Busy flag is RESET */
  270:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        counter =0;
- 405              		.loc 1 270 0
- 406 0190 0023     		movs	r3, #0
- 407 0192 0193     		str	r3, [sp, #4]
+ 409              		.loc 1 270 0
+ 410 0194 0023     		movs	r3, #0
+ 411 0196 0193     		str	r3, [sp, #4]
  271:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        do
  272:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****        {
  273:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****           busystatus = HASH_GetFlagStatus(HASH_FLAG_BUSY);
- 408              		.loc 1 273 0
- 409 0194 0824     		movs	r4, #8
- 410              	.LVL64:
- 411              	.L24:
- 412              		.loc 1 273 0 is_stmt 0 discriminator 1
- 413 0196 2046     		mov	r0, r4
- 414 0198 FFF7FEFF 		bl	HASH_GetFlagStatus
- 415              	.LVL65:
- 416 019c 0246     		mov	r2, r0
- 417              	.LVL66:
+ 412              		.loc 1 273 0
+ 413 0198 0824     		movs	r4, #8
+ 414              	.LVL64:
+ 415              	.L24:
+ 416              		.loc 1 273 0 is_stmt 0 discriminator 1
+ 417 019a 2046     		mov	r0, r4
+ 418 019c FFF7FEFF 		bl	HASH_GetFlagStatus
+ 419              	.LVL65:
+ 420 01a0 0246     		mov	r2, r0
+ 421              	.LVL66:
  274:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****           counter++;
- 418              		.loc 1 274 0 is_stmt 1 discriminator 1
- 419 019e 019B     		ldr	r3, [sp, #4]
- 420 01a0 0133     		adds	r3, r3, #1
- 421 01a2 0193     		str	r3, [sp, #4]
+ 422              		.loc 1 274 0 is_stmt 1 discriminator 1
+ 423 01a2 019B     		ldr	r3, [sp, #4]
+ 424 01a4 0133     		adds	r3, r3, #1
+ 425 01a6 0193     		str	r3, [sp, #4]
  275:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       }while ((counter != MD5BUSY_TIMEOUT) && (busystatus != RESET));
- 422              		.loc 1 275 0 discriminator 1
- 423 01a4 019B     		ldr	r3, [sp, #4]
- 424 01a6 B3F5803F 		cmp	r3, #65536
- 425 01aa 01D0     		beq	.L23
- 426 01ac 0028     		cmp	r0, #0
- 427 01ae F2D1     		bne	.L24
- 428              	.L23:
+ 426              		.loc 1 275 0 discriminator 1
+ 427 01a8 019B     		ldr	r3, [sp, #4]
+ 428 01aa B3F5803F 		cmp	r3, #65536
+ 429 01ae 01D0     		beq	.L23
+ 430 01b0 0028     		cmp	r0, #0
+ 431 01b2 F2D1     		bne	.L24
+ 432              	.L23:
  276:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** 
  277:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       if (busystatus != RESET)
- 429              		.loc 1 277 0
- 430 01b0 AAB9     		cbnz	r2, .L27
+ 433              		.loc 1 277 0
+ 434 01b4 AAB9     		cbnz	r2, .L27
  278:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       {
  279:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          status = ERROR;
  280:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       }
@@ -1071,131 +1075,131 @@
  282:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       {
  283:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          /* Read the message digest */
  284:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          HASH_GetDigest(&MD5_MessageDigest);
- 431              		.loc 1 284 0
- 432 01b2 03A8     		add	r0, sp, #12
- 433              	.LVL67:
- 434 01b4 FFF7FEFF 		bl	HASH_GetDigest
- 435              	.LVL68:
+ 435              		.loc 1 284 0
+ 436 01b6 03A8     		add	r0, sp, #12
+ 437              	.LVL67:
+ 438 01b8 FFF7FEFF 		bl	HASH_GetDigest
+ 439              	.LVL68:
  285:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[0]);
- 436              		.loc 1 285 0
- 437 01b8 039B     		ldr	r3, [sp, #12]
- 438              	.LVL69:
- 439              	.LBB26:
- 440              	.LBB27:
- 441              		.loc 2 352 0
- 442              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
- 443 01ba 1BBA     		rev r3, r3
- 444              	@ 0 "" 2
- 445              	.LVL70:
- 446              		.thumb
- 447              	.LBE27:
- 448              	.LBE26:
- 449              		.loc 1 285 0
- 450 01bc 149A     		ldr	r2, [sp, #80]
- 451 01be 1360     		str	r3, [r2]
- 452              	.LVL71:
+ 440              		.loc 1 285 0
+ 441 01bc 039B     		ldr	r3, [sp, #12]
+ 442              	.LVL69:
+ 443              	.LBB26:
+ 444              	.LBB27:
+ 445              		.loc 2 352 0
+ 446              	@ 352 "C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include/core_cmInstr.h" 
+ 447 01be 1BBA     		rev r3, r3
+ 448              	@ 0 "" 2
+ 449              	.LVL70:
+ 450              		.thumb
+ 451              	.LBE27:
+ 452              	.LBE26:
+ 453              		.loc 1 285 0
+ 454 01c0 149A     		ldr	r2, [sp, #80]
+ 455 01c2 1360     		str	r3, [r2]
+ 456              	.LVL71:
  286:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          outputaddr+=4;
  287:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[1]);
- 453              		.loc 1 287 0
- 454 01c0 049B     		ldr	r3, [sp, #16]
- 455              	.LVL72:
- 456              	.LBB28:
- 457              	.LBB29:
- 458              		.loc 2 352 0
- 459              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
- 460 01c2 1BBA     		rev r3, r3
- 461              	@ 0 "" 2
- 462              	.LVL73:
- 463              		.thumb
- 464              	.LBE29:
- 465              	.LBE28:
- 466              		.loc 1 287 0
- 467 01c4 5360     		str	r3, [r2, #4]
- 468              	.LVL74:
+ 457              		.loc 1 287 0
+ 458 01c4 049B     		ldr	r3, [sp, #16]
+ 459              	.LVL72:
+ 460              	.LBB28:
+ 461              	.LBB29:
+ 462              		.loc 2 352 0
+ 463              	@ 352 "C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include/core_cmInstr.h" 
+ 464 01c6 1BBA     		rev r3, r3
+ 465              	@ 0 "" 2
+ 466              	.LVL73:
+ 467              		.thumb
+ 468              	.LBE29:
+ 469              	.LBE28:
+ 470              		.loc 1 287 0
+ 471 01c8 5360     		str	r3, [r2, #4]
+ 472              	.LVL74:
  288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          outputaddr+=4;
  289:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[2]);
- 469              		.loc 1 289 0
- 470 01c6 059B     		ldr	r3, [sp, #20]
- 471              	.LVL75:
- 472              	.LBB30:
- 473              	.LBB31:
- 474              		.loc 2 352 0
- 475              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
- 476 01c8 1BBA     		rev r3, r3
- 477              	@ 0 "" 2
- 478              	.LVL76:
- 479              		.thumb
- 480              	.LBE31:
- 481              	.LBE30:
- 482              		.loc 1 289 0
- 483 01ca 9360     		str	r3, [r2, #8]
- 484              	.LVL77:
+ 473              		.loc 1 289 0
+ 474 01ca 059B     		ldr	r3, [sp, #20]
+ 475              	.LVL75:
+ 476              	.LBB30:
+ 477              	.LBB31:
+ 478              		.loc 2 352 0
+ 479              	@ 352 "C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include/core_cmInstr.h" 
+ 480 01cc 1BBA     		rev r3, r3
+ 481              	@ 0 "" 2
+ 482              	.LVL76:
+ 483              		.thumb
+ 484              	.LBE31:
+ 485              	.LBE30:
+ 486              		.loc 1 289 0
+ 487 01ce 9360     		str	r3, [r2, #8]
+ 488              	.LVL77:
  290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          outputaddr+=4;
  291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          *(uint32_t*)(outputaddr)  = __REV(MD5_MessageDigest.Data[3]);
- 485              		.loc 1 291 0
- 486 01cc 069B     		ldr	r3, [sp, #24]
- 487              	.LVL78:
- 488              	.LBB32:
- 489              	.LBB33:
- 490              		.loc 2 352 0
- 491              	@ 352 "C:\Users\Filip\Eclipse\Template\CMSIS\Include/core_cmInstr.h" 1
- 492 01ce 1BBA     		rev r3, r3
- 493              	@ 0 "" 2
- 494              	.LVL79:
- 495              		.thumb
- 496              	.LBE33:
- 497              	.LBE32:
- 498              		.loc 1 291 0
- 499 01d0 D360     		str	r3, [r2, #12]
+ 489              		.loc 1 291 0
+ 490 01d0 069B     		ldr	r3, [sp, #24]
+ 491              	.LVL78:
+ 492              	.LBB32:
+ 493              	.LBB33:
+ 494              		.loc 2 352 0
+ 495              	@ 352 "C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include/core_cmInstr.h" 
+ 496 01d2 1BBA     		rev r3, r3
+ 497              	@ 0 "" 2
+ 498              	.LVL79:
+ 499              		.thumb
+ 500              	.LBE33:
+ 501              	.LBE32:
+ 502              		.loc 1 291 0
+ 503 01d4 D360     		str	r3, [r2, #12]
  172:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   ErrorStatus status = SUCCESS;
- 500              		.loc 1 172 0
- 501 01d2 0120     		movs	r0, #1
- 502 01d4 04E0     		b	.L16
- 503              	.LVL80:
- 504              	.L25:
+ 504              		.loc 1 172 0
+ 505 01d6 0120     		movs	r0, #1
+ 506 01d8 04E0     		b	.L16
+ 507              	.LVL80:
+ 508              	.L25:
  224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****      status = ERROR;
- 505              		.loc 1 224 0
- 506 01d6 0020     		movs	r0, #0
- 507              	.LVL81:
- 508 01d8 02E0     		b	.L16
- 509              	.LVL82:
- 510              	.L26:
+ 509              		.loc 1 224 0
+ 510 01da 0020     		movs	r0, #0
+ 511              	.LVL81:
+ 512 01dc 02E0     		b	.L16
+ 513              	.LVL82:
+ 514              	.L26:
  251:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       status = ERROR;
- 511              		.loc 1 251 0
- 512 01da 0020     		movs	r0, #0
- 513              	.LVL83:
- 514 01dc 00E0     		b	.L16
- 515              	.LVL84:
- 516              	.L27:
+ 515              		.loc 1 251 0
+ 516 01de 0020     		movs	r0, #0
+ 517              	.LVL83:
+ 518 01e0 00E0     		b	.L16
+ 519              	.LVL84:
+ 520              	.L27:
  279:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****          status = ERROR;
- 517              		.loc 1 279 0
- 518 01de 0020     		movs	r0, #0
- 519              	.LVL85:
- 520              	.L16:
+ 521              		.loc 1 279 0
+ 522 01e2 0020     		movs	r0, #0
+ 523              	.LVL85:
+ 524              	.L16:
  292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****       }
  293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****     }
  294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   }
  295:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c ****   return status;  
  296:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c **** }
- 521              		.loc 1 296 0
- 522 01e0 0DB0     		add	sp, sp, #52
- 523              		@ sp needed
- 524 01e2 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
- 525              		.cfi_endproc
- 526              	.LFE111:
- 528              	.Letext0:
- 529              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 530              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 531              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
- 532              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_hash.h"
- 533              		.file 7 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+ 525              		.loc 1 296 0
+ 526 01e4 0DB0     		add	sp, sp, #52
+ 527              		@ sp needed
+ 528 01e6 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 529              		.cfi_endproc
+ 530              	.LFE111:
+ 532              	.Letext0:
+ 533              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 534              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 535              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx\\Include/s
+ 536              		.file 6 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx_StdPeriph_
+ 537              		.file 7 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\CMSIS\\Include/core_
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hash_md5.c
-C:\Users\Filip\AppData\Local\Temp\cc6vxPq7.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\cc6vxPq7.s:23     .text:00000000 HASH_MD5
-C:\Users\Filip\AppData\Local\Temp\cc6vxPq7.s:208    .text:00000098 HMAC_MD5
+C:\Users\Filip\AppData\Local\Temp\ccfGXOhr.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccfGXOhr.s:23     .text:00000000 HASH_MD5
+C:\Users\Filip\AppData\Local\Temp\ccfGXOhr.s:208    .text:00000098 HMAC_MD5
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

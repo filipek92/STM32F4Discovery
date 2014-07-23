@@ -462,36 +462,39 @@
  265:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****     
  266:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   if ((WWDG->SR) != (uint32_t)RESET)
  211              		.loc 1 266 0
- 212 0080 024B     		ldr	r3, .L20
- 213 0082 9868     		ldr	r0, [r3, #8]
- 214              	.LVL12:
+ 212 0080 034B     		ldr	r3, .L20
+ 213 0082 9B68     		ldr	r3, [r3, #8]
+ 214 0084 0BB1     		cbz	r3, .L19
  267:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   {
  268:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****     bitstatus = SET;
+ 215              		.loc 1 268 0
+ 216 0086 0120     		movs	r0, #1
+ 217 0088 7047     		bx	lr
+ 218              	.L19:
  269:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   }
  270:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   else
  271:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   {
  272:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****     bitstatus = RESET;
+ 219              		.loc 1 272 0
+ 220 008a 0020     		movs	r0, #0
+ 221              	.LVL12:
  273:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   }
  274:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   return bitstatus;
  275:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c **** }
- 215              		.loc 1 275 0
- 216 0084 0030     		adds	r0, r0, #0
- 217 0086 18BF     		it	ne
- 218 0088 0120     		movne	r0, #1
- 219              	.LVL13:
- 220 008a 7047     		bx	lr
- 221              	.L21:
- 222              		.align	2
- 223              	.L20:
- 224 008c 002C0040 		.word	1073753088
- 225              		.cfi_endproc
- 226              	.LFE116:
- 228              		.align	2
- 229              		.global	WWDG_ClearFlag
- 230              		.thumb
- 231              		.thumb_func
- 233              	WWDG_ClearFlag:
- 234              	.LFB117:
+ 222              		.loc 1 275 0
+ 223 008c 7047     		bx	lr
+ 224              	.L21:
+ 225 008e 00BF     		.align	2
+ 226              	.L20:
+ 227 0090 002C0040 		.word	1073753088
+ 228              		.cfi_endproc
+ 229              	.LFE116:
+ 231              		.align	2
+ 232              		.global	WWDG_ClearFlag
+ 233              		.thumb
+ 234              		.thumb_func
+ 236              	WWDG_ClearFlag:
+ 237              	.LFB117:
  276:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c **** 
  277:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c **** /**
  278:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   * @brief  Clears Early Wakeup interrupt flag.
@@ -500,55 +503,55 @@
  281:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   */
  282:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c **** void WWDG_ClearFlag(void)
  283:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c **** {
- 235              		.loc 1 283 0
- 236              		.cfi_startproc
- 237              		@ args = 0, pretend = 0, frame = 0
- 238              		@ frame_needed = 0, uses_anonymous_args = 0
- 239              		@ link register save eliminated.
+ 238              		.loc 1 283 0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242              		@ link register save eliminated.
  284:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c ****   WWDG->SR = (uint32_t)RESET;
- 240              		.loc 1 284 0
- 241 0090 0022     		movs	r2, #0
- 242 0092 014B     		ldr	r3, .L23
- 243 0094 9A60     		str	r2, [r3, #8]
- 244 0096 7047     		bx	lr
- 245              	.L24:
- 246              		.align	2
- 247              	.L23:
- 248 0098 002C0040 		.word	1073753088
- 249              		.cfi_endproc
- 250              	.LFE117:
- 252              	.Letext0:
- 253              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 254              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 255              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
- 256              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
- 257              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_rcc.h"
+ 243              		.loc 1 284 0
+ 244 0094 0022     		movs	r2, #0
+ 245 0096 014B     		ldr	r3, .L23
+ 246 0098 9A60     		str	r2, [r3, #8]
+ 247 009a 7047     		bx	lr
+ 248              	.L24:
+ 249              		.align	2
+ 250              	.L23:
+ 251 009c 002C0040 		.word	1073753088
+ 252              		.cfi_endproc
+ 253              	.LFE117:
+ 255              	.Letext0:
+ 256              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 257              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 258              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx\\Include/stm32f4xx.
+ 259              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\CMSIS\\Include/core_cm4.h"
+ 260              		.file 6 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx_StdPeriph_Driver\\i
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_wwdg.c
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:23     .text:00000000 WWDG_DeInit
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:53     .text:00000018 WWDG_SetPrescaler
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:75     .text:00000028 $d
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:79     .text:0000002c $t
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:84     .text:0000002c WWDG_SetWindowValue
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:118    .text:00000050 $d
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:122    .text:00000054 $t
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:127    .text:00000054 WWDG_EnableIT
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:142    .text:0000005c $d
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:146    .text:00000060 $t
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:151    .text:00000060 WWDG_SetCounter
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:168    .text:0000006c $d
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:172    .text:00000070 $t
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:177    .text:00000070 WWDG_Enable
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:194    .text:0000007c $d
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:198    .text:00000080 $t
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:203    .text:00000080 WWDG_GetFlagStatus
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:224    .text:0000008c $d
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:228    .text:00000090 $t
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:233    .text:00000090 WWDG_ClearFlag
-C:\Users\Filip\AppData\Local\Temp\ccsiIKzm.s:248    .text:00000098 $d
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:23     .text:00000000 WWDG_DeInit
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:53     .text:00000018 WWDG_SetPrescaler
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:75     .text:00000028 $d
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:79     .text:0000002c $t
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:84     .text:0000002c WWDG_SetWindowValue
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:118    .text:00000050 $d
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:122    .text:00000054 $t
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:127    .text:00000054 WWDG_EnableIT
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:142    .text:0000005c $d
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:146    .text:00000060 $t
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:151    .text:00000060 WWDG_SetCounter
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:168    .text:0000006c $d
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:172    .text:00000070 $t
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:177    .text:00000070 WWDG_Enable
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:194    .text:0000007c $d
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:198    .text:00000080 $t
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:203    .text:00000080 WWDG_GetFlagStatus
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:227    .text:00000090 $d
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:231    .text:00000094 $t
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:236    .text:00000094 WWDG_ClearFlag
+C:\Users\Filip\AppData\Local\Temp\ccNbB3nb.s:251    .text:0000009c $d
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

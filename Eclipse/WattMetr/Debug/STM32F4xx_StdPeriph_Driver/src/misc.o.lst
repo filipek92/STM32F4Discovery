@@ -433,52 +433,57 @@
  221:../STM32F4xx_StdPeriph_Driver/src/misc.c ****   if (SysTick_CLKSource == SysTick_CLKSource_HCLK)
  220              		.loc 1 221 0
  221 00b8 0428     		cmp	r0, #4
+ 222 00ba 05D1     		bne	.L18
  222:../STM32F4xx_StdPeriph_Driver/src/misc.c ****   {
  223:../STM32F4xx_StdPeriph_Driver/src/misc.c ****     SysTick->CTRL |= SysTick_CLKSource_HCLK;
- 222              		.loc 1 223 0
- 223 00ba 044B     		ldr	r3, .L20
- 224 00bc 1A68     		ldr	r2, [r3]
- 225 00be 0CBF     		ite	eq
- 226 00c0 42F00402 		orreq	r2, r2, #4
+ 223              		.loc 1 223 0
+ 224 00bc 054B     		ldr	r3, .L20
+ 225 00be 1A68     		ldr	r2, [r3]
+ 226 00c0 42F00402 		orr	r2, r2, #4
+ 227 00c4 1A60     		str	r2, [r3]
+ 228 00c6 7047     		bx	lr
+ 229              	.L18:
  224:../STM32F4xx_StdPeriph_Driver/src/misc.c ****   }
  225:../STM32F4xx_StdPeriph_Driver/src/misc.c ****   else
  226:../STM32F4xx_StdPeriph_Driver/src/misc.c ****   {
  227:../STM32F4xx_StdPeriph_Driver/src/misc.c ****     SysTick->CTRL &= SysTick_CLKSource_HCLK_Div8;
- 227              		.loc 1 227 0
- 228 00c4 22F00402 		bicne	r2, r2, #4
- 229 00c8 1A60     		str	r2, [r3]
- 230 00ca 7047     		bx	lr
- 231              	.L21:
- 232              		.align	2
- 233              	.L20:
- 234 00cc 10E000E0 		.word	-536813552
- 235              		.cfi_endproc
- 236              	.LFE114:
- 238              	.Letext0:
- 239              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 240              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 241              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
- 242              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
- 243              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/misc.h"
+ 230              		.loc 1 227 0
+ 231 00c8 024B     		ldr	r3, .L20
+ 232 00ca 1A68     		ldr	r2, [r3]
+ 233 00cc 22F00402 		bic	r2, r2, #4
+ 234 00d0 1A60     		str	r2, [r3]
+ 235 00d2 7047     		bx	lr
+ 236              	.L21:
+ 237              		.align	2
+ 238              	.L20:
+ 239 00d4 10E000E0 		.word	-536813552
+ 240              		.cfi_endproc
+ 241              	.LFE114:
+ 243              	.Letext0:
+ 244              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 245              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 246              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\CMSIS\\Include/core_cm4.h"
+ 247              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx\\Include/stm32f4xx.
+ 248              		.file 6 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx_StdPeriph_Driver\\i
 DEFINED SYMBOLS
                             *ABS*:00000000 misc.c
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:23     .text:00000000 NVIC_PriorityGroupConfig
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:42     .text:00000010 $d
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:46     .text:00000014 $t
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:51     .text:00000014 NVIC_Init
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:135    .text:00000080 $d
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:140    .text:00000088 $t
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:145    .text:00000088 NVIC_SetVectorTable
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:165    .text:00000098 $d
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:169    .text:0000009c $t
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:174    .text:0000009c NVIC_SystemLPConfig
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:203    .text:000000b4 $d
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:207    .text:000000b8 $t
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:212    .text:000000b8 SysTick_CLKSourceConfig
-C:\Users\Filip\AppData\Local\Temp\ccuxVwkB.s:234    .text:000000cc $d
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:23     .text:00000000 NVIC_PriorityGroupConfig
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:42     .text:00000010 $d
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:46     .text:00000014 $t
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:51     .text:00000014 NVIC_Init
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:135    .text:00000080 $d
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:140    .text:00000088 $t
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:145    .text:00000088 NVIC_SetVectorTable
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:165    .text:00000098 $d
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:169    .text:0000009c $t
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:174    .text:0000009c NVIC_SystemLPConfig
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:203    .text:000000b4 $d
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:207    .text:000000b8 $t
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:212    .text:000000b8 SysTick_CLKSourceConfig
+C:\Users\Filip\AppData\Local\Temp\ccX3TZq1.s:239    .text:000000d4 $d
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

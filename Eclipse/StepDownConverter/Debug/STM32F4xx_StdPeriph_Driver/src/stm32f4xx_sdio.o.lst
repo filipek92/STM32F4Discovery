@@ -1635,35 +1635,40 @@
  808              		.loc 1 875 0
  809 01ec 034B     		ldr	r3, .L76
  810 01ee 5B6B     		ldr	r3, [r3, #52]
- 811 01f0 1840     		ands	r0, r0, r3
- 812              	.LVL44:
+ 811 01f0 0342     		tst	r3, r0
+ 812 01f2 01D0     		beq	.L75
  876:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   {
  877:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****     bitstatus = SET;
+ 813              		.loc 1 877 0
+ 814 01f4 0120     		movs	r0, #1
+ 815              	.LVL44:
+ 816 01f6 7047     		bx	lr
+ 817              	.LVL45:
+ 818              	.L75:
  878:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   }
  879:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   else
  880:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   {
  881:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****     bitstatus = RESET;
+ 819              		.loc 1 881 0
+ 820 01f8 0020     		movs	r0, #0
+ 821              	.LVL46:
  882:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   }
  883:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   return bitstatus;
  884:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** }
- 813              		.loc 1 884 0
- 814 01f2 0030     		adds	r0, r0, #0
- 815 01f4 18BF     		it	ne
- 816 01f6 0120     		movne	r0, #1
- 817              	.LVL45:
- 818 01f8 7047     		bx	lr
- 819              	.L77:
- 820 01fa 00BF     		.align	2
- 821              	.L76:
- 822 01fc 002C0140 		.word	1073818624
- 823              		.cfi_endproc
- 824              	.LFE136:
- 826              		.align	2
- 827              		.global	SDIO_ClearFlag
- 828              		.thumb
- 829              		.thumb_func
- 831              	SDIO_ClearFlag:
- 832              	.LFB137:
+ 822              		.loc 1 884 0
+ 823 01fa 7047     		bx	lr
+ 824              	.L77:
+ 825              		.align	2
+ 826              	.L76:
+ 827 01fc 002C0140 		.word	1073818624
+ 828              		.cfi_endproc
+ 829              	.LFE136:
+ 831              		.align	2
+ 832              		.global	SDIO_ClearFlag
+ 833              		.thumb
+ 834              		.thumb_func
+ 836              	SDIO_ClearFlag:
+ 837              	.LFB137:
  885:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** 
  886:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** /**
  887:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   * @brief  Clears the SDIO's pending flags.
@@ -1686,32 +1691,32 @@
  904:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   */
  905:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** void SDIO_ClearFlag(uint32_t SDIO_FLAG)
  906:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** { 
- 833              		.loc 1 906 0
- 834              		.cfi_startproc
- 835              		@ args = 0, pretend = 0, frame = 0
- 836              		@ frame_needed = 0, uses_anonymous_args = 0
- 837              		@ link register save eliminated.
- 838              	.LVL46:
+ 838              		.loc 1 906 0
+ 839              		.cfi_startproc
+ 840              		@ args = 0, pretend = 0, frame = 0
+ 841              		@ frame_needed = 0, uses_anonymous_args = 0
+ 842              		@ link register save eliminated.
+ 843              	.LVL47:
  907:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   /* Check the parameters */
  908:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   assert_param(IS_SDIO_CLEAR_FLAG(SDIO_FLAG));
  909:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****    
  910:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   SDIO->ICR = SDIO_FLAG;
- 839              		.loc 1 910 0
- 840 0200 014B     		ldr	r3, .L79
- 841 0202 9863     		str	r0, [r3, #56]
- 842 0204 7047     		bx	lr
- 843              	.L80:
- 844 0206 00BF     		.align	2
- 845              	.L79:
- 846 0208 002C0140 		.word	1073818624
- 847              		.cfi_endproc
- 848              	.LFE137:
- 850              		.align	2
- 851              		.global	SDIO_GetITStatus
- 852              		.thumb
- 853              		.thumb_func
- 855              	SDIO_GetITStatus:
- 856              	.LFB138:
+ 844              		.loc 1 910 0
+ 845 0200 014B     		ldr	r3, .L79
+ 846 0202 9863     		str	r0, [r3, #56]
+ 847 0204 7047     		bx	lr
+ 848              	.L80:
+ 849 0206 00BF     		.align	2
+ 850              	.L79:
+ 851 0208 002C0140 		.word	1073818624
+ 852              		.cfi_endproc
+ 853              	.LFE137:
+ 855              		.align	2
+ 856              		.global	SDIO_GetITStatus
+ 857              		.thumb
+ 858              		.thumb_func
+ 860              	SDIO_GetITStatus:
+ 861              	.LFB138:
  911:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** }
  912:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** 
  913:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** /**
@@ -1747,49 +1752,54 @@
  943:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   */
  944:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** ITStatus SDIO_GetITStatus(uint32_t SDIO_IT)
  945:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** { 
- 857              		.loc 1 945 0
- 858              		.cfi_startproc
- 859              		@ args = 0, pretend = 0, frame = 0
- 860              		@ frame_needed = 0, uses_anonymous_args = 0
- 861              		@ link register save eliminated.
- 862              	.LVL47:
+ 862              		.loc 1 945 0
+ 863              		.cfi_startproc
+ 864              		@ args = 0, pretend = 0, frame = 0
+ 865              		@ frame_needed = 0, uses_anonymous_args = 0
+ 866              		@ link register save eliminated.
+ 867              	.LVL48:
  946:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   ITStatus bitstatus = RESET;
  947:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   
  948:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   /* Check the parameters */
  949:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   assert_param(IS_SDIO_GET_IT(SDIO_IT));
  950:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   if ((SDIO->STA & SDIO_IT) != (uint32_t)RESET)  
- 863              		.loc 1 950 0
- 864 020c 034B     		ldr	r3, .L84
- 865 020e 5B6B     		ldr	r3, [r3, #52]
- 866 0210 1840     		ands	r0, r0, r3
- 867              	.LVL48:
+ 868              		.loc 1 950 0
+ 869 020c 034B     		ldr	r3, .L84
+ 870 020e 5B6B     		ldr	r3, [r3, #52]
+ 871 0210 0342     		tst	r3, r0
+ 872 0212 01D0     		beq	.L83
  951:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   {
  952:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****     bitstatus = SET;
+ 873              		.loc 1 952 0
+ 874 0214 0120     		movs	r0, #1
+ 875              	.LVL49:
+ 876 0216 7047     		bx	lr
+ 877              	.LVL50:
+ 878              	.L83:
  953:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   }
  954:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   else
  955:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   {
  956:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****     bitstatus = RESET;
+ 879              		.loc 1 956 0
+ 880 0218 0020     		movs	r0, #0
+ 881              	.LVL51:
  957:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   }
  958:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   return bitstatus;
  959:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** }
- 868              		.loc 1 959 0
- 869 0212 0030     		adds	r0, r0, #0
- 870 0214 18BF     		it	ne
- 871 0216 0120     		movne	r0, #1
- 872              	.LVL49:
- 873 0218 7047     		bx	lr
- 874              	.L85:
- 875 021a 00BF     		.align	2
- 876              	.L84:
- 877 021c 002C0140 		.word	1073818624
- 878              		.cfi_endproc
- 879              	.LFE138:
- 881              		.align	2
- 882              		.global	SDIO_ClearITPendingBit
- 883              		.thumb
- 884              		.thumb_func
- 886              	SDIO_ClearITPendingBit:
- 887              	.LFB139:
+ 882              		.loc 1 959 0
+ 883 021a 7047     		bx	lr
+ 884              	.L85:
+ 885              		.align	2
+ 886              	.L84:
+ 887 021c 002C0140 		.word	1073818624
+ 888              		.cfi_endproc
+ 889              	.LFE138:
+ 891              		.align	2
+ 892              		.global	SDIO_ClearITPendingBit
+ 893              		.thumb
+ 894              		.thumb_func
+ 896              	SDIO_ClearITPendingBit:
+ 897              	.LFB139:
  960:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** 
  961:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** /**
  962:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   * @brief  Clears the SDIO's interrupt pending bits.
@@ -1812,119 +1822,119 @@
  979:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   */
  980:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** void SDIO_ClearITPendingBit(uint32_t SDIO_IT)
  981:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c **** { 
- 888              		.loc 1 981 0
- 889              		.cfi_startproc
- 890              		@ args = 0, pretend = 0, frame = 0
- 891              		@ frame_needed = 0, uses_anonymous_args = 0
- 892              		@ link register save eliminated.
- 893              	.LVL50:
+ 898              		.loc 1 981 0
+ 899              		.cfi_startproc
+ 900              		@ args = 0, pretend = 0, frame = 0
+ 901              		@ frame_needed = 0, uses_anonymous_args = 0
+ 902              		@ link register save eliminated.
+ 903              	.LVL52:
  982:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   /* Check the parameters */
  983:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   assert_param(IS_SDIO_CLEAR_IT(SDIO_IT));
  984:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****    
  985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c ****   SDIO->ICR = SDIO_IT;
- 894              		.loc 1 985 0
- 895 0220 014B     		ldr	r3, .L87
- 896 0222 9863     		str	r0, [r3, #56]
- 897 0224 7047     		bx	lr
- 898              	.L88:
- 899 0226 00BF     		.align	2
- 900              	.L87:
- 901 0228 002C0140 		.word	1073818624
- 902              		.cfi_endproc
- 903              	.LFE139:
- 905              	.Letext0:
- 906              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 907              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 908              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
- 909              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_sdio.h"
- 910              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
- 911              		.file 7 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_rcc.h"
+ 904              		.loc 1 985 0
+ 905 0220 014B     		ldr	r3, .L87
+ 906 0222 9863     		str	r0, [r3, #56]
+ 907 0224 7047     		bx	lr
+ 908              	.L88:
+ 909 0226 00BF     		.align	2
+ 910              	.L87:
+ 911 0228 002C0140 		.word	1073818624
+ 912              		.cfi_endproc
+ 913              	.LFE139:
+ 915              	.Letext0:
+ 916              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 917              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 918              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx\\Include/s
+ 919              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx_StdPeriph_
+ 920              		.file 6 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\CMSIS\\Include/core_
+ 921              		.file 7 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx_StdPeriph_
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_sdio.c
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:23     .text:00000000 SDIO_DeInit
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:53     .text:00000018 SDIO_Init
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:104    .text:00000048 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:108    .text:0000004c $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:113    .text:0000004c SDIO_StructInit
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:143    .text:0000005c SDIO_ClockCmd
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:158    .text:00000064 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:162    .text:00000068 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:167    .text:00000068 SDIO_SetPowerState
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:182    .text:00000070 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:186    .text:00000074 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:191    .text:00000074 SDIO_GetPowerState
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:207    .text:00000080 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:211    .text:00000084 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:216    .text:00000084 SDIO_SendCommand
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:261    .text:000000b0 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:265    .text:000000b4 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:270    .text:000000b4 SDIO_CmdStructInit
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:298    .text:000000c4 SDIO_GetCommandResponse
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:314    .text:000000cc $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:318    .text:000000d0 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:323    .text:000000d0 SDIO_GetResponse
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:351    .text:000000e4 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:355    .text:000000e8 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:360    .text:000000e8 SDIO_DataConfig
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:406    .text:00000114 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:410    .text:00000118 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:415    .text:00000118 SDIO_DataStructInit
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:446    .text:0000012c SDIO_GetDataCounter
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:461    .text:00000134 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:465    .text:00000138 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:470    .text:00000138 SDIO_ReadData
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:485    .text:00000140 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:489    .text:00000144 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:494    .text:00000144 SDIO_WriteData
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:509    .text:0000014c $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:513    .text:00000150 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:518    .text:00000150 SDIO_GetFIFOCount
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:533    .text:00000158 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:537    .text:0000015c $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:542    .text:0000015c SDIO_StartSDIOReadWait
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:557    .text:00000164 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:561    .text:00000168 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:566    .text:00000168 SDIO_StopSDIOReadWait
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:581    .text:00000170 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:585    .text:00000174 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:590    .text:00000174 SDIO_SetSDIOReadWaitMode
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:605    .text:0000017c $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:609    .text:00000180 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:614    .text:00000180 SDIO_SetSDIOOperation
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:629    .text:00000188 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:633    .text:0000018c $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:638    .text:0000018c SDIO_SendSDIOSuspendCmd
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:653    .text:00000194 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:657    .text:00000198 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:662    .text:00000198 SDIO_CommandCompletionCmd
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:677    .text:000001a0 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:681    .text:000001a4 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:686    .text:000001a4 SDIO_CEATAITCmd
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:705    .text:000001b4 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:709    .text:000001b8 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:714    .text:000001b8 SDIO_SendCEATACmd
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:729    .text:000001c0 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:733    .text:000001c4 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:738    .text:000001c4 SDIO_DMACmd
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:753    .text:000001cc $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:757    .text:000001d0 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:762    .text:000001d0 SDIO_ITConfig
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:791    .text:000001e8 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:795    .text:000001ec $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:800    .text:000001ec SDIO_GetFlagStatus
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:822    .text:000001fc $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:826    .text:00000200 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:831    .text:00000200 SDIO_ClearFlag
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:846    .text:00000208 $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:850    .text:0000020c $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:855    .text:0000020c SDIO_GetITStatus
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:877    .text:0000021c $d
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:881    .text:00000220 $t
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:886    .text:00000220 SDIO_ClearITPendingBit
-C:\Users\Filip\AppData\Local\Temp\ccFjJxIM.s:901    .text:00000228 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:23     .text:00000000 SDIO_DeInit
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:53     .text:00000018 SDIO_Init
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:104    .text:00000048 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:108    .text:0000004c $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:113    .text:0000004c SDIO_StructInit
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:143    .text:0000005c SDIO_ClockCmd
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:158    .text:00000064 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:162    .text:00000068 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:167    .text:00000068 SDIO_SetPowerState
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:182    .text:00000070 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:186    .text:00000074 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:191    .text:00000074 SDIO_GetPowerState
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:207    .text:00000080 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:211    .text:00000084 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:216    .text:00000084 SDIO_SendCommand
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:261    .text:000000b0 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:265    .text:000000b4 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:270    .text:000000b4 SDIO_CmdStructInit
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:298    .text:000000c4 SDIO_GetCommandResponse
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:314    .text:000000cc $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:318    .text:000000d0 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:323    .text:000000d0 SDIO_GetResponse
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:351    .text:000000e4 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:355    .text:000000e8 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:360    .text:000000e8 SDIO_DataConfig
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:406    .text:00000114 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:410    .text:00000118 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:415    .text:00000118 SDIO_DataStructInit
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:446    .text:0000012c SDIO_GetDataCounter
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:461    .text:00000134 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:465    .text:00000138 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:470    .text:00000138 SDIO_ReadData
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:485    .text:00000140 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:489    .text:00000144 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:494    .text:00000144 SDIO_WriteData
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:509    .text:0000014c $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:513    .text:00000150 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:518    .text:00000150 SDIO_GetFIFOCount
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:533    .text:00000158 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:537    .text:0000015c $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:542    .text:0000015c SDIO_StartSDIOReadWait
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:557    .text:00000164 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:561    .text:00000168 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:566    .text:00000168 SDIO_StopSDIOReadWait
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:581    .text:00000170 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:585    .text:00000174 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:590    .text:00000174 SDIO_SetSDIOReadWaitMode
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:605    .text:0000017c $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:609    .text:00000180 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:614    .text:00000180 SDIO_SetSDIOOperation
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:629    .text:00000188 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:633    .text:0000018c $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:638    .text:0000018c SDIO_SendSDIOSuspendCmd
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:653    .text:00000194 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:657    .text:00000198 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:662    .text:00000198 SDIO_CommandCompletionCmd
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:677    .text:000001a0 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:681    .text:000001a4 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:686    .text:000001a4 SDIO_CEATAITCmd
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:705    .text:000001b4 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:709    .text:000001b8 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:714    .text:000001b8 SDIO_SendCEATACmd
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:729    .text:000001c0 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:733    .text:000001c4 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:738    .text:000001c4 SDIO_DMACmd
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:753    .text:000001cc $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:757    .text:000001d0 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:762    .text:000001d0 SDIO_ITConfig
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:791    .text:000001e8 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:795    .text:000001ec $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:800    .text:000001ec SDIO_GetFlagStatus
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:827    .text:000001fc $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:831    .text:00000200 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:836    .text:00000200 SDIO_ClearFlag
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:851    .text:00000208 $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:855    .text:0000020c $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:860    .text:0000020c SDIO_GetITStatus
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:887    .text:0000021c $d
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:891    .text:00000220 $t
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:896    .text:00000220 SDIO_ClearITPendingBit
+C:\Users\Filip\AppData\Local\Temp\ccpStqNq.s:911    .text:00000228 $d
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

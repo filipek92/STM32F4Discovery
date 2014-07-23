@@ -2212,66 +2212,69 @@
  1026              		.loc 1 1234 0
  1027 0398 0C30     		adds	r0, r0, #12
  1028              	.LVL108:
- 1029 039a 03E0     		b	.L64
+ 1029 039a 04E0     		b	.L64
  1030              	.LVL109:
  1031              	.L63:
 1235:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1236:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else if (usartreg == 0x02) /* The IT is in CR2 register */
  1032              		.loc 1 1236 0
  1033 039c 022B     		cmp	r3, #2
+ 1034 039e 01D1     		bne	.L65
 1237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1238:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     usartxbase += 0x10;
- 1034              		.loc 1 1238 0
- 1035 039e 0CBF     		ite	eq
- 1036 03a0 1030     		addeq	r0, r0, #16
+ 1035              		.loc 1 1238 0
+ 1036 03a0 1030     		adds	r0, r0, #16
  1037              	.LVL110:
+ 1038 03a2 00E0     		b	.L64
+ 1039              	.LVL111:
+ 1040              	.L65:
 1239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else /* The IT is in CR3 register */
 1241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     usartxbase += 0x14; 
- 1038              		.loc 1 1242 0
- 1039 03a2 1430     		addne	r0, r0, #20
- 1040              	.LVL111:
- 1041              	.L64:
+ 1041              		.loc 1 1242 0
+ 1042 03a4 1430     		adds	r0, r0, #20
+ 1043              	.LVL112:
+ 1044              	.L64:
 1243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if (NewState != DISABLE)
- 1042              		.loc 1 1244 0
- 1043 03a4 1AB1     		cbz	r2, .L66
+ 1045              		.loc 1 1244 0
+ 1046 03a6 1AB1     		cbz	r2, .L66
 1245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1246:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     *(__IO uint32_t*)usartxbase  |= itmask;
- 1044              		.loc 1 1246 0
- 1045 03a6 0368     		ldr	r3, [r0]
- 1046              	.LVL112:
- 1047 03a8 1943     		orrs	r1, r1, r3
- 1048              	.LVL113:
- 1049 03aa 0160     		str	r1, [r0]
- 1050 03ac 03E0     		b	.L62
+ 1047              		.loc 1 1246 0
+ 1048 03a8 0368     		ldr	r3, [r0]
+ 1049              	.LVL113:
+ 1050 03aa 1943     		orrs	r1, r1, r3
  1051              	.LVL114:
- 1052              	.L66:
+ 1052 03ac 0160     		str	r1, [r0]
+ 1053 03ae 03E0     		b	.L62
+ 1054              	.LVL115:
+ 1055              	.L66:
 1247:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1248:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else
 1249:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1250:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     *(__IO uint32_t*)usartxbase &= ~itmask;
- 1053              		.loc 1 1250 0
- 1054 03ae 0368     		ldr	r3, [r0]
- 1055              	.LVL115:
- 1056 03b0 23EA0101 		bic	r1, r3, r1
- 1057              	.LVL116:
- 1058 03b4 0160     		str	r1, [r0]
- 1059              	.L62:
+ 1056              		.loc 1 1250 0
+ 1057 03b0 0368     		ldr	r3, [r0]
+ 1058              	.LVL116:
+ 1059 03b2 23EA0101 		bic	r1, r3, r1
+ 1060              	.LVL117:
+ 1061 03b6 0160     		str	r1, [r0]
+ 1062              	.L62:
 1251:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1252:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** }
- 1060              		.loc 1 1252 0
- 1061 03b6 5DF8044B 		ldr	r4, [sp], #4
- 1062 03ba 7047     		bx	lr
- 1063              		.cfi_endproc
- 1064              	.LFE134:
- 1066              		.align	2
- 1067              		.global	USART_GetFlagStatus
- 1068              		.thumb
- 1069              		.thumb_func
- 1071              	USART_GetFlagStatus:
- 1072              	.LFB135:
+ 1063              		.loc 1 1252 0
+ 1064 03b8 5DF8044B 		ldr	r4, [sp], #4
+ 1065 03bc 7047     		bx	lr
+ 1066              		.cfi_endproc
+ 1067              	.LFE134:
+ 1069 03be 00BF     		.align	2
+ 1070              		.global	USART_GetFlagStatus
+ 1071              		.thumb
+ 1072              		.thumb_func
+ 1074              	USART_GetFlagStatus:
+ 1075              	.LFB135:
 1253:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
 1254:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** /**
 1255:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @brief  Checks whether the specified USART flag is set or not.
@@ -2293,12 +2296,12 @@
 1271:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   */
 1272:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** FlagStatus USART_GetFlagStatus(USART_TypeDef* USARTx, uint16_t USART_FLAG)
 1273:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** {
- 1073              		.loc 1 1273 0
- 1074              		.cfi_startproc
- 1075              		@ args = 0, pretend = 0, frame = 0
- 1076              		@ frame_needed = 0, uses_anonymous_args = 0
- 1077              		@ link register save eliminated.
- 1078              	.LVL117:
+ 1076              		.loc 1 1273 0
+ 1077              		.cfi_startproc
+ 1078              		@ args = 0, pretend = 0, frame = 0
+ 1079              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1080              		@ link register save eliminated.
+ 1081              	.LVL118:
 1274:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   FlagStatus bitstatus = RESET;
 1275:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Check the parameters */
 1276:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_ALL_PERIPH(USARTx));
@@ -2311,34 +2314,38 @@
 1283:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   } 
 1284:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     
 1285:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if ((USARTx->SR & USART_FLAG) != (uint16_t)RESET)
- 1079              		.loc 1 1285 0
- 1080 03bc 0088     		ldrh	r0, [r0]
- 1081              	.LVL118:
- 1082 03be 0840     		ands	r0, r0, r1
- 1083              	.LVL119:
+ 1082              		.loc 1 1285 0
+ 1083 03c0 0388     		ldrh	r3, [r0]
+ 1084 03c2 1942     		tst	r1, r3
+ 1085 03c4 01D0     		beq	.L70
 1286:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1287:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     bitstatus = SET;
+ 1086              		.loc 1 1287 0
+ 1087 03c6 0120     		movs	r0, #1
+ 1088              	.LVL119:
+ 1089 03c8 7047     		bx	lr
+ 1090              	.LVL120:
+ 1091              	.L70:
 1288:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1289:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else
 1290:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1291:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     bitstatus = RESET;
+ 1092              		.loc 1 1291 0
+ 1093 03ca 0020     		movs	r0, #0
+ 1094              	.LVL121:
 1292:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1293:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   return bitstatus;
 1294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** }
- 1084              		.loc 1 1294 0
- 1085 03c0 0030     		adds	r0, r0, #0
- 1086 03c2 18BF     		it	ne
- 1087 03c4 0120     		movne	r0, #1
- 1088              	.LVL120:
- 1089 03c6 7047     		bx	lr
- 1090              		.cfi_endproc
- 1091              	.LFE135:
- 1093              		.align	2
- 1094              		.global	USART_ClearFlag
- 1095              		.thumb
- 1096              		.thumb_func
- 1098              	USART_ClearFlag:
- 1099              	.LFB136:
+ 1095              		.loc 1 1294 0
+ 1096 03cc 7047     		bx	lr
+ 1097              		.cfi_endproc
+ 1098              	.LFE135:
+ 1100 03ce 00BF     		.align	2
+ 1101              		.global	USART_ClearFlag
+ 1102              		.thumb
+ 1103              		.thumb_func
+ 1105              	USART_ClearFlag:
+ 1106              	.LFB136:
 1295:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
 1296:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** /**
 1297:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @brief  Clears the USARTx's pending flags.
@@ -2367,12 +2374,12 @@
 1320:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   */
 1321:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** void USART_ClearFlag(USART_TypeDef* USARTx, uint16_t USART_FLAG)
 1322:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** {
- 1100              		.loc 1 1322 0
- 1101              		.cfi_startproc
- 1102              		@ args = 0, pretend = 0, frame = 0
- 1103              		@ frame_needed = 0, uses_anonymous_args = 0
- 1104              		@ link register save eliminated.
- 1105              	.LVL121:
+ 1107              		.loc 1 1322 0
+ 1108              		.cfi_startproc
+ 1109              		@ args = 0, pretend = 0, frame = 0
+ 1110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1111              		@ link register save eliminated.
+ 1112              	.LVL122:
 1323:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Check the parameters */
 1324:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_ALL_PERIPH(USARTx));
 1325:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_CLEAR_FLAG(USART_FLAG));
@@ -2384,20 +2391,20 @@
 1331:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   } 
 1332:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****        
 1333:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   USARTx->SR = (uint16_t)~USART_FLAG;
- 1106              		.loc 1 1333 0
- 1107 03c8 C943     		mvns	r1, r1
- 1108              	.LVL122:
- 1109 03ca 89B2     		uxth	r1, r1
- 1110 03cc 0180     		strh	r1, [r0]	@ movhi
- 1111 03ce 7047     		bx	lr
- 1112              		.cfi_endproc
- 1113              	.LFE136:
- 1115              		.align	2
- 1116              		.global	USART_GetITStatus
- 1117              		.thumb
- 1118              		.thumb_func
- 1120              	USART_GetITStatus:
- 1121              	.LFB137:
+ 1113              		.loc 1 1333 0
+ 1114 03d0 C943     		mvns	r1, r1
+ 1115              	.LVL123:
+ 1116 03d2 89B2     		uxth	r1, r1
+ 1117 03d4 0180     		strh	r1, [r0]	@ movhi
+ 1118 03d6 7047     		bx	lr
+ 1119              		.cfi_endproc
+ 1120              	.LFE136:
+ 1122              		.align	2
+ 1123              		.global	USART_GetITStatus
+ 1124              		.thumb
+ 1125              		.thumb_func
+ 1127              	USART_GetITStatus:
+ 1128              	.LFB137:
 1334:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** }
 1335:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
 1336:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** /**
@@ -2421,16 +2428,16 @@
 1354:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   */
 1355:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** ITStatus USART_GetITStatus(USART_TypeDef* USARTx, uint16_t USART_IT)
 1356:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** {
- 1122              		.loc 1 1356 0
- 1123              		.cfi_startproc
- 1124              		@ args = 0, pretend = 0, frame = 0
- 1125              		@ frame_needed = 0, uses_anonymous_args = 0
- 1126              		@ link register save eliminated.
- 1127              	.LVL123:
- 1128 03d0 10B4     		push	{r4}
- 1129              		.cfi_def_cfa_offset 4
- 1130              		.cfi_offset 4, -4
- 1131              	.LVL124:
+ 1129              		.loc 1 1356 0
+ 1130              		.cfi_startproc
+ 1131              		@ args = 0, pretend = 0, frame = 0
+ 1132              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1133              		@ link register save eliminated.
+ 1134              	.LVL124:
+ 1135 03d8 10B4     		push	{r4}
+ 1136              		.cfi_def_cfa_offset 4
+ 1137              		.cfi_offset 4, -4
+ 1138              	.LVL125:
 1357:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   uint32_t bitpos = 0x00, itmask = 0x00, usartreg = 0x00;
 1358:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   ITStatus bitstatus = RESET;
 1359:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Check the parameters */
@@ -2445,108 +2452,119 @@
 1368:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     
 1369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Get the USART register index */
 1370:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   usartreg = (((uint8_t)USART_IT) >> 0x05);
- 1132              		.loc 1 1370 0
- 1133 03d2 C1F34213 		ubfx	r3, r1, #5, #3
- 1134              	.LVL125:
+ 1139              		.loc 1 1370 0
+ 1140 03da C1F34213 		ubfx	r3, r1, #5, #3
+ 1141              	.LVL126:
 1371:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Get the interrupt position */
 1372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   itmask = USART_IT & IT_MASK;
- 1135              		.loc 1 1372 0
- 1136 03d6 01F01F02 		and	r2, r1, #31
- 1137              	.LVL126:
+ 1142              		.loc 1 1372 0
+ 1143 03de 01F01F02 		and	r2, r1, #31
+ 1144              	.LVL127:
 1373:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   itmask = (uint32_t)0x01 << itmask;
- 1138              		.loc 1 1373 0
- 1139 03da 0124     		movs	r4, #1
- 1140 03dc 9440     		lsls	r4, r4, r2
- 1141              	.LVL127:
+ 1145              		.loc 1 1373 0
+ 1146 03e2 0124     		movs	r4, #1
+ 1147 03e4 9440     		lsls	r4, r4, r2
+ 1148              	.LVL128:
 1374:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   
 1375:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if (usartreg == 0x01) /* The IT  is in CR1 register */
- 1142              		.loc 1 1375 0
- 1143 03de 012B     		cmp	r3, #1
- 1144 03e0 03D1     		bne	.L73
+ 1149              		.loc 1 1375 0
+ 1150 03e6 012B     		cmp	r3, #1
+ 1151 03e8 03D1     		bne	.L73
 1376:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1377:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     itmask &= USARTx->CR1;
- 1145              		.loc 1 1377 0
- 1146 03e2 8289     		ldrh	r2, [r0, #12]
- 1147 03e4 92B2     		uxth	r2, r2
- 1148 03e6 2240     		ands	r2, r2, r4
- 1149              	.LVL128:
- 1150 03e8 05E0     		b	.L74
- 1151              	.LVL129:
- 1152              	.L73:
+ 1152              		.loc 1 1377 0
+ 1153 03ea 8289     		ldrh	r2, [r0, #12]
+ 1154 03ec 92B2     		uxth	r2, r2
+ 1155 03ee 2240     		ands	r2, r2, r4
+ 1156              	.LVL129:
+ 1157 03f0 08E0     		b	.L74
+ 1158              	.LVL130:
+ 1159              	.L73:
 1378:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1379:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else if (usartreg == 0x02) /* The IT  is in CR2 register */
- 1153              		.loc 1 1379 0
- 1154 03ea 022B     		cmp	r3, #2
+ 1160              		.loc 1 1379 0
+ 1161 03f2 022B     		cmp	r3, #2
+ 1162 03f4 03D1     		bne	.L75
 1380:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1381:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     itmask &= USARTx->CR2;
- 1155              		.loc 1 1381 0
- 1156 03ec 0CBF     		ite	eq
- 1157 03ee 028A     		ldrheq	r2, [r0, #16]
+ 1163              		.loc 1 1381 0
+ 1164 03f6 028A     		ldrh	r2, [r0, #16]
+ 1165 03f8 92B2     		uxth	r2, r2
+ 1166 03fa 2240     		ands	r2, r2, r4
+ 1167              	.LVL131:
+ 1168 03fc 02E0     		b	.L74
+ 1169              	.LVL132:
+ 1170              	.L75:
 1382:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1383:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else /* The IT  is in CR3 register */
 1384:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1385:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     itmask &= USARTx->CR3;
- 1158              		.loc 1 1385 0
- 1159 03f0 828A     		ldrhne	r2, [r0, #20]
- 1160 03f2 92B2     		uxth	r2, r2
- 1161 03f4 2240     		ands	r2, r2, r4
- 1162              	.LVL130:
- 1163              	.L74:
+ 1171              		.loc 1 1385 0
+ 1172 03fe 828A     		ldrh	r2, [r0, #20]
+ 1173 0400 92B2     		uxth	r2, r2
+ 1174 0402 2240     		ands	r2, r2, r4
+ 1175              	.LVL133:
+ 1176              	.L74:
 1386:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1387:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   
 1388:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos = USART_IT >> 0x08;
- 1164              		.loc 1 1388 0
- 1165 03f6 090A     		lsrs	r1, r1, #8
- 1166              	.LVL131:
+ 1177              		.loc 1 1388 0
+ 1178 0404 090A     		lsrs	r1, r1, #8
+ 1179              	.LVL134:
 1389:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos = (uint32_t)0x01 << bitpos;
- 1167              		.loc 1 1389 0
- 1168 03f8 0123     		movs	r3, #1
- 1169              	.LVL132:
- 1170 03fa 03FA01F1 		lsl	r1, r3, r1
- 1171              	.LVL133:
+ 1180              		.loc 1 1389 0
+ 1181 0406 0123     		movs	r3, #1
+ 1182              	.LVL135:
+ 1183 0408 03FA01F1 		lsl	r1, r3, r1
+ 1184              	.LVL136:
 1390:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos &= USARTx->SR;
- 1172              		.loc 1 1390 0
- 1173 03fe 0088     		ldrh	r0, [r0]
- 1174              	.LVL134:
- 1175 0400 80B2     		uxth	r0, r0
- 1176 0402 0840     		ands	r0, r0, r1
- 1177              	.LVL135:
+ 1185              		.loc 1 1390 0
+ 1186 040c 0388     		ldrh	r3, [r0]
+ 1187 040e 9BB2     		uxth	r3, r3
+ 1188 0410 1940     		ands	r1, r1, r3
+ 1189              	.LVL137:
 1391:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   if ((itmask != (uint16_t)RESET)&&(bitpos != (uint16_t)RESET))
- 1178              		.loc 1 1391 0
- 1179 0404 1AB1     		cbz	r2, .L77
+ 1190              		.loc 1 1391 0
+ 1191 0412 12B1     		cbz	r2, .L77
+ 1192              		.loc 1 1391 0 is_stmt 0 discriminator 1
+ 1193 0414 19B9     		cbnz	r1, .L78
 1392:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1393:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     bitstatus = SET;
 1394:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1395:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   else
 1396:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   {
 1397:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     bitstatus = RESET;
- 1180              		.loc 1 1397 0 discriminator 1
- 1181 0406 0030     		adds	r0, r0, #0
- 1182 0408 18BF     		it	ne
- 1183 040a 0120     		movne	r0, #1
- 1184              	.LVL136:
- 1185 040c 00E0     		b	.L76
- 1186              	.LVL137:
- 1187              	.L77:
- 1188              		.loc 1 1397 0 is_stmt 0
- 1189 040e 0020     		movs	r0, #0
- 1190              	.LVL138:
- 1191              	.L76:
+ 1194              		.loc 1 1397 0 is_stmt 1
+ 1195 0416 0020     		movs	r0, #0
+ 1196              	.LVL138:
+ 1197 0418 02E0     		b	.L76
+ 1198              	.LVL139:
+ 1199              	.L77:
+ 1200 041a 0020     		movs	r0, #0
+ 1201              	.LVL140:
+ 1202 041c 00E0     		b	.L76
+ 1203              	.LVL141:
+ 1204              	.L78:
+1393:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     bitstatus = SET;
+ 1205              		.loc 1 1393 0
+ 1206 041e 0120     		movs	r0, #1
+ 1207              	.LVL142:
+ 1208              	.L76:
 1398:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   }
 1399:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   
 1400:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   return bitstatus;  
 1401:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** }
- 1192              		.loc 1 1401 0 is_stmt 1
- 1193 0410 5DF8044B 		ldr	r4, [sp], #4
- 1194 0414 7047     		bx	lr
- 1195              		.cfi_endproc
- 1196              	.LFE137:
- 1198 0416 00BF     		.align	2
- 1199              		.global	USART_ClearITPendingBit
- 1200              		.thumb
- 1201              		.thumb_func
- 1203              	USART_ClearITPendingBit:
- 1204              	.LFB138:
+ 1209              		.loc 1 1401 0
+ 1210 0420 5DF8044B 		ldr	r4, [sp], #4
+ 1211 0424 7047     		bx	lr
+ 1212              		.cfi_endproc
+ 1213              	.LFE137:
+ 1215 0426 00BF     		.align	2
+ 1216              		.global	USART_ClearITPendingBit
+ 1217              		.thumb
+ 1218              		.thumb_func
+ 1220              	USART_ClearITPendingBit:
+ 1221              	.LFB138:
 1402:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** 
 1403:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** /**
 1404:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   * @brief  Clears the USARTx's interrupt pending bits.
@@ -2576,12 +2594,12 @@
 1428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   */
 1429:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT)
 1430:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c **** {
- 1205              		.loc 1 1430 0
- 1206              		.cfi_startproc
- 1207              		@ args = 0, pretend = 0, frame = 0
- 1208              		@ frame_needed = 0, uses_anonymous_args = 0
- 1209              		@ link register save eliminated.
- 1210              	.LVL139:
+ 1222              		.loc 1 1430 0
+ 1223              		.cfi_startproc
+ 1224              		@ args = 0, pretend = 0, frame = 0
+ 1225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1226              		@ link register save eliminated.
+ 1227              	.LVL143:
 1431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   uint16_t bitpos = 0x00, itmask = 0x00;
 1432:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   /* Check the parameters */
 1433:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   assert_param(IS_USART_ALL_PERIPH(USARTx));
@@ -2594,69 +2612,69 @@
 1440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   } 
 1441:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****     
 1442:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   bitpos = USART_IT >> 0x08;
- 1211              		.loc 1 1442 0
- 1212 0418 090A     		lsrs	r1, r1, #8
- 1213              	.LVL140:
+ 1228              		.loc 1 1442 0
+ 1229 0428 090A     		lsrs	r1, r1, #8
+ 1230              	.LVL144:
 1443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   itmask = ((uint16_t)0x01 << (uint16_t)bitpos);
- 1214              		.loc 1 1443 0
- 1215 041a 0123     		movs	r3, #1
- 1216 041c 8B40     		lsls	r3, r3, r1
- 1217              	.LVL141:
+ 1231              		.loc 1 1443 0
+ 1232 042a 0123     		movs	r3, #1
+ 1233 042c 8B40     		lsls	r3, r3, r1
+ 1234              	.LVL145:
 1444:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c ****   USARTx->SR = (uint16_t)~itmask;
- 1218              		.loc 1 1444 0
- 1219 041e DB43     		mvns	r3, r3
- 1220              	.LVL142:
- 1221 0420 9BB2     		uxth	r3, r3
- 1222              	.LVL143:
- 1223 0422 0380     		strh	r3, [r0]	@ movhi
- 1224 0424 7047     		bx	lr
- 1225              		.cfi_endproc
- 1226              	.LFE138:
- 1228              	.Letext0:
- 1229              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 1230              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 1231              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
- 1232              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_rcc.h"
- 1233              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_usart.h"
- 1234              		.file 7 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+ 1235              		.loc 1 1444 0
+ 1236 042e DB43     		mvns	r3, r3
+ 1237              	.LVL146:
+ 1238 0430 9BB2     		uxth	r3, r3
+ 1239              	.LVL147:
+ 1240 0432 0380     		strh	r3, [r0]	@ movhi
+ 1241 0434 7047     		bx	lr
+ 1242              		.cfi_endproc
+ 1243              	.LFE138:
+ 1245              	.Letext0:
+ 1246              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 1247              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 1248              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx\\Include/s
+ 1249              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx_StdPeriph_
+ 1250              		.file 6 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx_StdPeriph_
+ 1251              		.file 7 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\CMSIS\\Include/core_
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_usart.c
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:23     .text:00000000 USART_DeInit
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:145    .text:000000a4 $d
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:154    .text:000000bc $t
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:159    .text:000000bc USART_Init
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:330    .text:00000180 $d
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:335    .text:00000188 $t
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:340    .text:00000188 USART_StructInit
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:372    .text:000001a0 USART_ClockInit
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:418    .text:000001c0 USART_ClockStructInit
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:444    .text:000001cc USART_Cmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:476    .text:000001e8 USART_SetPrescaler
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:503    .text:000001fc USART_OverSampling8Cmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:534    .text:00000218 USART_OneBitMethodCmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:566    .text:00000234 USART_SendData
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:587    .text:0000023c USART_ReceiveData
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:609    .text:00000244 USART_SetAddress
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:638    .text:0000025c USART_ReceiverWakeUpCmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:670    .text:00000278 USART_WakeUpConfig
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:699    .text:00000290 USART_LINBreakDetectLengthConfig
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:728    .text:000002a8 USART_LINCmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:760    .text:000002c4 USART_SendBreak
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:782    .text:000002d0 USART_HalfDuplexCmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:814    .text:000002ec USART_SetGuardTime
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:841    .text:00000300 USART_SmartCardCmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:873    .text:0000031c USART_SmartCardNACKCmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:905    .text:00000338 USART_IrDAConfig
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:934    .text:00000350 USART_IrDACmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:966    .text:0000036c USART_DMACmd
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:1001   .text:00000384 USART_ITConfig
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:1071   .text:000003bc USART_GetFlagStatus
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:1098   .text:000003c8 USART_ClearFlag
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:1120   .text:000003d0 USART_GetITStatus
-C:\Users\Filip\AppData\Local\Temp\ccDmNMPl.s:1203   .text:00000418 USART_ClearITPendingBit
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:23     .text:00000000 USART_DeInit
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:145    .text:000000a4 $d
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:154    .text:000000bc $t
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:159    .text:000000bc USART_Init
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:330    .text:00000180 $d
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:335    .text:00000188 $t
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:340    .text:00000188 USART_StructInit
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:372    .text:000001a0 USART_ClockInit
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:418    .text:000001c0 USART_ClockStructInit
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:444    .text:000001cc USART_Cmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:476    .text:000001e8 USART_SetPrescaler
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:503    .text:000001fc USART_OverSampling8Cmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:534    .text:00000218 USART_OneBitMethodCmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:566    .text:00000234 USART_SendData
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:587    .text:0000023c USART_ReceiveData
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:609    .text:00000244 USART_SetAddress
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:638    .text:0000025c USART_ReceiverWakeUpCmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:670    .text:00000278 USART_WakeUpConfig
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:699    .text:00000290 USART_LINBreakDetectLengthConfig
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:728    .text:000002a8 USART_LINCmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:760    .text:000002c4 USART_SendBreak
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:782    .text:000002d0 USART_HalfDuplexCmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:814    .text:000002ec USART_SetGuardTime
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:841    .text:00000300 USART_SmartCardCmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:873    .text:0000031c USART_SmartCardNACKCmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:905    .text:00000338 USART_IrDAConfig
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:934    .text:00000350 USART_IrDACmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:966    .text:0000036c USART_DMACmd
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:1001   .text:00000384 USART_ITConfig
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:1074   .text:000003c0 USART_GetFlagStatus
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:1105   .text:000003d0 USART_ClearFlag
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:1127   .text:000003d8 USART_GetITStatus
+C:\Users\Filip\AppData\Local\Temp\ccmR4hvh.s:1220   .text:00000428 USART_ClearITPendingBit
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

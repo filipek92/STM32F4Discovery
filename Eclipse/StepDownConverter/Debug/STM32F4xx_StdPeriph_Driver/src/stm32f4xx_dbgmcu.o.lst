@@ -329,29 +329,29 @@
  180              		.cfi_endproc
  181              	.LFE114:
  183              	.Letext0:
- 184              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 185              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 186              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
- 187              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+ 184              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 185              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 186              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx\\Include/s
+ 187              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\CMSIS\\Include/core_
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_dbgmcu.c
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:23     .text:00000000 DBGMCU_GetREVID
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:40     .text:00000008 $d
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:44     .text:0000000c $t
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:49     .text:0000000c DBGMCU_GetDEVID
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:65     .text:00000018 $d
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:69     .text:0000001c $t
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:74     .text:0000001c DBGMCU_Config
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:103    .text:00000034 $d
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:107    .text:00000038 $t
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:112    .text:00000038 DBGMCU_APB1PeriphConfig
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:141    .text:00000050 $d
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:145    .text:00000054 $t
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:150    .text:00000054 DBGMCU_APB2PeriphConfig
-C:\Users\Filip\AppData\Local\Temp\cc4O9Wrt.s:179    .text:0000006c $d
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:23     .text:00000000 DBGMCU_GetREVID
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:40     .text:00000008 $d
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:44     .text:0000000c $t
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:49     .text:0000000c DBGMCU_GetDEVID
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:65     .text:00000018 $d
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:69     .text:0000001c $t
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:74     .text:0000001c DBGMCU_Config
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:103    .text:00000034 $d
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:107    .text:00000038 $t
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:112    .text:00000038 DBGMCU_APB1PeriphConfig
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:141    .text:00000050 $d
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:145    .text:00000054 $t
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:150    .text:00000054 DBGMCU_APB2PeriphConfig
+C:\Users\Filip\AppData\Local\Temp\ccItUAIH.s:179    .text:0000006c $d
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

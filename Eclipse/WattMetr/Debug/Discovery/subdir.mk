@@ -17,7 +17,7 @@ C_DEPS += \
 Discovery/%.o: ../Discovery/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="$@.lst" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="$@.lst" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

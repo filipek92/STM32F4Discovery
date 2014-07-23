@@ -583,54 +583,54 @@
  424 0000 00000000 		.space	4
  425              		.text
  426              	.Letext0:
- 427              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 428              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 429              		.file 4 "C:\\Users\\Filip\\GIT\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx\\Include/stm32f4xx.
- 430              		.file 5 "C:\\Users\\Filip\\GIT\\STM32F4Discovery\\Eclipse\\WattMetr\\CMSIS\\Include/core_cm4.h"
+ 427              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 428              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 429              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx\\Include/stm32f4xx.
+ 430              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\CMSIS\\Include/core_cm4.h"
  431              		.file 6 "../src/comunication.h"
- 432              		.file 7 "C:\\Users\\Filip\\GIT\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx_StdPeriph_Driver\\i
+ 432              		.file 7 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx_StdPeriph_Driver\\i
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_it.c
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:23     .text:00000000 NMI_Handler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:43     .text:0000000c $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:48     .text:00000014 $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:53     .text:00000014 HardFault_Handler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:74     .text:00000020 $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:79     .text:00000028 $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:84     .text:00000028 MemManage_Handler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:105    .text:00000034 $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:110    .text:0000003c $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:115    .text:0000003c BusFault_Handler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:136    .text:00000048 $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:141    .text:00000050 $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:146    .text:00000050 UsageFault_Handler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:167    .text:0000005c $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:172    .text:00000064 $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:177    .text:00000064 SVC_Handler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:196    .text:00000070 $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:201    .text:00000078 $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:206    .text:00000078 DebugMon_Handler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:225    .text:00000084 $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:230    .text:0000008c $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:235    .text:0000008c PendSV_Handler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:254    .text:00000098 $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:259    .text:000000a0 $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:264    .text:000000a0 EXTI0_IRQHandler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:293    .text:000000b4 Delay
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:322    .text:000000cc $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:326    .text:000000d0 $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:331    .text:000000d0 TimingDelay_Decrement
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:352    .text:000000e0 $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:356    .text:000000e4 $t
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:361    .text:000000e4 SysTick_Handler
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:388    .text:000000fc $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:23     .text:00000000 NMI_Handler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:43     .text:0000000c $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:48     .text:00000014 $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:53     .text:00000014 HardFault_Handler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:74     .text:00000020 $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:79     .text:00000028 $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:84     .text:00000028 MemManage_Handler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:105    .text:00000034 $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:110    .text:0000003c $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:115    .text:0000003c BusFault_Handler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:136    .text:00000048 $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:141    .text:00000050 $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:146    .text:00000050 UsageFault_Handler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:167    .text:0000005c $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:172    .text:00000064 $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:177    .text:00000064 SVC_Handler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:196    .text:00000070 $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:201    .text:00000078 $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:206    .text:00000078 DebugMon_Handler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:225    .text:00000084 $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:230    .text:0000008c $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:235    .text:0000008c PendSV_Handler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:254    .text:00000098 $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:259    .text:000000a0 $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:264    .text:000000a0 EXTI0_IRQHandler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:293    .text:000000b4 Delay
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:322    .text:000000cc $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:326    .text:000000d0 $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:331    .text:000000d0 TimingDelay_Decrement
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:352    .text:000000e0 $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:356    .text:000000e4 $t
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:361    .text:000000e4 SysTick_Handler
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:388    .text:000000fc $d
                             *COM*:00000004 Time
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:423    .bss:00000000 TimingDelay
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:396    .rodata.str1.4:00000000 $d
-C:\Users\Filip\AppData\Local\Temp\cc3MsP1N.s:419    .bss:00000000 $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:423    .bss:00000000 TimingDelay
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:396    .rodata.str1.4:00000000 $d
+C:\Users\Filip\AppData\Local\Temp\cc8Jc6bS.s:419    .bss:00000000 $d
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

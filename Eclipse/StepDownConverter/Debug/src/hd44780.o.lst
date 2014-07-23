@@ -1,0 +1,1832 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"hd44780.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.align	2
+  19              		.thumb
+  20              		.thumb_func
+  22              	task_add:
+  23              	.LFB115:
+  24              		.file 1 "../src/hd44780.c"
+   1:../src/hd44780.c **** /*
+   2:../src/hd44780.c ****  * STM32F4-HD44780
+   3:../src/hd44780.c ****  *
+   4:../src/hd44780.c ****  * An interrupt driven library for HD44780-based LCD displays
+   5:../src/hd44780.c ****  *
+   6:../src/hd44780.c ****  * http://eartoearoak.com/software/stm32f4-hd44780
+   7:../src/hd44780.c ****  *
+   8:../src/hd44780.c ****  * Copyright 2013 Al Brown
+   9:../src/hd44780.c ****  *
+  10:../src/hd44780.c ****  * This program is free software: you can redistribute it and/or modify
+  11:../src/hd44780.c ****  * it under the terms of the GNU General Public License as published by
+  12:../src/hd44780.c ****  * the Free Software Foundation, or (at your option)
+  13:../src/hd44780.c ****  * any later version.
+  14:../src/hd44780.c ****  *
+  15:../src/hd44780.c ****  * This program is distributed in the hope that it will be useful,
+  16:../src/hd44780.c ****  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  17:../src/hd44780.c ****  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  18:../src/hd44780.c ****  * GNU General Public License for more details.
+  19:../src/hd44780.c ****  *
+  20:../src/hd44780.c ****  * You should have received a copy of the GNU General Public License
+  21:../src/hd44780.c ****  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  22:../src/hd44780.c ****  */
+  23:../src/hd44780.c **** 
+  24:../src/hd44780.c **** 
+  25:../src/hd44780.c **** #include <stdarg.h>
+  26:../src/hd44780.c **** #include <stdbool.h>
+  27:../src/hd44780.c **** #include <stdio.h>
+  28:../src/hd44780.c **** 
+  29:../src/hd44780.c **** #include "hd44780.h"
+  30:../src/hd44780.c **** #include "stm32f4xx_conf.h"
+  31:../src/hd44780.c **** 
+  32:../src/hd44780.c **** #define HD44780_TIMER 		TIM7
+  33:../src/hd44780.c **** #define HD44780_PRIORITY 	6
+  34:../src/hd44780.c **** 
+  35:../src/hd44780.c **** #define NONE 0
+  36:../src/hd44780.c **** 
+  37:../src/hd44780.c **** #define HD44780_4BIT 		0x00
+  38:../src/hd44780.c **** #define HDD44780_ENTRY_LEFT	0x02
+  39:../src/hd44780.c **** #define HD44780_DISPLAY_ON	0x04
+  40:../src/hd44780.c **** #define HD44780_CURSOR_ON	0x02
+  41:../src/hd44780.c **** #define HD44780_BLINK_ON	0x01
+  42:../src/hd44780.c **** 
+  43:../src/hd44780.c **** #define HD44780_CLEAR		0x0001
+  44:../src/hd44780.c **** #define HD44780_HOME		0x0002
+  45:../src/hd44780.c **** #define HD44780_ENTRY		0x0004
+  46:../src/hd44780.c **** #define HD44780_DISPLAY		0x0008
+  47:../src/hd44780.c **** #define HD44780_CURSOR		0x0010
+  48:../src/hd44780.c **** #define HD44780_FUNCTION	0x0020
+  49:../src/hd44780.c **** #define HD44780_CGRAM		0x0040
+  50:../src/hd44780.c **** #define HD44780_DGRAM		0x0080
+  51:../src/hd44780.c **** 
+  52:../src/hd44780.c **** typedef enum {
+  53:../src/hd44780.c **** 	HD44780_WAIT = 1, HD44780_WAIT_NOT_BUSY, HD44780_WRITE
+  54:../src/hd44780.c **** } hd44780_command_t;
+  55:../src/hd44780.c **** 
+  56:../src/hd44780.c **** typedef struct {
+  57:../src/hd44780.c **** 	hd44780_command_t command;
+  58:../src/hd44780.c **** 	bool reg;
+  59:../src/hd44780.c **** 	u16 data;
+  60:../src/hd44780.c **** 	int8_t nibble;
+  61:../src/hd44780.c **** } hd44780_task_t;
+  62:../src/hd44780.c **** 
+  63:../src/hd44780.c **** typedef struct {
+  64:../src/hd44780.c **** 	GPIO_TypeDef* gpio;
+  65:../src/hd44780.c **** 	u32 rs;
+  66:../src/hd44780.c **** 	u32 rw;
+  67:../src/hd44780.c **** 	u32 e;
+  68:../src/hd44780.c **** 	u32 db4;
+  69:../src/hd44780.c **** 	u32 db5;
+  70:../src/hd44780.c **** 	u32 db6;
+  71:../src/hd44780.c **** 	u32 db7;
+  72:../src/hd44780.c **** 	u8 lines;
+  73:../src/hd44780.c **** 	u8 font;
+  74:../src/hd44780.c **** } hd44780_conf_t;
+  75:../src/hd44780.c **** 
+  76:../src/hd44780.c **** static hd44780_conf_t Lcd_Conf;
+  77:../src/hd44780.c **** static volatile hd44780_task_t Queue[HD44780_QUEUE_SIZE];
+  78:../src/hd44780.c **** static volatile u16 Queue_Head = 0;
+  79:../src/hd44780.c **** static volatile u16 Queue_Tail = 0;
+  80:../src/hd44780.c **** 
+  81:../src/hd44780.c **** static void delay(u8 delay) {
+  82:../src/hd44780.c **** 
+  83:../src/hd44780.c **** 	while (delay != 0)
+  84:../src/hd44780.c **** 		delay--;
+  85:../src/hd44780.c **** }
+  86:../src/hd44780.c **** 
+  87:../src/hd44780.c **** static void set_output(const bool output) {
+  88:../src/hd44780.c **** 
+  89:../src/hd44780.c **** 	GPIO_InitTypeDef GPIO_InitStruct;
+  90:../src/hd44780.c **** 	u32 pins;
+  91:../src/hd44780.c **** 	u8 dir;
+  92:../src/hd44780.c **** 
+  93:../src/hd44780.c **** 	pins = Lcd_Conf.db4 | Lcd_Conf.db5 | Lcd_Conf.db6 | Lcd_Conf.db7;
+  94:../src/hd44780.c **** 	dir = GPIO_Mode_IN;
+  95:../src/hd44780.c **** 
+  96:../src/hd44780.c **** 	if (output) {
+  97:../src/hd44780.c **** 		pins = pins | Lcd_Conf.rs | Lcd_Conf.rw | Lcd_Conf.e;
+  98:../src/hd44780.c **** 		dir = GPIO_Mode_OUT;
+  99:../src/hd44780.c **** 	}
+ 100:../src/hd44780.c **** 
+ 101:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_Pin = pins;
+ 102:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_Mode = dir;
+ 103:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+ 104:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
+ 105:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_25MHz;
+ 106:../src/hd44780.c **** 
+ 107:../src/hd44780.c **** 	GPIO_Init(Lcd_Conf.gpio, &GPIO_InitStruct);
+ 108:../src/hd44780.c **** }
+ 109:../src/hd44780.c **** 
+ 110:../src/hd44780.c **** static void enable(const bool pulse) {
+ 111:../src/hd44780.c **** 
+ 112:../src/hd44780.c **** 	if (pulse) {
+ 113:../src/hd44780.c **** 		GPIO_ToggleBits(Lcd_Conf.gpio, Lcd_Conf.e);
+ 114:../src/hd44780.c **** 		delay(150);
+ 115:../src/hd44780.c **** 	}
+ 116:../src/hd44780.c **** 	GPIO_ToggleBits(Lcd_Conf.gpio, Lcd_Conf.e);
+ 117:../src/hd44780.c **** 	delay(150);
+ 118:../src/hd44780.c **** }
+ 119:../src/hd44780.c **** 
+ 120:../src/hd44780.c **** static void write(const u8 data, const bool reg) {
+ 121:../src/hd44780.c **** 
+ 122:../src/hd44780.c **** 	set_output(true);
+ 123:../src/hd44780.c **** 
+ 124:../src/hd44780.c **** 	GPIO_ResetBits(Lcd_Conf.gpio, Lcd_Conf.rw);
+ 125:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.rs, !reg);
+ 126:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.db7, (data & 0x8) >> 3);
+ 127:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.db6, (data & 0x4) >> 2);
+ 128:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.db5, (data & 0x2) >> 1);
+ 129:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.db4, (data & 0x1));
+ 130:../src/hd44780.c **** 	enable(true);
+ 131:../src/hd44780.c **** }
+ 132:../src/hd44780.c **** 
+ 133:../src/hd44780.c **** static bool read_busy(void) {
+ 134:../src/hd44780.c **** 
+ 135:../src/hd44780.c **** 	u8 data;
+ 136:../src/hd44780.c **** 
+ 137:../src/hd44780.c **** 	set_output(false);
+ 138:../src/hd44780.c **** 	GPIO_ResetBits(Lcd_Conf.gpio, Lcd_Conf.rs | Lcd_Conf.db7);
+ 139:../src/hd44780.c **** 	GPIO_SetBits(Lcd_Conf.gpio, Lcd_Conf.rw);
+ 140:../src/hd44780.c **** 	enable(false);
+ 141:../src/hd44780.c **** 	data = GPIO_ReadInputDataBit(Lcd_Conf.gpio, Lcd_Conf.db7);
+ 142:../src/hd44780.c **** 	enable(false);
+ 143:../src/hd44780.c **** 	enable(true);
+ 144:../src/hd44780.c **** 
+ 145:../src/hd44780.c **** 	if (data == 1)
+ 146:../src/hd44780.c **** 		return (true);
+ 147:../src/hd44780.c **** 
+ 148:../src/hd44780.c **** 	return (false);
+ 149:../src/hd44780.c **** 
+ 150:../src/hd44780.c **** }
+ 151:../src/hd44780.c **** 
+ 152:../src/hd44780.c **** static void task_add(const hd44780_command_t command, const bool reg,
+ 153:../src/hd44780.c **** 		const u16 data, u8 nibbles) {
+  25              		.loc 1 153 0
+  26              		.cfi_startproc
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29              		@ link register save eliminated.
+  30              	.LVL0:
+  31 0000 F0B4     		push	{r4, r5, r6, r7}
+  32              		.cfi_def_cfa_offset 16
+  33              		.cfi_offset 4, -16
+  34              		.cfi_offset 5, -12
+  35              		.cfi_offset 6, -8
+  36              		.cfi_offset 7, -4
+ 154:../src/hd44780.c **** 
+ 155:../src/hd44780.c **** 	if (command == HD44780_WAIT_NOT_BUSY)
+  37              		.loc 1 155 0
+  38 0002 0228     		cmp	r0, #2
+  39 0004 00D1     		bne	.L2
+ 156:../src/hd44780.c **** 		nibbles = 2;
+  40              		.loc 1 156 0
+  41 0006 0223     		movs	r3, #2
+  42              	.LVL1:
+  43              	.L2:
+ 157:../src/hd44780.c **** 
+ 158:../src/hd44780.c **** 	nibbles--;
+  44              		.loc 1 158 0
+  45 0008 013B     		subs	r3, r3, #1
+  46              	.LVL2:
+  47 000a DBB2     		uxtb	r3, r3
+  48              	.LVL3:
+ 159:../src/hd44780.c **** 
+ 160:../src/hd44780.c **** 	if (Queue_Head != (Queue_Tail + 1) % (HD44780_QUEUE_SIZE - 1)) {
+  49              		.loc 1 160 0
+  50 000c 1D4C     		ldr	r4, .L5
+  51 000e 2688     		ldrh	r6, [r4]
+  52 0010 B6B2     		uxth	r6, r6
+  53 0012 6588     		ldrh	r5, [r4, #2]
+  54 0014 ADB2     		uxth	r5, r5
+  55 0016 0135     		adds	r5, r5, #1
+  56 0018 1B4C     		ldr	r4, .L5+4
+  57 001a 84FB0574 		smull	r7, r4, r4, r5
+  58 001e A411     		asrs	r4, r4, #6
+  59 0020 40F2F317 		movw	r7, #499
+  60 0024 07FB1454 		mls	r4, r7, r4, r5
+  61 0028 A642     		cmp	r6, r4
+  62 002a 28D0     		beq	.L1
+ 161:../src/hd44780.c **** 		Queue[Queue_Tail].command = command;
+  63              		.loc 1 161 0
+  64 002c 154C     		ldr	r4, .L5
+  65 002e 6588     		ldrh	r5, [r4, #2]
+  66 0030 ADB2     		uxth	r5, r5
+  67 0032 05EB4505 		add	r5, r5, r5, lsl #1
+  68 0036 6D00     		lsls	r5, r5, #1
+  69 0038 2544     		add	r5, r5, r4
+  70 003a 2871     		strb	r0, [r5, #4]
+ 162:../src/hd44780.c **** 		Queue[Queue_Tail].reg = reg;
+  71              		.loc 1 162 0
+  72 003c 6088     		ldrh	r0, [r4, #2]
+  73              	.LVL4:
+  74 003e 80B2     		uxth	r0, r0
+  75 0040 00EB4000 		add	r0, r0, r0, lsl #1
+  76 0044 4000     		lsls	r0, r0, #1
+  77 0046 2044     		add	r0, r0, r4
+  78 0048 4171     		strb	r1, [r0, #5]
+  79              	.LVL5:
+ 163:../src/hd44780.c **** 		Queue[Queue_Tail].data = data;
+  80              		.loc 1 163 0
+  81 004a 6188     		ldrh	r1, [r4, #2]
+  82              	.LVL6:
+  83 004c 89B2     		uxth	r1, r1
+  84 004e 01EB4101 		add	r1, r1, r1, lsl #1
+  85 0052 4900     		lsls	r1, r1, #1
+  86 0054 2144     		add	r1, r1, r4
+  87 0056 CA80     		strh	r2, [r1, #6]	@ movhi
+  88              	.LVL7:
+ 164:../src/hd44780.c **** 		Queue[Queue_Tail].nibble = nibbles;
+  89              		.loc 1 164 0
+  90 0058 6288     		ldrh	r2, [r4, #2]
+  91              	.LVL8:
+  92 005a 92B2     		uxth	r2, r2
+  93 005c DBB2     		uxtb	r3, r3
+  94              	.LVL9:
+  95 005e 02EB4202 		add	r2, r2, r2, lsl #1
+  96 0062 5200     		lsls	r2, r2, #1
+  97 0064 2244     		add	r2, r2, r4
+  98 0066 1372     		strb	r3, [r2, #8]
+  99              	.LVL10:
+ 165:../src/hd44780.c **** 		Queue_Tail = (Queue_Tail + 1) % (HD44780_QUEUE_SIZE - 1);
+ 100              		.loc 1 165 0
+ 101 0068 6288     		ldrh	r2, [r4, #2]
+ 102 006a 92B2     		uxth	r2, r2
+ 103 006c 0132     		adds	r2, r2, #1
+ 104 006e 064B     		ldr	r3, .L5+4
+ 105 0070 83FB0213 		smull	r1, r3, r3, r2
+ 106 0074 9B11     		asrs	r3, r3, #6
+ 107 0076 07FB1323 		mls	r3, r7, r3, r2
+ 108 007a 9BB2     		uxth	r3, r3
+ 109 007c 6380     		strh	r3, [r4, #2]	@ movhi
+ 110              	.L1:
+ 166:../src/hd44780.c **** 	} else
+ 167:../src/hd44780.c **** 		assert_param(false);
+ 168:../src/hd44780.c **** }
+ 111              		.loc 1 168 0
+ 112 007e F0BC     		pop	{r4, r5, r6, r7}
+ 113 0080 7047     		bx	lr
+ 114              	.L6:
+ 115 0082 00BF     		.align	2
+ 116              	.L5:
+ 117 0084 00000000 		.word	.LANCHOR0
+ 118 0088 396BD520 		.word	550857529
+ 119              		.cfi_endproc
+ 120              	.LFE115:
+ 122              		.align	2
+ 123              		.thumb
+ 124              		.thumb_func
+ 126              	task_del:
+ 127              	.LFB116:
+ 169:../src/hd44780.c **** 
+ 170:../src/hd44780.c **** static void task_del(void) {
+ 128              		.loc 1 170 0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132              		@ link register save eliminated.
+ 171:../src/hd44780.c **** 
+ 172:../src/hd44780.c **** 	if (Queue_Head != Queue_Tail) {
+ 133              		.loc 1 172 0
+ 134 008c 0A4B     		ldr	r3, .L9
+ 135 008e 1A88     		ldrh	r2, [r3]
+ 136 0090 92B2     		uxth	r2, r2
+ 137 0092 5B88     		ldrh	r3, [r3, #2]
+ 138 0094 9BB2     		uxth	r3, r3
+ 139 0096 9A42     		cmp	r2, r3
+ 140 0098 0DD0     		beq	.L7
+ 173:../src/hd44780.c **** 		Queue_Head = (Queue_Head + 1) % (HD44780_QUEUE_SIZE - 1);
+ 141              		.loc 1 173 0
+ 142 009a 074A     		ldr	r2, .L9
+ 143 009c 1188     		ldrh	r1, [r2]
+ 144 009e 89B2     		uxth	r1, r1
+ 145 00a0 0131     		adds	r1, r1, #1
+ 146 00a2 064B     		ldr	r3, .L9+4
+ 147 00a4 83FB0103 		smull	r0, r3, r3, r1
+ 148 00a8 9B11     		asrs	r3, r3, #6
+ 149 00aa 40F2F310 		movw	r0, #499
+ 150 00ae 00FB1313 		mls	r3, r0, r3, r1
+ 151 00b2 9BB2     		uxth	r3, r3
+ 152 00b4 1380     		strh	r3, [r2]	@ movhi
+ 153              	.L7:
+ 154 00b6 7047     		bx	lr
+ 155              	.L10:
+ 156              		.align	2
+ 157              	.L9:
+ 158 00b8 00000000 		.word	.LANCHOR0
+ 159 00bc 396BD520 		.word	550857529
+ 160              		.cfi_endproc
+ 161              	.LFE116:
+ 163              		.align	2
+ 164              		.thumb
+ 165              		.thumb_func
+ 167              	set_output:
+ 168              	.LFB111:
+  87:../src/hd44780.c **** static void set_output(const bool output) {
+ 169              		.loc 1 87 0
+ 170              		.cfi_startproc
+ 171              		@ args = 0, pretend = 0, frame = 8
+ 172              		@ frame_needed = 0, uses_anonymous_args = 0
+ 173              	.LVL11:
+ 174 00c0 10B5     		push	{r4, lr}
+ 175              		.cfi_def_cfa_offset 8
+ 176              		.cfi_offset 4, -8
+ 177              		.cfi_offset 14, -4
+ 178 00c2 82B0     		sub	sp, sp, #8
+ 179              		.cfi_def_cfa_offset 16
+  93:../src/hd44780.c **** 	pins = Lcd_Conf.db4 | Lcd_Conf.db5 | Lcd_Conf.db6 | Lcd_Conf.db7;
+ 180              		.loc 1 93 0
+ 181 00c4 164B     		ldr	r3, .L14
+ 182 00c6 D3F8CC1B 		ldr	r1, [r3, #3020]
+ 183 00ca D3F8D02B 		ldr	r2, [r3, #3024]
+ 184 00ce 1143     		orrs	r1, r1, r2
+ 185 00d0 D3F8D42B 		ldr	r2, [r3, #3028]
+ 186 00d4 0A43     		orrs	r2, r2, r1
+ 187 00d6 D3F8D84B 		ldr	r4, [r3, #3032]
+ 188 00da 42EA0403 		orr	r3, r2, r4
+ 189              	.LVL12:
+  96:../src/hd44780.c **** 	if (output) {
+ 190              		.loc 1 96 0
+ 191 00de 58B1     		cbz	r0, .L13
+  97:../src/hd44780.c **** 		pins = pins | Lcd_Conf.rs | Lcd_Conf.rw | Lcd_Conf.e;
+ 192              		.loc 1 97 0
+ 193 00e0 0F4A     		ldr	r2, .L14
+ 194 00e2 D2F8C01B 		ldr	r1, [r2, #3008]
+ 195 00e6 0B43     		orrs	r3, r3, r1
+ 196              	.LVL13:
+ 197 00e8 D2F8C41B 		ldr	r1, [r2, #3012]
+ 198 00ec 0B43     		orrs	r3, r3, r1
+ 199 00ee D2F8C82B 		ldr	r2, [r2, #3016]
+ 200 00f2 1343     		orrs	r3, r3, r2
+ 201              	.LVL14:
+  98:../src/hd44780.c **** 		dir = GPIO_Mode_OUT;
+ 202              		.loc 1 98 0
+ 203 00f4 0122     		movs	r2, #1
+ 204 00f6 00E0     		b	.L12
+ 205              	.LVL15:
+ 206              	.L13:
+  94:../src/hd44780.c **** 	dir = GPIO_Mode_IN;
+ 207              		.loc 1 94 0
+ 208 00f8 0022     		movs	r2, #0
+ 209              	.LVL16:
+ 210              	.L12:
+ 101:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_Pin = pins;
+ 211              		.loc 1 101 0
+ 212 00fa 0093     		str	r3, [sp]
+ 102:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_Mode = dir;
+ 213              		.loc 1 102 0
+ 214 00fc 8DF80420 		strb	r2, [sp, #4]
+ 103:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+ 215              		.loc 1 103 0
+ 216 0100 0023     		movs	r3, #0
+ 217              	.LVL17:
+ 218 0102 8DF80630 		strb	r3, [sp, #6]
+ 104:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
+ 219              		.loc 1 104 0
+ 220 0106 8DF80730 		strb	r3, [sp, #7]
+ 105:../src/hd44780.c **** 	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_25MHz;
+ 221              		.loc 1 105 0
+ 222 010a 0123     		movs	r3, #1
+ 223 010c 8DF80530 		strb	r3, [sp, #5]
+ 107:../src/hd44780.c **** 	GPIO_Init(Lcd_Conf.gpio, &GPIO_InitStruct);
+ 224              		.loc 1 107 0
+ 225 0110 034B     		ldr	r3, .L14
+ 226 0112 D3F8BC0B 		ldr	r0, [r3, #3004]
+ 227              	.LVL18:
+ 228 0116 6946     		mov	r1, sp
+ 229 0118 FFF7FEFF 		bl	GPIO_Init
+ 230              	.LVL19:
+ 108:../src/hd44780.c **** }
+ 231              		.loc 1 108 0
+ 232 011c 02B0     		add	sp, sp, #8
+ 233              		@ sp needed
+ 234 011e 10BD     		pop	{r4, pc}
+ 235              	.L15:
+ 236              		.align	2
+ 237              	.L14:
+ 238 0120 00000000 		.word	.LANCHOR0
+ 239              		.cfi_endproc
+ 240              	.LFE111:
+ 242              		.align	2
+ 243              		.thumb
+ 244              		.thumb_func
+ 246              	enable:
+ 247              	.LFB112:
+ 110:../src/hd44780.c **** static void enable(const bool pulse) {
+ 248              		.loc 1 110 0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252              	.LVL20:
+ 253 0124 08B5     		push	{r3, lr}
+ 254              		.cfi_def_cfa_offset 8
+ 255              		.cfi_offset 3, -8
+ 256              		.cfi_offset 14, -4
+ 112:../src/hd44780.c **** 	if (pulse) {
+ 257              		.loc 1 112 0
+ 258 0126 30B1     		cbz	r0, .L17
+ 113:../src/hd44780.c **** 		GPIO_ToggleBits(Lcd_Conf.gpio, Lcd_Conf.e);
+ 259              		.loc 1 113 0
+ 260 0128 074B     		ldr	r3, .L18
+ 261 012a D3F8BC0B 		ldr	r0, [r3, #3004]
+ 262              	.LVL21:
+ 263 012e B3F8C81B 		ldrh	r1, [r3, #3016]
+ 264 0132 FFF7FEFF 		bl	GPIO_ToggleBits
+ 265              	.LVL22:
+ 266              	.L17:
+ 116:../src/hd44780.c **** 	GPIO_ToggleBits(Lcd_Conf.gpio, Lcd_Conf.e);
+ 267              		.loc 1 116 0
+ 268 0136 044B     		ldr	r3, .L18
+ 269 0138 D3F8BC0B 		ldr	r0, [r3, #3004]
+ 270 013c B3F8C81B 		ldrh	r1, [r3, #3016]
+ 271 0140 FFF7FEFF 		bl	GPIO_ToggleBits
+ 272              	.LVL23:
+ 273 0144 08BD     		pop	{r3, pc}
+ 274              	.L19:
+ 275 0146 00BF     		.align	2
+ 276              	.L18:
+ 277 0148 00000000 		.word	.LANCHOR0
+ 278              		.cfi_endproc
+ 279              	.LFE112:
+ 281              		.align	2
+ 282              		.thumb
+ 283              		.thumb_func
+ 285              	read_busy:
+ 286              	.LFB114:
+ 133:../src/hd44780.c **** static bool read_busy(void) {
+ 287              		.loc 1 133 0
+ 288              		.cfi_startproc
+ 289              		@ args = 0, pretend = 0, frame = 0
+ 290              		@ frame_needed = 0, uses_anonymous_args = 0
+ 291 014c 10B5     		push	{r4, lr}
+ 292              		.cfi_def_cfa_offset 8
+ 293              		.cfi_offset 4, -8
+ 294              		.cfi_offset 14, -4
+ 137:../src/hd44780.c **** 	set_output(false);
+ 295              		.loc 1 137 0
+ 296 014e 0020     		movs	r0, #0
+ 297 0150 FFF7B6FF 		bl	set_output
+ 298              	.LVL24:
+ 138:../src/hd44780.c **** 	GPIO_ResetBits(Lcd_Conf.gpio, Lcd_Conf.rs | Lcd_Conf.db7);
+ 299              		.loc 1 138 0
+ 300 0154 134C     		ldr	r4, .L23
+ 301 0156 D4F8C01B 		ldr	r1, [r4, #3008]
+ 302 015a D4F8D83B 		ldr	r3, [r4, #3032]
+ 303 015e 1943     		orrs	r1, r1, r3
+ 304 0160 D4F8BC0B 		ldr	r0, [r4, #3004]
+ 305 0164 89B2     		uxth	r1, r1
+ 306 0166 FFF7FEFF 		bl	GPIO_ResetBits
+ 307              	.LVL25:
+ 139:../src/hd44780.c **** 	GPIO_SetBits(Lcd_Conf.gpio, Lcd_Conf.rw);
+ 308              		.loc 1 139 0
+ 309 016a D4F8BC0B 		ldr	r0, [r4, #3004]
+ 310 016e B4F8C41B 		ldrh	r1, [r4, #3012]
+ 311 0172 FFF7FEFF 		bl	GPIO_SetBits
+ 312              	.LVL26:
+ 140:../src/hd44780.c **** 	enable(false);
+ 313              		.loc 1 140 0
+ 314 0176 0020     		movs	r0, #0
+ 315 0178 FFF7D4FF 		bl	enable
+ 316              	.LVL27:
+ 141:../src/hd44780.c **** 	data = GPIO_ReadInputDataBit(Lcd_Conf.gpio, Lcd_Conf.db7);
+ 317              		.loc 1 141 0
+ 318 017c D4F8BC0B 		ldr	r0, [r4, #3004]
+ 319 0180 B4F8D81B 		ldrh	r1, [r4, #3032]
+ 320 0184 FFF7FEFF 		bl	GPIO_ReadInputDataBit
+ 321              	.LVL28:
+ 322 0188 0446     		mov	r4, r0
+ 323              	.LVL29:
+ 142:../src/hd44780.c **** 	enable(false);
+ 324              		.loc 1 142 0
+ 325 018a 0020     		movs	r0, #0
+ 326              	.LVL30:
+ 327 018c FFF7CAFF 		bl	enable
+ 328              	.LVL31:
+ 143:../src/hd44780.c **** 	enable(true);
+ 329              		.loc 1 143 0
+ 330 0190 0120     		movs	r0, #1
+ 331 0192 FFF7C7FF 		bl	enable
+ 332              	.LVL32:
+ 145:../src/hd44780.c **** 	if (data == 1)
+ 333              		.loc 1 145 0
+ 334 0196 012C     		cmp	r4, #1
+ 335 0198 01D1     		bne	.L22
+ 146:../src/hd44780.c **** 		return (true);
+ 336              		.loc 1 146 0
+ 337 019a 0120     		movs	r0, #1
+ 338 019c 10BD     		pop	{r4, pc}
+ 339              	.LVL33:
+ 340              	.L22:
+ 148:../src/hd44780.c **** 	return (false);
+ 341              		.loc 1 148 0
+ 342 019e 0020     		movs	r0, #0
+ 150:../src/hd44780.c **** }
+ 343              		.loc 1 150 0
+ 344 01a0 10BD     		pop	{r4, pc}
+ 345              	.LVL34:
+ 346              	.L24:
+ 347 01a2 00BF     		.align	2
+ 348              	.L23:
+ 349 01a4 00000000 		.word	.LANCHOR0
+ 350              		.cfi_endproc
+ 351              	.LFE114:
+ 353              		.align	2
+ 354              		.thumb
+ 355              		.thumb_func
+ 357              	write:
+ 358              	.LFB113:
+ 120:../src/hd44780.c **** static void write(const u8 data, const bool reg) {
+ 359              		.loc 1 120 0
+ 360              		.cfi_startproc
+ 361              		@ args = 0, pretend = 0, frame = 0
+ 362              		@ frame_needed = 0, uses_anonymous_args = 0
+ 363              	.LVL35:
+ 364 01a8 70B5     		push	{r4, r5, r6, lr}
+ 365              		.cfi_def_cfa_offset 16
+ 366              		.cfi_offset 4, -16
+ 367              		.cfi_offset 5, -12
+ 368              		.cfi_offset 6, -8
+ 369              		.cfi_offset 14, -4
+ 370 01aa 0546     		mov	r5, r0
+ 371 01ac 0E46     		mov	r6, r1
+ 122:../src/hd44780.c **** 	set_output(true);
+ 372              		.loc 1 122 0
+ 373 01ae 0120     		movs	r0, #1
+ 374              	.LVL36:
+ 375 01b0 FFF786FF 		bl	set_output
+ 376              	.LVL37:
+ 124:../src/hd44780.c **** 	GPIO_ResetBits(Lcd_Conf.gpio, Lcd_Conf.rw);
+ 377              		.loc 1 124 0
+ 378 01b4 194C     		ldr	r4, .L26
+ 379 01b6 D4F8BC0B 		ldr	r0, [r4, #3004]
+ 380 01ba B4F8C41B 		ldrh	r1, [r4, #3012]
+ 381 01be FFF7FEFF 		bl	GPIO_ResetBits
+ 382              	.LVL38:
+ 125:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.rs, !reg);
+ 383              		.loc 1 125 0
+ 384 01c2 D4F8BC0B 		ldr	r0, [r4, #3004]
+ 385 01c6 B4F8C01B 		ldrh	r1, [r4, #3008]
+ 386 01ca 86F00102 		eor	r2, r6, #1
+ 387 01ce FFF7FEFF 		bl	GPIO_WriteBit
+ 388              	.LVL39:
+ 126:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.db7, (data & 0x8) >> 3);
+ 389              		.loc 1 126 0
+ 390 01d2 D4F8BC0B 		ldr	r0, [r4, #3004]
+ 391 01d6 B4F8D81B 		ldrh	r1, [r4, #3032]
+ 392 01da C5F3C002 		ubfx	r2, r5, #3, #1
+ 393 01de FFF7FEFF 		bl	GPIO_WriteBit
+ 394              	.LVL40:
+ 127:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.db6, (data & 0x4) >> 2);
+ 395              		.loc 1 127 0
+ 396 01e2 D4F8BC0B 		ldr	r0, [r4, #3004]
+ 397 01e6 B4F8D41B 		ldrh	r1, [r4, #3028]
+ 398 01ea C5F38002 		ubfx	r2, r5, #2, #1
+ 399 01ee FFF7FEFF 		bl	GPIO_WriteBit
+ 400              	.LVL41:
+ 128:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.db5, (data & 0x2) >> 1);
+ 401              		.loc 1 128 0
+ 402 01f2 D4F8BC0B 		ldr	r0, [r4, #3004]
+ 403 01f6 B4F8D01B 		ldrh	r1, [r4, #3024]
+ 404 01fa C5F34002 		ubfx	r2, r5, #1, #1
+ 405 01fe FFF7FEFF 		bl	GPIO_WriteBit
+ 406              	.LVL42:
+ 129:../src/hd44780.c **** 	GPIO_WriteBit(Lcd_Conf.gpio, Lcd_Conf.db4, (data & 0x1));
+ 407              		.loc 1 129 0
+ 408 0202 D4F8BC0B 		ldr	r0, [r4, #3004]
+ 409 0206 B4F8CC1B 		ldrh	r1, [r4, #3020]
+ 410 020a 05F00102 		and	r2, r5, #1
+ 411 020e FFF7FEFF 		bl	GPIO_WriteBit
+ 412              	.LVL43:
+ 130:../src/hd44780.c **** 	enable(true);
+ 413              		.loc 1 130 0
+ 414 0212 0120     		movs	r0, #1
+ 415 0214 FFF786FF 		bl	enable
+ 416              	.LVL44:
+ 417 0218 70BD     		pop	{r4, r5, r6, pc}
+ 418              	.L27:
+ 419 021a 00BF     		.align	2
+ 420              	.L26:
+ 421 021c 00000000 		.word	.LANCHOR0
+ 422              		.cfi_endproc
+ 423              	.LFE113:
+ 425              		.align	2
+ 426              		.thumb
+ 427              		.thumb_func
+ 429              	exec:
+ 430              	.LFB117:
+ 174:../src/hd44780.c **** 	}
+ 175:../src/hd44780.c **** }
+ 176:../src/hd44780.c **** 
+ 177:../src/hd44780.c **** static void exec(void) {
+ 431              		.loc 1 177 0
+ 432              		.cfi_startproc
+ 433              		@ args = 0, pretend = 0, frame = 0
+ 434              		@ frame_needed = 0, uses_anonymous_args = 0
+ 435 0220 10B5     		push	{r4, lr}
+ 436              		.cfi_def_cfa_offset 8
+ 437              		.cfi_offset 4, -8
+ 438              		.cfi_offset 14, -4
+ 178:../src/hd44780.c **** 
+ 179:../src/hd44780.c **** 	volatile hd44780_task_t *task;
+ 180:../src/hd44780.c **** 
+ 181:../src/hd44780.c **** 	if (Queue_Head != Queue_Tail) {
+ 439              		.loc 1 181 0
+ 440 0222 204B     		ldr	r3, .L35
+ 441 0224 1A88     		ldrh	r2, [r3]
+ 442 0226 92B2     		uxth	r2, r2
+ 443 0228 5B88     		ldrh	r3, [r3, #2]
+ 444 022a 9BB2     		uxth	r3, r3
+ 445 022c 9A42     		cmp	r2, r3
+ 446 022e 38D0     		beq	.L28
+ 182:../src/hd44780.c **** 		task = &Queue[Queue_Head];
+ 447              		.loc 1 182 0
+ 448 0230 1C4A     		ldr	r2, .L35
+ 449 0232 32F8043B 		ldrh	r3, [r2], #4
+ 450 0236 9BB2     		uxth	r3, r3
+ 451 0238 03EB4303 		add	r3, r3, r3, lsl #1
+ 452 023c 5B00     		lsls	r3, r3, #1
+ 453 023e D418     		adds	r4, r2, r3
+ 454              	.LVL45:
+ 183:../src/hd44780.c **** 		switch (task->command) {
+ 455              		.loc 1 183 0
+ 456 0240 D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 457 0242 DBB2     		uxtb	r3, r3
+ 458 0244 022B     		cmp	r3, #2
+ 459 0246 10D0     		beq	.L30
+ 460 0248 032B     		cmp	r3, #3
+ 461 024a 16D0     		beq	.L31
+ 462 024c 012B     		cmp	r3, #1
+ 463 024e 28D1     		bne	.L28
+ 184:../src/hd44780.c **** 		case HD44780_WAIT:
+ 185:../src/hd44780.c **** 			if (task->data > 0)
+ 464              		.loc 1 185 0
+ 465 0250 6388     		ldrh	r3, [r4, #2]
+ 466 0252 9BB2     		uxth	r3, r3
+ 467 0254 23B1     		cbz	r3, .L33
+ 186:../src/hd44780.c **** 				task->data--;
+ 468              		.loc 1 186 0
+ 469 0256 6388     		ldrh	r3, [r4, #2]
+ 470 0258 013B     		subs	r3, r3, #1
+ 471 025a 9BB2     		uxth	r3, r3
+ 472 025c 6380     		strh	r3, [r4, #2]	@ movhi
+ 473 025e 10BD     		pop	{r4, pc}
+ 474              	.LVL46:
+ 475              	.L33:
+ 187:../src/hd44780.c **** 			else {
+ 188:../src/hd44780.c **** 				task_del();
+ 476              		.loc 1 188 0
+ 477 0260 FFF714FF 		bl	task_del
+ 478              	.LVL47:
+ 189:../src/hd44780.c **** 				exec();
+ 479              		.loc 1 189 0
+ 480 0264 FFF7DCFF 		bl	exec
+ 481              	.LVL48:
+ 482 0268 10BD     		pop	{r4, pc}
+ 483              	.LVL49:
+ 484              	.L30:
+ 190:../src/hd44780.c **** 			}
+ 191:../src/hd44780.c **** 			break;
+ 192:../src/hd44780.c **** 		case HD44780_WAIT_NOT_BUSY:
+ 193:../src/hd44780.c **** 			if (!read_busy()) {
+ 485              		.loc 1 193 0
+ 486 026a FFF76FFF 		bl	read_busy
+ 487              	.LVL50:
+ 488 026e C0B9     		cbnz	r0, .L28
+ 194:../src/hd44780.c **** 				task_del();
+ 489              		.loc 1 194 0
+ 490 0270 FFF70CFF 		bl	task_del
+ 491              	.LVL51:
+ 195:../src/hd44780.c **** 				exec();
+ 492              		.loc 1 195 0
+ 493 0274 FFF7D4FF 		bl	exec
+ 494              	.LVL52:
+ 495 0278 10BD     		pop	{r4, pc}
+ 496              	.LVL53:
+ 497              	.L31:
+ 196:../src/hd44780.c **** 			}
+ 197:../src/hd44780.c **** 			break;
+ 198:../src/hd44780.c **** 		case HD44780_WRITE:
+ 199:../src/hd44780.c **** 			if (task->nibble == 1)
+ 498              		.loc 1 199 0
+ 499 027a 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 500 027c 5BB2     		sxtb	r3, r3
+ 501 027e 012B     		cmp	r3, #1
+ 502 0280 05D1     		bne	.L34
+ 200:../src/hd44780.c **** 				write(task->data >> 4, task->reg);
+ 503              		.loc 1 200 0
+ 504 0282 6088     		ldrh	r0, [r4, #2]
+ 505 0284 6178     		ldrb	r1, [r4, #1]	@ zero_extendqisi2
+ 506 0286 C0F30710 		ubfx	r0, r0, #4, #8
+ 507 028a FFF78DFF 		bl	write
+ 508              	.LVL54:
+ 509              	.L34:
+ 201:../src/hd44780.c **** 			write(task->data & 0xf, task->reg);
+ 510              		.loc 1 201 0
+ 511 028e 6088     		ldrh	r0, [r4, #2]
+ 512 0290 6178     		ldrb	r1, [r4, #1]	@ zero_extendqisi2
+ 513 0292 00F00F00 		and	r0, r0, #15
+ 514 0296 FFF787FF 		bl	write
+ 515              	.LVL55:
+ 202:../src/hd44780.c **** 			task_del();
+ 516              		.loc 1 202 0
+ 517 029a FFF7F7FE 		bl	task_del
+ 518              	.LVL56:
+ 203:../src/hd44780.c **** 			exec();
+ 519              		.loc 1 203 0
+ 520 029e FFF7BFFF 		bl	exec
+ 521              	.LVL57:
+ 522              	.L28:
+ 523 02a2 10BD     		pop	{r4, pc}
+ 524              	.L36:
+ 525              		.align	2
+ 526              	.L35:
+ 527 02a4 00000000 		.word	.LANCHOR0
+ 528              		.cfi_endproc
+ 529              	.LFE117:
+ 531              		.align	2
+ 532              		.global	hd44780_clear
+ 533              		.thumb
+ 534              		.thumb_func
+ 536              	hd44780_clear:
+ 537              	.LFB118:
+ 204:../src/hd44780.c **** 			break;
+ 205:../src/hd44780.c **** 		}
+ 206:../src/hd44780.c **** 	}
+ 207:../src/hd44780.c **** }
+ 208:../src/hd44780.c **** 
+ 209:../src/hd44780.c **** /**
+ 210:../src/hd44780.c ****  * Clear the LCD
+ 211:../src/hd44780.c ****  */
+ 212:../src/hd44780.c **** void hd44780_clear(void) {
+ 538              		.loc 1 212 0
+ 539              		.cfi_startproc
+ 540              		@ args = 0, pretend = 0, frame = 0
+ 541              		@ frame_needed = 0, uses_anonymous_args = 0
+ 542 02a8 08B5     		push	{r3, lr}
+ 543              		.cfi_def_cfa_offset 8
+ 544              		.cfi_offset 3, -8
+ 545              		.cfi_offset 14, -4
+ 213:../src/hd44780.c **** 
+ 214:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, HD44780_CLEAR, 2);
+ 546              		.loc 1 214 0
+ 547 02aa 0320     		movs	r0, #3
+ 548 02ac 0121     		movs	r1, #1
+ 549 02ae 0A46     		mov	r2, r1
+ 550 02b0 0223     		movs	r3, #2
+ 551 02b2 FFF7A5FE 		bl	task_add
+ 552              	.LVL58:
+ 215:../src/hd44780.c **** 	task_add(HD44780_WAIT_NOT_BUSY, NONE, NONE, NONE);
+ 553              		.loc 1 215 0
+ 554 02b6 0220     		movs	r0, #2
+ 555 02b8 0021     		movs	r1, #0
+ 556 02ba 0A46     		mov	r2, r1
+ 557 02bc 0B46     		mov	r3, r1
+ 558 02be FFF79FFE 		bl	task_add
+ 559              	.LVL59:
+ 560 02c2 08BD     		pop	{r3, pc}
+ 561              		.cfi_endproc
+ 562              	.LFE118:
+ 564              		.align	2
+ 565              		.global	hd44780_home
+ 566              		.thumb
+ 567              		.thumb_func
+ 569              	hd44780_home:
+ 570              	.LFB119:
+ 216:../src/hd44780.c **** }
+ 217:../src/hd44780.c **** 
+ 218:../src/hd44780.c **** /**
+ 219:../src/hd44780.c ****  * Move cursor home
+ 220:../src/hd44780.c ****  */
+ 221:../src/hd44780.c **** void hd44780_home(void) {
+ 571              		.loc 1 221 0
+ 572              		.cfi_startproc
+ 573              		@ args = 0, pretend = 0, frame = 0
+ 574              		@ frame_needed = 0, uses_anonymous_args = 0
+ 575 02c4 08B5     		push	{r3, lr}
+ 576              		.cfi_def_cfa_offset 8
+ 577              		.cfi_offset 3, -8
+ 578              		.cfi_offset 14, -4
+ 222:../src/hd44780.c **** 
+ 223:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, HD44780_HOME, 2);
+ 579              		.loc 1 223 0
+ 580 02c6 0320     		movs	r0, #3
+ 581 02c8 0121     		movs	r1, #1
+ 582 02ca 0222     		movs	r2, #2
+ 583 02cc 1346     		mov	r3, r2
+ 584 02ce FFF797FE 		bl	task_add
+ 585              	.LVL60:
+ 224:../src/hd44780.c **** 	task_add(HD44780_WAIT_NOT_BUSY, NONE, NONE, NONE);
+ 586              		.loc 1 224 0
+ 587 02d2 0220     		movs	r0, #2
+ 588 02d4 0021     		movs	r1, #0
+ 589 02d6 0A46     		mov	r2, r1
+ 590 02d8 0B46     		mov	r3, r1
+ 591 02da FFF791FE 		bl	task_add
+ 592              	.LVL61:
+ 593 02de 08BD     		pop	{r3, pc}
+ 594              		.cfi_endproc
+ 595              	.LFE119:
+ 597              		.align	2
+ 598              		.global	hd44780_display
+ 599              		.thumb
+ 600              		.thumb_func
+ 602              	hd44780_display:
+ 603              	.LFB120:
+ 225:../src/hd44780.c **** }
+ 226:../src/hd44780.c **** 
+ 227:../src/hd44780.c **** /**
+ 228:../src/hd44780.c ****  * Display settings
+ 229:../src/hd44780.c ****  *
+ 230:../src/hd44780.c ****  * @param enable	LCD on/off
+ 231:../src/hd44780.c ****  * @param cursor	Cursor on/off
+ 232:../src/hd44780.c ****  * @param blink		Blinking cursor on/off
+ 233:../src/hd44780.c ****  *
+ 234:../src/hd44780.c ****  */
+ 235:../src/hd44780.c **** void hd44780_display(const bool enable, const bool cursor, const bool blink) {
+ 604              		.loc 1 235 0
+ 605              		.cfi_startproc
+ 606              		@ args = 0, pretend = 0, frame = 0
+ 607              		@ frame_needed = 0, uses_anonymous_args = 0
+ 608              	.LVL62:
+ 609 02e0 08B5     		push	{r3, lr}
+ 610              		.cfi_def_cfa_offset 8
+ 611              		.cfi_offset 3, -8
+ 612              		.cfi_offset 14, -4
+ 613              	.LVL63:
+ 236:../src/hd44780.c **** 
+ 237:../src/hd44780.c **** 	u16 command = HD44780_DISPLAY;
+ 238:../src/hd44780.c **** 
+ 239:../src/hd44780.c **** 	if (enable)
+ 614              		.loc 1 239 0
+ 615 02e2 20B9     		cbnz	r0, .L43
+ 240:../src/hd44780.c **** 		command |= HD44780_DISPLAY_ON;
+ 241:../src/hd44780.c **** 	else {
+ 242:../src/hd44780.c **** 		Queue_Head = Queue_Tail = 0;
+ 616              		.loc 1 242 0
+ 617 02e4 0C4B     		ldr	r3, .L44
+ 618 02e6 5880     		strh	r0, [r3, #2]	@ movhi
+ 619 02e8 1880     		strh	r0, [r3]	@ movhi
+ 237:../src/hd44780.c **** 	u16 command = HD44780_DISPLAY;
+ 620              		.loc 1 237 0
+ 621 02ea 0823     		movs	r3, #8
+ 622 02ec 00E0     		b	.L40
+ 623              	.L43:
+ 240:../src/hd44780.c **** 		command |= HD44780_DISPLAY_ON;
+ 624              		.loc 1 240 0
+ 625 02ee 0C23     		movs	r3, #12
+ 626              	.L40:
+ 627              	.LVL64:
+ 243:../src/hd44780.c **** 	}
+ 244:../src/hd44780.c **** 	if (cursor)
+ 628              		.loc 1 244 0
+ 629 02f0 09B1     		cbz	r1, .L41
+ 245:../src/hd44780.c **** 		command |= HD44780_CURSOR_ON;
+ 630              		.loc 1 245 0
+ 631 02f2 43F00203 		orr	r3, r3, #2
+ 632              	.LVL65:
+ 633              	.L41:
+ 246:../src/hd44780.c **** 	if (blink)
+ 634              		.loc 1 246 0
+ 635 02f6 0AB1     		cbz	r2, .L42
+ 247:../src/hd44780.c **** 		command |= HD44780_BLINK_ON;
+ 636              		.loc 1 247 0
+ 637 02f8 43F00103 		orr	r3, r3, #1
+ 638              	.LVL66:
+ 639              	.L42:
+ 248:../src/hd44780.c **** 
+ 249:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, command, 2);
+ 640              		.loc 1 249 0
+ 641 02fc 0320     		movs	r0, #3
+ 642              	.LVL67:
+ 643 02fe 0121     		movs	r1, #1
+ 644              	.LVL68:
+ 645 0300 1A46     		mov	r2, r3
+ 646              	.LVL69:
+ 647 0302 0223     		movs	r3, #2
+ 648              	.LVL70:
+ 649 0304 FFF77CFE 		bl	task_add
+ 650              	.LVL71:
+ 250:../src/hd44780.c **** 	task_add(HD44780_WAIT_NOT_BUSY, NONE, NONE, NONE);
+ 651              		.loc 1 250 0
+ 652 0308 0220     		movs	r0, #2
+ 653 030a 0021     		movs	r1, #0
+ 654 030c 0A46     		mov	r2, r1
+ 655 030e 0B46     		mov	r3, r1
+ 656 0310 FFF776FE 		bl	task_add
+ 657              	.LVL72:
+ 658 0314 08BD     		pop	{r3, pc}
+ 659              	.L45:
+ 660 0316 00BF     		.align	2
+ 661              	.L44:
+ 662 0318 00000000 		.word	.LANCHOR0
+ 663              		.cfi_endproc
+ 664              	.LFE120:
+ 666              		.align	2
+ 667              		.global	hd44780_position
+ 668              		.thumb
+ 669              		.thumb_func
+ 671              	hd44780_position:
+ 672              	.LFB121:
+ 251:../src/hd44780.c **** }
+ 252:../src/hd44780.c **** 
+ 253:../src/hd44780.c **** /**
+ 254:../src/hd44780.c ****  * Position the cursor
+ 255:../src/hd44780.c ****  *
+ 256:../src/hd44780.c ****  * @param row	Row
+ 257:../src/hd44780.c ****  * @param col	Column
+ 258:../src/hd44780.c ****  */
+ 259:../src/hd44780.c **** void hd44780_position(const u8 row, const u8 col) {
+ 673              		.loc 1 259 0
+ 674              		.cfi_startproc
+ 675              		@ args = 0, pretend = 0, frame = 8
+ 676              		@ frame_needed = 0, uses_anonymous_args = 0
+ 677              	.LVL73:
+ 678 031c 00B5     		push	{lr}
+ 679              		.cfi_def_cfa_offset 4
+ 680              		.cfi_offset 14, -4
+ 681 031e 83B0     		sub	sp, sp, #12
+ 682              		.cfi_def_cfa_offset 16
+ 683 0320 0346     		mov	r3, r0
+ 684              	.LVL74:
+ 260:../src/hd44780.c **** 
+ 261:../src/hd44780.c **** 	u16 command = HD44780_DGRAM;
+ 262:../src/hd44780.c **** 	const u8 offsets[] = { 0x00, 0x40, 0x14, 0x54 };
+ 685              		.loc 1 262 0
+ 686 0322 0C4A     		ldr	r2, .L47
+ 687 0324 1068     		ldr	r0, [r2]	@ unaligned
+ 688              	.LVL75:
+ 689 0326 0190     		str	r0, [sp, #4]	@ unaligned
+ 263:../src/hd44780.c **** 
+ 264:../src/hd44780.c **** 	command |= col + offsets[row];
+ 690              		.loc 1 264 0
+ 691 0328 02AA     		add	r2, sp, #8
+ 692 032a 1344     		add	r3, r3, r2
+ 693 032c 13F8042C 		ldrb	r2, [r3, #-4]	@ zero_extendqisi2
+ 694 0330 0A44     		add	r2, r2, r1
+ 695              	.LVL76:
+ 265:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, command, 2);
+ 696              		.loc 1 265 0
+ 697 0332 0320     		movs	r0, #3
+ 698 0334 0121     		movs	r1, #1
+ 699              	.LVL77:
+ 700 0336 42F08002 		orr	r2, r2, #128
+ 701              	.LVL78:
+ 702 033a 0223     		movs	r3, #2
+ 703 033c FFF760FE 		bl	task_add
+ 704              	.LVL79:
+ 266:../src/hd44780.c **** 	task_add(HD44780_WAIT_NOT_BUSY, NONE, NONE, NONE);
+ 705              		.loc 1 266 0
+ 706 0340 0220     		movs	r0, #2
+ 707 0342 0021     		movs	r1, #0
+ 708 0344 0A46     		mov	r2, r1
+ 709 0346 0B46     		mov	r3, r1
+ 710 0348 FFF75AFE 		bl	task_add
+ 711              	.LVL80:
+ 267:../src/hd44780.c **** }
+ 712              		.loc 1 267 0
+ 713 034c 03B0     		add	sp, sp, #12
+ 714              		@ sp needed
+ 715 034e 5DF804FB 		ldr	pc, [sp], #4
+ 716              	.L48:
+ 717 0352 00BF     		.align	2
+ 718              	.L47:
+ 719 0354 00000000 		.word	.LANCHOR1
+ 720              		.cfi_endproc
+ 721              	.LFE121:
+ 723              		.align	2
+ 724              		.global	hd44780_cgram
+ 725              		.thumb
+ 726              		.thumb_func
+ 728              	hd44780_cgram:
+ 729              	.LFB122:
+ 268:../src/hd44780.c **** 
+ 269:../src/hd44780.c **** /**
+ 270:../src/hd44780.c ****  * Set a UDG
+ 271:../src/hd44780.c ****  *
+ 272:../src/hd44780.c ****  * @param pos	UDG number
+ 273:../src/hd44780.c ****  * @param udg	UDG definition
+ 274:../src/hd44780.c ****  */
+ 275:../src/hd44780.c **** void hd44780_cgram(const u8 pos, const char udg[8]) {
+ 730              		.loc 1 275 0
+ 731              		.cfi_startproc
+ 732              		@ args = 0, pretend = 0, frame = 0
+ 733              		@ frame_needed = 0, uses_anonymous_args = 0
+ 734              	.LVL81:
+ 735 0358 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 736              		.cfi_def_cfa_offset 24
+ 737              		.cfi_offset 4, -24
+ 738              		.cfi_offset 5, -20
+ 739              		.cfi_offset 6, -16
+ 740              		.cfi_offset 7, -12
+ 741              		.cfi_offset 8, -8
+ 742              		.cfi_offset 14, -4
+ 743 035c 8846     		mov	r8, r1
+ 744              	.LVL82:
+ 276:../src/hd44780.c **** 
+ 277:../src/hd44780.c **** 	u8 i;
+ 278:../src/hd44780.c **** 	u16 command = HD44780_CGRAM;
+ 279:../src/hd44780.c **** 
+ 280:../src/hd44780.c **** 	assert_param(pos < 8);
+ 281:../src/hd44780.c **** 
+ 282:../src/hd44780.c **** 	command |= pos * 8;
+ 745              		.loc 1 282 0
+ 746 035e C200     		lsls	r2, r0, #3
+ 747              	.LVL83:
+ 283:../src/hd44780.c **** 
+ 284:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, command, 2);
+ 748              		.loc 1 284 0
+ 749 0360 0320     		movs	r0, #3
+ 750              	.LVL84:
+ 751 0362 0121     		movs	r1, #1
+ 752              	.LVL85:
+ 753 0364 42F04002 		orr	r2, r2, #64
+ 754              	.LVL86:
+ 755 0368 0223     		movs	r3, #2
+ 756 036a FFF749FE 		bl	task_add
+ 757              	.LVL87:
+ 285:../src/hd44780.c **** 	for (i = 0; i < 8; i++) {
+ 758              		.loc 1 285 0
+ 759 036e 0024     		movs	r4, #0
+ 286:../src/hd44780.c **** 		task_add(HD44780_WRITE, false, udg[i], 2);
+ 760              		.loc 1 286 0
+ 761 0370 0327     		movs	r7, #3
+ 762 0372 2646     		mov	r6, r4
+ 763 0374 0225     		movs	r5, #2
+ 285:../src/hd44780.c **** 	for (i = 0; i < 8; i++) {
+ 764              		.loc 1 285 0
+ 765 0376 0EE0     		b	.L50
+ 766              	.LVL88:
+ 767              	.L51:
+ 768              		.loc 1 286 0 discriminator 2
+ 769 0378 3846     		mov	r0, r7
+ 770 037a 3146     		mov	r1, r6
+ 771 037c 18F80420 		ldrb	r2, [r8, r4]	@ zero_extendqisi2
+ 772 0380 2B46     		mov	r3, r5
+ 773 0382 FFF73DFE 		bl	task_add
+ 774              	.LVL89:
+ 287:../src/hd44780.c **** 		task_add(HD44780_WAIT_NOT_BUSY, NONE, NONE, NONE);
+ 775              		.loc 1 287 0 discriminator 2
+ 776 0386 2846     		mov	r0, r5
+ 777 0388 3146     		mov	r1, r6
+ 778 038a 3246     		mov	r2, r6
+ 779 038c 3346     		mov	r3, r6
+ 780 038e FFF737FE 		bl	task_add
+ 781              	.LVL90:
+ 285:../src/hd44780.c **** 	for (i = 0; i < 8; i++) {
+ 782              		.loc 1 285 0 discriminator 2
+ 783 0392 0134     		adds	r4, r4, #1
+ 784              	.LVL91:
+ 785 0394 E4B2     		uxtb	r4, r4
+ 786              	.LVL92:
+ 787              	.L50:
+ 285:../src/hd44780.c **** 	for (i = 0; i < 8; i++) {
+ 788              		.loc 1 285 0 is_stmt 0 discriminator 1
+ 789 0396 072C     		cmp	r4, #7
+ 790 0398 EED9     		bls	.L51
+ 288:../src/hd44780.c **** 	}
+ 289:../src/hd44780.c **** }
+ 791              		.loc 1 289 0 is_stmt 1
+ 792 039a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 793              		.cfi_endproc
+ 794              	.LFE122:
+ 796 039e 00BF     		.align	2
+ 797              		.global	hd44780_put
+ 798              		.thumb
+ 799              		.thumb_func
+ 801              	hd44780_put:
+ 802              	.LFB123:
+ 290:../src/hd44780.c **** 
+ 291:../src/hd44780.c **** /**
+ 292:../src/hd44780.c ****  * Send a single character to the LCD
+ 293:../src/hd44780.c ****  *
+ 294:../src/hd44780.c ****  * @param chr	Character to send
+ 295:../src/hd44780.c ****  */
+ 296:../src/hd44780.c **** void hd44780_put(const char chr) {
+ 803              		.loc 1 296 0
+ 804              		.cfi_startproc
+ 805              		@ args = 0, pretend = 0, frame = 0
+ 806              		@ frame_needed = 0, uses_anonymous_args = 0
+ 807              	.LVL93:
+ 808 03a0 08B5     		push	{r3, lr}
+ 809              		.cfi_def_cfa_offset 8
+ 810              		.cfi_offset 3, -8
+ 811              		.cfi_offset 14, -4
+ 812 03a2 0246     		mov	r2, r0
+ 297:../src/hd44780.c **** 
+ 298:../src/hd44780.c **** 	task_add(HD44780_WRITE, false, chr, 2);
+ 813              		.loc 1 298 0
+ 814 03a4 0320     		movs	r0, #3
+ 815              	.LVL94:
+ 816 03a6 0021     		movs	r1, #0
+ 817 03a8 0223     		movs	r3, #2
+ 818 03aa FFF729FE 		bl	task_add
+ 819              	.LVL95:
+ 299:../src/hd44780.c **** 	task_add(HD44780_WAIT_NOT_BUSY, NONE, NONE, NONE);
+ 820              		.loc 1 299 0
+ 821 03ae 0220     		movs	r0, #2
+ 822 03b0 0021     		movs	r1, #0
+ 823 03b2 0A46     		mov	r2, r1
+ 824 03b4 0B46     		mov	r3, r1
+ 825 03b6 FFF723FE 		bl	task_add
+ 826              	.LVL96:
+ 827 03ba 08BD     		pop	{r3, pc}
+ 828              		.cfi_endproc
+ 829              	.LFE123:
+ 831              		.align	2
+ 832              		.global	hd44780_print
+ 833              		.thumb
+ 834              		.thumb_func
+ 836              	hd44780_print:
+ 837              	.LFB124:
+ 300:../src/hd44780.c **** }
+ 301:../src/hd44780.c **** 
+ 302:../src/hd44780.c **** /**
+ 303:../src/hd44780.c ****  * Send a string to the LCD
+ 304:../src/hd44780.c ****  *
+ 305:../src/hd44780.c ****  * @param string	String to send
+ 306:../src/hd44780.c ****  */
+ 307:../src/hd44780.c **** void hd44780_print(const char* string) {
+ 838              		.loc 1 307 0
+ 839              		.cfi_startproc
+ 840              		@ args = 0, pretend = 0, frame = 0
+ 841              		@ frame_needed = 0, uses_anonymous_args = 0
+ 842              	.LVL97:
+ 843 03bc 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 844              		.cfi_def_cfa_offset 24
+ 845              		.cfi_offset 4, -24
+ 846              		.cfi_offset 5, -20
+ 847              		.cfi_offset 6, -16
+ 848              		.cfi_offset 7, -12
+ 849              		.cfi_offset 8, -8
+ 850              		.cfi_offset 14, -4
+ 851 03c0 0746     		mov	r7, r0
+ 852              	.LVL98:
+ 308:../src/hd44780.c **** 
+ 309:../src/hd44780.c **** 	u8 i = 0;
+ 853              		.loc 1 309 0
+ 854 03c2 0024     		movs	r4, #0
+ 310:../src/hd44780.c **** 
+ 311:../src/hd44780.c **** 	while (string[i]) {
+ 312:../src/hd44780.c **** 		task_add(HD44780_WRITE, false, string[i], 2);
+ 855              		.loc 1 312 0
+ 856 03c4 4FF00308 		mov	r8, #3
+ 857 03c8 2646     		mov	r6, r4
+ 858 03ca 0225     		movs	r5, #2
+ 311:../src/hd44780.c **** 	while (string[i]) {
+ 859              		.loc 1 311 0
+ 860 03cc 0CE0     		b	.L54
+ 861              	.LVL99:
+ 862              	.L55:
+ 863              		.loc 1 312 0
+ 864 03ce 4046     		mov	r0, r8
+ 865 03d0 3146     		mov	r1, r6
+ 866 03d2 2B46     		mov	r3, r5
+ 867 03d4 FFF714FE 		bl	task_add
+ 868              	.LVL100:
+ 313:../src/hd44780.c **** 		task_add(HD44780_WAIT_NOT_BUSY, NONE, NONE, NONE);
+ 869              		.loc 1 313 0
+ 870 03d8 2846     		mov	r0, r5
+ 871 03da 3146     		mov	r1, r6
+ 872 03dc 3246     		mov	r2, r6
+ 873 03de 3346     		mov	r3, r6
+ 874 03e0 FFF70EFE 		bl	task_add
+ 875              	.LVL101:
+ 314:../src/hd44780.c **** 		i++;
+ 876              		.loc 1 314 0
+ 877 03e4 0134     		adds	r4, r4, #1
+ 878              	.LVL102:
+ 879 03e6 E4B2     		uxtb	r4, r4
+ 880              	.LVL103:
+ 881              	.L54:
+ 311:../src/hd44780.c **** 	while (string[i]) {
+ 882              		.loc 1 311 0 discriminator 1
+ 883 03e8 3A5D     		ldrb	r2, [r7, r4]	@ zero_extendqisi2
+ 884 03ea 002A     		cmp	r2, #0
+ 885 03ec EFD1     		bne	.L55
+ 315:../src/hd44780.c **** 	}
+ 316:../src/hd44780.c **** }
+ 886              		.loc 1 316 0
+ 887 03ee BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 888              		.cfi_endproc
+ 889              	.LFE124:
+ 891 03f2 00BF     		.align	2
+ 892              		.global	hd44780_init
+ 893              		.thumb
+ 894              		.thumb_func
+ 896              	hd44780_init:
+ 897              	.LFB125:
+ 317:../src/hd44780.c **** 
+ 318:../src/hd44780.c **** /**
+ 319:../src/hd44780.c ****  * Send a formatted string to the LCD
+ 320:../src/hd44780.c ****  *
+ 321:../src/hd44780.c ****  * @param fmt	String format
+ 322:../src/hd44780.c ****  * @param ...	Variable arguments (see printf())
+ 323:../src/hd44780.c ****  */
+ 324:../src/hd44780.c **** /*void hd44780_printf(const char *fmt, ...) {
+ 325:../src/hd44780.c **** 
+ 326:../src/hd44780.c **** 	u16 i;
+ 327:../src/hd44780.c **** 	u16 size;
+ 328:../src/hd44780.c **** 	u8 character;
+ 329:../src/hd44780.c **** 	char buffer[32];
+ 330:../src/hd44780.c **** 	va_list args;
+ 331:../src/hd44780.c **** 
+ 332:../src/hd44780.c **** 	va_start(args, fmt);
+ 333:../src/hd44780.c **** 	size = vsprintf(buffer, fmt, args);
+ 334:../src/hd44780.c **** 
+ 335:../src/hd44780.c **** 	for (i = 0; i < size; i++) {
+ 336:../src/hd44780.c **** 		character = buffer[i];
+ 337:../src/hd44780.c **** 
+ 338:../src/hd44780.c **** 		if (character == 10)
+ 339:../src/hd44780.c **** 			break;
+ 340:../src/hd44780.c **** 		else
+ 341:../src/hd44780.c **** 			hd44780_put(character);
+ 342:../src/hd44780.c **** 	}
+ 343:../src/hd44780.c **** }*/
+ 344:../src/hd44780.c **** 
+ 345:../src/hd44780.c **** /**
+ 346:../src/hd44780.c ****  * Initialise the LCD
+ 347:../src/hd44780.c ****  *
+ 348:../src/hd44780.c ****  * @param gpio	GPIO Port
+ 349:../src/hd44780.c ****  * @param rs	RS line
+ 350:../src/hd44780.c ****  * @param rw	RW line
+ 351:../src/hd44780.c ****  * @param e		E line
+ 352:../src/hd44780.c ****  * @param db4	DB4 line
+ 353:../src/hd44780.c ****  * @param db5	DB5 line
+ 354:../src/hd44780.c ****  * @param db6	DB6 line
+ 355:../src/hd44780.c ****  * @param db7	DB7 line
+ 356:../src/hd44780.c ****  * @param lines	Lines
+ 357:../src/hd44780.c ****  * @param font	Font
+ 358:../src/hd44780.c ****  */
+ 359:../src/hd44780.c **** void hd44780_init(GPIO_TypeDef* gpio, const u16 rs, const u16 rw, const u16 e,
+ 360:../src/hd44780.c **** 		const u16 db4, const u16 db5, const u16 db6, const u16 db7,
+ 361:../src/hd44780.c **** 		const hd44780_lines_t lines, const hd44780_font_t font) {
+ 898              		.loc 1 361 0
+ 899              		.cfi_startproc
+ 900              		@ args = 24, pretend = 0, frame = 16
+ 901              		@ frame_needed = 0, uses_anonymous_args = 0
+ 902              	.LVL104:
+ 903 03f4 F0B5     		push	{r4, r5, r6, r7, lr}
+ 904              		.cfi_def_cfa_offset 20
+ 905              		.cfi_offset 4, -20
+ 906              		.cfi_offset 5, -16
+ 907              		.cfi_offset 6, -12
+ 908              		.cfi_offset 7, -8
+ 909              		.cfi_offset 14, -4
+ 910 03f6 85B0     		sub	sp, sp, #20
+ 911              		.cfi_def_cfa_offset 40
+ 362:../src/hd44780.c **** 
+ 363:../src/hd44780.c **** 	u32 periph;
+ 364:../src/hd44780.c **** 	NVIC_InitTypeDef NVIC_InitStructure;
+ 365:../src/hd44780.c **** 	TIM_TimeBaseInitTypeDef TIM_InitStructure;
+ 366:../src/hd44780.c **** 
+ 367:../src/hd44780.c **** 	assert_param(IS_GPIO_ALL_PERIPH(gpio));
+ 368:../src/hd44780.c **** 	assert_param(IS_GPIO_PIN(rs));
+ 369:../src/hd44780.c **** 	assert_param(IS_GPIO_PIN(rw));
+ 370:../src/hd44780.c **** 	assert_param(IS_GPIO_PIN(e));
+ 371:../src/hd44780.c **** 	assert_param(IS_GPIO_PIN(db4));
+ 372:../src/hd44780.c **** 	assert_param(IS_GPIO_PIN(db5));
+ 373:../src/hd44780.c **** 	assert_param(IS_GPIO_PIN(db6));
+ 374:../src/hd44780.c **** 	assert_param(IS_GPIO_PIN(db7));
+ 375:../src/hd44780.c **** 
+ 376:../src/hd44780.c **** 	Lcd_Conf.gpio = gpio;
+ 912              		.loc 1 376 0
+ 913 03f8 6E4C     		ldr	r4, .L64
+ 914 03fa C4F8BC0B 		str	r0, [r4, #3004]
+ 377:../src/hd44780.c **** 	Lcd_Conf.rs = rs;
+ 915              		.loc 1 377 0
+ 916 03fe C4F8C01B 		str	r1, [r4, #3008]
+ 378:../src/hd44780.c **** 	Lcd_Conf.rw = rw;
+ 917              		.loc 1 378 0
+ 918 0402 C4F8C42B 		str	r2, [r4, #3012]
+ 379:../src/hd44780.c **** 	Lcd_Conf.e = e;
+ 919              		.loc 1 379 0
+ 920 0406 C4F8C83B 		str	r3, [r4, #3016]
+ 380:../src/hd44780.c **** 	Lcd_Conf.db4 = db4;
+ 921              		.loc 1 380 0
+ 922 040a BDF82830 		ldrh	r3, [sp, #40]
+ 923              	.LVL105:
+ 924 040e C4F8CC3B 		str	r3, [r4, #3020]
+ 381:../src/hd44780.c **** 	Lcd_Conf.db5 = db5;
+ 925              		.loc 1 381 0
+ 926 0412 BDF82C30 		ldrh	r3, [sp, #44]
+ 927 0416 C4F8D03B 		str	r3, [r4, #3024]
+ 382:../src/hd44780.c **** 	Lcd_Conf.db6 = db6;
+ 928              		.loc 1 382 0
+ 929 041a BDF83030 		ldrh	r3, [sp, #48]
+ 930 041e C4F8D43B 		str	r3, [r4, #3028]
+ 383:../src/hd44780.c **** 	Lcd_Conf.db7 = db7;
+ 931              		.loc 1 383 0
+ 932 0422 BDF83430 		ldrh	r3, [sp, #52]
+ 933 0426 C4F8D83B 		str	r3, [r4, #3032]
+ 384:../src/hd44780.c **** 	Lcd_Conf.lines = lines;
+ 934              		.loc 1 384 0
+ 935 042a 9DF83830 		ldrb	r3, [sp, #56]	@ zero_extendqisi2
+ 936 042e 84F8DC3B 		strb	r3, [r4, #3036]
+ 385:../src/hd44780.c **** 	Lcd_Conf.font = font;
+ 937              		.loc 1 385 0
+ 938 0432 9DF83C30 		ldrb	r3, [sp, #60]	@ zero_extendqisi2
+ 939 0436 84F8DD3B 		strb	r3, [r4, #3037]
+ 386:../src/hd44780.c **** 
+ 387:../src/hd44780.c **** 	if (gpio == GPIOA )
+ 940              		.loc 1 387 0
+ 941 043a 5F4B     		ldr	r3, .L64+4
+ 942 043c 9842     		cmp	r0, r3
+ 943 043e 12D0     		beq	.L60
+ 388:../src/hd44780.c **** 		periph = RCC_AHB1Periph_GPIOA;
+ 389:../src/hd44780.c **** 	else if (gpio == GPIOB )
+ 944              		.loc 1 389 0
+ 945 0440 03F58063 		add	r3, r3, #1024
+ 946 0444 9842     		cmp	r0, r3
+ 947 0446 10D0     		beq	.L61
+ 390:../src/hd44780.c **** 		periph = RCC_AHB1Periph_GPIOB;
+ 391:../src/hd44780.c **** 	else if (gpio == GPIOC )
+ 948              		.loc 1 391 0
+ 949 0448 03F58063 		add	r3, r3, #1024
+ 950 044c 9842     		cmp	r0, r3
+ 951 044e 0ED0     		beq	.L62
+ 392:../src/hd44780.c **** 		periph = RCC_AHB1Periph_GPIOC;
+ 393:../src/hd44780.c **** 	else if (gpio == GPIOD )
+ 952              		.loc 1 393 0
+ 953 0450 03F58063 		add	r3, r3, #1024
+ 954 0454 9842     		cmp	r0, r3
+ 955 0456 0CD0     		beq	.L63
+ 394:../src/hd44780.c **** 		periph = RCC_AHB1Periph_GPIOD;
+ 395:../src/hd44780.c **** 	else if (gpio == GPIOE )
+ 956              		.loc 1 395 0
+ 957 0458 03F58063 		add	r3, r3, #1024
+ 958 045c 9842     		cmp	r0, r3
+ 959 045e 40F0A680 		bne	.L56
+ 396:../src/hd44780.c **** 		periph = RCC_AHB1Periph_GPIOE;
+ 960              		.loc 1 396 0
+ 961 0462 1020     		movs	r0, #16
+ 962              	.LVL106:
+ 963 0464 06E0     		b	.L57
+ 964              	.LVL107:
+ 965              	.L60:
+ 388:../src/hd44780.c **** 		periph = RCC_AHB1Periph_GPIOA;
+ 966              		.loc 1 388 0
+ 967 0466 0120     		movs	r0, #1
+ 968              	.LVL108:
+ 969 0468 04E0     		b	.L57
+ 970              	.LVL109:
+ 971              	.L61:
+ 390:../src/hd44780.c **** 		periph = RCC_AHB1Periph_GPIOB;
+ 972              		.loc 1 390 0
+ 973 046a 0220     		movs	r0, #2
+ 974              	.LVL110:
+ 975 046c 02E0     		b	.L57
+ 976              	.LVL111:
+ 977              	.L62:
+ 392:../src/hd44780.c **** 		periph = RCC_AHB1Periph_GPIOC;
+ 978              		.loc 1 392 0
+ 979 046e 0420     		movs	r0, #4
+ 980              	.LVL112:
+ 981 0470 00E0     		b	.L57
+ 982              	.LVL113:
+ 983              	.L63:
+ 394:../src/hd44780.c **** 		periph = RCC_AHB1Periph_GPIOD;
+ 984              		.loc 1 394 0
+ 985 0472 0820     		movs	r0, #8
+ 986              	.LVL114:
+ 987              	.L57:
+ 397:../src/hd44780.c **** 	else
+ 398:../src/hd44780.c **** 		return;
+ 399:../src/hd44780.c **** 
+ 400:../src/hd44780.c **** 	RCC_AHB1PeriphClockCmd(periph, ENABLE);
+ 988              		.loc 1 400 0 discriminator 1
+ 989 0474 0121     		movs	r1, #1
+ 990              	.LVL115:
+ 991 0476 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 992              	.LVL116:
+ 401:../src/hd44780.c **** 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
+ 993              		.loc 1 401 0 discriminator 1
+ 994 047a 2020     		movs	r0, #32
+ 995 047c 0121     		movs	r1, #1
+ 996 047e FFF7FEFF 		bl	RCC_APB1PeriphClockCmd
+ 997              	.LVL117:
+ 402:../src/hd44780.c **** 
+ 403:../src/hd44780.c **** 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1 );
+ 998              		.loc 1 403 0 discriminator 1
+ 999 0482 4FF4C060 		mov	r0, #1536
+ 1000 0486 FFF7FEFF 		bl	NVIC_PriorityGroupConfig
+ 1001              	.LVL118:
+ 404:../src/hd44780.c **** 	NVIC_InitStructure.NVIC_IRQChannel = TIM7_IRQn;
+ 1002              		.loc 1 404 0 discriminator 1
+ 1003 048a 3723     		movs	r3, #55
+ 1004 048c 8DF80C30 		strb	r3, [sp, #12]
+ 405:../src/hd44780.c **** 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+ 1005              		.loc 1 405 0 discriminator 1
+ 1006 0490 0124     		movs	r4, #1
+ 1007 0492 8DF80D40 		strb	r4, [sp, #13]
+ 406:../src/hd44780.c **** 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = HD44780_PRIORITY;
+ 1008              		.loc 1 406 0 discriminator 1
+ 1009 0496 0627     		movs	r7, #6
+ 1010 0498 8DF80E70 		strb	r7, [sp, #14]
+ 407:../src/hd44780.c **** 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+ 1011              		.loc 1 407 0 discriminator 1
+ 1012 049c 8DF80F40 		strb	r4, [sp, #15]
+ 408:../src/hd44780.c **** 	NVIC_Init(&NVIC_InitStructure);
+ 1013              		.loc 1 408 0 discriminator 1
+ 1014 04a0 03A8     		add	r0, sp, #12
+ 1015 04a2 FFF7FEFF 		bl	NVIC_Init
+ 1016              	.LVL119:
+ 409:../src/hd44780.c **** 
+ 410:../src/hd44780.c **** 	TIM_InitStructure.TIM_Period = (62500 / HD44780_QUEUE_FREQ) - 1;
+ 1017              		.loc 1 410 0 discriminator 1
+ 1018 04a6 0B23     		movs	r3, #11
+ 1019 04a8 0193     		str	r3, [sp, #4]
+ 411:../src/hd44780.c **** 	TIM_InitStructure.TIM_Prescaler = ((SystemCoreClock / 2) / 62500) - 1;
+ 1020              		.loc 1 411 0 discriminator 1
+ 1021 04aa 444B     		ldr	r3, .L64+8
+ 1022 04ac 1A68     		ldr	r2, [r3]
+ 1023 04ae 444B     		ldr	r3, .L64+12
+ 1024 04b0 A3FB0213 		umull	r1, r3, r3, r2
+ 1025 04b4 DB0B     		lsrs	r3, r3, #15
+ 1026 04b6 013B     		subs	r3, r3, #1
+ 1027 04b8 ADF80030 		strh	r3, [sp]	@ movhi
+ 412:../src/hd44780.c **** 	TIM_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+ 1028              		.loc 1 412 0 discriminator 1
+ 1029 04bc 0025     		movs	r5, #0
+ 1030 04be ADF80850 		strh	r5, [sp, #8]	@ movhi
+ 413:../src/hd44780.c **** 	TIM_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+ 1031              		.loc 1 413 0 discriminator 1
+ 1032 04c2 ADF80250 		strh	r5, [sp, #2]	@ movhi
+ 414:../src/hd44780.c **** 	TIM_TimeBaseInit(HD44780_TIMER, &TIM_InitStructure);
+ 1033              		.loc 1 414 0 discriminator 1
+ 1034 04c6 3F4E     		ldr	r6, .L64+16
+ 1035 04c8 3046     		mov	r0, r6
+ 1036 04ca 6946     		mov	r1, sp
+ 1037 04cc FFF7FEFF 		bl	TIM_TimeBaseInit
+ 1038              	.LVL120:
+ 415:../src/hd44780.c **** 	TIM_ITConfig(HD44780_TIMER, TIM_IT_Update, ENABLE);
+ 1039              		.loc 1 415 0 discriminator 1
+ 1040 04d0 3046     		mov	r0, r6
+ 1041 04d2 2146     		mov	r1, r4
+ 1042 04d4 2246     		mov	r2, r4
+ 1043 04d6 FFF7FEFF 		bl	TIM_ITConfig
+ 1044              	.LVL121:
+ 416:../src/hd44780.c **** 	TIM_Cmd(HD44780_TIMER, ENABLE);
+ 1045              		.loc 1 416 0 discriminator 1
+ 1046 04da 3046     		mov	r0, r6
+ 1047 04dc 2146     		mov	r1, r4
+ 1048 04de FFF7FEFF 		bl	TIM_Cmd
+ 1049              	.LVL122:
+ 417:../src/hd44780.c **** 
+ 418:../src/hd44780.c **** 	task_add(HD44780_WAIT, true, 1000, 1);
+ 1050              		.loc 1 418 0 discriminator 1
+ 1051 04e2 2046     		mov	r0, r4
+ 1052 04e4 2146     		mov	r1, r4
+ 1053 04e6 4FF47A72 		mov	r2, #1000
+ 1054 04ea 2346     		mov	r3, r4
+ 1055 04ec FFF788FD 		bl	task_add
+ 1056              	.LVL123:
+ 419:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, 3, 1);
+ 1057              		.loc 1 419 0 discriminator 1
+ 1058 04f0 0320     		movs	r0, #3
+ 1059 04f2 2146     		mov	r1, r4
+ 1060 04f4 0246     		mov	r2, r0
+ 1061 04f6 2346     		mov	r3, r4
+ 1062 04f8 FFF782FD 		bl	task_add
+ 1063              	.LVL124:
+ 420:../src/hd44780.c **** 	task_add(HD44780_WAIT, NONE, 5, NONE);
+ 1064              		.loc 1 420 0 discriminator 1
+ 1065 04fc 2046     		mov	r0, r4
+ 1066 04fe 2946     		mov	r1, r5
+ 1067 0500 0522     		movs	r2, #5
+ 1068 0502 2B46     		mov	r3, r5
+ 1069 0504 FFF77CFD 		bl	task_add
+ 1070              	.LVL125:
+ 421:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, 3, 1);
+ 1071              		.loc 1 421 0 discriminator 1
+ 1072 0508 0320     		movs	r0, #3
+ 1073 050a 2146     		mov	r1, r4
+ 1074 050c 0246     		mov	r2, r0
+ 1075 050e 2346     		mov	r3, r4
+ 1076 0510 FFF776FD 		bl	task_add
+ 1077              	.LVL126:
+ 422:../src/hd44780.c **** 	task_add(HD44780_WAIT, NONE, 1, NONE);
+ 1078              		.loc 1 422 0 discriminator 1
+ 1079 0514 2046     		mov	r0, r4
+ 1080 0516 2946     		mov	r1, r5
+ 1081 0518 2246     		mov	r2, r4
+ 1082 051a 2B46     		mov	r3, r5
+ 1083 051c FFF770FD 		bl	task_add
+ 1084              	.LVL127:
+ 423:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, 3, 1);
+ 1085              		.loc 1 423 0 discriminator 1
+ 1086 0520 0320     		movs	r0, #3
+ 1087 0522 2146     		mov	r1, r4
+ 1088 0524 0246     		mov	r2, r0
+ 1089 0526 2346     		mov	r3, r4
+ 1090 0528 FFF76AFD 		bl	task_add
+ 1091              	.LVL128:
+ 424:../src/hd44780.c **** 	task_add(HD44780_WAIT, NONE, 1, NONE);
+ 1092              		.loc 1 424 0 discriminator 1
+ 1093 052c 2046     		mov	r0, r4
+ 1094 052e 2946     		mov	r1, r5
+ 1095 0530 2246     		mov	r2, r4
+ 1096 0532 2B46     		mov	r3, r5
+ 1097 0534 FFF764FD 		bl	task_add
+ 1098              	.LVL129:
+ 425:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, 2, 1);
+ 1099              		.loc 1 425 0 discriminator 1
+ 1100 0538 0320     		movs	r0, #3
+ 1101 053a 2146     		mov	r1, r4
+ 1102 053c 0222     		movs	r2, #2
+ 1103 053e 2346     		mov	r3, r4
+ 1104 0540 FFF75EFD 		bl	task_add
+ 1105              	.LVL130:
+ 426:../src/hd44780.c **** 	task_add(HD44780_WAIT, NONE, 1, NONE);
+ 1106              		.loc 1 426 0 discriminator 1
+ 1107 0544 2046     		mov	r0, r4
+ 1108 0546 2946     		mov	r1, r5
+ 1109 0548 2246     		mov	r2, r4
+ 1110 054a 2B46     		mov	r3, r5
+ 1111 054c FFF758FD 		bl	task_add
+ 1112              	.LVL131:
+ 427:../src/hd44780.c **** 	task_add(HD44780_WRITE, true,
+ 428:../src/hd44780.c **** 			HD44780_FUNCTION | HD44780_4BIT | Lcd_Conf.lines | Lcd_Conf.font,
+ 1113              		.loc 1 428 0 discriminator 1
+ 1114 0550 184B     		ldr	r3, .L64
+ 1115 0552 93F8DC2B 		ldrb	r2, [r3, #3036]	@ zero_extendqisi2
+ 1116 0556 93F8DD3B 		ldrb	r3, [r3, #3037]	@ zero_extendqisi2
+ 427:../src/hd44780.c **** 	task_add(HD44780_WRITE, true,
+ 1117              		.loc 1 427 0 discriminator 1
+ 1118 055a 1A43     		orrs	r2, r2, r3
+ 1119 055c 0320     		movs	r0, #3
+ 1120 055e 2146     		mov	r1, r4
+ 1121 0560 42F02002 		orr	r2, r2, #32
+ 1122 0564 0223     		movs	r3, #2
+ 1123 0566 FFF74BFD 		bl	task_add
+ 1124              	.LVL132:
+ 429:../src/hd44780.c **** 			2);
+ 430:../src/hd44780.c **** 	task_add(HD44780_WAIT, NONE, 1, NONE);
+ 1125              		.loc 1 430 0 discriminator 1
+ 1126 056a 2046     		mov	r0, r4
+ 1127 056c 2946     		mov	r1, r5
+ 1128 056e 2246     		mov	r2, r4
+ 1129 0570 2B46     		mov	r3, r5
+ 1130 0572 FFF745FD 		bl	task_add
+ 1131              	.LVL133:
+ 431:../src/hd44780.c **** 	task_add(HD44780_WRITE, true,
+ 1132              		.loc 1 431 0 discriminator 1
+ 1133 0576 0320     		movs	r0, #3
+ 1134 0578 2146     		mov	r1, r4
+ 1135 057a 0C22     		movs	r2, #12
+ 1136 057c 0223     		movs	r3, #2
+ 1137 057e FFF73FFD 		bl	task_add
+ 1138              	.LVL134:
+ 432:../src/hd44780.c **** 			HD44780_DISPLAY | HD44780_DISPLAY_ON | !HD44780_CURSOR_ON, 2);
+ 433:../src/hd44780.c **** 	task_add(HD44780_WAIT, NONE, 1, NONE);
+ 1139              		.loc 1 433 0 discriminator 1
+ 1140 0582 2046     		mov	r0, r4
+ 1141 0584 2946     		mov	r1, r5
+ 1142 0586 2246     		mov	r2, r4
+ 1143 0588 2B46     		mov	r3, r5
+ 1144 058a FFF739FD 		bl	task_add
+ 1145              	.LVL135:
+ 434:../src/hd44780.c **** 	task_add(HD44780_WRITE, true, HD44780_ENTRY | HDD44780_ENTRY_LEFT, 2);
+ 1146              		.loc 1 434 0 discriminator 1
+ 1147 058e 0320     		movs	r0, #3
+ 1148 0590 2146     		mov	r1, r4
+ 1149 0592 3A46     		mov	r2, r7
+ 1150 0594 0223     		movs	r3, #2
+ 1151 0596 FFF733FD 		bl	task_add
+ 1152              	.LVL136:
+ 435:../src/hd44780.c **** 	task_add(HD44780_WAIT_NOT_BUSY, NONE, NONE, NONE);
+ 1153              		.loc 1 435 0 discriminator 1
+ 1154 059a 0220     		movs	r0, #2
+ 1155 059c 2946     		mov	r1, r5
+ 1156 059e 2A46     		mov	r2, r5
+ 1157 05a0 2B46     		mov	r3, r5
+ 1158 05a2 FFF72DFD 		bl	task_add
+ 1159              	.LVL137:
+ 436:../src/hd44780.c **** 	hd44780_clear();
+ 1160              		.loc 1 436 0 discriminator 1
+ 1161 05a6 FFF7FEFF 		bl	hd44780_clear
+ 1162              	.LVL138:
+ 437:../src/hd44780.c **** 	hd44780_home();
+ 1163              		.loc 1 437 0 discriminator 1
+ 1164 05aa FFF7FEFF 		bl	hd44780_home
+ 1165              	.LVL139:
+ 1166              	.L56:
+ 438:../src/hd44780.c **** }
+ 1167              		.loc 1 438 0
+ 1168 05ae 05B0     		add	sp, sp, #20
+ 1169              		@ sp needed
+ 1170 05b0 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1171              	.LVL140:
+ 1172              	.L65:
+ 1173 05b2 00BF     		.align	2
+ 1174              	.L64:
+ 1175 05b4 00000000 		.word	.LANCHOR0
+ 1176 05b8 00000240 		.word	1073872896
+ 1177 05bc 00000000 		.word	SystemCoreClock
+ 1178 05c0 83DE1B43 		.word	1125899907
+ 1179 05c4 00140040 		.word	1073746944
+ 1180              		.cfi_endproc
+ 1181              	.LFE125:
+ 1183              		.align	2
+ 1184              		.global	TIM7_IRQHandler
+ 1185              		.thumb
+ 1186              		.thumb_func
+ 1188              	TIM7_IRQHandler:
+ 1189              	.LFB126:
+ 439:../src/hd44780.c **** 
+ 440:../src/hd44780.c **** void TIM7_IRQHandler(void) {
+ 1190              		.loc 1 440 0
+ 1191              		.cfi_startproc
+ 1192              		@ args = 0, pretend = 0, frame = 0
+ 1193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1194 05c8 08B5     		push	{r3, lr}
+ 1195              		.cfi_def_cfa_offset 8
+ 1196              		.cfi_offset 3, -8
+ 1197              		.cfi_offset 14, -4
+ 441:../src/hd44780.c **** 
+ 442:../src/hd44780.c **** 	exec();
+ 1198              		.loc 1 442 0
+ 1199 05ca FFF729FE 		bl	exec
+ 1200              	.LVL141:
+ 443:../src/hd44780.c **** 	TIM_ClearITPendingBit(HD44780_TIMER, TIM_IT_Update );
+ 1201              		.loc 1 443 0
+ 1202 05ce 0248     		ldr	r0, .L67
+ 1203 05d0 0121     		movs	r1, #1
+ 1204 05d2 FFF7FEFF 		bl	TIM_ClearITPendingBit
+ 1205              	.LVL142:
+ 1206 05d6 08BD     		pop	{r3, pc}
+ 1207              	.L68:
+ 1208              		.align	2
+ 1209              	.L67:
+ 1210 05d8 00140040 		.word	1073746944
+ 1211              		.cfi_endproc
+ 1212              	.LFE126:
+ 1214              		.section	.rodata
+ 1215              		.align	2
+ 1216              		.set	.LANCHOR1,. + 0
+ 1217              	.LC0:
+ 1218 0000 00       		.byte	0
+ 1219 0001 40       		.byte	64
+ 1220 0002 14       		.byte	20
+ 1221 0003 54       		.byte	84
+ 1222              		.bss
+ 1223              		.align	2
+ 1224              		.set	.LANCHOR0,. + 0
+ 1227              	Queue_Head:
+ 1228 0000 0000     		.space	2
+ 1231              	Queue_Tail:
+ 1232 0002 0000     		.space	2
+ 1235              	Queue:
+ 1236 0004 00000000 		.space	3000
+ 1236      00000000 
+ 1236      00000000 
+ 1236      00000000 
+ 1236      00000000 
+ 1239              	Lcd_Conf:
+ 1240 0bbc 00000000 		.space	36
+ 1240      00000000 
+ 1240      00000000 
+ 1240      00000000 
+ 1240      00000000 
+ 1241              		.text
+ 1242              	.Letext0:
+ 1243              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 1244              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 1245              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx\\Include/s
+ 1246              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx_StdPeriph_
+ 1247              		.file 6 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx_StdPeriph_
+ 1248              		.file 7 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx_StdPeriph_
+ 1249              		.file 8 "../src/hd44780.h"
+ 1250              		.file 9 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\CMSIS\\Include/core_
+ 1251              		.file 10 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx\\Include/
+ 1252              		.file 11 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\StepDownConverter\\STM32F4xx_StdPeriph
+DEFINED SYMBOLS
+                            *ABS*:00000000 hd44780.c
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:22     .text:00000000 task_add
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:117    .text:00000084 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:122    .text:0000008c $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:126    .text:0000008c task_del
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:158    .text:000000b8 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:163    .text:000000c0 $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:167    .text:000000c0 set_output
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:238    .text:00000120 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:242    .text:00000124 $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:246    .text:00000124 enable
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:277    .text:00000148 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:281    .text:0000014c $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:285    .text:0000014c read_busy
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:349    .text:000001a4 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:353    .text:000001a8 $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:357    .text:000001a8 write
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:421    .text:0000021c $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:425    .text:00000220 $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:429    .text:00000220 exec
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:527    .text:000002a4 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:531    .text:000002a8 $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:536    .text:000002a8 hd44780_clear
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:569    .text:000002c4 hd44780_home
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:602    .text:000002e0 hd44780_display
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:662    .text:00000318 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:666    .text:0000031c $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:671    .text:0000031c hd44780_position
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:719    .text:00000354 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:723    .text:00000358 $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:728    .text:00000358 hd44780_cgram
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:801    .text:000003a0 hd44780_put
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:836    .text:000003bc hd44780_print
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:896    .text:000003f4 hd44780_init
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1175   .text:000005b4 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1183   .text:000005c8 $t
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1188   .text:000005c8 TIM7_IRQHandler
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1210   .text:000005d8 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1215   .rodata:00000000 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1223   .bss:00000000 $d
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1227   .bss:00000000 Queue_Head
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1231   .bss:00000002 Queue_Tail
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1235   .bss:00000004 Queue
+C:\Users\Filip\AppData\Local\Temp\cclQh9hS.s:1239   .bss:00000bbc Lcd_Conf
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
+                           .group:00000000 wm4.stdarg.h.31.72c3aa8d68b291953fa52b9471bcdff7
+                           .group:00000000 wm4.stdbool.h.29.1c9ee6859ce8145f7838a4f2549ccec2
+                           .group:00000000 wm4.newlib.h.8.fec018e441fee7bfa1923812ad010f97
+                           .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7
+                           .group:00000000 wm4.config.h.212.4163ef2871a828c674038d036b081cfd
+                           .group:00000000 wm4._ansi.h.23.2147fde150631f5584b9dc29b914d1b8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4.stddef.h.184.159df79b4ca79c76561572a55985524c
+                           .group:00000000 wm4.stddef.h.39.fb88e218f22ad7a0ab38f3d93c6eb3e4
+                           .group:00000000 wm4._default_types.h.6.9e4229723f5523536bc8f574589d6a99
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4._types.h.54.d3d34a3b7f3cc230cd159baf022b4b08
+                           .group:00000000 wm4.stddef.h.158.61317cdbfb4026324507d123a50b0fd6
+                           .group:00000000 wm4.reent.h.17.8bd9e4098e0428508c282cad794fae43
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.56707660962b21991903f1fee7c13bb3
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.64.0f05fa42cfe2db7fc44729a52d3ba948
+                           .group:00000000 wm4.stm32f4xx_conf.h.24.a762e2483b8e31b68046e44b31e1d406
+                           .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
+                           .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
+                           .group:00000000 wm4.stdint.h.10.d0f8e374834fcfc2e296d5d5fe82f02a
+                           .group:00000000 wm4.core_cmInstr.h.25.f50f886f2edf670cf199b35fd96f5c91
+                           .group:00000000 wm4.core_cm4_simd.h.29.b4a3fdfb606cb3b26119424324d4b963
+                           .group:00000000 wm4.core_cm4.h.153.5393ef7e6cebf34dd51ca528f9218ab3
+                           .group:00000000 wm4.stm32f4xx.h.288.7f55b1a1f5e5bad6ffa2308f97f537d1
+                           .group:00000000 wm4.stm32f4xx.h.6972.f31ddedd83a17c461a3fab76f77123cb
+                           .group:00000000 wm4.stm32f4xx_adc.h.102.2061aa73008746f3c2cc6ce8f635cad3
+                           .group:00000000 wm4.stm32f4xx_can.h.25.87f18ca48b2692d39f76e87b1f07c953
+                           .group:00000000 wm4.stm32f4xx_cryp.h.25.db1951c06ee684df97ea3a11aba6cb51
+                           .group:00000000 wm4.stm32f4xx_dac.h.25.c43557a6416ea4dfa986c1209c2558d6
+                           .group:00000000 wm4.stm32f4xx_dbgmcu.h.24.7aedfdcf091890b5cb96019bd29a2bfc
+                           .group:00000000 wm4.stm32f4xx_dcmi.h.24.64883d9be802a535b1d7770d14da73e0
+                           .group:00000000 wm4.stm32f4xx_dma.h.25.c1fa1d44ae0bc9c2b3a0d1d355d8c1e6
+                           .group:00000000 wm4.stm32f4xx_exti.h.25.620998268d5d3d9042a8297fbe07d507
+                           .group:00000000 wm4.stm32f4xx_flash.h.25.65d4f351b72ee41355279f70305f361a
+                           .group:00000000 wm4.stm32f4xx_fsmc.h.25.b907ac7bd9bec46e02d06b137d53cfd8
+                           .group:00000000 wm4.stm32f4xx_hash.h.25.633fb84f031cf2ab1bd834e536716dfa
+                           .group:00000000 wm4.stm32f4xx_gpio.h.25.5bd1d790d742a307b55aea5fa8fcdae8
+                           .group:00000000 wm4.stm32f4xx_i2c.h.25.8fcdb817a00a67d4624d79bab0d9275f
+                           .group:00000000 wm4.stm32f4xx_iwdg.h.25.3013e8d2058415cb9d51af77f748a146
+                           .group:00000000 wm4.stm32f4xx_pwr.h.25.41ffcb5dc896ed2d26edf4d9bbbfbe6f
+                           .group:00000000 wm4.stm32f4xx_rcc.h.24.a10ec6e94989efb0f8f7f56448e9bb60
+                           .group:00000000 wm4.stm32f4xx_rng.h.25.cdb5c5c07de6a48aedfde608da3f447e
+                           .group:00000000 wm4.stm32f4xx_rtc.h.25.4809a79ad46ad97b4a01e735a96738eb
+                           .group:00000000 wm4.stm32f4xx_sdio.h.25.406302aabae34eada94e5f2cde635a3e
+                           .group:00000000 wm4.stm32f4xx_spi.h.25.980a9e96afe182c8b9cb91058a0693d6
+                           .group:00000000 wm4.stm32f4xx_syscfg.h.25.9d5caab5677661b69e959531364e23d7
+                           .group:00000000 wm4.stm32f4xx_tim.h.25.948f7fc943f34bd206e29758e77ee0a2
+                           .group:00000000 wm4.stm32f4xx_usart.h.25.32a7aeff79714f90f8c4da45bf79808c
+                           .group:00000000 wm4.stm32f4xx_wwdg.h.25.09d70b7849c6894ddf1e83c8e86b70e1
+                           .group:00000000 wm4.misc.h.25.a0cb758c1f091b46f201b19cec9e63a1
+                           .group:00000000 wm4.hd44780.h.31.23ac69a1ddb9aea1a9cf25e60b9f49bb
+
+UNDEFINED SYMBOLS
+GPIO_Init
+GPIO_ToggleBits
+GPIO_ResetBits
+GPIO_SetBits
+GPIO_ReadInputDataBit
+GPIO_WriteBit
+RCC_AHB1PeriphClockCmd
+RCC_APB1PeriphClockCmd
+NVIC_PriorityGroupConfig
+NVIC_Init
+TIM_TimeBaseInit
+TIM_ITConfig
+TIM_Cmd
+SystemCoreClock
+TIM_ClearITPendingBit

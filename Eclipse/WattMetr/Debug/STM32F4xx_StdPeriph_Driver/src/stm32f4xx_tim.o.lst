@@ -6320,1311 +6320,1335 @@
  2724              		.loc 1 1974 0
  2725 0882 4988     		ldrh	r1, [r1, #2]
  2726              	.LVL398:
+ 2727 0884 09B9     		cbnz	r1, .L117
 1976:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     icoppositepolarity = TIM_ICPolarity_Falling;
- 2727              		.loc 1 1976 0
- 2728 0884 0029     		cmp	r1, #0
- 2729 0886 14BF     		ite	ne
- 2730 0888 0027     		movne	r7, #0
- 2731 088a 0227     		moveq	r7, #2
- 2732              	.LVL399:
+ 2728              		.loc 1 1976 0
+ 2729 0886 0227     		movs	r7, #2
+ 2730 0888 00E0     		b	.L113
+ 2731              	.L117:
+1980:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     icoppositepolarity = TIM_ICPolarity_Rising;
+ 2732              		.loc 1 1980 0
+ 2733 088a 0027     		movs	r7, #0
+ 2734              	.L113:
+ 2735              	.LVL399:
 1983:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (TIM_ICInitStruct->TIM_ICSelection == TIM_ICSelection_DirectTI)
- 2733              		.loc 1 1983 0
- 2734 088c A388     		ldrh	r3, [r4, #4]
+ 2736              		.loc 1 1983 0
+ 2737 088c A388     		ldrh	r3, [r4, #4]
+ 2738 088e 012B     		cmp	r3, #1
+ 2739 0890 01D1     		bne	.L118
 1985:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     icoppositeselection = TIM_ICSelection_IndirectTI;
- 2735              		.loc 1 1985 0
- 2736 088e 012B     		cmp	r3, #1
- 2737 0890 14BF     		ite	ne
- 2738 0892 0126     		movne	r6, #1
- 2739 0894 0226     		moveq	r6, #2
- 2740              	.LVL400:
+ 2740              		.loc 1 1985 0
+ 2741 0892 0226     		movs	r6, #2
+ 2742 0894 00E0     		b	.L114
+ 2743              	.L118:
+1989:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     icoppositeselection = TIM_ICSelection_DirectTI;
+ 2744              		.loc 1 1989 0
+ 2745 0896 0126     		movs	r6, #1
+ 2746              	.L114:
+ 2747              	.LVL400:
 1991:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (TIM_ICInitStruct->TIM_Channel == TIM_Channel_1)
- 2741              		.loc 1 1991 0
- 2742 0896 2288     		ldrh	r2, [r4]
- 2743 0898 92B9     		cbnz	r2, .L115
+ 2748              		.loc 1 1991 0
+ 2749 0898 2288     		ldrh	r2, [r4]
+ 2750 089a 9AB9     		cbnz	r2, .L115
 1994:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI1_Config(TIMx, TIM_ICInitStruct->TIM_ICPolarity, TIM_ICInitStruct->TIM_ICSelection,
- 2744              		.loc 1 1994 0
- 2745 089a 1A46     		mov	r2, r3
- 2746 089c 2389     		ldrh	r3, [r4, #8]
- 2747 089e FFF7AFFB 		bl	TI1_Config
- 2748              	.LVL401:
+ 2751              		.loc 1 1994 0
+ 2752 089c 2846     		mov	r0, r5
+ 2753              	.LVL401:
+ 2754 089e 1A46     		mov	r2, r3
+ 2755 08a0 2389     		ldrh	r3, [r4, #8]
+ 2756 08a2 FFF7ADFB 		bl	TI1_Config
+ 2757              	.LVL402:
 1997:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIM_SetIC1Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
- 2749              		.loc 1 1997 0
- 2750 08a2 2846     		mov	r0, r5
- 2751 08a4 E188     		ldrh	r1, [r4, #6]
- 2752 08a6 FFF7FEFF 		bl	TIM_SetIC1Prescaler
- 2753              	.LVL402:
+ 2758              		.loc 1 1997 0
+ 2759 08a6 2846     		mov	r0, r5
+ 2760 08a8 E188     		ldrh	r1, [r4, #6]
+ 2761 08aa FFF7FEFF 		bl	TIM_SetIC1Prescaler
+ 2762              	.LVL403:
 1999:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI2_Config(TIMx, icoppositepolarity, icoppositeselection, TIM_ICInitStruct->TIM_ICFilter);
- 2754              		.loc 1 1999 0
- 2755 08aa 2846     		mov	r0, r5
- 2756 08ac 3946     		mov	r1, r7
- 2757 08ae 3246     		mov	r2, r6
- 2758 08b0 2389     		ldrh	r3, [r4, #8]
- 2759 08b2 FFF7C1FB 		bl	TI2_Config
- 2760              	.LVL403:
+ 2763              		.loc 1 1999 0
+ 2764 08ae 2846     		mov	r0, r5
+ 2765 08b0 3946     		mov	r1, r7
+ 2766 08b2 3246     		mov	r2, r6
+ 2767 08b4 2389     		ldrh	r3, [r4, #8]
+ 2768 08b6 FFF7BFFB 		bl	TI2_Config
+ 2769              	.LVL404:
 2001:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIM_SetIC2Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
- 2761              		.loc 1 2001 0
- 2762 08b6 2846     		mov	r0, r5
- 2763 08b8 E188     		ldrh	r1, [r4, #6]
- 2764 08ba FFF7FEFF 		bl	TIM_SetIC2Prescaler
- 2765              	.LVL404:
- 2766 08be F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 2767              	.LVL405:
- 2768              	.L115:
+ 2770              		.loc 1 2001 0
+ 2771 08ba 2846     		mov	r0, r5
+ 2772 08bc E188     		ldrh	r1, [r4, #6]
+ 2773 08be FFF7FEFF 		bl	TIM_SetIC2Prescaler
+ 2774              	.LVL405:
+ 2775 08c2 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 2776              	.LVL406:
+ 2777              	.L115:
 2006:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI2_Config(TIMx, TIM_ICInitStruct->TIM_ICPolarity, TIM_ICInitStruct->TIM_ICSelection,
- 2769              		.loc 1 2006 0
- 2770 08c0 1A46     		mov	r2, r3
- 2771 08c2 2389     		ldrh	r3, [r4, #8]
- 2772 08c4 FFF7B8FB 		bl	TI2_Config
- 2773              	.LVL406:
+ 2778              		.loc 1 2006 0
+ 2779 08c4 2846     		mov	r0, r5
+ 2780              	.LVL407:
+ 2781 08c6 1A46     		mov	r2, r3
+ 2782 08c8 2389     		ldrh	r3, [r4, #8]
+ 2783 08ca FFF7B5FB 		bl	TI2_Config
+ 2784              	.LVL408:
 2009:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIM_SetIC2Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
- 2774              		.loc 1 2009 0
- 2775 08c8 2846     		mov	r0, r5
- 2776 08ca E188     		ldrh	r1, [r4, #6]
- 2777 08cc FFF7FEFF 		bl	TIM_SetIC2Prescaler
- 2778              	.LVL407:
+ 2785              		.loc 1 2009 0
+ 2786 08ce 2846     		mov	r0, r5
+ 2787 08d0 E188     		ldrh	r1, [r4, #6]
+ 2788 08d2 FFF7FEFF 		bl	TIM_SetIC2Prescaler
+ 2789              	.LVL409:
 2011:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI1_Config(TIMx, icoppositepolarity, icoppositeselection, TIM_ICInitStruct->TIM_ICFilter);
- 2779              		.loc 1 2011 0
- 2780 08d0 2846     		mov	r0, r5
- 2781 08d2 3946     		mov	r1, r7
- 2782 08d4 3246     		mov	r2, r6
- 2783 08d6 2389     		ldrh	r3, [r4, #8]
- 2784 08d8 FFF792FB 		bl	TI1_Config
- 2785              	.LVL408:
+ 2790              		.loc 1 2011 0
+ 2791 08d6 2846     		mov	r0, r5
+ 2792 08d8 3946     		mov	r1, r7
+ 2793 08da 3246     		mov	r2, r6
+ 2794 08dc 2389     		ldrh	r3, [r4, #8]
+ 2795 08de FFF78FFB 		bl	TI1_Config
+ 2796              	.LVL410:
 2013:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIM_SetIC1Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
- 2786              		.loc 1 2013 0
- 2787 08dc 2846     		mov	r0, r5
- 2788 08de E188     		ldrh	r1, [r4, #6]
- 2789 08e0 FFF7FEFF 		bl	TIM_SetIC1Prescaler
- 2790              	.LVL409:
- 2791 08e4 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 2792              		.cfi_endproc
- 2793              	.LFE162:
- 2795 08e6 00BF     		.align	2
- 2796              		.global	TIM_SetIC3Prescaler
- 2797              		.thumb
- 2798              		.thumb_func
- 2800              	TIM_SetIC3Prescaler:
- 2801              	.LFB169:
+ 2797              		.loc 1 2013 0
+ 2798 08e2 2846     		mov	r0, r5
+ 2799 08e4 E188     		ldrh	r1, [r4, #6]
+ 2800 08e6 FFF7FEFF 		bl	TIM_SetIC1Prescaler
+ 2801              	.LVL411:
+ 2802 08ea F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 2803              		.cfi_endproc
+ 2804              	.LFE162:
+ 2806              		.align	2
+ 2807              		.global	TIM_SetIC3Prescaler
+ 2808              		.thumb
+ 2809              		.thumb_func
+ 2811              	TIM_SetIC3Prescaler:
+ 2812              	.LFB169:
 2135:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 2802              		.loc 1 2135 0
- 2803              		.cfi_startproc
- 2804              		@ args = 0, pretend = 0, frame = 0
- 2805              		@ frame_needed = 0, uses_anonymous_args = 0
- 2806              		@ link register save eliminated.
- 2807              	.LVL410:
+ 2813              		.loc 1 2135 0
+ 2814              		.cfi_startproc
+ 2815              		@ args = 0, pretend = 0, frame = 0
+ 2816              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2817              		@ link register save eliminated.
+ 2818              	.LVL412:
 2141:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->CCMR2 &= (uint16_t)~TIM_CCMR2_IC3PSC;
- 2808              		.loc 1 2141 0
- 2809 08e8 838B     		ldrh	r3, [r0, #28]
- 2810 08ea 23F00C03 		bic	r3, r3, #12
- 2811 08ee 1B04     		lsls	r3, r3, #16
- 2812 08f0 1B0C     		lsrs	r3, r3, #16
- 2813 08f2 8383     		strh	r3, [r0, #28]	@ movhi
+ 2819              		.loc 1 2141 0
+ 2820 08ec 838B     		ldrh	r3, [r0, #28]
+ 2821 08ee 23F00C03 		bic	r3, r3, #12
+ 2822 08f2 1B04     		lsls	r3, r3, #16
+ 2823 08f4 1B0C     		lsrs	r3, r3, #16
+ 2824 08f6 8383     		strh	r3, [r0, #28]	@ movhi
 2144:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->CCMR2 |= TIM_ICPSC;
- 2814              		.loc 1 2144 0
- 2815 08f4 838B     		ldrh	r3, [r0, #28]
- 2816 08f6 9BB2     		uxth	r3, r3
- 2817 08f8 1943     		orrs	r1, r1, r3
- 2818              	.LVL411:
- 2819 08fa 8183     		strh	r1, [r0, #28]	@ movhi
- 2820 08fc 7047     		bx	lr
- 2821              		.cfi_endproc
- 2822              	.LFE169:
- 2824 08fe 00BF     		.align	2
- 2825              		.global	TIM_SetIC4Prescaler
- 2826              		.thumb
- 2827              		.thumb_func
- 2829              	TIM_SetIC4Prescaler:
- 2830              	.LFB170:
+ 2825              		.loc 1 2144 0
+ 2826 08f8 838B     		ldrh	r3, [r0, #28]
+ 2827 08fa 9BB2     		uxth	r3, r3
+ 2828 08fc 1943     		orrs	r1, r1, r3
+ 2829              	.LVL413:
+ 2830 08fe 8183     		strh	r1, [r0, #28]	@ movhi
+ 2831 0900 7047     		bx	lr
+ 2832              		.cfi_endproc
+ 2833              	.LFE169:
+ 2835 0902 00BF     		.align	2
+ 2836              		.global	TIM_SetIC4Prescaler
+ 2837              		.thumb
+ 2838              		.thumb_func
+ 2840              	TIM_SetIC4Prescaler:
+ 2841              	.LFB170:
 2159:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {  
- 2831              		.loc 1 2159 0
- 2832              		.cfi_startproc
- 2833              		@ args = 0, pretend = 0, frame = 0
- 2834              		@ frame_needed = 0, uses_anonymous_args = 0
- 2835              		@ link register save eliminated.
- 2836              	.LVL412:
+ 2842              		.loc 1 2159 0
+ 2843              		.cfi_startproc
+ 2844              		@ args = 0, pretend = 0, frame = 0
+ 2845              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2846              		@ link register save eliminated.
+ 2847              	.LVL414:
 2165:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->CCMR2 &= (uint16_t)~TIM_CCMR2_IC4PSC;
- 2837              		.loc 1 2165 0
- 2838 0900 838B     		ldrh	r3, [r0, #28]
- 2839 0902 23F44063 		bic	r3, r3, #3072
- 2840 0906 1B04     		lsls	r3, r3, #16
- 2841 0908 1B0C     		lsrs	r3, r3, #16
- 2842 090a 8383     		strh	r3, [r0, #28]	@ movhi
+ 2848              		.loc 1 2165 0
+ 2849 0904 838B     		ldrh	r3, [r0, #28]
+ 2850 0906 23F44063 		bic	r3, r3, #3072
+ 2851 090a 1B04     		lsls	r3, r3, #16
+ 2852 090c 1B0C     		lsrs	r3, r3, #16
+ 2853 090e 8383     		strh	r3, [r0, #28]	@ movhi
 2168:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->CCMR2 |= (uint16_t)(TIM_ICPSC << 8);
- 2843              		.loc 1 2168 0
- 2844 090c 838B     		ldrh	r3, [r0, #28]
- 2845 090e 9BB2     		uxth	r3, r3
- 2846 0910 0902     		lsls	r1, r1, #8
- 2847              	.LVL413:
- 2848 0912 89B2     		uxth	r1, r1
- 2849 0914 0B43     		orrs	r3, r3, r1
- 2850 0916 8383     		strh	r3, [r0, #28]	@ movhi
- 2851 0918 7047     		bx	lr
- 2852              		.cfi_endproc
- 2853              	.LFE170:
- 2855 091a 00BF     		.align	2
- 2856              		.global	TIM_ICInit
- 2857              		.thumb
- 2858              		.thumb_func
- 2860              	TIM_ICInit:
- 2861              	.LFB160:
+ 2854              		.loc 1 2168 0
+ 2855 0910 838B     		ldrh	r3, [r0, #28]
+ 2856 0912 9BB2     		uxth	r3, r3
+ 2857 0914 0902     		lsls	r1, r1, #8
+ 2858              	.LVL415:
+ 2859 0916 89B2     		uxth	r1, r1
+ 2860 0918 0B43     		orrs	r3, r3, r1
+ 2861 091a 8383     		strh	r3, [r0, #28]	@ movhi
+ 2862 091c 7047     		bx	lr
+ 2863              		.cfi_endproc
+ 2864              	.LFE170:
+ 2866 091e 00BF     		.align	2
+ 2867              		.global	TIM_ICInit
+ 2868              		.thumb
+ 2869              		.thumb_func
+ 2871              	TIM_ICInit:
+ 2872              	.LFB160:
 1891:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 2862              		.loc 1 1891 0
- 2863              		.cfi_startproc
- 2864              		@ args = 0, pretend = 0, frame = 0
- 2865              		@ frame_needed = 0, uses_anonymous_args = 0
- 2866              	.LVL414:
- 2867 091c 38B5     		push	{r3, r4, r5, lr}
- 2868              		.cfi_def_cfa_offset 16
- 2869              		.cfi_offset 3, -16
- 2870              		.cfi_offset 4, -12
- 2871              		.cfi_offset 5, -8
- 2872              		.cfi_offset 14, -4
- 2873 091e 0546     		mov	r5, r0
- 2874 0920 0C46     		mov	r4, r1
+ 2873              		.loc 1 1891 0
+ 2874              		.cfi_startproc
+ 2875              		@ args = 0, pretend = 0, frame = 0
+ 2876              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2877              	.LVL416:
+ 2878 0920 38B5     		push	{r3, r4, r5, lr}
+ 2879              		.cfi_def_cfa_offset 16
+ 2880              		.cfi_offset 3, -16
+ 2881              		.cfi_offset 4, -12
+ 2882              		.cfi_offset 5, -8
+ 2883              		.cfi_offset 14, -4
+ 2884 0922 0546     		mov	r5, r0
+ 2885 0924 0C46     		mov	r4, r1
 1899:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (TIM_ICInitStruct->TIM_Channel == TIM_Channel_1)
- 2875              		.loc 1 1899 0
- 2876 0922 0B88     		ldrh	r3, [r1]
- 2877 0924 4BB9     		cbnz	r3, .L122
+ 2886              		.loc 1 1899 0
+ 2887 0926 0B88     		ldrh	r3, [r1]
+ 2888 0928 4BB9     		cbnz	r3, .L122
 1902:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI1_Config(TIMx, TIM_ICInitStruct->TIM_ICPolarity,
- 2878              		.loc 1 1902 0
- 2879 0926 4988     		ldrh	r1, [r1, #2]
- 2880              	.LVL415:
- 2881 0928 A288     		ldrh	r2, [r4, #4]
- 2882 092a 2389     		ldrh	r3, [r4, #8]
- 2883 092c FFF768FB 		bl	TI1_Config
- 2884              	.LVL416:
+ 2889              		.loc 1 1902 0
+ 2890 092a 4988     		ldrh	r1, [r1, #2]
+ 2891              	.LVL417:
+ 2892 092c A288     		ldrh	r2, [r4, #4]
+ 2893 092e 2389     		ldrh	r3, [r4, #8]
+ 2894 0930 FFF766FB 		bl	TI1_Config
+ 2895              	.LVL418:
 1906:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIM_SetIC1Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
- 2885              		.loc 1 1906 0
- 2886 0930 2846     		mov	r0, r5
- 2887 0932 E188     		ldrh	r1, [r4, #6]
- 2888 0934 FFF7FEFF 		bl	TIM_SetIC1Prescaler
- 2889              	.LVL417:
- 2890 0938 38BD     		pop	{r3, r4, r5, pc}
- 2891              	.LVL418:
- 2892              	.L122:
-1908:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   else if (TIM_ICInitStruct->TIM_Channel == TIM_Channel_2)
- 2893              		.loc 1 1908 0
- 2894 093a 042B     		cmp	r3, #4
- 2895 093c 09D1     		bne	.L124
-1912:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI2_Config(TIMx, TIM_ICInitStruct->TIM_ICPolarity,
- 2896              		.loc 1 1912 0
- 2897 093e 4988     		ldrh	r1, [r1, #2]
- 2898              	.LVL419:
- 2899 0940 A288     		ldrh	r2, [r4, #4]
- 2900 0942 2389     		ldrh	r3, [r4, #8]
- 2901 0944 FFF778FB 		bl	TI2_Config
+ 2896              		.loc 1 1906 0
+ 2897 0934 2846     		mov	r0, r5
+ 2898 0936 E188     		ldrh	r1, [r4, #6]
+ 2899 0938 FFF7FEFF 		bl	TIM_SetIC1Prescaler
+ 2900              	.LVL419:
+ 2901 093c 38BD     		pop	{r3, r4, r5, pc}
  2902              	.LVL420:
+ 2903              	.L122:
+1908:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   else if (TIM_ICInitStruct->TIM_Channel == TIM_Channel_2)
+ 2904              		.loc 1 1908 0
+ 2905 093e 042B     		cmp	r3, #4
+ 2906 0940 09D1     		bne	.L124
+1912:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI2_Config(TIMx, TIM_ICInitStruct->TIM_ICPolarity,
+ 2907              		.loc 1 1912 0
+ 2908 0942 4988     		ldrh	r1, [r1, #2]
+ 2909              	.LVL421:
+ 2910 0944 A288     		ldrh	r2, [r4, #4]
+ 2911 0946 2389     		ldrh	r3, [r4, #8]
+ 2912 0948 FFF776FB 		bl	TI2_Config
+ 2913              	.LVL422:
 1916:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIM_SetIC2Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
- 2903              		.loc 1 1916 0
- 2904 0948 2846     		mov	r0, r5
- 2905 094a E188     		ldrh	r1, [r4, #6]
- 2906 094c FFF7FEFF 		bl	TIM_SetIC2Prescaler
- 2907              	.LVL421:
- 2908 0950 38BD     		pop	{r3, r4, r5, pc}
- 2909              	.LVL422:
- 2910              	.L124:
-1918:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   else if (TIM_ICInitStruct->TIM_Channel == TIM_Channel_3)
- 2911              		.loc 1 1918 0
- 2912 0952 082B     		cmp	r3, #8
- 2913 0954 09D1     		bne	.L125
-1922:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI3_Config(TIMx,  TIM_ICInitStruct->TIM_ICPolarity,
- 2914              		.loc 1 1922 0
- 2915 0956 4988     		ldrh	r1, [r1, #2]
- 2916              	.LVL423:
- 2917 0958 A288     		ldrh	r2, [r4, #4]
- 2918 095a 2389     		ldrh	r3, [r4, #8]
- 2919 095c FFF78CFB 		bl	TI3_Config
+ 2914              		.loc 1 1916 0
+ 2915 094c 2846     		mov	r0, r5
+ 2916 094e E188     		ldrh	r1, [r4, #6]
+ 2917 0950 FFF7FEFF 		bl	TIM_SetIC2Prescaler
+ 2918              	.LVL423:
+ 2919 0954 38BD     		pop	{r3, r4, r5, pc}
  2920              	.LVL424:
+ 2921              	.L124:
+1918:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   else if (TIM_ICInitStruct->TIM_Channel == TIM_Channel_3)
+ 2922              		.loc 1 1918 0
+ 2923 0956 082B     		cmp	r3, #8
+ 2924 0958 09D1     		bne	.L125
+1922:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI3_Config(TIMx,  TIM_ICInitStruct->TIM_ICPolarity,
+ 2925              		.loc 1 1922 0
+ 2926 095a 4988     		ldrh	r1, [r1, #2]
+ 2927              	.LVL425:
+ 2928 095c A288     		ldrh	r2, [r4, #4]
+ 2929 095e 2389     		ldrh	r3, [r4, #8]
+ 2930 0960 FFF78AFB 		bl	TI3_Config
+ 2931              	.LVL426:
 1926:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIM_SetIC3Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
- 2921              		.loc 1 1926 0
- 2922 0960 2846     		mov	r0, r5
- 2923 0962 E188     		ldrh	r1, [r4, #6]
- 2924 0964 FFF7FEFF 		bl	TIM_SetIC3Prescaler
- 2925              	.LVL425:
- 2926 0968 38BD     		pop	{r3, r4, r5, pc}
- 2927              	.LVL426:
- 2928              	.L125:
+ 2932              		.loc 1 1926 0
+ 2933 0964 2846     		mov	r0, r5
+ 2934 0966 E188     		ldrh	r1, [r4, #6]
+ 2935 0968 FFF7FEFF 		bl	TIM_SetIC3Prescaler
+ 2936              	.LVL427:
+ 2937 096c 38BD     		pop	{r3, r4, r5, pc}
+ 2938              	.LVL428:
+ 2939              	.L125:
 1932:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI4_Config(TIMx, TIM_ICInitStruct->TIM_ICPolarity,
- 2929              		.loc 1 1932 0
- 2930 096a 4988     		ldrh	r1, [r1, #2]
- 2931              	.LVL427:
- 2932 096c A288     		ldrh	r2, [r4, #4]
- 2933 096e 2389     		ldrh	r3, [r4, #8]
- 2934 0970 FFF7A0FB 		bl	TI4_Config
- 2935              	.LVL428:
+ 2940              		.loc 1 1932 0
+ 2941 096e 4988     		ldrh	r1, [r1, #2]
+ 2942              	.LVL429:
+ 2943 0970 A288     		ldrh	r2, [r4, #4]
+ 2944 0972 2389     		ldrh	r3, [r4, #8]
+ 2945 0974 FFF79EFB 		bl	TI4_Config
+ 2946              	.LVL430:
 1936:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIM_SetIC4Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
- 2936              		.loc 1 1936 0
- 2937 0974 2846     		mov	r0, r5
- 2938 0976 E188     		ldrh	r1, [r4, #6]
- 2939 0978 FFF7FEFF 		bl	TIM_SetIC4Prescaler
- 2940              	.LVL429:
- 2941 097c 38BD     		pop	{r3, r4, r5, pc}
- 2942              		.cfi_endproc
- 2943              	.LFE160:
- 2945 097e 00BF     		.align	2
- 2946              		.global	TIM_BDTRConfig
- 2947              		.thumb
- 2948              		.thumb_func
- 2950              	TIM_BDTRConfig:
- 2951              	.LFB171:
+ 2947              		.loc 1 1936 0
+ 2948 0978 2846     		mov	r0, r5
+ 2949 097a E188     		ldrh	r1, [r4, #6]
+ 2950 097c FFF7FEFF 		bl	TIM_SetIC4Prescaler
+ 2951              	.LVL431:
+ 2952 0980 38BD     		pop	{r3, r4, r5, pc}
+ 2953              		.cfi_endproc
+ 2954              	.LFE160:
+ 2956 0982 00BF     		.align	2
+ 2957              		.global	TIM_BDTRConfig
+ 2958              		.thumb
+ 2959              		.thumb_func
+ 2961              	TIM_BDTRConfig:
+ 2962              	.LFB171:
 2212:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 2952              		.loc 1 2212 0
- 2953              		.cfi_startproc
- 2954              		@ args = 0, pretend = 0, frame = 0
- 2955              		@ frame_needed = 0, uses_anonymous_args = 0
- 2956              		@ link register save eliminated.
- 2957              	.LVL430:
- 2958 0980 F0B4     		push	{r4, r5, r6, r7}
- 2959              		.cfi_def_cfa_offset 16
- 2960              		.cfi_offset 4, -16
- 2961              		.cfi_offset 5, -12
- 2962              		.cfi_offset 6, -8
- 2963              		.cfi_offset 7, -4
-2224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->BDTR = (uint32_t)TIM_BDTRInitStruct->TIM_OSSRState | TIM_BDTRInitStruct->TIM_OSSIState |
- 2964              		.loc 1 2224 0
- 2965 0982 B1F800C0 		ldrh	ip, [r1]
- 2966 0986 4B88     		ldrh	r3, [r1, #2]
-2225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****              TIM_BDTRInitStruct->TIM_LOCKLevel | TIM_BDTRInitStruct->TIM_DeadTime |
- 2967              		.loc 1 2225 0
- 2968 0988 8F88     		ldrh	r7, [r1, #4]
- 2969 098a CE88     		ldrh	r6, [r1, #6]
-2226:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****              TIM_BDTRInitStruct->TIM_Break | TIM_BDTRInitStruct->TIM_BreakPolarity |
- 2970              		.loc 1 2226 0
- 2971 098c 0D89     		ldrh	r5, [r1, #8]
- 2972 098e 4C89     		ldrh	r4, [r1, #10]
-2227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****              TIM_BDTRInitStruct->TIM_AutomaticOutput;
- 2973              		.loc 1 2227 0
- 2974 0990 8A89     		ldrh	r2, [r1, #12]
+ 2963              		.loc 1 2212 0
+ 2964              		.cfi_startproc
+ 2965              		@ args = 0, pretend = 0, frame = 0
+ 2966              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2967              		@ link register save eliminated.
+ 2968              	.LVL432:
+ 2969 0984 F0B4     		push	{r4, r5, r6, r7}
+ 2970              		.cfi_def_cfa_offset 16
+ 2971              		.cfi_offset 4, -16
+ 2972              		.cfi_offset 5, -12
+ 2973              		.cfi_offset 6, -8
+ 2974              		.cfi_offset 7, -4
 2224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->BDTR = (uint32_t)TIM_BDTRInitStruct->TIM_OSSRState | TIM_BDTRInitStruct->TIM_OSSIState |
  2975              		.loc 1 2224 0
- 2976 0992 4CEA0303 		orr	r3, ip, r3
- 2977 0996 3B43     		orrs	r3, r3, r7
- 2978 0998 3343     		orrs	r3, r3, r6
- 2979 099a 2B43     		orrs	r3, r3, r5
- 2980 099c 2343     		orrs	r3, r3, r4
- 2981 099e 1343     		orrs	r3, r3, r2
- 2982 09a0 A0F84430 		strh	r3, [r0, #68]	@ movhi
+ 2976 0986 B1F800C0 		ldrh	ip, [r1]
+ 2977 098a 4B88     		ldrh	r3, [r1, #2]
+2225:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****              TIM_BDTRInitStruct->TIM_LOCKLevel | TIM_BDTRInitStruct->TIM_DeadTime |
+ 2978              		.loc 1 2225 0
+ 2979 098c 8F88     		ldrh	r7, [r1, #4]
+ 2980 098e CE88     		ldrh	r6, [r1, #6]
+2226:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****              TIM_BDTRInitStruct->TIM_Break | TIM_BDTRInitStruct->TIM_BreakPolarity |
+ 2981              		.loc 1 2226 0
+ 2982 0990 0D89     		ldrh	r5, [r1, #8]
+ 2983 0992 4C89     		ldrh	r4, [r1, #10]
+2227:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****              TIM_BDTRInitStruct->TIM_AutomaticOutput;
+ 2984              		.loc 1 2227 0
+ 2985 0994 8A89     		ldrh	r2, [r1, #12]
+2224:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->BDTR = (uint32_t)TIM_BDTRInitStruct->TIM_OSSRState | TIM_BDTRInitStruct->TIM_OSSIState |
+ 2986              		.loc 1 2224 0
+ 2987 0996 4CEA0303 		orr	r3, ip, r3
+ 2988 099a 3B43     		orrs	r3, r3, r7
+ 2989 099c 3343     		orrs	r3, r3, r6
+ 2990 099e 2B43     		orrs	r3, r3, r5
+ 2991 09a0 2343     		orrs	r3, r3, r4
+ 2992 09a2 1343     		orrs	r3, r3, r2
+ 2993 09a4 A0F84430 		strh	r3, [r0, #68]	@ movhi
 2228:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** }
- 2983              		.loc 1 2228 0
- 2984 09a4 F0BC     		pop	{r4, r5, r6, r7}
- 2985 09a6 7047     		bx	lr
- 2986              		.cfi_endproc
- 2987              	.LFE171:
- 2989              		.align	2
- 2990              		.global	TIM_BDTRStructInit
- 2991              		.thumb
- 2992              		.thumb_func
- 2994              	TIM_BDTRStructInit:
- 2995              	.LFB172:
+ 2994              		.loc 1 2228 0
+ 2995 09a8 F0BC     		pop	{r4, r5, r6, r7}
+ 2996 09aa 7047     		bx	lr
+ 2997              		.cfi_endproc
+ 2998              	.LFE171:
+ 3000              		.align	2
+ 3001              		.global	TIM_BDTRStructInit
+ 3002              		.thumb
+ 3003              		.thumb_func
+ 3005              	TIM_BDTRStructInit:
+ 3006              	.LFB172:
 2237:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 2996              		.loc 1 2237 0
- 2997              		.cfi_startproc
- 2998              		@ args = 0, pretend = 0, frame = 0
- 2999              		@ frame_needed = 0, uses_anonymous_args = 0
- 3000              		@ link register save eliminated.
- 3001              	.LVL431:
+ 3007              		.loc 1 2237 0
+ 3008              		.cfi_startproc
+ 3009              		@ args = 0, pretend = 0, frame = 0
+ 3010              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3011              		@ link register save eliminated.
+ 3012              	.LVL433:
 2239:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_BDTRInitStruct->TIM_OSSRState = TIM_OSSRState_Disable;
- 3002              		.loc 1 2239 0
- 3003 09a8 0023     		movs	r3, #0
- 3004 09aa 0380     		strh	r3, [r0]	@ movhi
+ 3013              		.loc 1 2239 0
+ 3014 09ac 0023     		movs	r3, #0
+ 3015 09ae 0380     		strh	r3, [r0]	@ movhi
 2240:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_BDTRInitStruct->TIM_OSSIState = TIM_OSSIState_Disable;
- 3005              		.loc 1 2240 0
- 3006 09ac 4380     		strh	r3, [r0, #2]	@ movhi
+ 3016              		.loc 1 2240 0
+ 3017 09b0 4380     		strh	r3, [r0, #2]	@ movhi
 2241:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_BDTRInitStruct->TIM_LOCKLevel = TIM_LOCKLevel_OFF;
- 3007              		.loc 1 2241 0
- 3008 09ae 8380     		strh	r3, [r0, #4]	@ movhi
+ 3018              		.loc 1 2241 0
+ 3019 09b2 8380     		strh	r3, [r0, #4]	@ movhi
 2242:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_BDTRInitStruct->TIM_DeadTime = 0x00;
- 3009              		.loc 1 2242 0
- 3010 09b0 C380     		strh	r3, [r0, #6]	@ movhi
+ 3020              		.loc 1 2242 0
+ 3021 09b4 C380     		strh	r3, [r0, #6]	@ movhi
 2243:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_BDTRInitStruct->TIM_Break = TIM_Break_Disable;
- 3011              		.loc 1 2243 0
- 3012 09b2 0381     		strh	r3, [r0, #8]	@ movhi
+ 3022              		.loc 1 2243 0
+ 3023 09b6 0381     		strh	r3, [r0, #8]	@ movhi
 2244:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_BDTRInitStruct->TIM_BreakPolarity = TIM_BreakPolarity_Low;
- 3013              		.loc 1 2244 0
- 3014 09b4 4381     		strh	r3, [r0, #10]	@ movhi
+ 3024              		.loc 1 2244 0
+ 3025 09b8 4381     		strh	r3, [r0, #10]	@ movhi
 2245:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_BDTRInitStruct->TIM_AutomaticOutput = TIM_AutomaticOutput_Disable;
- 3015              		.loc 1 2245 0
- 3016 09b6 8381     		strh	r3, [r0, #12]	@ movhi
- 3017 09b8 7047     		bx	lr
- 3018              		.cfi_endproc
- 3019              	.LFE172:
- 3021 09ba 00BF     		.align	2
- 3022              		.global	TIM_CtrlPWMOutputs
- 3023              		.thumb
- 3024              		.thumb_func
- 3026              	TIM_CtrlPWMOutputs:
- 3027              	.LFB173:
+ 3026              		.loc 1 2245 0
+ 3027 09ba 8381     		strh	r3, [r0, #12]	@ movhi
+ 3028 09bc 7047     		bx	lr
+ 3029              		.cfi_endproc
+ 3030              	.LFE172:
+ 3032 09be 00BF     		.align	2
+ 3033              		.global	TIM_CtrlPWMOutputs
+ 3034              		.thumb
+ 3035              		.thumb_func
+ 3037              	TIM_CtrlPWMOutputs:
+ 3038              	.LFB173:
 2256:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3028              		.loc 1 2256 0
- 3029              		.cfi_startproc
- 3030              		@ args = 0, pretend = 0, frame = 0
- 3031              		@ frame_needed = 0, uses_anonymous_args = 0
- 3032              		@ link register save eliminated.
- 3033              	.LVL432:
+ 3039              		.loc 1 2256 0
+ 3040              		.cfi_startproc
+ 3041              		@ args = 0, pretend = 0, frame = 0
+ 3042              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3043              		@ link register save eliminated.
+ 3044              	.LVL434:
 2261:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (NewState != DISABLE)
- 3034              		.loc 1 2261 0
- 3035 09bc 49B1     		cbz	r1, .L129
+ 3045              		.loc 1 2261 0
+ 3046 09c0 49B1     		cbz	r1, .L129
 2264:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->BDTR |= TIM_BDTR_MOE;
- 3036              		.loc 1 2264 0
- 3037 09be B0F84430 		ldrh	r3, [r0, #68]
- 3038 09c2 6FEA4343 		mvn	r3, r3, lsl #17
- 3039 09c6 6FEA5343 		mvn	r3, r3, lsr #17
- 3040 09ca 9BB2     		uxth	r3, r3
- 3041 09cc A0F84430 		strh	r3, [r0, #68]	@ movhi
- 3042 09d0 7047     		bx	lr
- 3043              	.L129:
+ 3047              		.loc 1 2264 0
+ 3048 09c2 B0F84430 		ldrh	r3, [r0, #68]
+ 3049 09c6 6FEA4343 		mvn	r3, r3, lsl #17
+ 3050 09ca 6FEA5343 		mvn	r3, r3, lsr #17
+ 3051 09ce 9BB2     		uxth	r3, r3
+ 3052 09d0 A0F84430 		strh	r3, [r0, #68]	@ movhi
+ 3053 09d4 7047     		bx	lr
+ 3054              	.L129:
 2269:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->BDTR &= (uint16_t)~TIM_BDTR_MOE;
- 3044              		.loc 1 2269 0
- 3045 09d2 B0F84430 		ldrh	r3, [r0, #68]
- 3046 09d6 C3F30E03 		ubfx	r3, r3, #0, #15
- 3047 09da A0F84430 		strh	r3, [r0, #68]	@ movhi
- 3048 09de 7047     		bx	lr
- 3049              		.cfi_endproc
- 3050              	.LFE173:
- 3052              		.align	2
- 3053              		.global	TIM_SelectCOM
- 3054              		.thumb
- 3055              		.thumb_func
- 3057              	TIM_SelectCOM:
- 3058              	.LFB174:
+ 3055              		.loc 1 2269 0
+ 3056 09d6 B0F84430 		ldrh	r3, [r0, #68]
+ 3057 09da C3F30E03 		ubfx	r3, r3, #0, #15
+ 3058 09de A0F84430 		strh	r3, [r0, #68]	@ movhi
+ 3059 09e2 7047     		bx	lr
+ 3060              		.cfi_endproc
+ 3061              	.LFE173:
+ 3063              		.align	2
+ 3064              		.global	TIM_SelectCOM
+ 3065              		.thumb
+ 3066              		.thumb_func
+ 3068              	TIM_SelectCOM:
+ 3069              	.LFB174:
 2281:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3059              		.loc 1 2281 0
- 3060              		.cfi_startproc
- 3061              		@ args = 0, pretend = 0, frame = 0
- 3062              		@ frame_needed = 0, uses_anonymous_args = 0
- 3063              		@ link register save eliminated.
- 3064              	.LVL433:
+ 3070              		.loc 1 2281 0
+ 3071              		.cfi_startproc
+ 3072              		@ args = 0, pretend = 0, frame = 0
+ 3073              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3074              		@ link register save eliminated.
+ 3075              	.LVL435:
 2286:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (NewState != DISABLE)
- 3065              		.loc 1 2286 0
- 3066 09e0 29B1     		cbz	r1, .L132
+ 3076              		.loc 1 2286 0
+ 3077 09e4 29B1     		cbz	r1, .L132
 2289:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->CR2 |= TIM_CR2_CCUS;
- 3067              		.loc 1 2289 0
- 3068 09e2 8388     		ldrh	r3, [r0, #4]
- 3069 09e4 9BB2     		uxth	r3, r3
- 3070 09e6 43F00403 		orr	r3, r3, #4
- 3071 09ea 8380     		strh	r3, [r0, #4]	@ movhi
- 3072 09ec 7047     		bx	lr
- 3073              	.L132:
+ 3078              		.loc 1 2289 0
+ 3079 09e6 8388     		ldrh	r3, [r0, #4]
+ 3080 09e8 9BB2     		uxth	r3, r3
+ 3081 09ea 43F00403 		orr	r3, r3, #4
+ 3082 09ee 8380     		strh	r3, [r0, #4]	@ movhi
+ 3083 09f0 7047     		bx	lr
+ 3084              	.L132:
 2294:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->CR2 &= (uint16_t)~TIM_CR2_CCUS;
- 3074              		.loc 1 2294 0
- 3075 09ee 8388     		ldrh	r3, [r0, #4]
- 3076 09f0 23F00403 		bic	r3, r3, #4
- 3077 09f4 1B04     		lsls	r3, r3, #16
- 3078 09f6 1B0C     		lsrs	r3, r3, #16
- 3079 09f8 8380     		strh	r3, [r0, #4]	@ movhi
- 3080 09fa 7047     		bx	lr
- 3081              		.cfi_endproc
- 3082              	.LFE174:
- 3084              		.align	2
- 3085              		.global	TIM_CCPreloadControl
- 3086              		.thumb
- 3087              		.thumb_func
- 3089              	TIM_CCPreloadControl:
- 3090              	.LFB175:
+ 3085              		.loc 1 2294 0
+ 3086 09f2 8388     		ldrh	r3, [r0, #4]
+ 3087 09f4 23F00403 		bic	r3, r3, #4
+ 3088 09f8 1B04     		lsls	r3, r3, #16
+ 3089 09fa 1B0C     		lsrs	r3, r3, #16
+ 3090 09fc 8380     		strh	r3, [r0, #4]	@ movhi
+ 3091 09fe 7047     		bx	lr
+ 3092              		.cfi_endproc
+ 3093              	.LFE174:
+ 3095              		.align	2
+ 3096              		.global	TIM_CCPreloadControl
+ 3097              		.thumb
+ 3098              		.thumb_func
+ 3100              	TIM_CCPreloadControl:
+ 3101              	.LFB175:
 2306:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** { 
- 3091              		.loc 1 2306 0
- 3092              		.cfi_startproc
- 3093              		@ args = 0, pretend = 0, frame = 0
- 3094              		@ frame_needed = 0, uses_anonymous_args = 0
- 3095              		@ link register save eliminated.
- 3096              	.LVL434:
+ 3102              		.loc 1 2306 0
+ 3103              		.cfi_startproc
+ 3104              		@ args = 0, pretend = 0, frame = 0
+ 3105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3106              		@ link register save eliminated.
+ 3107              	.LVL436:
 2310:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (NewState != DISABLE)
- 3097              		.loc 1 2310 0
- 3098 09fc 29B1     		cbz	r1, .L135
+ 3108              		.loc 1 2310 0
+ 3109 0a00 29B1     		cbz	r1, .L135
 2313:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->CR2 |= TIM_CR2_CCPC;
- 3099              		.loc 1 2313 0
- 3100 09fe 8388     		ldrh	r3, [r0, #4]
- 3101 0a00 9BB2     		uxth	r3, r3
- 3102 0a02 43F00103 		orr	r3, r3, #1
- 3103 0a06 8380     		strh	r3, [r0, #4]	@ movhi
- 3104 0a08 7047     		bx	lr
- 3105              	.L135:
+ 3110              		.loc 1 2313 0
+ 3111 0a02 8388     		ldrh	r3, [r0, #4]
+ 3112 0a04 9BB2     		uxth	r3, r3
+ 3113 0a06 43F00103 		orr	r3, r3, #1
+ 3114 0a0a 8380     		strh	r3, [r0, #4]	@ movhi
+ 3115 0a0c 7047     		bx	lr
+ 3116              	.L135:
 2318:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->CR2 &= (uint16_t)~TIM_CR2_CCPC;
- 3106              		.loc 1 2318 0
- 3107 0a0a 8388     		ldrh	r3, [r0, #4]
- 3108 0a0c 23F00103 		bic	r3, r3, #1
- 3109 0a10 1B04     		lsls	r3, r3, #16
- 3110 0a12 1B0C     		lsrs	r3, r3, #16
- 3111 0a14 8380     		strh	r3, [r0, #4]	@ movhi
- 3112 0a16 7047     		bx	lr
- 3113              		.cfi_endproc
- 3114              	.LFE175:
- 3116              		.align	2
- 3117              		.global	TIM_ITConfig
- 3118              		.thumb
- 3119              		.thumb_func
- 3121              	TIM_ITConfig:
- 3122              	.LFB176:
+ 3117              		.loc 1 2318 0
+ 3118 0a0e 8388     		ldrh	r3, [r0, #4]
+ 3119 0a10 23F00103 		bic	r3, r3, #1
+ 3120 0a14 1B04     		lsls	r3, r3, #16
+ 3121 0a16 1B0C     		lsrs	r3, r3, #16
+ 3122 0a18 8380     		strh	r3, [r0, #4]	@ movhi
+ 3123 0a1a 7047     		bx	lr
+ 3124              		.cfi_endproc
+ 3125              	.LFE175:
+ 3127              		.align	2
+ 3128              		.global	TIM_ITConfig
+ 3129              		.thumb
+ 3130              		.thumb_func
+ 3132              	TIM_ITConfig:
+ 3133              	.LFB176:
 2363:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {  
- 3123              		.loc 1 2363 0
- 3124              		.cfi_startproc
- 3125              		@ args = 0, pretend = 0, frame = 0
- 3126              		@ frame_needed = 0, uses_anonymous_args = 0
- 3127              		@ link register save eliminated.
- 3128              	.LVL435:
+ 3134              		.loc 1 2363 0
+ 3135              		.cfi_startproc
+ 3136              		@ args = 0, pretend = 0, frame = 0
+ 3137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3138              		@ link register save eliminated.
+ 3139              	.LVL437:
 2369:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (NewState != DISABLE)
- 3129              		.loc 1 2369 0
- 3130 0a18 22B1     		cbz	r2, .L138
+ 3140              		.loc 1 2369 0
+ 3141 0a1c 22B1     		cbz	r2, .L138
 2372:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->DIER |= TIM_IT;
- 3131              		.loc 1 2372 0
- 3132 0a1a 8389     		ldrh	r3, [r0, #12]
- 3133 0a1c 9BB2     		uxth	r3, r3
- 3134 0a1e 1943     		orrs	r1, r1, r3
- 3135              	.LVL436:
- 3136 0a20 8181     		strh	r1, [r0, #12]	@ movhi
- 3137 0a22 7047     		bx	lr
- 3138              	.LVL437:
- 3139              	.L138:
+ 3142              		.loc 1 2372 0
+ 3143 0a1e 8389     		ldrh	r3, [r0, #12]
+ 3144 0a20 9BB2     		uxth	r3, r3
+ 3145 0a22 1943     		orrs	r1, r1, r3
+ 3146              	.LVL438:
+ 3147 0a24 8181     		strh	r1, [r0, #12]	@ movhi
+ 3148 0a26 7047     		bx	lr
+ 3149              	.LVL439:
+ 3150              	.L138:
 2377:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->DIER &= (uint16_t)~TIM_IT;
- 3140              		.loc 1 2377 0
- 3141 0a24 8389     		ldrh	r3, [r0, #12]
- 3142 0a26 C943     		mvns	r1, r1
- 3143              	.LVL438:
- 3144 0a28 89B2     		uxth	r1, r1
- 3145 0a2a 1940     		ands	r1, r1, r3
- 3146 0a2c 8181     		strh	r1, [r0, #12]	@ movhi
- 3147 0a2e 7047     		bx	lr
- 3148              		.cfi_endproc
- 3149              	.LFE176:
- 3151              		.align	2
- 3152              		.global	TIM_GenerateEvent
- 3153              		.thumb
- 3154              		.thumb_func
- 3156              	TIM_GenerateEvent:
- 3157              	.LFB177:
+ 3151              		.loc 1 2377 0
+ 3152 0a28 8389     		ldrh	r3, [r0, #12]
+ 3153 0a2a C943     		mvns	r1, r1
+ 3154              	.LVL440:
+ 3155 0a2c 89B2     		uxth	r1, r1
+ 3156 0a2e 1940     		ands	r1, r1, r3
+ 3157 0a30 8181     		strh	r1, [r0, #12]	@ movhi
+ 3158 0a32 7047     		bx	lr
+ 3159              		.cfi_endproc
+ 3160              	.LFE176:
+ 3162              		.align	2
+ 3163              		.global	TIM_GenerateEvent
+ 3164              		.thumb
+ 3165              		.thumb_func
+ 3167              	TIM_GenerateEvent:
+ 3168              	.LFB177:
 2401:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** { 
- 3158              		.loc 1 2401 0
- 3159              		.cfi_startproc
- 3160              		@ args = 0, pretend = 0, frame = 0
- 3161              		@ frame_needed = 0, uses_anonymous_args = 0
- 3162              		@ link register save eliminated.
- 3163              	.LVL439:
+ 3169              		.loc 1 2401 0
+ 3170              		.cfi_startproc
+ 3171              		@ args = 0, pretend = 0, frame = 0
+ 3172              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3173              		@ link register save eliminated.
+ 3174              	.LVL441:
 2407:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->EGR = TIM_EventSource;
- 3164              		.loc 1 2407 0
- 3165 0a30 8182     		strh	r1, [r0, #20]	@ movhi
- 3166 0a32 7047     		bx	lr
- 3167              		.cfi_endproc
- 3168              	.LFE177:
- 3170              		.align	2
- 3171              		.global	TIM_GetFlagStatus
- 3172              		.thumb
- 3173              		.thumb_func
- 3175              	TIM_GetFlagStatus:
- 3176              	.LFB178:
+ 3175              		.loc 1 2407 0
+ 3176 0a34 8182     		strh	r1, [r0, #20]	@ movhi
+ 3177 0a36 7047     		bx	lr
+ 3178              		.cfi_endproc
+ 3179              	.LFE177:
+ 3181              		.align	2
+ 3182              		.global	TIM_GetFlagStatus
+ 3183              		.thumb
+ 3184              		.thumb_func
+ 3186              	TIM_GetFlagStatus:
+ 3187              	.LFB178:
 2434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** { 
- 3177              		.loc 1 2434 0
- 3178              		.cfi_startproc
- 3179              		@ args = 0, pretend = 0, frame = 0
- 3180              		@ frame_needed = 0, uses_anonymous_args = 0
- 3181              		@ link register save eliminated.
- 3182              	.LVL440:
+ 3188              		.loc 1 2434 0
+ 3189              		.cfi_startproc
+ 3190              		@ args = 0, pretend = 0, frame = 0
+ 3191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3192              		@ link register save eliminated.
+ 3193              	.LVL442:
 2441:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if ((TIMx->SR & TIM_FLAG) != (uint16_t)RESET)
- 3183              		.loc 1 2441 0
- 3184 0a34 008A     		ldrh	r0, [r0, #16]
- 3185              	.LVL441:
- 3186 0a36 0840     		ands	r0, r0, r1
- 3187              	.LVL442:
+ 3194              		.loc 1 2441 0
+ 3195 0a38 038A     		ldrh	r3, [r0, #16]
+ 3196 0a3a 1942     		tst	r1, r3
+ 3197 0a3c 01D0     		beq	.L143
+2443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     bitstatus = SET;
+ 3198              		.loc 1 2443 0
+ 3199 0a3e 0120     		movs	r0, #1
+ 3200              	.LVL443:
+ 3201 0a40 7047     		bx	lr
+ 3202              	.LVL444:
+ 3203              	.L143:
+2447:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     bitstatus = RESET;
+ 3204              		.loc 1 2447 0
+ 3205 0a42 0020     		movs	r0, #0
+ 3206              	.LVL445:
 2450:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** }
- 3188              		.loc 1 2450 0
- 3189 0a38 0030     		adds	r0, r0, #0
- 3190 0a3a 18BF     		it	ne
- 3191 0a3c 0120     		movne	r0, #1
- 3192              	.LVL443:
- 3193 0a3e 7047     		bx	lr
- 3194              		.cfi_endproc
- 3195              	.LFE178:
- 3197              		.align	2
- 3198              		.global	TIM_ClearFlag
- 3199              		.thumb
- 3200              		.thumb_func
- 3202              	TIM_ClearFlag:
- 3203              	.LFB179:
+ 3207              		.loc 1 2450 0
+ 3208 0a44 7047     		bx	lr
+ 3209              		.cfi_endproc
+ 3210              	.LFE178:
+ 3212 0a46 00BF     		.align	2
+ 3213              		.global	TIM_ClearFlag
+ 3214              		.thumb
+ 3215              		.thumb_func
+ 3217              	TIM_ClearFlag:
+ 3218              	.LFB179:
 2476:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {  
- 3204              		.loc 1 2476 0
- 3205              		.cfi_startproc
- 3206              		@ args = 0, pretend = 0, frame = 0
- 3207              		@ frame_needed = 0, uses_anonymous_args = 0
- 3208              		@ link register save eliminated.
- 3209              	.LVL444:
+ 3219              		.loc 1 2476 0
+ 3220              		.cfi_startproc
+ 3221              		@ args = 0, pretend = 0, frame = 0
+ 3222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3223              		@ link register save eliminated.
+ 3224              	.LVL446:
 2481:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SR = (uint16_t)~TIM_FLAG;
- 3210              		.loc 1 2481 0
- 3211 0a40 C943     		mvns	r1, r1
- 3212              	.LVL445:
- 3213 0a42 89B2     		uxth	r1, r1
- 3214 0a44 0182     		strh	r1, [r0, #16]	@ movhi
- 3215 0a46 7047     		bx	lr
- 3216              		.cfi_endproc
- 3217              	.LFE179:
- 3219              		.align	2
- 3220              		.global	TIM_GetITStatus
- 3221              		.thumb
- 3222              		.thumb_func
- 3224              	TIM_GetITStatus:
- 3225              	.LFB180:
+ 3225              		.loc 1 2481 0
+ 3226 0a48 C943     		mvns	r1, r1
+ 3227              	.LVL447:
+ 3228 0a4a 89B2     		uxth	r1, r1
+ 3229 0a4c 0182     		strh	r1, [r0, #16]	@ movhi
+ 3230 0a4e 7047     		bx	lr
+ 3231              		.cfi_endproc
+ 3232              	.LFE179:
+ 3234              		.align	2
+ 3235              		.global	TIM_GetITStatus
+ 3236              		.thumb
+ 3237              		.thumb_func
+ 3239              	TIM_GetITStatus:
+ 3240              	.LFB180:
 2504:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3226              		.loc 1 2504 0
- 3227              		.cfi_startproc
- 3228              		@ args = 0, pretend = 0, frame = 0
- 3229              		@ frame_needed = 0, uses_anonymous_args = 0
- 3230              		@ link register save eliminated.
- 3231              	.LVL446:
+ 3241              		.loc 1 2504 0
+ 3242              		.cfi_startproc
+ 3243              		@ args = 0, pretend = 0, frame = 0
+ 3244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3245              		@ link register save eliminated.
+ 3246              	.LVL448:
 2511:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   itstatus = TIMx->SR & TIM_IT;
- 3232              		.loc 1 2511 0
- 3233 0a48 038A     		ldrh	r3, [r0, #16]
- 3234              	.LVL447:
+ 3247              		.loc 1 2511 0
+ 3248 0a50 038A     		ldrh	r3, [r0, #16]
+ 3249              	.LVL449:
 2513:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   itenable = TIMx->DIER & TIM_IT;
- 3235              		.loc 1 2513 0
- 3236 0a4a 8089     		ldrh	r0, [r0, #12]
- 3237              	.LVL448:
- 3238 0a4c 0840     		ands	r0, r0, r1
- 3239              	.LVL449:
+ 3250              		.loc 1 2513 0
+ 3251 0a52 8289     		ldrh	r2, [r0, #12]
+ 3252 0a54 0A40     		ands	r2, r2, r1
+ 3253              	.LVL450:
 2514:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if ((itstatus != (uint16_t)RESET) && (itenable != (uint16_t)RESET))
- 3240              		.loc 1 2514 0
- 3241 0a4e 1942     		tst	r1, r3
- 3242 0a50 03D0     		beq	.L147
+ 3254              		.loc 1 2514 0
+ 3255 0a56 1942     		tst	r1, r3
+ 3256 0a58 02D0     		beq	.L147
+2514:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if ((itstatus != (uint16_t)RESET) && (itenable != (uint16_t)RESET))
+ 3257              		.loc 1 2514 0 is_stmt 0 discriminator 1
+ 3258 0a5a 1AB9     		cbnz	r2, .L148
 2520:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     bitstatus = RESET;
- 3243              		.loc 1 2520 0 discriminator 1
- 3244 0a52 0030     		adds	r0, r0, #0
- 3245 0a54 18BF     		it	ne
- 3246 0a56 0120     		movne	r0, #1
- 3247              	.LVL450:
- 3248 0a58 7047     		bx	lr
- 3249              	.LVL451:
- 3250              	.L147:
-2520:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     bitstatus = RESET;
- 3251              		.loc 1 2520 0 is_stmt 0
- 3252 0a5a 0020     		movs	r0, #0
- 3253              	.LVL452:
+ 3259              		.loc 1 2520 0 is_stmt 1
+ 3260 0a5c 0020     		movs	r0, #0
+ 3261              	.LVL451:
+ 3262 0a5e 7047     		bx	lr
+ 3263              	.LVL452:
+ 3264              	.L147:
+ 3265 0a60 0020     		movs	r0, #0
+ 3266              	.LVL453:
+ 3267 0a62 7047     		bx	lr
+ 3268              	.LVL454:
+ 3269              	.L148:
+2516:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     bitstatus = SET;
+ 3270              		.loc 1 2516 0
+ 3271 0a64 0120     		movs	r0, #1
+ 3272              	.LVL455:
 2523:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** }
- 3254              		.loc 1 2523 0 is_stmt 1
- 3255 0a5c 7047     		bx	lr
- 3256              		.cfi_endproc
- 3257              	.LFE180:
- 3259 0a5e 00BF     		.align	2
- 3260              		.global	TIM_ClearITPendingBit
- 3261              		.thumb
- 3262              		.thumb_func
- 3264              	TIM_ClearITPendingBit:
- 3265              	.LFB181:
+ 3273              		.loc 1 2523 0
+ 3274 0a66 7047     		bx	lr
+ 3275              		.cfi_endproc
+ 3276              	.LFE180:
+ 3278              		.align	2
+ 3279              		.global	TIM_ClearITPendingBit
+ 3280              		.thumb
+ 3281              		.thumb_func
+ 3283              	TIM_ClearITPendingBit:
+ 3284              	.LFB181:
 2545:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3266              		.loc 1 2545 0
- 3267              		.cfi_startproc
- 3268              		@ args = 0, pretend = 0, frame = 0
- 3269              		@ frame_needed = 0, uses_anonymous_args = 0
- 3270              		@ link register save eliminated.
- 3271              	.LVL453:
+ 3285              		.loc 1 2545 0
+ 3286              		.cfi_startproc
+ 3287              		@ args = 0, pretend = 0, frame = 0
+ 3288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3289              		@ link register save eliminated.
+ 3290              	.LVL456:
 2550:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SR = (uint16_t)~TIM_IT;
- 3272              		.loc 1 2550 0
- 3273 0a60 C943     		mvns	r1, r1
- 3274              	.LVL454:
- 3275 0a62 89B2     		uxth	r1, r1
- 3276 0a64 0182     		strh	r1, [r0, #16]	@ movhi
- 3277 0a66 7047     		bx	lr
- 3278              		.cfi_endproc
- 3279              	.LFE181:
- 3281              		.align	2
- 3282              		.global	TIM_DMAConfig
- 3283              		.thumb
- 3284              		.thumb_func
- 3286              	TIM_DMAConfig:
- 3287              	.LFB182:
+ 3291              		.loc 1 2550 0
+ 3292 0a68 C943     		mvns	r1, r1
+ 3293              	.LVL457:
+ 3294 0a6a 89B2     		uxth	r1, r1
+ 3295 0a6c 0182     		strh	r1, [r0, #16]	@ movhi
+ 3296 0a6e 7047     		bx	lr
+ 3297              		.cfi_endproc
+ 3298              	.LFE181:
+ 3300              		.align	2
+ 3301              		.global	TIM_DMAConfig
+ 3302              		.thumb
+ 3303              		.thumb_func
+ 3305              	TIM_DMAConfig:
+ 3306              	.LFB182:
 2582:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3288              		.loc 1 2582 0
- 3289              		.cfi_startproc
- 3290              		@ args = 0, pretend = 0, frame = 0
- 3291              		@ frame_needed = 0, uses_anonymous_args = 0
- 3292              		@ link register save eliminated.
- 3293              	.LVL455:
+ 3307              		.loc 1 2582 0
+ 3308              		.cfi_startproc
+ 3309              		@ args = 0, pretend = 0, frame = 0
+ 3310              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3311              		@ link register save eliminated.
+ 3312              	.LVL458:
 2589:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->DCR = TIM_DMABase | TIM_DMABurstLength;
- 3294              		.loc 1 2589 0
- 3295 0a68 0A43     		orrs	r2, r2, r1
- 3296              	.LVL456:
- 3297 0a6a A0F84820 		strh	r2, [r0, #72]	@ movhi
- 3298 0a6e 7047     		bx	lr
- 3299              		.cfi_endproc
- 3300              	.LFE182:
- 3302              		.align	2
- 3303              		.global	TIM_DMACmd
- 3304              		.thumb
- 3305              		.thumb_func
- 3307              	TIM_DMACmd:
- 3308              	.LFB183:
+ 3313              		.loc 1 2589 0
+ 3314 0a70 0A43     		orrs	r2, r2, r1
+ 3315              	.LVL459:
+ 3316 0a72 A0F84820 		strh	r2, [r0, #72]	@ movhi
+ 3317 0a76 7047     		bx	lr
+ 3318              		.cfi_endproc
+ 3319              	.LFE182:
+ 3321              		.align	2
+ 3322              		.global	TIM_DMACmd
+ 3323              		.thumb
+ 3324              		.thumb_func
+ 3326              	TIM_DMACmd:
+ 3327              	.LFB183:
 2609:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** { 
- 3309              		.loc 1 2609 0
- 3310              		.cfi_startproc
- 3311              		@ args = 0, pretend = 0, frame = 0
- 3312              		@ frame_needed = 0, uses_anonymous_args = 0
- 3313              		@ link register save eliminated.
- 3314              	.LVL457:
+ 3328              		.loc 1 2609 0
+ 3329              		.cfi_startproc
+ 3330              		@ args = 0, pretend = 0, frame = 0
+ 3331              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3332              		@ link register save eliminated.
+ 3333              	.LVL460:
 2615:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (NewState != DISABLE)
- 3315              		.loc 1 2615 0
- 3316 0a70 22B1     		cbz	r2, .L152
+ 3334              		.loc 1 2615 0
+ 3335 0a78 22B1     		cbz	r2, .L152
 2618:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->DIER |= TIM_DMASource; 
- 3317              		.loc 1 2618 0
- 3318 0a72 8389     		ldrh	r3, [r0, #12]
- 3319 0a74 9BB2     		uxth	r3, r3
- 3320 0a76 1943     		orrs	r1, r1, r3
- 3321              	.LVL458:
- 3322 0a78 8181     		strh	r1, [r0, #12]	@ movhi
- 3323 0a7a 7047     		bx	lr
- 3324              	.LVL459:
- 3325              	.L152:
+ 3336              		.loc 1 2618 0
+ 3337 0a7a 8389     		ldrh	r3, [r0, #12]
+ 3338 0a7c 9BB2     		uxth	r3, r3
+ 3339 0a7e 1943     		orrs	r1, r1, r3
+ 3340              	.LVL461:
+ 3341 0a80 8181     		strh	r1, [r0, #12]	@ movhi
+ 3342 0a82 7047     		bx	lr
+ 3343              	.LVL462:
+ 3344              	.L152:
 2623:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->DIER &= (uint16_t)~TIM_DMASource;
- 3326              		.loc 1 2623 0
- 3327 0a7c 8389     		ldrh	r3, [r0, #12]
- 3328 0a7e C943     		mvns	r1, r1
- 3329              	.LVL460:
- 3330 0a80 89B2     		uxth	r1, r1
- 3331 0a82 1940     		ands	r1, r1, r3
- 3332 0a84 8181     		strh	r1, [r0, #12]	@ movhi
- 3333 0a86 7047     		bx	lr
- 3334              		.cfi_endproc
- 3335              	.LFE183:
- 3337              		.align	2
- 3338              		.global	TIM_SelectCCDMA
- 3339              		.thumb
- 3340              		.thumb_func
- 3342              	TIM_SelectCCDMA:
- 3343              	.LFB184:
+ 3345              		.loc 1 2623 0
+ 3346 0a84 8389     		ldrh	r3, [r0, #12]
+ 3347 0a86 C943     		mvns	r1, r1
+ 3348              	.LVL463:
+ 3349 0a88 89B2     		uxth	r1, r1
+ 3350 0a8a 1940     		ands	r1, r1, r3
+ 3351 0a8c 8181     		strh	r1, [r0, #12]	@ movhi
+ 3352 0a8e 7047     		bx	lr
+ 3353              		.cfi_endproc
+ 3354              	.LFE183:
+ 3356              		.align	2
+ 3357              		.global	TIM_SelectCCDMA
+ 3358              		.thumb
+ 3359              		.thumb_func
+ 3361              	TIM_SelectCCDMA:
+ 3362              	.LFB184:
 2635:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3344              		.loc 1 2635 0
- 3345              		.cfi_startproc
- 3346              		@ args = 0, pretend = 0, frame = 0
- 3347              		@ frame_needed = 0, uses_anonymous_args = 0
- 3348              		@ link register save eliminated.
- 3349              	.LVL461:
+ 3363              		.loc 1 2635 0
+ 3364              		.cfi_startproc
+ 3365              		@ args = 0, pretend = 0, frame = 0
+ 3366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3367              		@ link register save eliminated.
+ 3368              	.LVL464:
 2640:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (NewState != DISABLE)
- 3350              		.loc 1 2640 0
- 3351 0a88 29B1     		cbz	r1, .L155
+ 3369              		.loc 1 2640 0
+ 3370 0a90 29B1     		cbz	r1, .L155
 2643:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->CR2 |= TIM_CR2_CCDS;
- 3352              		.loc 1 2643 0
- 3353 0a8a 8388     		ldrh	r3, [r0, #4]
- 3354 0a8c 9BB2     		uxth	r3, r3
- 3355 0a8e 43F00803 		orr	r3, r3, #8
- 3356 0a92 8380     		strh	r3, [r0, #4]	@ movhi
- 3357 0a94 7047     		bx	lr
- 3358              	.L155:
+ 3371              		.loc 1 2643 0
+ 3372 0a92 8388     		ldrh	r3, [r0, #4]
+ 3373 0a94 9BB2     		uxth	r3, r3
+ 3374 0a96 43F00803 		orr	r3, r3, #8
+ 3375 0a9a 8380     		strh	r3, [r0, #4]	@ movhi
+ 3376 0a9c 7047     		bx	lr
+ 3377              	.L155:
 2648:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->CR2 &= (uint16_t)~TIM_CR2_CCDS;
- 3359              		.loc 1 2648 0
- 3360 0a96 8388     		ldrh	r3, [r0, #4]
- 3361 0a98 23F00803 		bic	r3, r3, #8
- 3362 0a9c 1B04     		lsls	r3, r3, #16
- 3363 0a9e 1B0C     		lsrs	r3, r3, #16
- 3364 0aa0 8380     		strh	r3, [r0, #4]	@ movhi
- 3365 0aa2 7047     		bx	lr
- 3366              		.cfi_endproc
- 3367              	.LFE184:
- 3369              		.align	2
- 3370              		.global	TIM_InternalClockConfig
- 3371              		.thumb
- 3372              		.thumb_func
- 3374              	TIM_InternalClockConfig:
- 3375              	.LFB185:
+ 3378              		.loc 1 2648 0
+ 3379 0a9e 8388     		ldrh	r3, [r0, #4]
+ 3380 0aa0 23F00803 		bic	r3, r3, #8
+ 3381 0aa4 1B04     		lsls	r3, r3, #16
+ 3382 0aa6 1B0C     		lsrs	r3, r3, #16
+ 3383 0aa8 8380     		strh	r3, [r0, #4]	@ movhi
+ 3384 0aaa 7047     		bx	lr
+ 3385              		.cfi_endproc
+ 3386              	.LFE184:
+ 3388              		.align	2
+ 3389              		.global	TIM_InternalClockConfig
+ 3390              		.thumb
+ 3391              		.thumb_func
+ 3393              	TIM_InternalClockConfig:
+ 3394              	.LFB185:
 2674:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3376              		.loc 1 2674 0
- 3377              		.cfi_startproc
- 3378              		@ args = 0, pretend = 0, frame = 0
- 3379              		@ frame_needed = 0, uses_anonymous_args = 0
- 3380              		@ link register save eliminated.
- 3381              	.LVL462:
+ 3395              		.loc 1 2674 0
+ 3396              		.cfi_startproc
+ 3397              		@ args = 0, pretend = 0, frame = 0
+ 3398              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3399              		@ link register save eliminated.
+ 3400              	.LVL465:
 2679:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR &=  (uint16_t)~TIM_SMCR_SMS;
- 3382              		.loc 1 2679 0
- 3383 0aa4 0389     		ldrh	r3, [r0, #8]
- 3384 0aa6 23F00703 		bic	r3, r3, #7
- 3385 0aaa 1B04     		lsls	r3, r3, #16
- 3386 0aac 1B0C     		lsrs	r3, r3, #16
- 3387 0aae 0381     		strh	r3, [r0, #8]	@ movhi
- 3388 0ab0 7047     		bx	lr
- 3389              		.cfi_endproc
- 3390              	.LFE185:
- 3392 0ab2 00BF     		.align	2
- 3393              		.global	TIM_SelectInputTrigger
- 3394              		.thumb
- 3395              		.thumb_func
- 3397              	TIM_SelectInputTrigger:
- 3398              	.LFB190:
+ 3401              		.loc 1 2679 0
+ 3402 0aac 0389     		ldrh	r3, [r0, #8]
+ 3403 0aae 23F00703 		bic	r3, r3, #7
+ 3404 0ab2 1B04     		lsls	r3, r3, #16
+ 3405 0ab4 1B0C     		lsrs	r3, r3, #16
+ 3406 0ab6 0381     		strh	r3, [r0, #8]	@ movhi
+ 3407 0ab8 7047     		bx	lr
+ 3408              		.cfi_endproc
+ 3409              	.LFE185:
+ 3411 0aba 00BF     		.align	2
+ 3412              		.global	TIM_SelectInputTrigger
+ 3413              		.thumb
+ 3414              		.thumb_func
+ 3416              	TIM_SelectInputTrigger:
+ 3417              	.LFB190:
 2880:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3399              		.loc 1 2880 0
- 3400              		.cfi_startproc
- 3401              		@ args = 0, pretend = 0, frame = 0
- 3402              		@ frame_needed = 0, uses_anonymous_args = 0
- 3403              		@ link register save eliminated.
- 3404              	.LVL463:
+ 3418              		.loc 1 2880 0
+ 3419              		.cfi_startproc
+ 3420              		@ args = 0, pretend = 0, frame = 0
+ 3421              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3422              		@ link register save eliminated.
+ 3423              	.LVL466:
 2888:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr = TIMx->SMCR;
- 3405              		.loc 1 2888 0
- 3406 0ab4 0389     		ldrh	r3, [r0, #8]
- 3407              	.LVL464:
+ 3424              		.loc 1 2888 0
+ 3425 0abc 0389     		ldrh	r3, [r0, #8]
+ 3426              	.LVL467:
 2891:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr &= (uint16_t)~TIM_SMCR_TS;
- 3408              		.loc 1 2891 0
- 3409 0ab6 23F07003 		bic	r3, r3, #112
- 3410              	.LVL465:
- 3411 0aba 1B04     		lsls	r3, r3, #16
- 3412 0abc 1B0C     		lsrs	r3, r3, #16
- 3413              	.LVL466:
+ 3427              		.loc 1 2891 0
+ 3428 0abe 23F07003 		bic	r3, r3, #112
+ 3429              	.LVL468:
+ 3430 0ac2 1B04     		lsls	r3, r3, #16
+ 3431 0ac4 1B0C     		lsrs	r3, r3, #16
+ 3432              	.LVL469:
 2894:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr |= TIM_InputTriggerSource;
- 3414              		.loc 1 2894 0
- 3415 0abe 1943     		orrs	r1, r1, r3
- 3416              	.LVL467:
+ 3433              		.loc 1 2894 0
+ 3434 0ac6 1943     		orrs	r1, r1, r3
+ 3435              	.LVL470:
 2897:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR = tmpsmcr;
- 3417              		.loc 1 2897 0
- 3418 0ac0 0181     		strh	r1, [r0, #8]	@ movhi
- 3419 0ac2 7047     		bx	lr
- 3420              		.cfi_endproc
- 3421              	.LFE190:
- 3423              		.align	2
- 3424              		.global	TIM_ITRxExternalClockConfig
- 3425              		.thumb
- 3426              		.thumb_func
- 3428              	TIM_ITRxExternalClockConfig:
- 3429              	.LFB186:
+ 3436              		.loc 1 2897 0
+ 3437 0ac8 0181     		strh	r1, [r0, #8]	@ movhi
+ 3438 0aca 7047     		bx	lr
+ 3439              		.cfi_endproc
+ 3440              	.LFE190:
+ 3442              		.align	2
+ 3443              		.global	TIM_ITRxExternalClockConfig
+ 3444              		.thumb
+ 3445              		.thumb_func
+ 3447              	TIM_ITRxExternalClockConfig:
+ 3448              	.LFB186:
 2695:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3430              		.loc 1 2695 0
- 3431              		.cfi_startproc
- 3432              		@ args = 0, pretend = 0, frame = 0
- 3433              		@ frame_needed = 0, uses_anonymous_args = 0
- 3434              	.LVL468:
- 3435 0ac4 10B5     		push	{r4, lr}
- 3436              		.cfi_def_cfa_offset 8
- 3437              		.cfi_offset 4, -8
- 3438              		.cfi_offset 14, -4
- 3439 0ac6 0446     		mov	r4, r0
+ 3449              		.loc 1 2695 0
+ 3450              		.cfi_startproc
+ 3451              		@ args = 0, pretend = 0, frame = 0
+ 3452              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3453              	.LVL471:
+ 3454 0acc 10B5     		push	{r4, lr}
+ 3455              		.cfi_def_cfa_offset 8
+ 3456              		.cfi_offset 4, -8
+ 3457              		.cfi_offset 14, -4
+ 3458 0ace 0446     		mov	r4, r0
 2701:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_SelectInputTrigger(TIMx, TIM_InputTriggerSource);
- 3440              		.loc 1 2701 0
- 3441 0ac8 FFF7FEFF 		bl	TIM_SelectInputTrigger
- 3442              	.LVL469:
+ 3459              		.loc 1 2701 0
+ 3460 0ad0 FFF7FEFF 		bl	TIM_SelectInputTrigger
+ 3461              	.LVL472:
 2704:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR |= TIM_SlaveMode_External1;
- 3443              		.loc 1 2704 0
- 3444 0acc 2389     		ldrh	r3, [r4, #8]
- 3445 0ace 9BB2     		uxth	r3, r3
- 3446 0ad0 43F00703 		orr	r3, r3, #7
- 3447 0ad4 2381     		strh	r3, [r4, #8]	@ movhi
- 3448 0ad6 10BD     		pop	{r4, pc}
- 3449              		.cfi_endproc
- 3450              	.LFE186:
- 3452              		.align	2
- 3453              		.global	TIM_TIxExternalClockConfig
- 3454              		.thumb
- 3455              		.thumb_func
- 3457              	TIM_TIxExternalClockConfig:
- 3458              	.LFB187:
+ 3462              		.loc 1 2704 0
+ 3463 0ad4 2389     		ldrh	r3, [r4, #8]
+ 3464 0ad6 9BB2     		uxth	r3, r3
+ 3465 0ad8 43F00703 		orr	r3, r3, #7
+ 3466 0adc 2381     		strh	r3, [r4, #8]	@ movhi
+ 3467 0ade 10BD     		pop	{r4, pc}
+ 3468              		.cfi_endproc
+ 3469              	.LFE186:
+ 3471              		.align	2
+ 3472              		.global	TIM_TIxExternalClockConfig
+ 3473              		.thumb
+ 3474              		.thumb_func
+ 3476              	TIM_TIxExternalClockConfig:
+ 3477              	.LFB187:
 2726:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3459              		.loc 1 2726 0
- 3460              		.cfi_startproc
- 3461              		@ args = 0, pretend = 0, frame = 0
- 3462              		@ frame_needed = 0, uses_anonymous_args = 0
- 3463              	.LVL470:
- 3464 0ad8 38B5     		push	{r3, r4, r5, lr}
- 3465              		.cfi_def_cfa_offset 16
- 3466              		.cfi_offset 3, -16
- 3467              		.cfi_offset 4, -12
- 3468              		.cfi_offset 5, -8
- 3469              		.cfi_offset 14, -4
- 3470 0ada 0446     		mov	r4, r0
- 3471 0adc 0D46     		mov	r5, r1
+ 3478              		.loc 1 2726 0
+ 3479              		.cfi_startproc
+ 3480              		@ args = 0, pretend = 0, frame = 0
+ 3481              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3482              	.LVL473:
+ 3483 0ae0 38B5     		push	{r3, r4, r5, lr}
+ 3484              		.cfi_def_cfa_offset 16
+ 3485              		.cfi_offset 3, -16
+ 3486              		.cfi_offset 4, -12
+ 3487              		.cfi_offset 5, -8
+ 3488              		.cfi_offset 14, -4
+ 3489 0ae2 0446     		mov	r4, r0
+ 3490 0ae4 0D46     		mov	r5, r1
 2733:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (TIM_TIxExternalCLKSource == TIM_TIxExternalCLK1Source_TI2)
- 3472              		.loc 1 2733 0
- 3473 0ade 6029     		cmp	r1, #96
- 3474 0ae0 04D1     		bne	.L161
+ 3491              		.loc 1 2733 0
+ 3492 0ae6 6029     		cmp	r1, #96
+ 3493 0ae8 04D1     		bne	.L161
 2735:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI2_Config(TIMx, TIM_ICPolarity, TIM_ICSelection_DirectTI, ICFilter);
- 3475              		.loc 1 2735 0
- 3476 0ae2 1146     		mov	r1, r2
- 3477              	.LVL471:
- 3478 0ae4 0122     		movs	r2, #1
- 3479              	.LVL472:
- 3480 0ae6 FFF7A7FA 		bl	TI2_Config
- 3481              	.LVL473:
- 3482 0aea 03E0     		b	.L162
- 3483              	.LVL474:
- 3484              	.L161:
+ 3494              		.loc 1 2735 0
+ 3495 0aea 1146     		mov	r1, r2
+ 3496              	.LVL474:
+ 3497 0aec 0122     		movs	r2, #1
+ 3498              	.LVL475:
+ 3499 0aee FFF7A3FA 		bl	TI2_Config
+ 3500              	.LVL476:
+ 3501 0af2 03E0     		b	.L162
+ 3502              	.LVL477:
+ 3503              	.L161:
 2739:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TI1_Config(TIMx, TIM_ICPolarity, TIM_ICSelection_DirectTI, ICFilter);
- 3485              		.loc 1 2739 0
- 3486 0aec 1146     		mov	r1, r2
- 3487              	.LVL475:
- 3488 0aee 0122     		movs	r2, #1
- 3489              	.LVL476:
- 3490 0af0 FFF786FA 		bl	TI1_Config
- 3491              	.LVL477:
- 3492              	.L162:
+ 3504              		.loc 1 2739 0
+ 3505 0af4 1146     		mov	r1, r2
+ 3506              	.LVL478:
+ 3507 0af6 0122     		movs	r2, #1
+ 3508              	.LVL479:
+ 3509 0af8 FFF782FA 		bl	TI1_Config
+ 3510              	.LVL480:
+ 3511              	.L162:
 2742:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_SelectInputTrigger(TIMx, TIM_TIxExternalCLKSource);
- 3493              		.loc 1 2742 0
- 3494 0af4 2046     		mov	r0, r4
- 3495 0af6 2946     		mov	r1, r5
- 3496 0af8 FFF7FEFF 		bl	TIM_SelectInputTrigger
- 3497              	.LVL478:
+ 3512              		.loc 1 2742 0
+ 3513 0afc 2046     		mov	r0, r4
+ 3514 0afe 2946     		mov	r1, r5
+ 3515 0b00 FFF7FEFF 		bl	TIM_SelectInputTrigger
+ 3516              	.LVL481:
 2744:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR |= TIM_SlaveMode_External1;
- 3498              		.loc 1 2744 0
- 3499 0afc 2389     		ldrh	r3, [r4, #8]
- 3500 0afe 9BB2     		uxth	r3, r3
- 3501 0b00 43F00703 		orr	r3, r3, #7
- 3502 0b04 2381     		strh	r3, [r4, #8]	@ movhi
- 3503 0b06 38BD     		pop	{r3, r4, r5, pc}
- 3504              		.cfi_endproc
- 3505              	.LFE187:
- 3507              		.align	2
- 3508              		.global	TIM_SelectOutputTrigger
- 3509              		.thumb
- 3510              		.thumb_func
- 3512              	TIM_SelectOutputTrigger:
- 3513              	.LFB191:
+ 3517              		.loc 1 2744 0
+ 3518 0b04 2389     		ldrh	r3, [r4, #8]
+ 3519 0b06 9BB2     		uxth	r3, r3
+ 3520 0b08 43F00703 		orr	r3, r3, #7
+ 3521 0b0c 2381     		strh	r3, [r4, #8]	@ movhi
+ 3522 0b0e 38BD     		pop	{r3, r4, r5, pc}
+ 3523              		.cfi_endproc
+ 3524              	.LFE187:
+ 3526              		.align	2
+ 3527              		.global	TIM_SelectOutputTrigger
+ 3528              		.thumb
+ 3529              		.thumb_func
+ 3531              	TIM_SelectOutputTrigger:
+ 3532              	.LFB191:
 2923:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3514              		.loc 1 2923 0
- 3515              		.cfi_startproc
- 3516              		@ args = 0, pretend = 0, frame = 0
- 3517              		@ frame_needed = 0, uses_anonymous_args = 0
- 3518              		@ link register save eliminated.
- 3519              	.LVL479:
+ 3533              		.loc 1 2923 0
+ 3534              		.cfi_startproc
+ 3535              		@ args = 0, pretend = 0, frame = 0
+ 3536              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3537              		@ link register save eliminated.
+ 3538              	.LVL482:
 2929:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->CR2 &= (uint16_t)~TIM_CR2_MMS;
- 3520              		.loc 1 2929 0
- 3521 0b08 8388     		ldrh	r3, [r0, #4]
- 3522 0b0a 23F07003 		bic	r3, r3, #112
- 3523 0b0e 1B04     		lsls	r3, r3, #16
- 3524 0b10 1B0C     		lsrs	r3, r3, #16
- 3525 0b12 8380     		strh	r3, [r0, #4]	@ movhi
+ 3539              		.loc 1 2929 0
+ 3540 0b10 8388     		ldrh	r3, [r0, #4]
+ 3541 0b12 23F07003 		bic	r3, r3, #112
+ 3542 0b16 1B04     		lsls	r3, r3, #16
+ 3543 0b18 1B0C     		lsrs	r3, r3, #16
+ 3544 0b1a 8380     		strh	r3, [r0, #4]	@ movhi
 2931:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->CR2 |=  TIM_TRGOSource;
- 3526              		.loc 1 2931 0
- 3527 0b14 8388     		ldrh	r3, [r0, #4]
- 3528 0b16 9BB2     		uxth	r3, r3
- 3529 0b18 1943     		orrs	r1, r1, r3
- 3530              	.LVL480:
- 3531 0b1a 8180     		strh	r1, [r0, #4]	@ movhi
- 3532 0b1c 7047     		bx	lr
- 3533              		.cfi_endproc
- 3534              	.LFE191:
- 3536 0b1e 00BF     		.align	2
- 3537              		.global	TIM_SelectSlaveMode
- 3538              		.thumb
- 3539              		.thumb_func
- 3541              	TIM_SelectSlaveMode:
- 3542              	.LFB192:
+ 3545              		.loc 1 2931 0
+ 3546 0b1c 8388     		ldrh	r3, [r0, #4]
+ 3547 0b1e 9BB2     		uxth	r3, r3
+ 3548 0b20 1943     		orrs	r1, r1, r3
+ 3549              	.LVL483:
+ 3550 0b22 8180     		strh	r1, [r0, #4]	@ movhi
+ 3551 0b24 7047     		bx	lr
+ 3552              		.cfi_endproc
+ 3553              	.LFE191:
+ 3555 0b26 00BF     		.align	2
+ 3556              		.global	TIM_SelectSlaveMode
+ 3557              		.thumb
+ 3558              		.thumb_func
+ 3560              	TIM_SelectSlaveMode:
+ 3561              	.LFB192:
 2947:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3543              		.loc 1 2947 0
- 3544              		.cfi_startproc
- 3545              		@ args = 0, pretend = 0, frame = 0
- 3546              		@ frame_needed = 0, uses_anonymous_args = 0
- 3547              		@ link register save eliminated.
- 3548              	.LVL481:
+ 3562              		.loc 1 2947 0
+ 3563              		.cfi_startproc
+ 3564              		@ args = 0, pretend = 0, frame = 0
+ 3565              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3566              		@ link register save eliminated.
+ 3567              	.LVL484:
 2953:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR &= (uint16_t)~TIM_SMCR_SMS;
- 3549              		.loc 1 2953 0
- 3550 0b20 0389     		ldrh	r3, [r0, #8]
- 3551 0b22 23F00703 		bic	r3, r3, #7
- 3552 0b26 1B04     		lsls	r3, r3, #16
- 3553 0b28 1B0C     		lsrs	r3, r3, #16
- 3554 0b2a 0381     		strh	r3, [r0, #8]	@ movhi
+ 3568              		.loc 1 2953 0
+ 3569 0b28 0389     		ldrh	r3, [r0, #8]
+ 3570 0b2a 23F00703 		bic	r3, r3, #7
+ 3571 0b2e 1B04     		lsls	r3, r3, #16
+ 3572 0b30 1B0C     		lsrs	r3, r3, #16
+ 3573 0b32 0381     		strh	r3, [r0, #8]	@ movhi
 2956:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR |= TIM_SlaveMode;
- 3555              		.loc 1 2956 0
- 3556 0b2c 0389     		ldrh	r3, [r0, #8]
- 3557 0b2e 9BB2     		uxth	r3, r3
- 3558 0b30 1943     		orrs	r1, r1, r3
- 3559              	.LVL482:
- 3560 0b32 0181     		strh	r1, [r0, #8]	@ movhi
- 3561 0b34 7047     		bx	lr
- 3562              		.cfi_endproc
- 3563              	.LFE192:
- 3565 0b36 00BF     		.align	2
- 3566              		.global	TIM_SelectMasterSlaveMode
- 3567              		.thumb
- 3568              		.thumb_func
- 3570              	TIM_SelectMasterSlaveMode:
- 3571              	.LFB193:
+ 3574              		.loc 1 2956 0
+ 3575 0b34 0389     		ldrh	r3, [r0, #8]
+ 3576 0b36 9BB2     		uxth	r3, r3
+ 3577 0b38 1943     		orrs	r1, r1, r3
+ 3578              	.LVL485:
+ 3579 0b3a 0181     		strh	r1, [r0, #8]	@ movhi
+ 3580 0b3c 7047     		bx	lr
+ 3581              		.cfi_endproc
+ 3582              	.LFE192:
+ 3584 0b3e 00BF     		.align	2
+ 3585              		.global	TIM_SelectMasterSlaveMode
+ 3586              		.thumb
+ 3587              		.thumb_func
+ 3589              	TIM_SelectMasterSlaveMode:
+ 3590              	.LFB193:
 2970:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3572              		.loc 1 2970 0
- 3573              		.cfi_startproc
- 3574              		@ args = 0, pretend = 0, frame = 0
- 3575              		@ frame_needed = 0, uses_anonymous_args = 0
- 3576              		@ link register save eliminated.
- 3577              	.LVL483:
+ 3591              		.loc 1 2970 0
+ 3592              		.cfi_startproc
+ 3593              		@ args = 0, pretend = 0, frame = 0
+ 3594              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3595              		@ link register save eliminated.
+ 3596              	.LVL486:
 2976:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR &= (uint16_t)~TIM_SMCR_MSM;
- 3578              		.loc 1 2976 0
- 3579 0b38 0389     		ldrh	r3, [r0, #8]
- 3580 0b3a 23F08003 		bic	r3, r3, #128
- 3581 0b3e 1B04     		lsls	r3, r3, #16
- 3582 0b40 1B0C     		lsrs	r3, r3, #16
- 3583 0b42 0381     		strh	r3, [r0, #8]	@ movhi
+ 3597              		.loc 1 2976 0
+ 3598 0b40 0389     		ldrh	r3, [r0, #8]
+ 3599 0b42 23F08003 		bic	r3, r3, #128
+ 3600 0b46 1B04     		lsls	r3, r3, #16
+ 3601 0b48 1B0C     		lsrs	r3, r3, #16
+ 3602 0b4a 0381     		strh	r3, [r0, #8]	@ movhi
 2979:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR |= TIM_MasterSlaveMode;
- 3584              		.loc 1 2979 0
- 3585 0b44 0389     		ldrh	r3, [r0, #8]
- 3586 0b46 9BB2     		uxth	r3, r3
- 3587 0b48 1943     		orrs	r1, r1, r3
- 3588              	.LVL484:
- 3589 0b4a 0181     		strh	r1, [r0, #8]	@ movhi
- 3590 0b4c 7047     		bx	lr
- 3591              		.cfi_endproc
- 3592              	.LFE193:
- 3594 0b4e 00BF     		.align	2
- 3595              		.global	TIM_ETRConfig
- 3596              		.thumb
- 3597              		.thumb_func
- 3599              	TIM_ETRConfig:
- 3600              	.LFB194:
+ 3603              		.loc 1 2979 0
+ 3604 0b4c 0389     		ldrh	r3, [r0, #8]
+ 3605 0b4e 9BB2     		uxth	r3, r3
+ 3606 0b50 1943     		orrs	r1, r1, r3
+ 3607              	.LVL487:
+ 3608 0b52 0181     		strh	r1, [r0, #8]	@ movhi
+ 3609 0b54 7047     		bx	lr
+ 3610              		.cfi_endproc
+ 3611              	.LFE193:
+ 3613 0b56 00BF     		.align	2
+ 3614              		.global	TIM_ETRConfig
+ 3615              		.thumb
+ 3616              		.thumb_func
+ 3618              	TIM_ETRConfig:
+ 3619              	.LFB194:
 3001:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3601              		.loc 1 3001 0
- 3602              		.cfi_startproc
- 3603              		@ args = 0, pretend = 0, frame = 0
- 3604              		@ frame_needed = 0, uses_anonymous_args = 0
- 3605              		@ link register save eliminated.
- 3606              	.LVL485:
- 3607 0b50 10B4     		push	{r4}
- 3608              		.cfi_def_cfa_offset 4
- 3609              		.cfi_offset 4, -4
- 3610              	.LVL486:
+ 3620              		.loc 1 3001 0
+ 3621              		.cfi_startproc
+ 3622              		@ args = 0, pretend = 0, frame = 0
+ 3623              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3624              		@ link register save eliminated.
+ 3625              	.LVL488:
+ 3626 0b58 10B4     		push	{r4}
+ 3627              		.cfi_def_cfa_offset 4
+ 3628              		.cfi_offset 4, -4
+ 3629              	.LVL489:
 3010:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr = TIMx->SMCR;
- 3611              		.loc 1 3010 0
- 3612 0b52 0489     		ldrh	r4, [r0, #8]
- 3613              	.LVL487:
+ 3630              		.loc 1 3010 0
+ 3631 0b5a 0489     		ldrh	r4, [r0, #8]
+ 3632              	.LVL490:
 3013:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr &= SMCR_ETR_MASK;
- 3614              		.loc 1 3013 0
- 3615 0b54 E4B2     		uxtb	r4, r4
- 3616              	.LVL488:
+ 3633              		.loc 1 3013 0
+ 3634 0b5c E4B2     		uxtb	r4, r4
+ 3635              	.LVL491:
 3016:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr |= (uint16_t)(TIM_ExtTRGPrescaler | (uint16_t)(TIM_ExtTRGPolarity | (uint16_t)(ExtTRGFilt
- 3617              		.loc 1 3016 0
- 3618 0b56 1B02     		lsls	r3, r3, #8
- 3619              	.LVL489:
- 3620 0b58 9BB2     		uxth	r3, r3
- 3621 0b5a 1A43     		orrs	r2, r2, r3
- 3622              	.LVL490:
- 3623 0b5c 1143     		orrs	r1, r1, r2
- 3624              	.LVL491:
- 3625 0b5e 0C43     		orrs	r4, r4, r1
- 3626              	.LVL492:
+ 3636              		.loc 1 3016 0
+ 3637 0b5e 1B02     		lsls	r3, r3, #8
+ 3638              	.LVL492:
+ 3639 0b60 9BB2     		uxth	r3, r3
+ 3640 0b62 1A43     		orrs	r2, r2, r3
+ 3641              	.LVL493:
+ 3642 0b64 1143     		orrs	r1, r1, r2
+ 3643              	.LVL494:
+ 3644 0b66 0C43     		orrs	r4, r4, r1
+ 3645              	.LVL495:
 3019:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR = tmpsmcr;
- 3627              		.loc 1 3019 0
- 3628 0b60 0481     		strh	r4, [r0, #8]	@ movhi
+ 3646              		.loc 1 3019 0
+ 3647 0b68 0481     		strh	r4, [r0, #8]	@ movhi
 3020:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** }
- 3629              		.loc 1 3020 0
- 3630 0b62 5DF8044B 		ldr	r4, [sp], #4
- 3631              	.LVL493:
- 3632 0b66 7047     		bx	lr
- 3633              		.cfi_endproc
- 3634              	.LFE194:
- 3636              		.align	2
- 3637              		.global	TIM_ETRClockMode1Config
- 3638              		.thumb
- 3639              		.thumb_func
- 3641              	TIM_ETRClockMode1Config:
- 3642              	.LFB188:
+ 3648              		.loc 1 3020 0
+ 3649 0b6a 5DF8044B 		ldr	r4, [sp], #4
+ 3650              	.LVL496:
+ 3651 0b6e 7047     		bx	lr
+ 3652              		.cfi_endproc
+ 3653              	.LFE194:
+ 3655              		.align	2
+ 3656              		.global	TIM_ETRClockMode1Config
+ 3657              		.thumb
+ 3658              		.thumb_func
+ 3660              	TIM_ETRClockMode1Config:
+ 3661              	.LFB188:
 2766:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3643              		.loc 1 2766 0
- 3644              		.cfi_startproc
- 3645              		@ args = 0, pretend = 0, frame = 0
- 3646              		@ frame_needed = 0, uses_anonymous_args = 0
- 3647              	.LVL494:
- 3648 0b68 10B5     		push	{r4, lr}
- 3649              		.cfi_def_cfa_offset 8
- 3650              		.cfi_offset 4, -8
- 3651              		.cfi_offset 14, -4
- 3652 0b6a 0446     		mov	r4, r0
- 3653              	.LVL495:
+ 3662              		.loc 1 2766 0
+ 3663              		.cfi_startproc
+ 3664              		@ args = 0, pretend = 0, frame = 0
+ 3665              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3666              	.LVL497:
+ 3667 0b70 10B5     		push	{r4, lr}
+ 3668              		.cfi_def_cfa_offset 8
+ 3669              		.cfi_offset 4, -8
+ 3670              		.cfi_offset 14, -4
+ 3671 0b72 0446     		mov	r4, r0
+ 3672              	.LVL498:
 2775:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_ETRConfig(TIMx, TIM_ExtTRGPrescaler, TIM_ExtTRGPolarity, ExtTRGFilter);
- 3654              		.loc 1 2775 0
- 3655 0b6c FFF7FEFF 		bl	TIM_ETRConfig
- 3656              	.LVL496:
+ 3673              		.loc 1 2775 0
+ 3674 0b74 FFF7FEFF 		bl	TIM_ETRConfig
+ 3675              	.LVL499:
 2778:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr = TIMx->SMCR;
- 3657              		.loc 1 2778 0
- 3658 0b70 2389     		ldrh	r3, [r4, #8]
- 3659              	.LVL497:
+ 3676              		.loc 1 2778 0
+ 3677 0b78 2389     		ldrh	r3, [r4, #8]
+ 3678              	.LVL500:
 2787:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr &= (uint16_t)~TIM_SMCR_TS;
- 3660              		.loc 1 2787 0
- 3661 0b72 23F07703 		bic	r3, r3, #119
- 3662              	.LVL498:
- 3663 0b76 1B04     		lsls	r3, r3, #16
- 3664 0b78 1B0C     		lsrs	r3, r3, #16
- 3665              	.LVL499:
+ 3679              		.loc 1 2787 0
+ 3680 0b7a 23F07703 		bic	r3, r3, #119
+ 3681              	.LVL501:
+ 3682 0b7e 1B04     		lsls	r3, r3, #16
+ 3683 0b80 1B0C     		lsrs	r3, r3, #16
+ 3684              	.LVL502:
 2788:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr |= TIM_TS_ETRF;
- 3666              		.loc 1 2788 0
- 3667 0b7a 43F07703 		orr	r3, r3, #119
- 3668              	.LVL500:
+ 3685              		.loc 1 2788 0
+ 3686 0b82 43F07703 		orr	r3, r3, #119
+ 3687              	.LVL503:
 2791:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR = tmpsmcr;
- 3669              		.loc 1 2791 0
- 3670 0b7e 2381     		strh	r3, [r4, #8]	@ movhi
- 3671 0b80 10BD     		pop	{r4, pc}
- 3672              		.cfi_endproc
- 3673              	.LFE188:
- 3675 0b82 00BF     		.align	2
- 3676              		.global	TIM_ETRClockMode2Config
- 3677              		.thumb
- 3678              		.thumb_func
- 3680              	TIM_ETRClockMode2Config:
- 3681              	.LFB189:
+ 3688              		.loc 1 2791 0
+ 3689 0b86 2381     		strh	r3, [r4, #8]	@ movhi
+ 3690 0b88 10BD     		pop	{r4, pc}
+ 3691              		.cfi_endproc
+ 3692              	.LFE188:
+ 3694 0b8a 00BF     		.align	2
+ 3695              		.global	TIM_ETRClockMode2Config
+ 3696              		.thumb
+ 3697              		.thumb_func
+ 3699              	TIM_ETRClockMode2Config:
+ 3700              	.LFB189:
 2813:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3682              		.loc 1 2813 0
- 3683              		.cfi_startproc
- 3684              		@ args = 0, pretend = 0, frame = 0
- 3685              		@ frame_needed = 0, uses_anonymous_args = 0
- 3686              	.LVL501:
- 3687 0b84 10B5     		push	{r4, lr}
- 3688              		.cfi_def_cfa_offset 8
- 3689              		.cfi_offset 4, -8
- 3690              		.cfi_offset 14, -4
- 3691 0b86 0446     		mov	r4, r0
+ 3701              		.loc 1 2813 0
+ 3702              		.cfi_startproc
+ 3703              		@ args = 0, pretend = 0, frame = 0
+ 3704              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3705              	.LVL504:
+ 3706 0b8c 10B5     		push	{r4, lr}
+ 3707              		.cfi_def_cfa_offset 8
+ 3708              		.cfi_offset 4, -8
+ 3709              		.cfi_offset 14, -4
+ 3710 0b8e 0446     		mov	r4, r0
 2821:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIM_ETRConfig(TIMx, TIM_ExtTRGPrescaler, TIM_ExtTRGPolarity, ExtTRGFilter);
- 3692              		.loc 1 2821 0
- 3693 0b88 FFF7FEFF 		bl	TIM_ETRConfig
- 3694              	.LVL502:
+ 3711              		.loc 1 2821 0
+ 3712 0b90 FFF7FEFF 		bl	TIM_ETRConfig
+ 3713              	.LVL505:
 2824:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR |= TIM_SMCR_ECE;
- 3695              		.loc 1 2824 0
- 3696 0b8c 2389     		ldrh	r3, [r4, #8]
- 3697 0b8e 9BB2     		uxth	r3, r3
- 3698 0b90 43F48043 		orr	r3, r3, #16384
- 3699 0b94 2381     		strh	r3, [r4, #8]	@ movhi
- 3700 0b96 10BD     		pop	{r4, pc}
- 3701              		.cfi_endproc
- 3702              	.LFE189:
- 3704              		.align	2
- 3705              		.global	TIM_EncoderInterfaceConfig
- 3706              		.thumb
- 3707              		.thumb_func
- 3709              	TIM_EncoderInterfaceConfig:
- 3710              	.LFB195:
+ 3714              		.loc 1 2824 0
+ 3715 0b94 2389     		ldrh	r3, [r4, #8]
+ 3716 0b96 9BB2     		uxth	r3, r3
+ 3717 0b98 43F48043 		orr	r3, r3, #16384
+ 3718 0b9c 2381     		strh	r3, [r4, #8]	@ movhi
+ 3719 0b9e 10BD     		pop	{r4, pc}
+ 3720              		.cfi_endproc
+ 3721              	.LFE189:
+ 3723              		.align	2
+ 3724              		.global	TIM_EncoderInterfaceConfig
+ 3725              		.thumb
+ 3726              		.thumb_func
+ 3728              	TIM_EncoderInterfaceConfig:
+ 3729              	.LFB195:
 3059:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3711              		.loc 1 3059 0
- 3712              		.cfi_startproc
- 3713              		@ args = 0, pretend = 0, frame = 0
- 3714              		@ frame_needed = 0, uses_anonymous_args = 0
- 3715              		@ link register save eliminated.
- 3716              	.LVL503:
- 3717 0b98 70B4     		push	{r4, r5, r6}
- 3718              		.cfi_def_cfa_offset 12
- 3719              		.cfi_offset 4, -12
- 3720              		.cfi_offset 5, -8
- 3721              		.cfi_offset 6, -4
- 3722              	.LVL504:
+ 3730              		.loc 1 3059 0
+ 3731              		.cfi_startproc
+ 3732              		@ args = 0, pretend = 0, frame = 0
+ 3733              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3734              		@ link register save eliminated.
+ 3735              	.LVL506:
+ 3736 0ba0 70B4     		push	{r4, r5, r6}
+ 3737              		.cfi_def_cfa_offset 12
+ 3738              		.cfi_offset 4, -12
+ 3739              		.cfi_offset 5, -8
+ 3740              		.cfi_offset 6, -4
+ 3741              	.LVL507:
 3071:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr = TIMx->SMCR;
- 3723              		.loc 1 3071 0
- 3724 0b9a 0489     		ldrh	r4, [r0, #8]
- 3725              	.LVL505:
+ 3742              		.loc 1 3071 0
+ 3743 0ba2 0489     		ldrh	r4, [r0, #8]
+ 3744              	.LVL508:
 3074:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpccmr1 = TIMx->CCMR1;
- 3726              		.loc 1 3074 0
- 3727 0b9c 068B     		ldrh	r6, [r0, #24]
- 3728 0b9e B6B2     		uxth	r6, r6
- 3729              	.LVL506:
+ 3745              		.loc 1 3074 0
+ 3746 0ba4 068B     		ldrh	r6, [r0, #24]
+ 3747 0ba6 B6B2     		uxth	r6, r6
+ 3748              	.LVL509:
 3077:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpccer = TIMx->CCER;
- 3730              		.loc 1 3077 0
- 3731 0ba0 058C     		ldrh	r5, [r0, #32]
- 3732              	.LVL507:
+ 3749              		.loc 1 3077 0
+ 3750 0ba8 058C     		ldrh	r5, [r0, #32]
+ 3751              	.LVL510:
 3080:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr &= (uint16_t)~TIM_SMCR_SMS;
- 3733              		.loc 1 3080 0
- 3734 0ba2 24F00704 		bic	r4, r4, #7
- 3735              	.LVL508:
- 3736 0ba6 2404     		lsls	r4, r4, #16
- 3737 0ba8 240C     		lsrs	r4, r4, #16
- 3738              	.LVL509:
+ 3752              		.loc 1 3080 0
+ 3753 0baa 24F00704 		bic	r4, r4, #7
+ 3754              	.LVL511:
+ 3755 0bae 2404     		lsls	r4, r4, #16
+ 3756 0bb0 240C     		lsrs	r4, r4, #16
+ 3757              	.LVL512:
 3081:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpsmcr |= TIM_EncoderMode;
- 3739              		.loc 1 3081 0
- 3740 0baa 2143     		orrs	r1, r1, r4
- 3741              	.LVL510:
+ 3758              		.loc 1 3081 0
+ 3759 0bb2 2143     		orrs	r1, r1, r4
+ 3760              	.LVL513:
 3084:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpccmr1 &= ((uint16_t)~TIM_CCMR1_CC1S) & ((uint16_t)~TIM_CCMR1_CC2S);
- 3742              		.loc 1 3084 0
- 3743 0bac 26F44076 		bic	r6, r6, #768
- 3744              	.LVL511:
- 3745 0bb0 26F00306 		bic	r6, r6, #3
- 3746              	.LVL512:
+ 3761              		.loc 1 3084 0
+ 3762 0bb4 26F44076 		bic	r6, r6, #768
+ 3763              	.LVL514:
+ 3764 0bb8 26F00306 		bic	r6, r6, #3
+ 3765              	.LVL515:
 3085:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpccmr1 |= TIM_CCMR1_CC1S_0 | TIM_CCMR1_CC2S_0;
- 3747              		.loc 1 3085 0
- 3748 0bb4 46F48076 		orr	r6, r6, #256
- 3749              	.LVL513:
- 3750 0bb8 46F00106 		orr	r6, r6, #1
- 3751              	.LVL514:
+ 3766              		.loc 1 3085 0
+ 3767 0bbc 46F48076 		orr	r6, r6, #256
+ 3768              	.LVL516:
+ 3769 0bc0 46F00106 		orr	r6, r6, #1
+ 3770              	.LVL517:
 3088:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpccer &= ((uint16_t)~TIM_CCER_CC1P) & ((uint16_t)~TIM_CCER_CC2P);
- 3752              		.loc 1 3088 0
- 3753 0bbc 25F02205 		bic	r5, r5, #34
- 3754              	.LVL515:
- 3755 0bc0 2D04     		lsls	r5, r5, #16
- 3756 0bc2 2D0C     		lsrs	r5, r5, #16
- 3757              	.LVL516:
+ 3771              		.loc 1 3088 0
+ 3772 0bc4 25F02205 		bic	r5, r5, #34
+ 3773              	.LVL518:
+ 3774 0bc8 2D04     		lsls	r5, r5, #16
+ 3775 0bca 2D0C     		lsrs	r5, r5, #16
+ 3776              	.LVL519:
 3089:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   tmpccer |= (uint16_t)(TIM_IC1Polarity | (uint16_t)(TIM_IC2Polarity << (uint16_t)4));
- 3758              		.loc 1 3089 0
- 3759 0bc4 1B01     		lsls	r3, r3, #4
- 3760              	.LVL517:
- 3761 0bc6 9BB2     		uxth	r3, r3
- 3762 0bc8 1A43     		orrs	r2, r2, r3
- 3763              	.LVL518:
- 3764 0bca 1543     		orrs	r5, r5, r2
- 3765              	.LVL519:
+ 3777              		.loc 1 3089 0
+ 3778 0bcc 1B01     		lsls	r3, r3, #4
+ 3779              	.LVL520:
+ 3780 0bce 9BB2     		uxth	r3, r3
+ 3781 0bd0 1A43     		orrs	r2, r2, r3
+ 3782              	.LVL521:
+ 3783 0bd2 1543     		orrs	r5, r5, r2
+ 3784              	.LVL522:
 3092:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->SMCR = tmpsmcr;
- 3766              		.loc 1 3092 0
- 3767 0bcc 0181     		strh	r1, [r0, #8]	@ movhi
+ 3785              		.loc 1 3092 0
+ 3786 0bd4 0181     		strh	r1, [r0, #8]	@ movhi
 3095:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->CCMR1 = tmpccmr1;
- 3768              		.loc 1 3095 0
- 3769 0bce 0683     		strh	r6, [r0, #24]	@ movhi
+ 3787              		.loc 1 3095 0
+ 3788 0bd6 0683     		strh	r6, [r0, #24]	@ movhi
 3098:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->CCER = tmpccer;
- 3770              		.loc 1 3098 0
- 3771 0bd0 0584     		strh	r5, [r0, #32]	@ movhi
+ 3789              		.loc 1 3098 0
+ 3790 0bd8 0584     		strh	r5, [r0, #32]	@ movhi
 3099:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** }
- 3772              		.loc 1 3099 0
- 3773 0bd2 70BC     		pop	{r4, r5, r6}
- 3774              	.LVL520:
- 3775 0bd4 7047     		bx	lr
- 3776              		.cfi_endproc
- 3777              	.LFE195:
- 3779 0bd6 00BF     		.align	2
- 3780              		.global	TIM_SelectHallSensor
- 3781              		.thumb
- 3782              		.thumb_func
- 3784              	TIM_SelectHallSensor:
- 3785              	.LFB196:
+ 3791              		.loc 1 3099 0
+ 3792 0bda 70BC     		pop	{r4, r5, r6}
+ 3793              	.LVL523:
+ 3794 0bdc 7047     		bx	lr
+ 3795              		.cfi_endproc
+ 3796              	.LFE195:
+ 3798 0bde 00BF     		.align	2
+ 3799              		.global	TIM_SelectHallSensor
+ 3800              		.thumb
+ 3801              		.thumb_func
+ 3803              	TIM_SelectHallSensor:
+ 3804              	.LFB196:
 3110:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3786              		.loc 1 3110 0
- 3787              		.cfi_startproc
- 3788              		@ args = 0, pretend = 0, frame = 0
- 3789              		@ frame_needed = 0, uses_anonymous_args = 0
- 3790              		@ link register save eliminated.
- 3791              	.LVL521:
+ 3805              		.loc 1 3110 0
+ 3806              		.cfi_startproc
+ 3807              		@ args = 0, pretend = 0, frame = 0
+ 3808              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3809              		@ link register save eliminated.
+ 3810              	.LVL524:
 3115:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   if (NewState != DISABLE)
- 3792              		.loc 1 3115 0
- 3793 0bd8 29B1     		cbz	r1, .L171
+ 3811              		.loc 1 3115 0
+ 3812 0be0 29B1     		cbz	r1, .L171
 3118:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->CR2 |= TIM_CR2_TI1S;
- 3794              		.loc 1 3118 0
- 3795 0bda 8388     		ldrh	r3, [r0, #4]
- 3796 0bdc 9BB2     		uxth	r3, r3
- 3797 0bde 43F08003 		orr	r3, r3, #128
- 3798 0be2 8380     		strh	r3, [r0, #4]	@ movhi
- 3799 0be4 7047     		bx	lr
- 3800              	.L171:
+ 3813              		.loc 1 3118 0
+ 3814 0be2 8388     		ldrh	r3, [r0, #4]
+ 3815 0be4 9BB2     		uxth	r3, r3
+ 3816 0be6 43F08003 		orr	r3, r3, #128
+ 3817 0bea 8380     		strh	r3, [r0, #4]	@ movhi
+ 3818 0bec 7047     		bx	lr
+ 3819              	.L171:
 3123:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****     TIMx->CR2 &= (uint16_t)~TIM_CR2_TI1S;
- 3801              		.loc 1 3123 0
- 3802 0be6 8388     		ldrh	r3, [r0, #4]
- 3803 0be8 23F08003 		bic	r3, r3, #128
- 3804 0bec 1B04     		lsls	r3, r3, #16
- 3805 0bee 1B0C     		lsrs	r3, r3, #16
- 3806 0bf0 8380     		strh	r3, [r0, #4]	@ movhi
- 3807 0bf2 7047     		bx	lr
- 3808              		.cfi_endproc
- 3809              	.LFE196:
- 3811              		.align	2
- 3812              		.global	TIM_RemapConfig
- 3813              		.thumb
- 3814              		.thumb_func
- 3816              	TIM_RemapConfig:
- 3817              	.LFB197:
-3161:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
- 3818              		.loc 1 3161 0
- 3819              		.cfi_startproc
- 3820              		@ args = 0, pretend = 0, frame = 0
- 3821              		@ frame_needed = 0, uses_anonymous_args = 0
- 3822              		@ link register save eliminated.
- 3823              	.LVL522:
-3167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->OR =  TIM_Remap;
- 3824              		.loc 1 3167 0
- 3825 0bf4 A0F85010 		strh	r1, [r0, #80]	@ movhi
- 3826 0bf8 7047     		bx	lr
+ 3820              		.loc 1 3123 0
+ 3821 0bee 8388     		ldrh	r3, [r0, #4]
+ 3822 0bf0 23F08003 		bic	r3, r3, #128
+ 3823 0bf4 1B04     		lsls	r3, r3, #16
+ 3824 0bf6 1B0C     		lsrs	r3, r3, #16
+ 3825 0bf8 8380     		strh	r3, [r0, #4]	@ movhi
+ 3826 0bfa 7047     		bx	lr
  3827              		.cfi_endproc
- 3828              	.LFE197:
- 3830              	.Letext0:
- 3831              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 3832              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 3833              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
- 3834              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_tim.h"
- 3835              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
- 3836              		.file 7 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_rcc.h"
+ 3828              	.LFE196:
+ 3830              		.align	2
+ 3831              		.global	TIM_RemapConfig
+ 3832              		.thumb
+ 3833              		.thumb_func
+ 3835              	TIM_RemapConfig:
+ 3836              	.LFB197:
+3161:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c **** {
+ 3837              		.loc 1 3161 0
+ 3838              		.cfi_startproc
+ 3839              		@ args = 0, pretend = 0, frame = 0
+ 3840              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3841              		@ link register save eliminated.
+ 3842              	.LVL525:
+3167:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c ****   TIMx->OR =  TIM_Remap;
+ 3843              		.loc 1 3167 0
+ 3844 0bfc A0F85010 		strh	r1, [r0, #80]	@ movhi
+ 3845 0c00 7047     		bx	lr
+ 3846              		.cfi_endproc
+ 3847              	.LFE197:
+ 3849              	.Letext0:
+ 3850              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 3851              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 3852              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx\\Include/stm32f4xx.
+ 3853              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx_StdPeriph_Driver\\i
+ 3854              		.file 6 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\CMSIS\\Include/core_cm4.h"
+ 3855              		.file 7 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx_StdPeriph_Driver\\i
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_tim.c
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:22     .text:00000000 TI1_Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:87     .text:00000038 TI2_Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:160    .text:00000078 TI3_Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:229    .text:000000b4 TI4_Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:304    .text:000000f4 TIM_DeInit
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:568    .text:00000258 $d
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:584    .text:0000028c $t
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:589    .text:0000028c TIM_TimeBaseInit
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:679    .text:00000300 $d
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:684    .text:00000308 $t
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:689    .text:00000308 TIM_TimeBaseStructInit
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:718    .text:0000031c TIM_PrescalerConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:739    .text:00000324 TIM_CounterModeConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:770    .text:00000334 TIM_SetCounter
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:789    .text:00000338 TIM_SetAutoreload
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:808    .text:0000033c TIM_GetCounter
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:829    .text:00000340 TIM_GetPrescaler
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:851    .text:00000348 TIM_UpdateDisableConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:883    .text:00000364 TIM_UpdateRequestConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:915    .text:00000380 TIM_ARRPreloadConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:947    .text:0000039c TIM_SelectOnePulseMode
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:976    .text:000003b4 TIM_SetClockDivision
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1005   .text:000003cc TIM_Cmd
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1037   .text:000003e8 TIM_OC1Init
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1142   .text:00000454 $d
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1146   .text:00000458 $t
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1151   .text:00000458 TIM_OC2Init
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1270   .text:000004e0 $d
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1274   .text:000004e4 $t
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1279   .text:000004e4 TIM_OC3Init
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1396   .text:00000568 $d
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1400   .text:0000056c $t
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1405   .text:0000056c TIM_OC4Init
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1500   .text:000005d4 $d
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1504   .text:000005d8 $t
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1509   .text:000005d8 TIM_OCStructInit
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1543   .text:000005ec TIM_SelectOCxM
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1627   .text:0000063c TIM_SetCompare1
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1646   .text:00000640 TIM_SetCompare2
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1665   .text:00000644 TIM_SetCompare3
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1684   .text:00000648 TIM_SetCompare4
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1703   .text:0000064c TIM_ForcedOC1Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1734   .text:0000065c TIM_ForcedOC2Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1768   .text:00000670 TIM_ForcedOC3Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1799   .text:00000680 TIM_ForcedOC4Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1833   .text:00000694 TIM_OC1PreloadConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1864   .text:000006a4 TIM_OC2PreloadConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1898   .text:000006b8 TIM_OC3PreloadConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1929   .text:000006c8 TIM_OC4PreloadConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1963   .text:000006dc TIM_OC1FastConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:1994   .text:000006ec TIM_OC2FastConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2028   .text:00000700 TIM_OC3FastConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2059   .text:00000710 TIM_OC4FastConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2093   .text:00000724 TIM_ClearOC1Ref
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2124   .text:00000734 TIM_ClearOC2Ref
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2155   .text:00000744 TIM_ClearOC3Ref
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2186   .text:00000754 TIM_ClearOC4Ref
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2217   .text:00000764 TIM_OC1PolarityConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2248   .text:00000774 TIM_OC1NPolarityConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2279   .text:00000784 TIM_OC2PolarityConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2313   .text:00000798 TIM_OC2NPolarityConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2347   .text:000007ac TIM_OC3PolarityConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2381   .text:000007c0 TIM_OC3NPolarityConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2415   .text:000007d4 TIM_OC4PolarityConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2449   .text:000007e8 TIM_CCxCmd
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2491   .text:00000808 TIM_CCxNCmd
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2533   .text:00000828 TIM_ICStructInit
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2562   .text:00000838 TIM_GetCapture1
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2583   .text:0000083c TIM_GetCapture2
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2604   .text:00000840 TIM_GetCapture3
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2625   .text:00000844 TIM_GetCapture4
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2646   .text:00000848 TIM_SetIC1Prescaler
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2675   .text:00000860 TIM_SetIC2Prescaler
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2706   .text:0000087c TIM_PWMIConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2800   .text:000008e8 TIM_SetIC3Prescaler
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2829   .text:00000900 TIM_SetIC4Prescaler
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2860   .text:0000091c TIM_ICInit
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2950   .text:00000980 TIM_BDTRConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:2994   .text:000009a8 TIM_BDTRStructInit
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3026   .text:000009bc TIM_CtrlPWMOutputs
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3057   .text:000009e0 TIM_SelectCOM
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3089   .text:000009fc TIM_CCPreloadControl
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3121   .text:00000a18 TIM_ITConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3156   .text:00000a30 TIM_GenerateEvent
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3175   .text:00000a34 TIM_GetFlagStatus
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3202   .text:00000a40 TIM_ClearFlag
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3224   .text:00000a48 TIM_GetITStatus
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3264   .text:00000a60 TIM_ClearITPendingBit
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3286   .text:00000a68 TIM_DMAConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3307   .text:00000a70 TIM_DMACmd
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3342   .text:00000a88 TIM_SelectCCDMA
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3374   .text:00000aa4 TIM_InternalClockConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3397   .text:00000ab4 TIM_SelectInputTrigger
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3428   .text:00000ac4 TIM_ITRxExternalClockConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3457   .text:00000ad8 TIM_TIxExternalClockConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3512   .text:00000b08 TIM_SelectOutputTrigger
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3541   .text:00000b20 TIM_SelectSlaveMode
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3570   .text:00000b38 TIM_SelectMasterSlaveMode
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3599   .text:00000b50 TIM_ETRConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3641   .text:00000b68 TIM_ETRClockMode1Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3680   .text:00000b84 TIM_ETRClockMode2Config
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3709   .text:00000b98 TIM_EncoderInterfaceConfig
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3784   .text:00000bd8 TIM_SelectHallSensor
-C:\Users\Filip\AppData\Local\Temp\ccQ10qDJ.s:3816   .text:00000bf4 TIM_RemapConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:22     .text:00000000 TI1_Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:87     .text:00000038 TI2_Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:160    .text:00000078 TI3_Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:229    .text:000000b4 TI4_Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:304    .text:000000f4 TIM_DeInit
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:568    .text:00000258 $d
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:584    .text:0000028c $t
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:589    .text:0000028c TIM_TimeBaseInit
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:679    .text:00000300 $d
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:684    .text:00000308 $t
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:689    .text:00000308 TIM_TimeBaseStructInit
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:718    .text:0000031c TIM_PrescalerConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:739    .text:00000324 TIM_CounterModeConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:770    .text:00000334 TIM_SetCounter
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:789    .text:00000338 TIM_SetAutoreload
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:808    .text:0000033c TIM_GetCounter
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:829    .text:00000340 TIM_GetPrescaler
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:851    .text:00000348 TIM_UpdateDisableConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:883    .text:00000364 TIM_UpdateRequestConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:915    .text:00000380 TIM_ARRPreloadConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:947    .text:0000039c TIM_SelectOnePulseMode
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:976    .text:000003b4 TIM_SetClockDivision
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1005   .text:000003cc TIM_Cmd
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1037   .text:000003e8 TIM_OC1Init
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1142   .text:00000454 $d
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1146   .text:00000458 $t
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1151   .text:00000458 TIM_OC2Init
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1270   .text:000004e0 $d
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1274   .text:000004e4 $t
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1279   .text:000004e4 TIM_OC3Init
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1396   .text:00000568 $d
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1400   .text:0000056c $t
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1405   .text:0000056c TIM_OC4Init
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1500   .text:000005d4 $d
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1504   .text:000005d8 $t
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1509   .text:000005d8 TIM_OCStructInit
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1543   .text:000005ec TIM_SelectOCxM
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1627   .text:0000063c TIM_SetCompare1
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1646   .text:00000640 TIM_SetCompare2
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1665   .text:00000644 TIM_SetCompare3
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1684   .text:00000648 TIM_SetCompare4
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1703   .text:0000064c TIM_ForcedOC1Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1734   .text:0000065c TIM_ForcedOC2Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1768   .text:00000670 TIM_ForcedOC3Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1799   .text:00000680 TIM_ForcedOC4Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1833   .text:00000694 TIM_OC1PreloadConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1864   .text:000006a4 TIM_OC2PreloadConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1898   .text:000006b8 TIM_OC3PreloadConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1929   .text:000006c8 TIM_OC4PreloadConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1963   .text:000006dc TIM_OC1FastConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:1994   .text:000006ec TIM_OC2FastConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2028   .text:00000700 TIM_OC3FastConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2059   .text:00000710 TIM_OC4FastConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2093   .text:00000724 TIM_ClearOC1Ref
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2124   .text:00000734 TIM_ClearOC2Ref
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2155   .text:00000744 TIM_ClearOC3Ref
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2186   .text:00000754 TIM_ClearOC4Ref
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2217   .text:00000764 TIM_OC1PolarityConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2248   .text:00000774 TIM_OC1NPolarityConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2279   .text:00000784 TIM_OC2PolarityConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2313   .text:00000798 TIM_OC2NPolarityConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2347   .text:000007ac TIM_OC3PolarityConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2381   .text:000007c0 TIM_OC3NPolarityConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2415   .text:000007d4 TIM_OC4PolarityConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2449   .text:000007e8 TIM_CCxCmd
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2491   .text:00000808 TIM_CCxNCmd
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2533   .text:00000828 TIM_ICStructInit
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2562   .text:00000838 TIM_GetCapture1
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2583   .text:0000083c TIM_GetCapture2
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2604   .text:00000840 TIM_GetCapture3
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2625   .text:00000844 TIM_GetCapture4
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2646   .text:00000848 TIM_SetIC1Prescaler
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2675   .text:00000860 TIM_SetIC2Prescaler
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2706   .text:0000087c TIM_PWMIConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2811   .text:000008ec TIM_SetIC3Prescaler
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2840   .text:00000904 TIM_SetIC4Prescaler
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2871   .text:00000920 TIM_ICInit
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:2961   .text:00000984 TIM_BDTRConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3005   .text:000009ac TIM_BDTRStructInit
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3037   .text:000009c0 TIM_CtrlPWMOutputs
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3068   .text:000009e4 TIM_SelectCOM
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3100   .text:00000a00 TIM_CCPreloadControl
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3132   .text:00000a1c TIM_ITConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3167   .text:00000a34 TIM_GenerateEvent
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3186   .text:00000a38 TIM_GetFlagStatus
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3217   .text:00000a48 TIM_ClearFlag
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3239   .text:00000a50 TIM_GetITStatus
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3283   .text:00000a68 TIM_ClearITPendingBit
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3305   .text:00000a70 TIM_DMAConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3326   .text:00000a78 TIM_DMACmd
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3361   .text:00000a90 TIM_SelectCCDMA
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3393   .text:00000aac TIM_InternalClockConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3416   .text:00000abc TIM_SelectInputTrigger
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3447   .text:00000acc TIM_ITRxExternalClockConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3476   .text:00000ae0 TIM_TIxExternalClockConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3531   .text:00000b10 TIM_SelectOutputTrigger
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3560   .text:00000b28 TIM_SelectSlaveMode
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3589   .text:00000b40 TIM_SelectMasterSlaveMode
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3618   .text:00000b58 TIM_ETRConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3660   .text:00000b70 TIM_ETRClockMode1Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3699   .text:00000b8c TIM_ETRClockMode2Config
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3728   .text:00000ba0 TIM_EncoderInterfaceConfig
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3803   .text:00000be0 TIM_SelectHallSensor
+C:\Users\Filip\AppData\Local\Temp\cceJARWr.s:3835   .text:00000bfc TIM_RemapConfig
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

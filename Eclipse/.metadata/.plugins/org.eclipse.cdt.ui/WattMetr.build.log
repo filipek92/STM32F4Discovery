@@ -1,18 +1,209 @@
-23:17:53 **** Incremental Build of configuration Debug for project WattMetr ****
+17:29:51 **** Build of configuration Debug for project WattMetr ****
 make all 
+Building file: ../src/comunication.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="src/comunication.o.lst" -MMD -MP -MF"src/comunication.d" -MT"src/comunication.o" -c -o "src/comunication.o" "../src/comunication.c"
+cygwin warning:
+  MS-DOS style path detected: C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Debug
+  Preferred POSIX equivalent is: /cygdrive/c/Users/Filip/Git/STM32F4Discovery/Eclipse/WattMetr/Debug
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+Finished building: ../src/comunication.c
+ 
+Building file: ../src/hd44780.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="src/hd44780.o.lst" -MMD -MP -MF"src/hd44780.d" -MT"src/hd44780.o" -c -o "src/hd44780.o" "../src/hd44780.c"
+Finished building: ../src/hd44780.c
+ 
 Building file: ../src/main.c
 Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="src/main.o.lst" -MMD -MP -MF"src/main.d" -MT"src/main.o" -c -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="src/main.o.lst" -MMD -MP -MF"src/main.d" -MT"src/main.o" -c -o "src/main.o" "../src/main.c"
 Finished building: ../src/main.c
  
 Building file: ../src/measure.c
 Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="src/measure.o.lst" -MMD -MP -MF"src/measure.d" -MT"src/measure.o" -c -o "src/measure.o" "../src/measure.c"
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="src/measure.o.lst" -MMD -MP -MF"src/measure.d" -MT"src/measure.o" -c -o "src/measure.o" "../src/measure.c"
 Finished building: ../src/measure.c
+ 
+Building file: ../src/stm32f4xx_it.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="src/stm32f4xx_it.o.lst" -MMD -MP -MF"src/stm32f4xx_it.d" -MT"src/stm32f4xx_it.o" -c -o "src/stm32f4xx_it.o" "../src/stm32f4xx_it.c"
+Finished building: ../src/stm32f4xx_it.c
+ 
+Building file: ../src/system_stm32f4xx.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="src/system_stm32f4xx.o.lst" -MMD -MP -MF"src/system_stm32f4xx.d" -MT"src/system_stm32f4xx.o" -c -o "src/system_stm32f4xx.o" "../src/system_stm32f4xx.c"
+Finished building: ../src/system_stm32f4xx.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/misc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/misc.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/misc.d" -MT"STM32F4xx_StdPeriph_Driver/src/misc.o" -c -o "STM32F4xx_StdPeriph_Driver/src/misc.o" "../STM32F4xx_StdPeriph_Driver/src/misc.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/misc.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c
+ 
+Building file: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o.lst" -MMD -MP -MF"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.d" -MT"STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o" -c -o "STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o" "../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c"
+Finished building: ../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c
+ 
+Building file: ../STM32F4xx/Source/startup_stm32f4xx.S
+Invoking: Cross ARM GNU Assembler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -x assembler-with-cpp -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -MMD -MP -MF"STM32F4xx/Source/startup_stm32f4xx.d" -MT"STM32F4xx/Source/startup_stm32f4xx.o" -c -o "STM32F4xx/Source/startup_stm32f4xx.o" "../STM32F4xx/Source/startup_stm32f4xx.S"
+Finished building: ../STM32F4xx/Source/startup_stm32f4xx.S
+ 
+Building file: ../Discovery/stm32f4_discovery.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="Discovery/stm32f4_discovery.o.lst" -MMD -MP -MF"Discovery/stm32f4_discovery.d" -MT"Discovery/stm32f4_discovery.o" -c -o "Discovery/stm32f4_discovery.o" "../Discovery/stm32f4_discovery.c"
+Finished building: ../Discovery/stm32f4_discovery.c
  
 Building target: WattMetr.elf
 Invoking: Cross ARM C Linker
-arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -T "C:\Users\Filip\GIT\STM32F4Discovery\Eclipse\WattMetr\stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"WattMetr.map" -Xlinker --cref -o "WattMetr.elf"  ./src/comunication.o ./src/hd44780.o ./src/main.o ./src/measure.o ./src/stm32f4xx_it.o ./src/system_stm32f4xx.o  ./STM32F4xx_StdPeriph_Driver/src/misc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o  ./STM32F4xx/Source/startup_stm32f4xx.o  ./Discovery/stm32f4_discovery.o   
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -T "C:\Users\Filip\Git\STM32F4Discovery\Eclipse\WattMetr\stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"WattMetr.map" -Xlinker --cref -o "WattMetr.elf"  ./src/comunication.o ./src/hd44780.o ./src/main.o ./src/measure.o ./src/stm32f4xx_it.o ./src/system_stm32f4xx.o  ./STM32F4xx_StdPeriph_Driver/src/misc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o ./STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o  ./STM32F4xx/Source/startup_stm32f4xx.o  ./Discovery/stm32f4_discovery.o   
 Finished building target: WattMetr.elf
  
 Invoking: Cross ARM GNU Create Flash Image
@@ -26,9 +217,9 @@ Finished building: WattMetr.lst
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "WattMetr.elf"
    text	   data	    bss	    dec	    hex	filename
-  15328	     60	   4164	  19552	   4c60	WattMetr.elf
+  15436	     60	   4164	  19660	   4ccc	WattMetr.elf
 Finished building: WattMetr.siz
  
 
-23:17:57 Build Finished (took 3s.612ms)
+17:30:19 Build Finished (took 28s.29ms)
 

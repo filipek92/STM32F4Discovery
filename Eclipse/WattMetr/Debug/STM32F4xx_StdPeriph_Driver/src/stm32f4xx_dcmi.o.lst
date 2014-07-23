@@ -860,67 +860,77 @@
  422:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   {
  423:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****     tempreg= DCMI->RISR;
  455              		.loc 1 423 0
- 456 0162 064B     		ldr	r3, .L48
+ 456 0162 084B     		ldr	r3, .L48
  457              	.LVL20:
  458 0164 9B68     		ldr	r3, [r3, #8]
  459              	.LVL21:
- 460 0166 04E0     		b	.L44
+ 460 0166 06E0     		b	.L44
  461              	.LVL22:
  462              	.L43:
  424:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   }
  425:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   else if (dcmireg == 0x02) /* The FLAG is in SR register */
  463              		.loc 1 425 0
  464 0168 022B     		cmp	r3, #2
+ 465 016a 02D1     		bne	.L45
  426:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   {
  427:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****     tempreg = DCMI->SR;
- 465              		.loc 1 427 0
- 466 016a 044B     		ldr	r3, .L48
- 467              	.LVL23:
- 468 016c 0CBF     		ite	eq
- 469 016e 5B68     		ldreq	r3, [r3, #4]
+ 466              		.loc 1 427 0
+ 467 016c 054B     		ldr	r3, .L48
+ 468              	.LVL23:
+ 469 016e 5B68     		ldr	r3, [r3, #4]
  470              	.LVL24:
+ 471 0170 01E0     		b	.L44
+ 472              	.LVL25:
+ 473              	.L45:
  428:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   }
  429:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   else /* The FLAG is in MISR register */
  430:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   {
  431:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****     tempreg = DCMI->MISR;
- 471              		.loc 1 431 0
- 472 0170 1B69     		ldrne	r3, [r3, #16]
- 473              	.LVL25:
- 474              	.L44:
+ 474              		.loc 1 431 0
+ 475 0172 044B     		ldr	r3, .L48
+ 476              	.LVL26:
+ 477 0174 1B69     		ldr	r3, [r3, #16]
+ 478              	.LVL27:
+ 479              	.L44:
  432:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   }
  433:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   
  434:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   if ((tempreg & DCMI_FLAG) != (uint16_t)RESET )
- 475              		.loc 1 434 0
- 476 0172 1840     		ands	r0, r0, r3
- 477              	.LVL26:
+ 480              		.loc 1 434 0
+ 481 0176 1842     		tst	r0, r3
+ 482 0178 01D0     		beq	.L47
  435:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   {
  436:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****     bitstatus = SET;
+ 483              		.loc 1 436 0
+ 484 017a 0120     		movs	r0, #1
+ 485              	.LVL28:
+ 486 017c 7047     		bx	lr
+ 487              	.LVL29:
+ 488              	.L47:
  437:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   }
  438:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   else
  439:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   {
  440:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****     bitstatus = RESET;
+ 489              		.loc 1 440 0
+ 490 017e 0020     		movs	r0, #0
+ 491              	.LVL30:
  441:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   }
  442:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   /* Return the DCMI_FLAG status */
  443:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   return  bitstatus;
  444:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** }
- 478              		.loc 1 444 0
- 479 0174 0030     		adds	r0, r0, #0
- 480 0176 18BF     		it	ne
- 481 0178 0120     		movne	r0, #1
- 482              	.LVL27:
- 483 017a 7047     		bx	lr
- 484              	.L49:
- 485              		.align	2
- 486              	.L48:
- 487 017c 00000550 		.word	1342504960
- 488              		.cfi_endproc
- 489              	.LFE121:
- 491              		.align	2
- 492              		.global	DCMI_ClearFlag
- 493              		.thumb
- 494              		.thumb_func
- 496              	DCMI_ClearFlag:
- 497              	.LFB122:
+ 492              		.loc 1 444 0
+ 493 0180 7047     		bx	lr
+ 494              	.L49:
+ 495 0182 00BF     		.align	2
+ 496              	.L48:
+ 497 0184 00000550 		.word	1342504960
+ 498              		.cfi_endproc
+ 499              	.LFE121:
+ 501              		.align	2
+ 502              		.global	DCMI_ClearFlag
+ 503              		.thumb
+ 504              		.thumb_func
+ 506              	DCMI_ClearFlag:
+ 507              	.LFB122:
  445:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** 
  446:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** /**
  447:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   * @brief  Clears the DCMI's pending flags.
@@ -935,12 +945,12 @@
  456:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   */
  457:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** void DCMI_ClearFlag(uint16_t DCMI_FLAG)
  458:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** {
- 498              		.loc 1 458 0
- 499              		.cfi_startproc
- 500              		@ args = 0, pretend = 0, frame = 0
- 501              		@ frame_needed = 0, uses_anonymous_args = 0
- 502              		@ link register save eliminated.
- 503              	.LVL28:
+ 508              		.loc 1 458 0
+ 509              		.cfi_startproc
+ 510              		@ args = 0, pretend = 0, frame = 0
+ 511              		@ frame_needed = 0, uses_anonymous_args = 0
+ 512              		@ link register save eliminated.
+ 513              	.LVL31:
  459:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   /* Check the parameters */
  460:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   assert_param(IS_DCMI_CLEAR_FLAG(DCMI_FLAG));
  461:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   
@@ -948,22 +958,22 @@
  463:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   Flag position*/
  464:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   
  465:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   DCMI->ICR = DCMI_FLAG;
- 504              		.loc 1 465 0
- 505 0180 014B     		ldr	r3, .L51
- 506 0182 5861     		str	r0, [r3, #20]
- 507 0184 7047     		bx	lr
- 508              	.L52:
- 509 0186 00BF     		.align	2
- 510              	.L51:
- 511 0188 00000550 		.word	1342504960
- 512              		.cfi_endproc
- 513              	.LFE122:
- 515              		.align	2
- 516              		.global	DCMI_GetITStatus
- 517              		.thumb
- 518              		.thumb_func
- 520              	DCMI_GetITStatus:
- 521              	.LFB123:
+ 514              		.loc 1 465 0
+ 515 0188 014B     		ldr	r3, .L51
+ 516 018a 5861     		str	r0, [r3, #20]
+ 517 018c 7047     		bx	lr
+ 518              	.L52:
+ 519 018e 00BF     		.align	2
+ 520              	.L51:
+ 521 0190 00000550 		.word	1342504960
+ 522              		.cfi_endproc
+ 523              	.LFE122:
+ 525              		.align	2
+ 526              		.global	DCMI_GetITStatus
+ 527              		.thumb
+ 528              		.thumb_func
+ 530              	DCMI_GetITStatus:
+ 531              	.LFB123:
  466:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** }
  467:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** 
  468:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** /**
@@ -979,12 +989,12 @@
  478:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   */
  479:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** ITStatus DCMI_GetITStatus(uint16_t DCMI_IT)
  480:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** {
- 522              		.loc 1 480 0
- 523              		.cfi_startproc
- 524              		@ args = 0, pretend = 0, frame = 0
- 525              		@ frame_needed = 0, uses_anonymous_args = 0
- 526              		@ link register save eliminated.
- 527              	.LVL29:
+ 532              		.loc 1 480 0
+ 533              		.cfi_startproc
+ 534              		@ args = 0, pretend = 0, frame = 0
+ 535              		@ frame_needed = 0, uses_anonymous_args = 0
+ 536              		@ link register save eliminated.
+ 537              	.LVL32:
  481:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   ITStatus bitstatus = RESET;
  482:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   uint32_t itstatus = 0;
  483:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   
@@ -992,40 +1002,47 @@
  485:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   assert_param(IS_DCMI_GET_IT(DCMI_IT));
  486:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   
  487:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   itstatus = DCMI->MISR & DCMI_IT; /* Only masked interrupts are checked */
- 528              		.loc 1 487 0
- 529 018c 034B     		ldr	r3, .L56
- 530 018e 1B69     		ldr	r3, [r3, #16]
- 531 0190 1840     		ands	r0, r0, r3
- 532              	.LVL30:
+ 538              		.loc 1 487 0
+ 539 0194 034B     		ldr	r3, .L56
+ 540 0196 1B69     		ldr	r3, [r3, #16]
+ 541              	.LVL33:
  488:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   
  489:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   if ((itstatus != (uint16_t)RESET))
+ 542              		.loc 1 489 0
+ 543 0198 0342     		tst	r3, r0
+ 544 019a 01D0     		beq	.L55
  490:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   {
  491:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****     bitstatus = SET;
+ 545              		.loc 1 491 0
+ 546 019c 0120     		movs	r0, #1
+ 547              	.LVL34:
+ 548 019e 7047     		bx	lr
+ 549              	.LVL35:
+ 550              	.L55:
  492:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   }
  493:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   else
  494:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   {
  495:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****     bitstatus = RESET;
+ 551              		.loc 1 495 0
+ 552 01a0 0020     		movs	r0, #0
+ 553              	.LVL36:
  496:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   }
  497:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   return bitstatus;
  498:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** }
- 533              		.loc 1 498 0
- 534 0192 0030     		adds	r0, r0, #0
- 535 0194 18BF     		it	ne
- 536 0196 0120     		movne	r0, #1
- 537              	.LVL31:
- 538 0198 7047     		bx	lr
- 539              	.L57:
- 540 019a 00BF     		.align	2
- 541              	.L56:
- 542 019c 00000550 		.word	1342504960
- 543              		.cfi_endproc
- 544              	.LFE123:
- 546              		.align	2
- 547              		.global	DCMI_ClearITPendingBit
- 548              		.thumb
- 549              		.thumb_func
- 551              	DCMI_ClearITPendingBit:
- 552              	.LFB124:
+ 554              		.loc 1 498 0
+ 555 01a2 7047     		bx	lr
+ 556              	.L57:
+ 557              		.align	2
+ 558              	.L56:
+ 559 01a4 00000550 		.word	1342504960
+ 560              		.cfi_endproc
+ 561              	.LFE123:
+ 563              		.align	2
+ 564              		.global	DCMI_ClearITPendingBit
+ 565              		.thumb
+ 566              		.thumb_func
+ 568              	DCMI_ClearITPendingBit:
+ 569              	.LFB124:
  499:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** 
  500:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** /**
  501:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   * @brief  Clears the DCMI's interrupt pending bits.
@@ -1040,79 +1057,79 @@
  510:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   */
  511:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** void DCMI_ClearITPendingBit(uint16_t DCMI_IT)
  512:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c **** {
- 553              		.loc 1 512 0
- 554              		.cfi_startproc
- 555              		@ args = 0, pretend = 0, frame = 0
- 556              		@ frame_needed = 0, uses_anonymous_args = 0
- 557              		@ link register save eliminated.
- 558              	.LVL32:
+ 570              		.loc 1 512 0
+ 571              		.cfi_startproc
+ 572              		@ args = 0, pretend = 0, frame = 0
+ 573              		@ frame_needed = 0, uses_anonymous_args = 0
+ 574              		@ link register save eliminated.
+ 575              	.LVL37:
  513:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   /* Clear the interrupt pending Bit by writing in the ICR register 1 in the 
  514:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   corresponding pending Bit position*/
  515:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   
  516:../STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c ****   DCMI->ICR = DCMI_IT;
- 559              		.loc 1 516 0
- 560 01a0 014B     		ldr	r3, .L59
- 561 01a2 5861     		str	r0, [r3, #20]
- 562 01a4 7047     		bx	lr
- 563              	.L60:
- 564 01a6 00BF     		.align	2
- 565              	.L59:
- 566 01a8 00000550 		.word	1342504960
- 567              		.cfi_endproc
- 568              	.LFE124:
- 570              	.Letext0:
- 571              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\mach
- 572              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q1\\arm-none-eabi\\include\\stdi
- 573              		.file 4 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx\\Include/stm32f4xx.h"
- 574              		.file 5 "C:\\Users\\Filip\\Eclipse\\Template\\STM32F4xx_StdPeriph_Driver\\inc/stm32f4xx_dcmi.h"
- 575              		.file 6 "C:\\Users\\Filip\\Eclipse\\Template\\CMSIS\\Include/core_cm4.h"
+ 576              		.loc 1 516 0
+ 577 01a8 014B     		ldr	r3, .L59
+ 578 01aa 5861     		str	r0, [r3, #20]
+ 579 01ac 7047     		bx	lr
+ 580              	.L60:
+ 581 01ae 00BF     		.align	2
+ 582              	.L59:
+ 583 01b0 00000550 		.word	1342504960
+ 584              		.cfi_endproc
+ 585              	.LFE124:
+ 587              	.Letext0:
+ 588              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\mach
+ 589              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\4.8 2014q2\\arm-none-eabi\\include\\stdi
+ 590              		.file 4 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx\\Include/stm32f4xx.
+ 591              		.file 5 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\STM32F4xx_StdPeriph_Driver\\i
+ 592              		.file 6 "C:\\Users\\Filip\\Git\\STM32F4Discovery\\Eclipse\\WattMetr\\CMSIS\\Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_dcmi.c
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:18     .text:00000000 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:23     .text:00000000 DCMI_DeInit
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:52     .text:00000018 $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:56     .text:0000001c $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:61     .text:0000001c DCMI_Init
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:123    .text:0000005c $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:127    .text:00000060 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:132    .text:00000060 DCMI_StructInit
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:164    .text:00000074 DCMI_CROPConfig
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:191    .text:0000008c $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:195    .text:00000090 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:200    .text:00000090 DCMI_CROPCmd
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:226    .text:000000ac $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:230    .text:000000b0 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:235    .text:000000b0 DCMI_SetEmbeddedSynchroCodes
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:263    .text:000000cc $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:267    .text:000000d0 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:272    .text:000000d0 DCMI_JPEGCmd
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:298    .text:000000ec $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:302    .text:000000f0 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:307    .text:000000f0 DCMI_Cmd
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:333    .text:0000010c $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:337    .text:00000110 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:342    .text:00000110 DCMI_CaptureCmd
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:368    .text:0000012c $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:372    .text:00000130 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:377    .text:00000130 DCMI_ReadData
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:392    .text:00000138 $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:396    .text:0000013c $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:401    .text:0000013c DCMI_ITConfig
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:432    .text:00000158 $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:436    .text:0000015c $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:441    .text:0000015c DCMI_GetFlagStatus
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:487    .text:0000017c $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:491    .text:00000180 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:496    .text:00000180 DCMI_ClearFlag
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:511    .text:00000188 $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:515    .text:0000018c $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:520    .text:0000018c DCMI_GetITStatus
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:542    .text:0000019c $d
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:546    .text:000001a0 $t
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:551    .text:000001a0 DCMI_ClearITPendingBit
-C:\Users\Filip\AppData\Local\Temp\cc96KZDE.s:566    .text:000001a8 $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:18     .text:00000000 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:23     .text:00000000 DCMI_DeInit
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:52     .text:00000018 $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:56     .text:0000001c $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:61     .text:0000001c DCMI_Init
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:123    .text:0000005c $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:127    .text:00000060 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:132    .text:00000060 DCMI_StructInit
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:164    .text:00000074 DCMI_CROPConfig
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:191    .text:0000008c $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:195    .text:00000090 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:200    .text:00000090 DCMI_CROPCmd
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:226    .text:000000ac $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:230    .text:000000b0 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:235    .text:000000b0 DCMI_SetEmbeddedSynchroCodes
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:263    .text:000000cc $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:267    .text:000000d0 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:272    .text:000000d0 DCMI_JPEGCmd
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:298    .text:000000ec $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:302    .text:000000f0 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:307    .text:000000f0 DCMI_Cmd
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:333    .text:0000010c $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:337    .text:00000110 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:342    .text:00000110 DCMI_CaptureCmd
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:368    .text:0000012c $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:372    .text:00000130 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:377    .text:00000130 DCMI_ReadData
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:392    .text:00000138 $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:396    .text:0000013c $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:401    .text:0000013c DCMI_ITConfig
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:432    .text:00000158 $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:436    .text:0000015c $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:441    .text:0000015c DCMI_GetFlagStatus
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:497    .text:00000184 $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:501    .text:00000188 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:506    .text:00000188 DCMI_ClearFlag
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:521    .text:00000190 $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:525    .text:00000194 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:530    .text:00000194 DCMI_GetITStatus
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:559    .text:000001a4 $d
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:563    .text:000001a8 $t
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:568    .text:000001a8 DCMI_ClearITPendingBit
+C:\Users\Filip\AppData\Local\Temp\ccQwqMlt.s:583    .text:000001b0 $d
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.2bb9d917777380cc06007ef782f1739f
+                           .group:00000000 wm4.0.1c01c98cf54d5aaab4df87c6bb476f00
                            .group:00000000 wm4.stm32f4xx.h.48.ab6cfc2433f704442c75c2d67f633280
                            .group:00000000 wm4.core_cm4.h.32.f824aba4d431a5bb4a51726bd5b62834
                            .group:00000000 wm4.features.h.22.6a4ca7cd053637cc1d0db6c16f39b2d7

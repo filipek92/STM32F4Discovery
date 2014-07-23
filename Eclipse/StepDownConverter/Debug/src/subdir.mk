@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/comunication.c \
+../src/hd44780.c \
 ../src/main.c \
 ../src/measure.c \
 ../src/stm32f4xx_it.c \
@@ -12,6 +13,7 @@ C_SRCS += \
 
 OBJS += \
 ./src/comunication.o \
+./src/hd44780.o \
 ./src/main.o \
 ./src/measure.o \
 ./src/stm32f4xx_it.o \
@@ -19,6 +21,7 @@ OBJS += \
 
 C_DEPS += \
 ./src/comunication.d \
+./src/hd44780.d \
 ./src/main.d \
 ./src/measure.d \
 ./src/stm32f4xx_it.d \
@@ -29,7 +32,7 @@ C_DEPS += \
 src/%.o: ../src/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Eclipse\StepDownConverter\STM32F4xx\Include" -I"C:\Users\Filip\Eclipse\StepDownConverter\STM32F4xx\Source" -I"C:\Users\Filip\Eclipse\StepDownConverter\CMSIS\Include" -I"C:\Users\Filip\Eclipse\StepDownConverter\Discovery" -I"C:\Users\Filip\Eclipse\StepDownConverter\src" -I"C:\Users\Filip\Eclipse\StepDownConverter\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="$@.lst" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Og  -g3 -ggdb -DUSE_STDPERIPH_DRIVER -DHSE_VALUE=8000000 -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\STM32F4xx\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\STM32F4xx\Source" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\CMSIS\Include" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\Discovery" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\src" -I"C:\Users\Filip\Git\STM32F4Discovery\Eclipse\StepDownConverter\STM32F4xx_StdPeriph_Driver\inc" -std=gnu11 -Wa,-adhlns="$@.lst" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
